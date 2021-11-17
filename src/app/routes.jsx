@@ -1,7 +1,15 @@
 import React, { useEffect } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import {
+  Route,
+  Routes,
+  useNavigate,
+  useLocation,
+  Navigate,
+  Outlet,
+} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
+// import requireAuth from './components/hoc/RequireAuth';
 
 import withTracker from './hooks/withTracker';
 
@@ -13,6 +21,41 @@ import toggleTheme from './helpers/toggleTheme';
 import Register from './views/Register';
 import Home from './views/Home';
 import Login from './views/Login';
+import { authenticated } from './actions/auth';
+
+function RequireAuth(props) {
+  const {
+    Isauthenticated,
+    tfaLocked,
+    doneLoading,
+  } = props;
+  const location = useLocation();
+  const dispatch = useDispatch();
+  useEffect(() => dispatch(authenticated()), [dispatch]);
+  useEffect(() => {
+    console.log(Isauthenticated);
+    if (!Isauthenticated && doneLoading) {
+      return <Navigate to="/signin" state={{ from: location }} />;
+    }
+    if (tfaLocked && doneLoading) {
+      return <Navigate to="/login/2fa" state={{ from: location }} />;
+    }
+    return <Outlet />;
+  }, [
+    Isauthenticated,
+    doneLoading,
+    tfaLocked,
+  ]);
+  console.log('USE EFFECT REQUIRE AUTH');
+  console.log(props);
+  if (!Isauthenticated && doneLoading) {
+    return <Navigate to="/signin" state={{ from: location }} />;
+  }
+  if (tfaLocked && doneLoading) {
+    return <Navigate to="/login/2fa" state={{ from: location }} />;
+  }
+  return <Outlet />;
+}
 
 const RoutesX = (props) => {
   const {
@@ -25,10 +68,15 @@ const RoutesX = (props) => {
   return (
     <Routes>
       <Route
+        element={<RequireAuth {...props} />}
+      >
+        <Route
         // exact
-        path="/"
-        element={<Home />}
-      />
+          path="/"
+          element={<Home />}
+        />
+      </Route>
+
       <Route
         path="/register"
         element={<Register />}
@@ -49,6 +97,9 @@ RoutesX.propTypes = {
 
 const mapStateToProps = (state) => ({
   theme: state.theme,
+  Isauthenticated: state.auth.authenticated,
+  tfaLocked: state.auth.tfaLocked,
+  doneLoading: state.auth.doneLoading,
 })
 
 export default connect(mapStateToProps, null)(RoutesX);

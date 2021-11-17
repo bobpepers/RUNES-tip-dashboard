@@ -11,6 +11,7 @@ export default function (ComposedComponent) {
     useEffect(() => dispatch(authenticated()), [dispatch]);
     useEffect(() => {
       console.log('USE EFFECT REQUIRE AUTH');
+      console.log(props.Isauthenticated);
       if (!props.Isauthenticated && props.doneLoading) {
         history.push('/signin');
       }
@@ -28,8 +29,6 @@ export default function (ComposedComponent) {
   };
 
   function mapStateToProps(state) {
-    console.log('require auth component mapstatetoprops');
-    console.log(state);
     return {
       Isauthenticated: state.auth.authenticated,
       tfaLocked: state.auth.tfaLocked,
