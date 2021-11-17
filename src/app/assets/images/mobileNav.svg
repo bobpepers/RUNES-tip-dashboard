@@ -1,0 +1,5 @@
+<svg width="35" height="30">
+    <path d="M0,5 35,5" class="mobileToggleColor" stroke-width="3"></path>
+    <path d="M0,15 35,15" class="mobileToggleColor" stroke-width="3"></path>
+    <path d="M0,25 35,25" class="mobileToggleColor" stroke-width="3"></path>
+</svg>

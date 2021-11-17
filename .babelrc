@@ -1,0 +1,19 @@
+{
+    "presets": [
+    	"@babel/preset-react",
+        "@babel/preset-env"
+    ],
+    "plugins": [
+    	"@babel/plugin-syntax-dynamic-import",
+        "@babel/plugin-proposal-class-properties",
+        "macros",
+        "@babel/plugin-proposal-optional-chaining"
+    ],
+    "env": {
+        "test": {
+          "plugins": [
+            "dynamic-import-node"
+          ]
+        }
+    }
+}

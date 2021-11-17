@@ -1,0 +1,43 @@
+p {
+    width: auto;
+}
+
+.dashboardContainer a {
+    color: #007bff;
+}
+
+.transactions .MuiTableCell-body.MuiTableCell-sizeSmall {
+    color: azure;
+}
+
+.transactions .MuiTableCell-head.MuiTableCell-sizeSmall {
+    color: azure;
+}
+
+.transactions .MuiTableCell-head.MuiTableCell-sizeSmall .MuiTableSortLabel-root.MuiTableSortLabel-active {
+    color: azure;
+}
+
+.transactions .dashboardContainer .MuiTablePagination-root {
+    color: azure;
+}
+.transactions {
+    display: grid;
+}
+
+
+.transactionsContainer {
+    padding: 20px
+}
+.blue-border-table {
+    box-shadow: 0 0 1rem 0 rgba(60, 67, 146, 0.4);
+}
+
+.border-none {
+    border: none !important;
+}
+
+.glassHeader h3 {
+    padding-left: 20px;
+    padding-top: 20px;
+}

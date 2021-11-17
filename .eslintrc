@@ -1,0 +1,10 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 2020
+  },
+  "extends": "airbnb",
+  "rules": {
+    "func-names": 0,
+    "semi": 0,
+  }
+}

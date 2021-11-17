@@ -1,0 +1,121 @@
+.position-relative {
+    position: relative!important;
+}
+.bot-0 {
+    bottom: 0;
+}
+.nopointer {
+    pointer-events: none;
+}
+.position-absolute {
+    position: absolute!important;
+}
+img {
+    max-width: 100%;
+}
+.shadow-w {
+    color: white;
+    text-shadow: rgb(0, 0, 0) -1px -1px 0px, rgb(0, 0, 0) 1px -1px 0px, rgb(0, 0, 0) -1px 1px 0px, rgb(0, 0, 0) 1px 1px 0px;
+}
+.main_top_area {
+    text-align: center;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.main_top_area .single_slider a {
+    line-height: 1 !important;
+}
+
+.showpointer {
+    pointer-events: all;
+}
+
+.main_top_area {
+    text-align: center;
+    clear:both;
+}
+.mb-auto, .my-auto {
+    margin-bottom: auto!important;
+}
+
+.foggy {
+    position: absolute;
+  //background: url(/static/images/fog.png) repeat 0 0;
+  background-size: 100% 100%;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  text-align: center;
+  box-sizing: border-box;
+  -webkit-animation: slide 120s linear infinite;
+  height: 100%;
+    z-index: 6;
+}
+
+
+@-webkit-keyframes slide {
+    from { background-position: 0 0; }
+    to { background-position: -100vw 0; }
+}
+
+.sliderbg{
+  background: rgb(115,84,67);
+  background: radial-gradient(
+      farthest-corner at top left,
+     var(--backgroundColor2) 0%, rgba(0,0,0,0) 64%
+     , transparent 400px
+    );
+  position: absolute;
+  width: 100%;
+  margin: 0;
+  text-align: center;
+  box-sizing: border-box;
+  height: 1000px;
+  z-index: 2;
+}
+#particles-js{
+  height: 100%;
+  width: 100%;
+  background: var(--backgroundColor1);
+}
+.clouds{
+position: fixed;
+bottom: 0;
+top: 0;
+right: 0;
+left: 0;
+  width: 100%;
+  margin: 0;
+  text-align: center;
+  box-sizing: border-box;
+  height: 100%;
+  background:
+    radial-gradient(
+      farthest-side at bottom left,
+       rgba(149,147,146,1) 0%, rgba(0,0,0,0) 64%,
+
+      transparent
+    ),
+    radial-gradient(
+      farthest-corner at bottom right,
+      rgba(149,147,146,1) 0%, rgba(0,0,0,0) 64%
+     , transparent 400px
+    );
+  z-index: 3;
+}
+.particles{
+  position: fixed;
+bottom: 0;
+top: 0;
+right: 0;
+left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 501;
+}
+.mountain{
+  z-index: 4;
+}

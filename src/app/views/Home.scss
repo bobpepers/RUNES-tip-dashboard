@@ -1,0 +1,296 @@
+.poolCard {
+  background: white;
+  margin: 25px;
+  padding: 25px;
+}
+.content {
+  position: relative;
+flex: 1; 
+z-index: 20;
+}
+.zindexOne {
+  z-index: 1;
+}
+.cardBorder {
+  border: 2px solid var(--cardBorderColor);
+  margin: 50px;
+  //min-width: 100%;
+}
+.height100 {
+  height: 100%;
+}
+
+.surfContainer {
+  flex-grow: 1;
+  z-index: 50;
+  color: azure;
+}
+
+.floatLeft {
+  float: left;
+}
+#info {
+  position: fixed;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+#info > section {
+  position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+}
+
+#banner {
+  z-index:600;
+}
+.chainInfoBG {
+    background: linear-gradient(#000 40%, #283048 100%, rgba(255, 255, 255, 0));
+    z-index: 600;
+    position: sticky;
+    bottom:0;
+    height: 35px;
+}
+.button1 {
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    color: white;
+    background-color: transparent;
+    text-shadow: rgb(0, 0, 0) -1px -1px 0px, rgb(0, 0, 0) 1px -1px 0px, rgb(0, 0, 0) -1px 1px 0px, rgb(0, 0, 0) 1px 1px 0px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: rgb(76, 175, 80);
+    border-image: initial;
+    padding: 16px 32px;
+    text-decoration: none;
+    font-weight: 400 !important;
+    line-height: 1.7 !important;
+}
+.button1:hover {
+  background-color: rgb(76, 175, 80) !important;
+}
+.nav-link.active {
+  background-color: rgb(76, 175, 80) !important;
+}
+
+a, button {
+    transition: all 0.2s ease-in-out 0s;
+}
+.underline {
+    width: 50%;
+    height: 4px;
+    background-color: black;
+}
+.titleStyled {
+    font-weight: 300;
+    margin-bottom: .9rem;
+    font-size: 2.1rem;
+    line-height: 2.5rem;
+}
+.textStyled{
+  line-height: 1.5rem;
+    font-size: 1.1rem;
+}
+.textBorder {
+  color: #ccc;
+  text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+a {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #777;
+}
+
+.brand-icon-size {
+    text-shadow: rgb(0, 0, 0) -1px -1px 0px, rgb(0, 0, 0) 1px -1px 0px, rgb(0, 0, 0) -1px 1px 0px, rgb(0, 0, 0) 1px 1px 0px !important;
+    font-size: 100px !important;
+}
+
+.noBottomMargin {
+  margin-bottom: 0;
+}
+
+.borderGray{
+      border: 3px solid #000;
+}
+.chainInfo{
+  padding: 0 !important;
+  margin-top: 0 !important;
+  background-color: #c4c4c4;
+  overflow: hidden;
+    height: 35px;
+    display: flex;
+    align-items: flex-end;
+    position: sticky;
+}
+
+.imageBorderTeam{
+  border: 3px solid black;
+}
+.fa-linkedin {
+    color: #4875B4;
+}
+.fa-linkedin:hover {
+    color: #fff;
+}
+.fa-telegram {
+    color: #0088cc;
+}
+.fa-telegram:hover {
+    color: #0088cc;
+}
+
+.fab {
+    font-family: 'Font Awesome 5 Brands';
+}
+
+.fa-lg {
+    font-size: 1.33333em;
+    line-height: 0.75em;
+    vertical-align: -.0667em;
+}
+.zIndex-1{
+  z-index: 10;
+}
+.zIndex-2{
+  z-index: 20;
+}
+.zIndex-3{
+  z-index: 30;
+}
+.zIndex-4{
+  z-index: 40;
+}
+.blackback{background-color:black;}
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #000;
+  background: rgba(0, 0, 0, 1);
+  overflow-x: hidden;
+}
+
+
+  #clouds{
+    height: inherit !important;
+  }
+  #clouds > canvas{
+    height: inherit !important;
+    z-index: -1 !important;
+  }
+
+  .osdlwrapper{
+   z-index: 700;
+  }
+
+.downloadBG{
+  background: linear-gradient(#000 40%, #283048 100%, rgba(255, 255, 255, 0));
+  position: relative;
+  z-index: 100;
+}
+
+
+.fa-facebook {
+    color: rgb(59, 89, 152);
+}
+
+li {
+    list-style-type: none;
+}
+ul {
+    padding-inline-start: 0px;
+}
+
+.input-group {
+    display: block !important;
+}
+
+
+.text-area {
+
+}
+
+.has-error textarea[type='text'], .has-error textarea[type='password'] {
+    border: 1px solid #e15258;
+}
+
+textarea[type='text'], textarea[type='password'] {
+    border-radius: 5px;
+    border: 1px solid #c0c4c6;
+    width: 98%;
+    min-height: 200px;
+}
+.workFormButton {
+    width: auto !important;
+}
+
+.element {
+  -moz-transition: all 0.5s ease-in;
+  -o-transition: all 0.5s ease-in;
+  -webkit-transition: all 0.5s ease-in;
+  transition: all 0.5s ease-in;
+  color: #4c5760;
+  text-shadow: none;
+}
+
+.highlight {
+  text-shadow:
+    -1px -1px 0 #4caf50,
+    1px -1px 0 #4caf50,
+    -1px 1px 0 #4caf50,
+    1px 1px 0 #4caf50;
+}
+
+textarea {
+    padding-left: 2%;
+    padding-right: 2%;
+}
+#wallets {
+  z-index: 600;
+}
+.index600 {
+ z-index: 600;
+ position: relative;
+}
+#wallets::before, #product::before, #exchanges::before, #community::before, #team::before, #roadmap::before, #contact::before {
+  content: "";
+  display: block;
+  height: 100px; /* fixed header height*/
+  margin: -100px 0 0; /* negative fixed header height */
+}
+
+.zindexThree{
+  z-index: 3;
+}
+.text-center {
+      padding: 0px 20px 0px 20px;
+      text-align: center !important;
+}
+.mb-auto, .my-auto {
+  margin-bottom: auto !important;
+  margin-top: auto !important;
+}
+.pt-3, .py-3 {
+  padding-top: 1rem !important;
+}
+.w-100 {
+  width: 100% !important;
+}
+
+.spacing-top {
+  padding-top: 20px;
+}
