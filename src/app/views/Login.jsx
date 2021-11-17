@@ -1,458 +1,226 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import {
+  reduxForm,
+  Field,
+  formValueSelector,
+  change,
+} from 'redux-form';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import {
+  Visibility,
+  VisibilityOff,
+} from '@mui/icons-material';
+import {
+  Button,
   Grid,
+  OutlinedInput,
+  InputLabel,
+  InputAdornment,
+  IconButton,
+  FormControl,
+  TextField,
+  Box,
 } from '@mui/material';
+import Captcha from '../components/Captcha';
+import * as actions from '../actions/auth';
 
-export default function SimpleCollapse() {
-  const [showFaq1, setShowFaq1] = React.useState(false);
-  const onClick1 = () => setShowFaq1(!showFaq1);
-  const [showFaq2, setShowFaq2] = React.useState(false);
-  const onClick2 = () => setShowFaq2(!showFaq2);
-  const [showFaq3, setShowFaq3] = React.useState(false);
-  const onClick3 = () => setShowFaq3(!showFaq3);
-  const [showFaq4, setShowFaq4] = React.useState(false);
-  const onClick4 = () => setShowFaq4(!showFaq4);
-  const [showFaq5, setShowFaq5] = React.useState(false);
-  const onClick5 = () => setShowFaq5(!showFaq5);
-  const [showFaq6, setShowFaq6] = React.useState(false);
-  const onClick6 = () => setShowFaq6(!showFaq6);
-  const [showFaq7, setShowFaq7] = React.useState(false);
-  const onClick7 = () => setShowFaq7(!showFaq7);
-  const [showFaq8, setShowFaq8] = React.useState(false);
-  const onClick8 = () => setShowFaq8(!showFaq8);
-  const [showFaq9, setShowFaq9] = React.useState(false);
-  const onClick9 = () => setShowFaq9(!showFaq9);
+const renderField = ({
+  input, type, placeholder, meta: { touched, error },
+}) => (
+  <div className={`input-group ${touched && error ? 'has-error' : ''}`}>
+    <FormControl
+      variant="outlined"
+      fullWidth
+    >
+      <TextField
+        // className="outlined-email-field"
+        label="E-mail"
+        type={type}
+        variant="outlined"
+        inputProps={{ className: 'outlined-email-field' }}
+        {...input}
+      />
+      { touched && error && <div className="form-error">{error}</div> }
+    </FormControl>
+  </div>
+);
+
+const Signin = (props) => {
+  const {
+    handleSubmit,
+    signinUser,
+  } = props;
+  const [values, setValues] = useState({
+    password: '',
+    showPassword: false,
+  });
+
+  const handleChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value });
+  };
+
+  const handleClickShowPassword = () => {
+    setValues({ ...values, showPassword: !values.showPassword });
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
+  const renderPasswordField = (
+    {
+      input, type, placeholder, meta: { touched, error },
+    },
+  ) => (
+    <div className={`input-group ${touched && error ? 'has-error' : ''}`}>
+      <FormControl
+      // className={clsx(classes.margin, classes.textField)}
+        variant="outlined"
+        fullWidth
+      >
+        <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+        <OutlinedInput
+          // id="outlined-adornment-password"
+          inputProps={{ className: 'outlined-adornment-password' }}
+          type={values.showPassword ? 'text' : 'password'}
+          value={values.password}
+          onChange={handleChange('password')}
+          endAdornment={(
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={handleClickShowPassword}
+                onMouseDown={handleMouseDownPassword}
+                edge="end"
+              >
+                {values.showPassword ? <Visibility /> : <VisibilityOff />}
+              </IconButton>
+            </InputAdornment>
+              )}
+          labelWidth={70}
+          {...input}
+        />
+      </FormControl>
+      { touched && error && <div className="form-error">{error}</div> }
+    </div>
+
+  );
+
+  const handleFormSubmit = async (props) => {
+    await signinUser(props);
+  }
 
   return (
-    <Grid
-      container
-      // style={{ zIndex: 5000 }}
+    <div
+      className="form-container index600 shadow-w signinContainer content"
     >
       <Grid
         container
-        xs={12}
-        item
-        justifyContent="center"
-        className="zindexOne"
-      >
-        <Grid
-          item
-          onClick={onClick1}
-          xs={12}
-          sm={12}
-          md={8}
-          lg={6}
-          xl={6}
-          className="faqDrawerQuestion"
-
-        >
-          <p>Q: What is Wrapped RUNES?</p>
-        </Grid>
-      </Grid>
-      <Grid
-        container
-        xs={12}
-        item
-        justifyContent="center"
-        className="zindexOne"
+        alignItems="center"
+        justify="center"
       >
         <Grid
           item
           xs={12}
           sm={12}
           md={8}
-          lg={6}
-          xl={6}
-          className="faqDrawerAnswer"
+          lg={4}
+          xl={4}
         >
-          { showFaq1
-            ? (
-              <p>
-                Wrapped RUNES is a cryptocurrency token pegged to the value of the RUNES coin. It’s called wrapped because the original asset is put in a wrapper, a kind of a digital vault that allows the wrapped version to be created on another blockchain.'
-              </p>
-            )
-            : null}
+          <h2 className="textCenter">Sign in</h2>
+          <form onSubmit={handleSubmit(handleFormSubmit)}>
+            <Box
+              component={Grid}
+              container
+              item
+              justify="center"
+              direction="column"
+              py={3}
+              xs={12}
+            >
+              <Box
+                item
+                component={Grid}
+                p={1}
+              >
+                <Field
+                  name="email"
+                  component={renderField}
+                  type="text"
+                  placeholder="Email"
+                />
+              </Box>
+              <Box
+                item
+                component={Grid}
+                p={1}
+              >
+                <Field
+                  name="password"
+                  component={renderPasswordField}
+                  type="password"
+                  placeholder="Password"
+                />
+              </Box>
+              <Box
+                item
+                component={Grid}
+                p={1}
+              >
+                <div className="password-forgot">
+                  <Link className="shadow-w" to="/reset-password">I forgot my password</Link>
+                </div>
+                { props.errorMessage && props.errorMessage.signin && (
+                  <div className="error-container signin-error">
+                    { props.errorMessage.signin }
+                  </div>
+                )}
+              </Box>
+              <Box
+                component={Grid}
+                p={1}
+                item
+              >
+                <Field component={Captcha} change={change} name="captchaResponse" />
+              </Box>
+              <Box
+                component={Grid}
+                p={1}
+                item
+              >
+                <Button variant="contained" color="primary" type="submit" className="btn" fullWidth size="large">
+                  Sign in
+                </Button>
+              </Box>
+            </Box>
+          </form>
         </Grid>
       </Grid>
-
-      <Grid
-        container
-        xs={12}
-        item
-        justifyContent="center"
-        className="zindexOne"
-      >
-        <Grid
-          item
-          onClick={onClick2}
-          xs={12}
-          sm={12}
-          md={8}
-          lg={6}
-          xl={6}
-          className="faqDrawerQuestion"
-        >
-          <p>Q: how does the bridge work?</p>
-        </Grid>
-      </Grid>
-      <Grid
-        container
-        xs={12}
-        item
-        justifyContent="center"
-        className="zindexOne"
-      >
-        <Grid
-          item
-          xs={12}
-          sm={12}
-          md={8}
-          lg={6}
-          xl={6}
-          className="faqDrawerAnswer"
-        >
-          { showFaq2
-            ? (
-              <p>
-                The bridge uses a digital vault which holds RUNES coins on Runebase blockchain and issue wRUNES tokens on the binance smart chain that is pegged at a 1:1 ratio to RUNES native coin.
-              </p>
-            )
-            : null}
-        </Grid>
-      </Grid>
-
-      <Grid
-        container
-        xs={12}
-        item
-        justifyContent="center"
-        className="zindexOne"
-      >
-        <Grid
-          item
-          onClick={onClick3}
-          xs={12}
-          sm={12}
-          md={8}
-          lg={6}
-          xl={6}
-          className="faqDrawerQuestion"
-        >
-          <p>Q: Who is the owner of my RUNES after wrapping?</p>
-        </Grid>
-      </Grid>
-      <Grid
-        container
-        xs={12}
-        item
-        justifyContent="center"
-        className="zindexOne"
-      >
-        <Grid
-          item
-          xs={12}
-          sm={12}
-          md={8}
-          lg={6}
-          xl={6}
-          className="faqDrawerAnswer"
-        >
-          { showFaq3
-            ? (
-              <p>
-                Bridge vault is the owner of your RUNES coins. And you are the owner of Wrapped RUNES coins because coins are sent to your BSC address.
-              </p>
-            )
-            : null}
-        </Grid>
-      </Grid>
-
-      <Grid
-        container
-        xs={12}
-        item
-        justifyContent="center"
-        className="zindexOne"
-      >
-        <Grid
-          item
-          onClick={onClick4}
-          xs={12}
-          sm={12}
-          md={8}
-          lg={6}
-          xl={6}
-          className="faqDrawerQuestion"
-        >
-          <p>Q: Where can i see proof of assets?</p>
-        </Grid>
-      </Grid>
-      <Grid
-        container
-        xs={12}
-        item
-        justifyContent="center"
-        className="zindexOne"
-      >
-        <Grid
-          item
-          xs={12}
-          sm={12}
-          md={8}
-          lg={6}
-          xl={6}
-          className="faqDrawerAnswer"
-        >
-          { showFaq4
-            ? (
-              <p>
-                You can see reserves on Runebase explorer & BSC contract .
-              </p>
-            )
-            : null}
-        </Grid>
-      </Grid>
-
-      <Grid
-        container
-        xs={12}
-        item
-        justifyContent="center"
-        className="zindexOne"
-      >
-        <Grid
-          item
-          onClick={onClick5}
-          xs={12}
-          sm={12}
-          md={8}
-          lg={6}
-          xl={6}
-          className="faqDrawerQuestion"
-        >
-          <p>Q: What can i do with my wrapped RUNES?</p>
-        </Grid>
-      </Grid>
-      <Grid
-        container
-        xs={12}
-        item
-        justifyContent="center"
-        className="zindexOne"
-      >
-        <Grid
-          item
-          xs={12}
-          sm={12}
-          md={8}
-          lg={6}
-          xl={6}
-          className="faqDrawerAnswer"
-        >
-          { showFaq5
-            ? (
-              <p>
-                You can trade wRUNES on any decentralized exchange on Binance Smart Chain (e.g. Pancake Swap) or hold it on any wallet which supports BEP-20 token standard (e.g. Trust Wallet).
-              </p>
-            )
-            : null}
-        </Grid>
-      </Grid>
-
-      <Grid
-        container
-        xs={12}
-        item
-        justifyContent="center"
-        className="zindexOne"
-      >
-        <Grid
-          item
-          onClick={onClick6}
-          xs={12}
-          sm={12}
-          md={8}
-          lg={6}
-          xl={6}
-          className="faqDrawerQuestion"
-        >
-          <p>Q: Can i transfer coins directly from/to exchange?</p>
-        </Grid>
-      </Grid>
-      <Grid
-        container
-        xs={12}
-        item
-        justifyContent="center"
-        className="zindexOne"
-      >
-        <Grid
-          item
-          xs={12}
-          sm={12}
-          md={8}
-          lg={6}
-          xl={6}
-          className="faqDrawerAnswer"
-        >
-          { showFaq6
-            ? (
-              <p>
-                Currently, you can only wrap coins through the bridge by using any Runebase wallet and Metamask.
-              </p>
-            )
-            : null}
-        </Grid>
-      </Grid>
-
-      <Grid
-        container
-        xs={12}
-        item
-        justifyContent="center"
-        className="zindexOne"
-      >
-        <Grid
-          item
-          onClick={onClick7}
-          xs={12}
-          sm={12}
-          md={8}
-          lg={6}
-          xl={6}
-          className="faqDrawerQuestion"
-        >
-          <p>Q: How to create a BSC wallet?</p>
-        </Grid>
-      </Grid>
-      <Grid
-        container
-        xs={12}
-        item
-        justifyContent="center"
-        className="zindexOne"
-      >
-        <Grid
-          item
-          xs={12}
-          sm={12}
-          md={8}
-          lg={6}
-          xl={6}
-          className="faqDrawerAnswer"
-        >
-          { showFaq7
-            ? (
-              <>
-                <p>
-                  Step 1: Install Metamask and create a Metamask account.
-                </p>
-                <p>
-                  Go to MetaMask.io and select from Android or iOS for mobile application or select Chrome for desktop. You can also go directly to the Chrome store or Google Play store.
-                </p>
-                <p>
-                  Step 2: Connect Metamask to Binance Smart Chain
-                  Since Metamask was originally made for the Ethereum network. We need to make a few more steps to connect it to the Binance Smart Chain network. You can use step by step guide provided on this link (use Mainnet parameters from the guide): https://academy.binance.com/en/articles/connecting-metamask-to-binance-smart-chain .
-
-                </p>
-              </>
-            )
-            : null}
-        </Grid>
-      </Grid>
-
-      <Grid
-        container
-        xs={12}
-        item
-        justifyContent="center"
-        className="zindexOne"
-      >
-        <Grid
-          item
-          onClick={onClick8}
-          xs={12}
-          sm={12}
-          md={8}
-          lg={6}
-          xl={6}
-          className="faqDrawerQuestion"
-        >
-          <p>Q: Which wallet supports RUNES BEP-20?</p>
-        </Grid>
-      </Grid>
-      <Grid
-        container
-        xs={12}
-        item
-        justifyContent="center"
-        className="zindexOne"
-      >
-        <Grid
-          item
-          xs={12}
-          sm={12}
-          md={8}
-          lg={6}
-          xl={6}
-          className="faqDrawerAnswer"
-        >
-          { showFaq8
-            ? (
-              <p>
-                MetaMask, TrustWallet, SafePal and any other wallet that supports BEP-20 Tokens.
-              </p>
-            )
-            : null}
-        </Grid>
-      </Grid>
-
-      <Grid
-        container
-        xs={12}
-        item
-        justifyContent="center"
-        className="zindexOne"
-      >
-        <Grid
-          item
-          onClick={onClick9}
-          xs={12}
-          sm={12}
-          md={8}
-          lg={6}
-          xl={6}
-          className="faqDrawerQuestion"
-        >
-          <p>Q: why don't i see my wrapped RUNES on BSC wallet?</p>
-        </Grid>
-      </Grid>
-      <Grid
-        container
-        xs={12}
-        item
-        justifyContent="center"
-        className="zindexOne"
-      >
-        <Grid
-          item
-          xs={12}
-          sm={12}
-          md={8}
-          lg={6}
-          xl={6}
-          className="faqDrawerAnswer"
-        >
-          { showFaq9
-            ? (
-              <p>
-                Make sure the wallet supports BEP-20 tokens, if yes then you can add the token address manually: 0xBeb9Aa6BDfE0964e77F9E6814b5328Bdd5fD90D7
-              </p>
-            )
-            : null}
-        </Grid>
-      </Grid>
-
-    </Grid>
-  );
+    </div>
+  )
 }
+
+const validate = (formProps) => {
+  const errors = {};
+  if (!formProps.email) {
+    errors.email = 'Email is required'
+  }
+
+  if (!formProps.password) {
+    errors.password = 'Password is required'
+  }
+
+  if (!formProps.captchaResponse) {
+    errors.captchaResponse = 'Please validate the captcha.';
+  }
+
+  return errors;
+}
+const selector = formValueSelector('signin');
+const mapStateToProps = (state) => ({
+  errorMessage: state.auth.error,
+  recaptchaValue: selector(state, 'captchaResponse'),
+})
+
+export default connect(mapStateToProps, actions)(reduxForm({ form: 'signin', validate })(Signin));
