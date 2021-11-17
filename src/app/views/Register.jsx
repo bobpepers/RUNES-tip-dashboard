@@ -5,7 +5,6 @@ import {
   formValueSelector,
   change,
 } from 'redux-form';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
   Button,
@@ -22,34 +21,9 @@ import {
   Visibility,
   VisibilityOff,
 } from '@mui/icons-material';
-import { makeStyles } from '@mui/styles';
 
 import * as actions from '../actions/auth';
 import Captcha from '../components/Captcha';
-
-const useStyles = makeStyles((theme) => ({
-  modal: {
-    position: 'absolute',
-    top: '10%',
-    left: '10%',
-    overflow: 'hidden',
-    height: '100%',
-    maxHeight: 500,
-    display: 'block',
-  },
-  paper: {
-    backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-  },
-  content: {
-    padding: 12,
-    overflow: 'scroll',
-    height: '100%',
-    maxHeight: 500,
-  },
-}));
 
 const renderField = ({
   InputProps,
@@ -82,37 +56,10 @@ const renderField = ({
   </div>
 );
 
-const Checkbox = ({ input, meta: { touched, error } }) => {
-  const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-  return (
-    <div style={{ border: touched && error ? '1px solid red' : 'none' }}>
-      <input type="checkbox" {...input} />
-      <label>
-        I agree to
-        {' '}
-        <a href="/terms" target="_blank">
-          Terms and conditions
-        </a>
-      </label>
-    </div>
-  )
-}
-
-const Signup = (props) => {
+const Register = (props) => {
   const {
     handleSubmit,
     signupUser,
-    location: {
-      search,
-    },
     initialize,
   } = props;
 
@@ -269,30 +216,6 @@ const Signup = (props) => {
                 item
               >
                 <Field
-                  name="firstname"
-                  component={renderField}
-                  type="text"
-                  placeholder="First name"
-                />
-              </Box>
-              <Box
-                component={Grid}
-                p={1}
-                item
-              >
-                <Field
-                  name="lastname"
-                  component={renderField}
-                  type="text"
-                  placeholder="Last name"
-                />
-              </Box>
-              <Box
-                component={Grid}
-                p={1}
-                item
-              >
-                <Field
                   name="email"
                   component={renderField}
                   type="text"
@@ -321,32 +244,6 @@ const Signup = (props) => {
                   component={renderRePasswordField}
                   type="password"
                   placeholder="Repeat Password"
-                />
-              </Box>
-              <Box
-                component={Grid}
-                p={1}
-                item
-              >
-                <Field
-                  name="referredby"
-                  component={renderField}
-                  type="text"
-                  placeholder="Referred By"
-                  disabled
-                  InputProps={{
-                    className: 'Mui-disabled',
-                  }}
-                />
-              </Box>
-              <Box
-                component={Grid}
-                p={1}
-                item
-              >
-                <Field
-                  name="termsAndConditions"
-                  component={Checkbox}
                 />
               </Box>
               <Box
@@ -384,16 +281,6 @@ const Signup = (props) => {
                   Sign up
                 </Button>
               </Box>
-              <Box
-                component={Grid}
-                p={1}
-                item
-              >
-                <div className="form-bottom">
-                  <p>Already signed up?</p>
-                  <Link className="shadow-w" to="/signin">Click here to sign in</Link>
-                </div>
-              </Box>
             </Box>
           </form>
         </Grid>
@@ -404,7 +291,7 @@ const Signup = (props) => {
 
 const validate = (props) => {
   const errors = {};
-  const fields = ['firstname', 'lastname', 'email', 'password', 'repassword', 'username'];
+  const fields = ['email', 'password', 'repassword', 'username'];
 
   fields.forEach((f) => {
     if (!(f in props)) {
@@ -414,22 +301,6 @@ const validate = (props) => {
 
   if (props.username && props.username.length < 3) {
     errors.username = 'minimum of 4 characters';
-  }
-
-  if (props.firstname && props.firstname.length < 2) {
-    errors.firstname = 'minimum of 3 characters';
-  }
-
-  if (props.firstname && props.firstname.length > 20) {
-    errors.firstname = 'maximum of 20 characters';
-  }
-
-  if (props.lastname && props.lastname.length < 2) {
-    errors.lastname = 'minimum of 3 characters';
-  }
-
-  if (props.lastname && props.lastname.length > 20) {
-    errors.lastname = 'maximum of 20 characters';
   }
 
   if (props.email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,8}$/i.test(props.email)) {
@@ -448,10 +319,6 @@ const validate = (props) => {
     errors.captchaResponse = 'Please validate the captcha.';
   }
 
-  if (!props.termsAndConditions) {
-    errors.termsAndConditions = 'You must agree to Terms and conditions';
-  }
-
   return errors;
 };
 const selector = formValueSelector('signin');
@@ -466,4 +333,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, actions)(reduxForm({ form: 'signup', validate })(Signup));
+export default connect(mapStateToProps, actions)(reduxForm({ form: 'signup', validate })(Register));
