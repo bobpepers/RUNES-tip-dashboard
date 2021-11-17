@@ -120,7 +120,6 @@ function App() {
       <I18nProvider i18n={i18n}>
         <ThemeProvider theme={theme}>
           <Provider store={store}>
-
             <SnackbarProvider
               ref={notistackRef}
               classes={{
