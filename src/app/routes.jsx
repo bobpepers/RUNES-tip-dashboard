@@ -37,7 +37,7 @@ function RequireAuth(props) {
   useEffect(() => {
     console.log(Isauthenticated);
     if (!Isauthenticated && doneLoading) {
-      return <Navigate to="/signin" state={{ from: location }} />;
+      return <Navigate to="/login" state={{ from: location }} />;
     }
     if (tfaLocked && doneLoading) {
       return <Navigate to="/login/2fa" state={{ from: location }} />;
@@ -51,7 +51,7 @@ function RequireAuth(props) {
   console.log('USE EFFECT REQUIRE AUTH');
   console.log(props);
   if (!Isauthenticated && doneLoading) {
-    return <Navigate to="/signin" state={{ from: location }} />;
+    return <Navigate to="/login" state={{ from: location }} />;
   }
   if (tfaLocked && doneLoading) {
     return <Navigate to="/login/2fa" state={{ from: location }} />;
