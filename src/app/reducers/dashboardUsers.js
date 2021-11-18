@@ -1,7 +1,7 @@
 import {
-    FETCH_WITHDRAWALS_BEGIN,
-    FETCH_WITHDRAWALS_SUCCESS,
-    FETCH_WITHDRAWALS_FAIL,
+    FETCH_DASHBOARDUSERS_BEGIN,
+    FETCH_DASHBOARDUSERS_SUCCESS,
+    FETCH_DASHBOARDUSERS_FAIL,
 } from '../actions/types/index';
 
 const initialState = {
@@ -11,19 +11,19 @@ const initialState = {
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case FETCH_WITHDRAWALS_BEGIN:
+        case FETCH_DASHBOARDUSERS_BEGIN:
             return {
                 ...state,
                 isFetching: true,
                 error: null,
             };
-        case FETCH_WITHDRAWALS_SUCCESS:
+        case FETCH_DASHBOARDUSERS_SUCCESS:
             return {
                 ...state,
                 data: action.payload,
                 isFetching: false,
             };
-        case FETCH_WITHDRAWALS_FAIL:
+        case FETCH_DASHBOARDUSERS_FAIL:
             console.log('Error: ', action.error);
             return {
                 ...state,

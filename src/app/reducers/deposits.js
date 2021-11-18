@@ -1,7 +1,7 @@
 import {
-    FETCH_NODESTATUS_BEGIN,
-    FETCH_NODESTATUS_SUCCESS,
-    FETCH_NODESTATUS_FAIL,
+    FETCH_DEPOSITS_BEGIN,
+    FETCH_DEPOSITS_SUCCESS,
+    FETCH_DEPOSITS_FAIL,
 } from '../actions/types/index';
 
 const initialState = {
@@ -11,19 +11,19 @@ const initialState = {
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case FETCH_NODESTATUS_BEGIN:
+        case FETCH_DEPOSITS_BEGIN:
             return {
                 ...state,
                 isFetching: true,
                 error: null,
             };
-        case FETCH_NODESTATUS_SUCCESS:
+        case FETCH_DEPOSITS_SUCCESS:
             return {
                 ...state,
                 data: action.payload,
                 isFetching: false,
             };
-        case FETCH_NODESTATUS_FAIL:
+        case FETCH_DEPOSITS_FAIL:
             console.log('Error: ', action.error);
             return {
                 ...state,
