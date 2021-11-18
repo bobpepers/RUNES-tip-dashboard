@@ -1,104 +1,189 @@
 import React, {
     useEffect,
     useState,
+    useLayoutEffect,
     // Fragment,
 } from 'react';
-import PropTypes from 'prop-types';
-import withStyles from '@mui/styles/withStyles';
-import { useNavigate } from 'react-router-dom';
+import { withRouter } from '../hooks/withRouter';
 import { connect, useDispatch } from 'react-redux';
 import {
     Grid,
-    Button,
-    Divider,
+    InputLabel,
+    Select,
+    FormControl,
+    CircularProgress,
+    TextField,
+    MenuItem,
 } from '@mui/material';
-import { withRouter } from '../hooks/withRouter';
+import { makeStyles } from '@mui/styles';
+
 import {
-    fetchNodeStatusAction,
-} from '../actions/nodeStatus';
+    fetchActivityAction,
+} from '../actions/activity';
+import ActivityContainer from '../containers/Activity';
 
+const headCells = [
+    {
+        id: 'dbId', numeric: false, disablePadding: true, label: 'id',
+    },
+    {
+        id: 'userId', numeric: true, disablePadding: false, label: 'userId',
+    },
+    {
+        id: 'from', numeric: true, disablePadding: false, label: 'from',
+    },
+    {
+        id: 'txId', numeric: true, disablePadding: false, label: 'tx id',
+    },
+    {
+        id: 'amount', numeric: true, disablePadding: false, label: 'amount',
+    },
+    {
+        id: 'confirmations', numeric: true, disablePadding: false, label: 'confirmations',
+    },
+    {
+        id: 'phase', numeric: true, disablePadding: false, label: 'phase',
+    },
 
-import Logo from '../assets/images/logo.svg';
+];
 
-const styles = {
-    card: {
-        minWidth: 275,
-        margin: '50px',
+const useStyles = makeStyles((theme) => ({
+    formControl: {
+        margin: theme.spacing(1),
+        minWidth: 120,
+        width: '100%',
     },
-    bullet: {
-        display: 'inline-block',
-        margin: '0 2px',
-        transform: 'scale(0.8)',
+    selectEmpty: {
+        marginTop: theme.spacing(2),
     },
-    title: {
-        fontSize: 14,
-    },
-    pos: {
-        marginBottom: 12,
-    },
-};
+}));
 
-const Home = (props) => {
-    const { nodeStatus } = props;
-    const navigate = useNavigate();
+const ActivityView = (props) => {
+    const {
+        activity,
+    } = props;
     const dispatch = useDispatch();
+    const classes = useStyles();
+    const [id, setId] = useState('');
+    const [spender, setSpender] = useState('');
+    const [earner, setEarner] = useState('');
+    const [type, setType] = useState('');
+    const [amount, setAmount] = useState('');
+
+    useEffect(() => dispatch(fetchActivityAction(id, spender, earner, type, amount)), [dispatch]);
+    useEffect(() => dispatch(fetchActivityAction(id, spender, earner, type, amount)), [
+        id,
+        spender,
+        earner,
+        type,
+        amount,
+    ]);
+
+    const handleChangeId = (event) => {
+        console.log(event);
+        setId(event.target.value);
+    };
+
+    const handleChangeSpender = (event) => {
+        setSpender(event.target.value);
+    };
+
+    const handleChangeEarner = (event) => {
+        setEarner(event.target.value);
+    };
+    const handleChangeType = (event) => {
+        setType(event.target.value);
+    };
+    const handleChangeAmount = (event) => {
+        setAmount(event.target.value);
+    };
 
     useEffect(() => {
-        dispatch(fetchNodeStatusAction());
-    }, []);
-
-    useEffect(() => {
-        console.log("nodeStatus");
-        console.log(nodeStatus);
-    }, [nodeStatus]);
-
-    const routeChangeSwap = () => {
-        const path = 'bridge';
-        navigate(path);
-    }
+        console.log(activity);
+    }, [activity]);
 
     return (
         <div className="height100 content">
-            <Grid
-                container
-                spacing={0}
-                justifyContent="center"
-                className="zindexOne"
-            >
-                <Grid
-                    item
-                    xs={6}
-                    sm={6}
-                    md={4}
-                    lg={3}
-                    xl={3}
-                    className="zindexOne"
-                    justifyContent="center"
-                >
-                    <p>{nodeStatus.data && nodeStatus.data.status ? 'Online' : 'Offline'}</p>
-                    <p>{nodeStatus.data && nodeStatus.data.peers ? `${nodeStatus.data.peers.length} peers` : '0 peers'}</p>
-                </Grid>
-            </Grid>
-            <Grid
-                container
-                spacing={0}
-            >
-                <Divider variant="middle" />
-
+            <Grid container>
                 <Grid item xs={12}>
+                    <h3>Deposits</h3>
+                </Grid>
+                <Grid container item xs={12}>
+                    <Grid container item xs={12} md={4}>
+                        <FormControl variant="outlined" className={classes.formControl}>
+                            <TextField
+                                name="id"
+                                value={id}
+                                label="id"
+                                variant="filled"
+                                onChange={handleChangeId} />
+                        </FormControl>
+                    </Grid>
+
+                    <Grid container item xs={12} md={4}>
+                        <FormControl variant="outlined" className={classes.formControl}>
+                            <TextField
+                                name="spender"
+                                value={spender}
+                                label="spender"
+                                variant="filled"
+                                onChange={handleChangeSpender} />
+                        </FormControl>
+                    </Grid>
+                    <Grid container item xs={12} md={4}>
+                        <FormControl variant="outlined" className={classes.formControl}>
+                            <TextField
+                                name="earner"
+                                value={earner}
+                                label="earner"
+                                variant="filled"
+                                onChange={handleChangeEarner} />
+                        </FormControl>
+                    </Grid>
+                    <Grid container item xs={12} md={4}>
+                        <FormControl variant="outlined" className={classes.formControl}>
+                            <TextField
+                                name="type"
+                                value={type}
+                                label="type"
+                                variant="filled"
+                                onChange={handleChangeType} />
+                        </FormControl>
+                    </Grid>
+                    <Grid container item xs={12} md={4}>
+                        <FormControl variant="outlined" className={classes.formControl}>
+                            <TextField
+                                name="amount"
+                                value={amount}
+                                label="amount"
+                                variant="filled"
+                                onChange={handleChangeAmount} />
+                        </FormControl>
+                    </Grid>
+                </Grid>
+                <Grid item xs={12}>
+                    {
+                        activity && activity.isFetching
+                            ? (<CircularProgress />)
+                            : (
+                                <ActivityContainer
+                                    activity={activity
+                                        && activity.data
+                                        ? activity.data
+                                        : []
+                                    }
+                                />
+                            )
+                    }
 
                 </Grid>
             </Grid>
         </div>
-    );
+    )
 }
 
-Home.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
-
 const mapStateToProps = (state) => ({
-    nodeStatus: state.nodeStatus
+    activity: state.activity,
 })
 
-export default withStyles(styles)(withRouter(connect(mapStateToProps, null)(Home)));
+export default withRouter(connect(mapStateToProps, null)(ActivityView));

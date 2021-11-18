@@ -7,18 +7,18 @@ import {
 } from './types/index';
 
 
-export function fetchServerAction(id, groupId, serverName, platform) {
+export function fetchWithdrawalsAction(id, txId, userId, username, to) {
     return function (dispatch) {
         dispatch({
             type: FETCH_WITHDRAWALS_BEGIN,
         });
-        axios.post(`${process.env.API_URL}/withdrawals`, { id, groupId, serverName, platform })
+        axios.post(`${process.env.API_URL}/withdrawals`, { id, txId, userId, username, to })
             .then((response) => {
                 console.log('SUCESSSSS');
                 console.log(response);
                 dispatch({
                     type: FETCH_WITHDRAWALS_SUCCESS,
-                    payload: response.data.servers,
+                    payload: response.data.withdrawals,
                 });
             }).catch((error) => {
                 if (error.response) {

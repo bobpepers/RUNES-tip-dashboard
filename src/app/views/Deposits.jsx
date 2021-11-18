@@ -27,20 +27,27 @@ const headCells = [
         id: 'dbId', numeric: false, disablePadding: true, label: 'id',
     },
     {
+        id: 'userId', numeric: true, disablePadding: false, label: 'userId',
+    },
+    {
         id: 'username', numeric: true, disablePadding: false, label: 'username',
     },
     {
-        id: 'email', numeric: true, disablePadding: false, label: 'email',
+        id: 'from', numeric: true, disablePadding: false, label: 'from',
     },
     {
-        id: 'role', numeric: true, disablePadding: false, label: 'role',
+        id: 'txId', numeric: true, disablePadding: false, label: 'tx id',
     },
     {
-        id: 'lastActive', numeric: true, disablePadding: false, label: 'last active',
+        id: 'amount', numeric: true, disablePadding: false, label: 'amount',
     },
     {
-        id: 'banned', numeric: true, disablePadding: false, label: 'banned',
+        id: 'confirmations', numeric: true, disablePadding: false, label: 'confirmations',
     },
+    {
+        id: 'phase', numeric: true, disablePadding: false, label: 'phase',
+    },
+
 ];
 
 const useStyles = makeStyles((theme) => ({

@@ -35,17 +35,23 @@ import { Link } from 'react-router-dom';
 
 function createData(
     id,
-    userId,
+    txId,
     username,
-    lastActive,
-    banned
+    userId,
+    phase,
+    to_from,
+    amount,
+    confirmations,
 ) {
     return {
         id,
-        userId,
+        txId,
         username,
-        lastActive,
-        banned
+        userId,
+        phase,
+        to_from,
+        amount,
+        confirmations,
     };
 }
 
@@ -216,25 +222,28 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function UsersTable(props) {
+function WithdrawalsTable(props) {
     const {
         headCells,
-        users,
+        withdrawals,
         defaultPageSize,
     } = props;
     const rows = [];
     const dispatch = useDispatch();
 
-    users.forEach((item) => {
+    withdrawals.forEach((item) => {
         console.log('item');
         console.log(item);
         rows.push(
             createData(
                 item.id,
-                item.userid,
-                item.username,
-                item.lastActive,
-                item.banned,
+                item.txid,
+                item.address.wallet.user.username,
+                item.address.wallet.user.user_id,
+                item.phase,
+                item.to_from,
+                item.amount,
+                item.confirmations,
             ),
         );
     });
@@ -352,11 +361,14 @@ function UsersTable(props) {
                                             </TableCell>
                                             <TableCell align="right">{row.userId}</TableCell>
                                             <TableCell align="right">{row.username}</TableCell>
+                                            <TableCell align="right">{row.to_from}</TableCell>
 
                                             <TableCell align="right">
-                                                {row.lastActive}
+                                                {row.txId}
                                             </TableCell>
-                                            <TableCell align="right">{row.lastActive.banned}BAN/UNBAN</TableCell>
+                                            <TableCell align="right">{row.amount / 1e8}</TableCell>
+                                            <TableCell align="right">{row.confirmations}</TableCell>
+                                            <TableCell align="right">{row.phase}</TableCell>
                                         </TableRow>
                                     );
                                 })}
@@ -394,4 +406,4 @@ function mapStateToProps(state) {
 
 // export default AlertDialogSlide;
 
-export default connect(mapStateToProps, null)(UsersTable);
+export default connect(mapStateToProps, null)(WithdrawalsTable);

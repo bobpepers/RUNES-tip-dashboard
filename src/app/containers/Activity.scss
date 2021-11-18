@@ -1,0 +1,44 @@
+.glassHeaderActivity h3 {
+    margin: 0;
+}
+.pl-20 {
+    padding-left: 20px;
+}
+
+.previousArrowActive {
+    font-size: 30px;
+ cursor: pointer;
+}
+
+.previousArrowActive:hover {
+    color: blue;
+}
+
+.previousArrowDisabled {
+    font-size: 30px;
+    color: #444;
+}
+
+.nextArrowActive {
+    cursor: pointer;
+    font-size: 30px;
+}
+
+.nextArrowActive:hover {
+    color: blue;
+}
+
+.nextArrowDisabled {
+    color: #444;
+    font-size: 30px;
+}
+
+.glassHeaderActivity {
+    margin-top: 20px;
+    box-shadow: 0 0 1rem 0 rgba(60, 67, 146, 0.4);
+    border-radius: 5px;
+    position: relative;
+    z-index: 1;
+    background: inherit;
+    overflow: hidden;
+}

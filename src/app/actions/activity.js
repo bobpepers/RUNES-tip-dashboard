@@ -7,12 +7,12 @@ import {
 } from './types/index';
 
 
-export function fetchServerAction(id, groupId, serverName, platform) {
+export function fetchActivityAction(id, spender, earner, type, amount) {
     return function (dispatch) {
         dispatch({
             type: FETCH_ACTIVITY_BEGIN,
         });
-        axios.post(`${process.env.API_URL}/activity`, { id, groupId, serverName, platform })
+        axios.post(`${process.env.API_URL}/activity`, { id, spender, earner, type, amount })
             .then((response) => {
                 console.log('SUCESSSSS');
                 console.log(response);

@@ -237,9 +237,9 @@ function DepositsTable(props) {
         rows.push(
             createData(
                 item.id,
-                item.txId,
+                item.txid,
                 item.address.wallet.user.username,
-                item.address.wallet.user.userId,
+                item.address.wallet.user.user_id,
                 item.phase,
                 item.to_from,
                 item.amount,
@@ -361,11 +361,14 @@ function DepositsTable(props) {
                                             </TableCell>
                                             <TableCell align="right">{row.userId}</TableCell>
                                             <TableCell align="right">{row.username}</TableCell>
+                                            <TableCell align="right">{row.from}</TableCell>
 
                                             <TableCell align="right">
-                                                {row.lastActive}
+                                                {row.txId}
                                             </TableCell>
-                                            <TableCell align="right">{row.lastActive.banned}BAN/UNBAN</TableCell>
+                                            <TableCell align="right">{row.amount / 1e8}</TableCell>
+                                            <TableCell align="right">{row.confirmations}</TableCell>
+                                            <TableCell align="right">{row.phase}</TableCell>
                                         </TableRow>
                                     );
                                 })}

@@ -1,104 +1,194 @@
 import React, {
     useEffect,
     useState,
+    useLayoutEffect,
     // Fragment,
 } from 'react';
-import PropTypes from 'prop-types';
-import withStyles from '@mui/styles/withStyles';
-import { useNavigate } from 'react-router-dom';
+import { withRouter } from '../hooks/withRouter';
 import { connect, useDispatch } from 'react-redux';
 import {
     Grid,
-    Button,
-    Divider,
+    InputLabel,
+    Select,
+    FormControl,
+    CircularProgress,
+    TextField,
+    MenuItem,
 } from '@mui/material';
-import { withRouter } from '../hooks/withRouter';
+import { makeStyles } from '@mui/styles';
+
 import {
-    fetchNodeStatusAction,
-} from '../actions/nodeStatus';
+    fetchWithdrawalsAction,
+} from '../actions/withdrawals';
+import WithdrawalsTable from '../components/WithdrawalsTable';
 
+const headCells = [
+    {
+        id: 'dbId', numeric: false, disablePadding: true, label: 'id',
+    },
+    {
+        id: 'userId', numeric: true, disablePadding: false, label: 'userId',
+    },
+    {
+        id: 'username', numeric: true, disablePadding: false, label: 'username',
+    },
+    {
+        id: 'to', numeric: true, disablePadding: false, label: 'to',
+    },
+    {
+        id: 'txId', numeric: true, disablePadding: false, label: 'tx id',
+    },
+    {
+        id: 'amount', numeric: true, disablePadding: false, label: 'amount',
+    },
+    {
+        id: 'confirmations', numeric: true, disablePadding: false, label: 'confirmations',
+    },
+    {
+        id: 'phase', numeric: true, disablePadding: false, label: 'phase',
+    },
 
-import Logo from '../assets/images/logo.svg';
+];
 
-const styles = {
-    card: {
-        minWidth: 275,
-        margin: '50px',
+const useStyles = makeStyles((theme) => ({
+    formControl: {
+        margin: theme.spacing(1),
+        minWidth: 120,
+        width: '100%',
     },
-    bullet: {
-        display: 'inline-block',
-        margin: '0 2px',
-        transform: 'scale(0.8)',
+    selectEmpty: {
+        marginTop: theme.spacing(2),
     },
-    title: {
-        fontSize: 14,
-    },
-    pos: {
-        marginBottom: 12,
-    },
-};
+}));
 
-const Home = (props) => {
-    const { nodeStatus } = props;
-    const navigate = useNavigate();
+const WithdrawalsView = (props) => {
+    const {
+        withdrawals,
+    } = props;
     const dispatch = useDispatch();
+    const classes = useStyles();
+    const [id, setId] = useState('');
+    const [txId, setTxId] = useState('');
+    const [userId, setUserId] = useState('');
+    const [username, setUsername] = useState('');
+    const [to, setTo] = useState('');
+
+    useEffect(() => dispatch(fetchWithdrawalsAction(id, txId, userId, username, to)), [dispatch]);
+    useEffect(() => dispatch(fetchWithdrawalsAction(id, txId, userId, username, to)), [
+        id,
+        txId,
+        userId,
+        username,
+        to,
+    ]);
+
+    const handleChangeId = (event) => {
+        console.log(event);
+        setId(event.target.value);
+    };
+
+    const handleChangeTxId = (event) => {
+        setTxId(event.target.value);
+    };
+
+    const handleChangeUserId = (event) => {
+        setUserId(event.target.value);
+    };
+    const handleChangeUsername = (event) => {
+        setUsername(event.target.value);
+    };
+    const handleChangeTo = (event) => {
+        setTo(event.target.value);
+    };
 
     useEffect(() => {
-        dispatch(fetchNodeStatusAction());
-    }, []);
-
-    useEffect(() => {
-        console.log("nodeStatus");
-        console.log(nodeStatus);
-    }, [nodeStatus]);
-
-    const routeChangeSwap = () => {
-        const path = 'bridge';
-        navigate(path);
-    }
+        console.log(withdrawals);
+    }, [withdrawals]);
 
     return (
         <div className="height100 content">
-            <Grid
-                container
-                spacing={0}
-                justifyContent="center"
-                className="zindexOne"
-            >
-                <Grid
-                    item
-                    xs={6}
-                    sm={6}
-                    md={4}
-                    lg={3}
-                    xl={3}
-                    className="zindexOne"
-                    justifyContent="center"
-                >
-                    <p>{nodeStatus.data && nodeStatus.data.status ? 'Online' : 'Offline'}</p>
-                    <p>{nodeStatus.data && nodeStatus.data.peers ? `${nodeStatus.data.peers.length} peers` : '0 peers'}</p>
-                </Grid>
-            </Grid>
-            <Grid
-                container
-                spacing={0}
-            >
-                <Divider variant="middle" />
-
+            <Grid container>
                 <Grid item xs={12}>
+                    <h3>Withdrawals</h3>
+                </Grid>
+                <Grid container item xs={12}>
+                    <Grid container item xs={12} md={4}>
+                        <FormControl variant="outlined" className={classes.formControl}>
+                            <TextField
+                                name="id"
+                                value={id}
+                                label="id"
+                                variant="filled"
+                                onChange={handleChangeId} />
+                        </FormControl>
+                    </Grid>
+
+                    <Grid container item xs={12} md={4}>
+                        <FormControl variant="outlined" className={classes.formControl}>
+                            <TextField
+                                name="txId"
+                                value={username}
+                                label="tx id"
+                                variant="filled"
+                                onChange={handleChangeTxId} />
+                        </FormControl>
+                    </Grid>
+                    <Grid container item xs={12} md={4}>
+                        <FormControl variant="outlined" className={classes.formControl}>
+                            <TextField
+                                name="userId"
+                                value={userId}
+                                label="user id"
+                                variant="filled"
+                                onChange={handleChangeUserId} />
+                        </FormControl>
+                    </Grid>
+                    <Grid container item xs={12} md={4}>
+                        <FormControl variant="outlined" className={classes.formControl}>
+                            <TextField
+                                name="username"
+                                value={username}
+                                label="username"
+                                variant="filled"
+                                onChange={handleChangeUsername} />
+                        </FormControl>
+                    </Grid>
+                    <Grid container item xs={12} md={4}>
+                        <FormControl variant="outlined" className={classes.formControl}>
+                            <TextField
+                                name="to"
+                                value={to}
+                                label="to"
+                                variant="filled"
+                                onChange={handleChangeTo} />
+                        </FormControl>
+                    </Grid>
+                </Grid>
+                <Grid item xs={12}>
+                    {
+                        withdrawals && withdrawals.isFetching
+                            ? (<CircularProgress />)
+                            : (
+                                <WithdrawalsTable
+                                    defaultPageSize={25}
+                                    headCells={headCells || []}
+                                    withdrawals={withdrawals
+                                        && withdrawals.data
+                                        ? withdrawals.data
+                                        : []
+                                    }
+                                />
+                            )
+                    }
 
                 </Grid>
             </Grid>
         </div>
-    );
+    )
 }
 
-Home.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
-
 const mapStateToProps = (state) => ({
-    nodeStatus: state.nodeStatus
+    withdrawals: state.withdrawals,
 })
 
-export default withStyles(styles)(withRouter(connect(mapStateToProps, null)(Home)));
+export default withRouter(connect(mapStateToProps, null)(WithdrawalsView));
