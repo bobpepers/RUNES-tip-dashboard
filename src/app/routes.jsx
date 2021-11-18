@@ -23,6 +23,12 @@ import toggleTheme from './helpers/toggleTheme';
 import Register from './views/Register';
 import Home from './views/Home';
 import Login from './views/Login';
+import Servers from './views/Servers';
+import Users from './views/Users';
+import Activity from './views/Activity';
+import Deposits from './views/Deposits';
+import Withdrawals from './views/Withdrawals';
+import DashboardUsers from './views/DashboardUsers';
 import { authenticated } from './actions/auth';
 
 function RequireAuth(props) {
@@ -71,10 +77,34 @@ const RoutesX = (props) => {
         element={<RequireAuth {...props} />}
       >
         <Route
-          // exact
           path="/"
           element={<Home />}
         />
+        <Route
+          path="/users"
+          element={<Users />}
+        />
+        <Route
+          path="/servers"
+          element={<Servers />}
+        />
+        <Route
+          path="/activity"
+          element={<Activity />}
+        />
+        <Route
+          path="/deposits"
+          element={<Deposits />}
+        />
+        <Route
+          path="/withdrawals"
+          element={<Withdrawals />}
+        />
+        <Route
+          path="/dashboardusers"
+          element={<DashboardUsers />}
+        />
+
       </Route>
 
       <Route
@@ -85,6 +115,7 @@ const RoutesX = (props) => {
         path="/login"
         element={<Login />}
       />
+
       <Route
         path="/register/verify-register"
         element={<RegisterVerify />}

@@ -89,6 +89,16 @@ export function signinUser(props) {
     axios.post(`${process.env.API_URL}/signin`,
       { email, password, captchaResponse })
       .then((response) => {
+        console.log(response);
+        console.log(response);
+        console.log(response);
+        console.log(response);
+        console.log(response);
+        console.log(response);
+        console.log(response);
+        console.log(response);
+        console.log("response");
+
         dispatch({
           type: AUTH_USER,
           payload: response,

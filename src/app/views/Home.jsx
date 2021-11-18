@@ -48,6 +48,7 @@ const Home = (props) => {
   }, []);
 
   useEffect(() => {
+    console.log("nodeStatus");
     console.log(nodeStatus);
   }, [nodeStatus]);
 
@@ -66,14 +67,16 @@ const Home = (props) => {
       >
         <Grid
           item
-          xs={12}
+          xs={6}
           sm={6}
           md={4}
           lg={3}
           xl={3}
           className="zindexOne"
+          justifyContent="center"
         >
-          123
+          <p>{nodeStatus.data && nodeStatus.data.status ? 'Online' : 'Offline'}</p>
+          <p>{nodeStatus.data && nodeStatus.data.peers ? `${nodeStatus.data.peers.length} peers` : '0 peers'}</p>
         </Grid>
       </Grid>
       <Grid

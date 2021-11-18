@@ -95,6 +95,36 @@ const Header = (props) => {
             >
               Users
             </Link>
+            <Link
+              className="nav-link"
+              to="/servers"
+            >
+              Servers
+            </Link>
+            <Link
+              className="nav-link"
+              to="/activity"
+            >
+              Activity
+            </Link>
+            <Link
+              className="nav-link"
+              to="/deposits"
+            >
+              Deposits
+            </Link>
+            <Link
+              className="nav-link"
+              to="/withdrawals"
+            >
+              Withdrawals
+            </Link>
+            <Link
+              className="nav-link"
+              to="/dashboardusers"
+            >
+              DashboardUsers
+            </Link>
           </Nav>
           <ul>
             {
@@ -108,13 +138,15 @@ const Header = (props) => {
                       >
                         settings
                       </Link>
+
+                    </li>
+                    <li>
                       <Link
                         className="nav-link"
                         to="/logout"
                       >
                         logout
                       </Link>
-
                     </li>
                   </>
                 )
@@ -127,6 +159,8 @@ const Header = (props) => {
                       >
                         login
                       </Link>
+                    </li>
+                    <li>
                       <Link
                         className="nav-link"
                         to="/register"

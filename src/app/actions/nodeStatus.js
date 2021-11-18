@@ -14,6 +14,9 @@ export function fetchNodeStatusAction(obj) {
         });
         axios.get(`${process.env.API_URL}/status`)
             .then((response) => {
+                console.log('SUCESSSSS');
+
+                console.log(response);
                 dispatch({
                     type: FETCH_NODESTATUS_SUCCESS,
                     payload: response.data,
