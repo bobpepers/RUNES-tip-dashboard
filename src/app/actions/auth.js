@@ -33,7 +33,7 @@ export function signupUser(props) {
       .then(() => {
         dispatch({ type: SIGNUP_SUCCESS });
 
-        history.push(`/signup/verify-email?email=${props.email}`);
+        history.push(`/register/verify-register?email=${props.email}`);
       })
       .catch((error) => {
         if (error.response) {
@@ -93,7 +93,7 @@ export function signinUser(props) {
           type: AUTH_USER,
           payload: response,
         });
-        window.location.href = '/advertisements';
+        window.location.href = '/';
         // history.push('/dashboard');
       })
       .catch((error) => {
@@ -163,6 +163,7 @@ export function verifyEmail(props) {
           type: AUTH_USER,
           payload: response,
         });
+        history.push('/register/verified');
       })
       .catch((error) => {
         dispatch(authError(VERIFY_EMAIL_ERROR, error.response.data.error));
@@ -203,7 +204,7 @@ export function authenticated() {
         // history.push('/');
       })
       .catch((response) => {
-        console.log('ERROR AUTHENTICATED.................;;');
+        console.log('ERROR AUTHENTICATED');
         console.log(response);
       });
   }

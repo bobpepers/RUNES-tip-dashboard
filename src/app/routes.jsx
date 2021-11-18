@@ -9,6 +9,8 @@ import {
 } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect, useDispatch } from 'react-redux';
+import RegisterVerify from './views/RegisterVerify';
+import VerifyEmail from './views/VerifyEmail';
 // import requireAuth from './components/hoc/RequireAuth';
 
 import withTracker from './hooks/withTracker';
@@ -71,7 +73,7 @@ const RoutesX = (props) => {
         element={<RequireAuth {...props} />}
       >
         <Route
-        // exact
+          // exact
           path="/"
           element={<Home />}
         />
@@ -84,6 +86,14 @@ const RoutesX = (props) => {
       <Route
         path="/login"
         element={<Login />}
+      />
+      <Route
+        path="/register/verify-register"
+        element={<RegisterVerify />}
+      />
+      <Route
+        path="/register/verify-email"
+        element={<VerifyEmail />}
       />
     </Routes>
   )
