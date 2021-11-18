@@ -25,13 +25,6 @@ import {
 // import * as actions from '../actions/auth';
 import UsersTable from '../components/UsersTable';
 
-const headers = [
-    'db id',
-    'user id',
-    'username',
-    'last active',
-];
-
 const headCells = [
     {
         id: 'dbId', numeric: false, disablePadding: true, label: 'id',
@@ -43,10 +36,19 @@ const headCells = [
         id: 'username', numeric: true, disablePadding: false, label: 'username',
     },
     {
+        id: 'available', numeric: true, disablePadding: false, label: 'available',
+    },
+    {
+        id: 'locked', numeric: true, disablePadding: false, label: 'locked',
+    },
+    {
+        id: 'total', numeric: true, disablePadding: false, label: 'total',
+    },
+    {
         id: 'lastActive', numeric: true, disablePadding: false, label: 'last active',
     },
     {
-        id: 'banned', numeric: true, disablePadding: false, label: 'last active',
+        id: 'banned', numeric: true, disablePadding: false, label: 'banned',
     },
 ];
 
@@ -109,10 +111,10 @@ const UsersView = (props) => {
         <div className="height100 content">
             <Grid container>
                 <Grid item xs={12}>
-                    <h3>Servers</h3>
+                    <h3>Users</h3>
                 </Grid>
                 <Grid container item xs={12}>
-                    <Grid container item xs={12} md={3}>
+                    <Grid container item xs={12} md={4}>
                         <FormControl variant="outlined" className={classes.formControl}>
                             <TextField
                                 name="id"
@@ -122,7 +124,7 @@ const UsersView = (props) => {
                                 onChange={handleChangeId} />
                         </FormControl>
                     </Grid>
-                    <Grid container item xs={12} md={3}>
+                    <Grid container item xs={12} md={4}>
                         <FormControl variant="outlined" className={classes.formControl}>
                             <TextField
                                 name="userId"
@@ -133,7 +135,7 @@ const UsersView = (props) => {
                         </FormControl>
                     </Grid>
 
-                    <Grid container item xs={12} md={3}>
+                    <Grid container item xs={12} md={4}>
                         <FormControl variant="outlined" className={classes.formControl}>
                             <TextField
                                 name="username"
@@ -143,7 +145,7 @@ const UsersView = (props) => {
                                 onChange={handleChangeUsername} />
                         </FormControl>
                     </Grid>
-                    <Grid container item xs={12} md={3}>
+                    <Grid container item xs={12} md={6}>
                         <FormControl variant="outlined" className={classes.formControl}>
                             <InputLabel id="demo-simple-select-outlined-label">Platform</InputLabel>
                             <Select
@@ -165,9 +167,9 @@ const UsersView = (props) => {
                             </Select>
                         </FormControl>
                     </Grid>
-                    <Grid container item xs={12} md={3}>
+                    <Grid container item xs={12} md={6}>
                         <FormControl variant="outlined" className={classes.formControl}>
-                            <InputLabel id="demo-simple-select-outlined-label">Platform</InputLabel>
+                            <InputLabel id="demo-simple-select-outlined-label">Banned</InputLabel>
                             <Select
                                 labelId="demo-simple-select-outlined-label"
                                 id="demo-simple-select-outlined"

@@ -37,6 +37,9 @@ function createData(
     id,
     userId,
     username,
+    available,
+    locked,
+    total,
     lastActive,
     banned
 ) {
@@ -44,6 +47,9 @@ function createData(
         id,
         userId,
         username,
+        available,
+        locked,
+        total,
         lastActive,
         banned
     };
@@ -231,9 +237,12 @@ function UsersTable(props) {
         rows.push(
             createData(
                 item.id,
-                item.userid,
+                item.user_id,
                 item.username,
-                item.lastActive,
+                item.wallet.available,
+                item.wallet.locked,
+                item.wallet.available + item.wallet.locked,
+                item.lastSeen,
                 item.banned,
             ),
         );
@@ -352,11 +361,14 @@ function UsersTable(props) {
                                             </TableCell>
                                             <TableCell align="right">{row.userId}</TableCell>
                                             <TableCell align="right">{row.username}</TableCell>
+                                            <TableCell align="right">{row.available / 1e8}</TableCell>
+                                            <TableCell align="right">{row.locked / 1e8}</TableCell>
+                                            <TableCell align="right">{row.total / 1e8}</TableCell>
 
                                             <TableCell align="right">
                                                 {row.lastActive}
                                             </TableCell>
-                                            <TableCell align="right">{row.lastActive.banned}BAN/UNBAN</TableCell>
+                                            <TableCell align="right">{row.banned}BAN/UNBAN</TableCell>
                                         </TableRow>
                                     );
                                 })}

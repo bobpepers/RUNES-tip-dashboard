@@ -18,35 +18,28 @@ import {
 import { makeStyles } from '@mui/styles';
 
 import {
-    fetchUsersAction,
-} from '../actions/users';
-
-// import Info from '../containers/Info';
-// import * as actions from '../actions/auth';
-import UsersTable from '../components/UsersTable';
-
-const headers = [
-    'db id',
-    'user id',
-    'username',
-    'last active',
-];
+    fetchDashboardUsersAction,
+} from '../actions/dashboardUsers';
+import DashboardUsersTable from '../components/DashboardUsersTable';
 
 const headCells = [
     {
         id: 'dbId', numeric: false, disablePadding: true, label: 'id',
     },
     {
-        id: 'userId', numeric: true, disablePadding: false, label: 'user id',
+        id: 'username', numeric: true, disablePadding: false, label: 'username',
     },
     {
-        id: 'username', numeric: true, disablePadding: false, label: 'username',
+        id: 'email', numeric: true, disablePadding: false, label: 'email',
+    },
+    {
+        id: 'role', numeric: true, disablePadding: false, label: 'role',
     },
     {
         id: 'lastActive', numeric: true, disablePadding: false, label: 'last active',
     },
     {
-        id: 'banned', numeric: true, disablePadding: false, label: 'last active',
+        id: 'banned', numeric: true, disablePadding: false, label: 'banned',
     },
 ];
 
@@ -102,17 +95,17 @@ const DashboardUsersView = (props) => {
     };
 
     useEffect(() => {
-        console.log(users);
-    }, [users]);
+        console.log(dashboardUsers);
+    }, [dashboardUsers]);
 
     return (
         <div className="height100 content">
             <Grid container>
                 <Grid item xs={12}>
-                    <h3>Servers</h3>
+                    <h3>Dashboard Users</h3>
                 </Grid>
                 <Grid container item xs={12}>
-                    <Grid container item xs={12} md={3}>
+                    <Grid container item xs={12} md={4}>
                         <FormControl variant="outlined" className={classes.formControl}>
                             <TextField
                                 name="id"
@@ -123,7 +116,7 @@ const DashboardUsersView = (props) => {
                         </FormControl>
                     </Grid>
 
-                    <Grid container item xs={12} md={3}>
+                    <Grid container item xs={12} md={4}>
                         <FormControl variant="outlined" className={classes.formControl}>
                             <TextField
                                 name="username"
@@ -133,7 +126,7 @@ const DashboardUsersView = (props) => {
                                 onChange={handleChangeUsername} />
                         </FormControl>
                     </Grid>
-                    <Grid container item xs={12} md={3}>
+                    <Grid container item xs={12} md={4}>
                         <FormControl variant="outlined" className={classes.formControl}>
                             <TextField
                                 name="email"
@@ -143,9 +136,9 @@ const DashboardUsersView = (props) => {
                                 onChange={handleChangeEmail} />
                         </FormControl>
                     </Grid>
-                    <Grid container item xs={12} md={3}>
+                    <Grid container item xs={12} md={6}>
                         <FormControl variant="outlined" className={classes.formControl}>
-                            <InputLabel id="demo-simple-select-outlined-label">Platform</InputLabel>
+                            <InputLabel id="demo-simple-select-outlined-label">Role</InputLabel>
                             <Select
                                 labelId="demo-simple-select-outlined-label"
                                 id="demo-simple-select-outlined"
@@ -165,9 +158,9 @@ const DashboardUsersView = (props) => {
                             </Select>
                         </FormControl>
                     </Grid>
-                    <Grid container item xs={12} md={3}>
+                    <Grid container item xs={12} md={6}>
                         <FormControl variant="outlined" className={classes.formControl}>
-                            <InputLabel id="demo-simple-select-outlined-label">Platform</InputLabel>
+                            <InputLabel id="demo-simple-select-outlined-label">Banned</InputLabel>
                             <Select
                                 labelId="demo-simple-select-outlined-label"
                                 id="demo-simple-select-outlined"

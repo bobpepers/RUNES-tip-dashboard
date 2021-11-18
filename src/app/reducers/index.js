@@ -10,6 +10,7 @@ import activity from "./activity";
 import users from "./users";
 import deposits from "./deposits";
 import withdrawals from "./withdrawals";
+import dashboardUsers from "./dashboardUsers";
 
 const rootReducer = combineReducers({
   form,
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
   users: users,
   deposits: deposits,
   withdrawals: withdrawals,
+  dashboardUsers: dashboardUsers,
 
 });
 

@@ -1,22 +1,23 @@
 import axios from 'axios';
 import {
-    FETCH_USERS_BEGIN,
-    FETCH_USERS_SUCCESS,
-    FETCH_USERS_FAIL,
+    FETCH_DASHBOARDUSERS_BEGIN,
+    FETCH_DASHBOARDUSERS_SUCCESS,
+    FETCH_DASHBOARDUSERS_FAIL,
     ENQUEUE_SNACKBAR,
 } from './types/index';
 
 
-export function fetchUsersAction(id, userId, username, platform, banned) {
+export function fetchDashboardUsersAction(id, email, username, role, banned) {
     return function (dispatch) {
         dispatch({
-            type: FETCH_USERS_BEGIN,
+            type: FETCH_DASHBOARDUSERS_BEGIN,
         });
-        axios.post(`${process.env.API_URL}/users`, { id, userId, username, platform, banned })
+        axios.post(`${process.env.API_URL}/dashboardusers`, { id, email, username, role, banned })
             .then((response) => {
+                console.log(response.data);
                 dispatch({
-                    type: FETCH_USERS_SUCCESS,
-                    payload: response.data.users,
+                    type: FETCH_DASHBOARDUSERS_SUCCESS,
+                    payload: response.data.dashboardusers,
                 });
             }).catch((error) => {
                 if (error.response) {
@@ -56,7 +57,7 @@ export function fetchUsersAction(id, userId, username, platform, banned) {
                     });
                 }
                 dispatch({
-                    type: FETCH_USERS_FAIL,
+                    type: FETCH_DASHBOARDUSERS_FAIL,
                     payload: error,
                 });
             });

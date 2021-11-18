@@ -35,15 +35,17 @@ import { Link } from 'react-router-dom';
 
 function createData(
     id,
-    userId,
     username,
+    email,
+    role,
     lastActive,
     banned
 ) {
     return {
         id,
-        userId,
         username,
+        email,
+        role,
         lastActive,
         banned
     };
@@ -216,24 +218,25 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function UsersTable(props) {
+function DashboardUsersTable(props) {
     const {
         headCells,
-        users,
+        dashboardUsers,
         defaultPageSize,
     } = props;
     const rows = [];
     const dispatch = useDispatch();
 
-    users.forEach((item) => {
+    dashboardUsers.forEach((item) => {
         console.log('item');
         console.log(item);
         rows.push(
             createData(
                 item.id,
-                item.userid,
                 item.username,
-                item.lastActive,
+                item.email,
+                item.role,
+                item.lastSeen,
                 item.banned,
             ),
         );
@@ -350,13 +353,13 @@ function UsersTable(props) {
                                                 </p>
 
                                             </TableCell>
-                                            <TableCell align="right">{row.userId}</TableCell>
                                             <TableCell align="right">{row.username}</TableCell>
-
+                                            <TableCell align="right">{row.email}</TableCell>
+                                            <TableCell align="right">{row.role}</TableCell>
                                             <TableCell align="right">
                                                 {row.lastActive}
                                             </TableCell>
-                                            <TableCell align="right">{row.lastActive.banned}BAN/UNBAN</TableCell>
+                                            <TableCell align="right">{row.banned}BAN/UNBAN</TableCell>
                                         </TableRow>
                                     );
                                 })}
@@ -394,4 +397,4 @@ function mapStateToProps(state) {
 
 // export default AlertDialogSlide;
 
-export default connect(mapStateToProps, null)(UsersTable);
+export default connect(mapStateToProps, null)(DashboardUsersTable);
