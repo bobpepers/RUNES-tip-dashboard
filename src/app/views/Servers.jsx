@@ -23,39 +23,27 @@ import {
 
 // import Info from '../containers/Info';
 // import * as actions from '../actions/auth';
-//import TableAds from '../components/TableAds';
+import ServerTable from '../components/ServerTable';
 
 const headers = [
-    'db ID',
-    'discord ID',
-    'Server name',
+    'db id',
+    'group id',
+    'server name',
     'last active',
 ];
 
 const headCells = [
     {
-        id: 'buyer', numeric: false, disablePadding: true, label: 'Buyer',
+        id: 'dbId', numeric: false, disablePadding: true, label: 'id',
     },
     {
-        id: 'country', numeric: true, disablePadding: false, label: 'Country',
+        id: 'groupId', numeric: true, disablePadding: false, label: 'group id',
     },
     {
-        id: 'paymentMethod', numeric: true, disablePadding: false, label: 'Payment Method',
+        id: 'serverName', numeric: true, disablePadding: false, label: 'server name',
     },
     {
-        id: 'price', numeric: true, disablePadding: false, label: 'Price / RUNES',
-    },
-    {
-        id: 'currency', numeric: true, disablePadding: false, label: 'Currency',
-    },
-    // {
-    //  id: 'actual', numeric: true, disablePadding: false, label: 'Over/Under Price %',
-    // },
-    {
-        id: 'limits', numeric: true, disablePadding: false, label: 'Limits',
-    },
-    {
-        id: 'actions', numeric: true, disablePadding: false, label: 'Actions',
+        id: 'lastActive', numeric: true, disablePadding: false, label: 'last active',
     },
 ];
 
@@ -177,7 +165,15 @@ const ServersView = (props) => {
                         servers && servers.isFetching
                             ? (<CircularProgress />)
                             : (
-                                <p>Loop results here</p>
+                                <ServerTable
+                                    defaultPageSize={25}
+                                    headCells={headCells || []}
+                                    servers={servers
+                                        && servers.data
+                                        ? servers.data
+                                        : []
+                                    }
+                                />
                             )
                     }
 
