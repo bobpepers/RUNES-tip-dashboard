@@ -18,9 +18,9 @@ import {
 import { makeStyles } from '@mui/styles';
 
 import {
-    fetchDashboardUsersAction,
-} from '../actions/dashboardUsers';
-import DashboardUsersTable from '../components/DashboardUsersTable';
+    fetchDepositsAction,
+} from '../actions/deposits';
+import DepositsTable from '../components/DepositsTable';
 
 const headCells = [
     {
@@ -56,23 +56,23 @@ const useStyles = makeStyles((theme) => ({
 
 const DepositsView = (props) => {
     const {
-        dashboardUsers,
+        deposits,
     } = props;
     const dispatch = useDispatch();
     const classes = useStyles();
     const [id, setId] = useState('');
+    const [txId, setTxId] = useState('');
+    const [userId, setUserId] = useState('');
     const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [banned, setBanned] = useState('All');
-    const [role, setRole] = useState('All');
+    const [from, setFrom] = useState('');
 
-    useEffect(() => dispatch(fetchDepositsAction(id, email, username, role, banned)), [dispatch]);
-    useEffect(() => dispatch(fetchDepositsAction(id, email, username, role, banned)), [
+    useEffect(() => dispatch(fetchDepositsAction(id, txId, userId, username, from)), [dispatch]);
+    useEffect(() => dispatch(fetchDepositsAction(id, txId, userId, username, from)), [
         id,
+        txId,
+        userId,
         username,
-        banned,
-        role,
-        email,
+        from,
     ]);
 
     const handleChangeId = (event) => {
@@ -80,29 +80,29 @@ const DepositsView = (props) => {
         setId(event.target.value);
     };
 
+    const handleChangeTxId = (event) => {
+        setTxId(event.target.value);
+    };
+
+    const handleChangeUserId = (event) => {
+        setUserId(event.target.value);
+    };
     const handleChangeUsername = (event) => {
         setUsername(event.target.value);
     };
-
-    const handleChangeBanned = (event) => {
-        setBanned(event.target.value);
-    };
-    const handleChangeRole = (event) => {
-        setRole(event.target.value);
-    };
-    const handleChangeEmail = (event) => {
-        setEmail(event.target.value);
+    const handleChangeFrom = (event) => {
+        setFrom(event.target.value);
     };
 
     useEffect(() => {
-        console.log(dashboardUsers);
-    }, [dashboardUsers]);
+        console.log(deposits);
+    }, [deposits]);
 
     return (
         <div className="height100 content">
             <Grid container>
                 <Grid item xs={12}>
-                    <h3>Dashboard Users</h3>
+                    <h3>Deposits</h3>
                 </Grid>
                 <Grid container item xs={12}>
                     <Grid container item xs={12} md={4}>
@@ -119,6 +119,26 @@ const DepositsView = (props) => {
                     <Grid container item xs={12} md={4}>
                         <FormControl variant="outlined" className={classes.formControl}>
                             <TextField
+                                name="txId"
+                                value={username}
+                                label="tx id"
+                                variant="filled"
+                                onChange={handleChangeTxId} />
+                        </FormControl>
+                    </Grid>
+                    <Grid container item xs={12} md={4}>
+                        <FormControl variant="outlined" className={classes.formControl}>
+                            <TextField
+                                name="userId"
+                                value={userId}
+                                label="user id"
+                                variant="filled"
+                                onChange={handleChangeUserId} />
+                        </FormControl>
+                    </Grid>
+                    <Grid container item xs={12} md={4}>
+                        <FormControl variant="outlined" className={classes.formControl}>
+                            <TextField
                                 name="username"
                                 value={username}
                                 label="username"
@@ -129,69 +149,25 @@ const DepositsView = (props) => {
                     <Grid container item xs={12} md={4}>
                         <FormControl variant="outlined" className={classes.formControl}>
                             <TextField
-                                name="email"
-                                value={email}
-                                label="email"
+                                name="from"
+                                value={from}
+                                label="from"
                                 variant="filled"
-                                onChange={handleChangeEmail} />
-                        </FormControl>
-                    </Grid>
-                    <Grid container item xs={12} md={6}>
-                        <FormControl variant="outlined" className={classes.formControl}>
-                            <InputLabel id="demo-simple-select-outlined-label">Role</InputLabel>
-                            <Select
-                                labelId="demo-simple-select-outlined-label"
-                                id="demo-simple-select-outlined"
-                                value={role}
-                                onChange={handleChangeRole}
-                                label="Role"
-                            >
-                                <MenuItem value="all">
-                                    <em>All</em>
-                                </MenuItem>
-                                <MenuItem value={8}>
-                                    SuperAdmin
-                                </MenuItem>
-                                <MenuItem value={4}>
-                                    Admin
-                                </MenuItem>
-                            </Select>
-                        </FormControl>
-                    </Grid>
-                    <Grid container item xs={12} md={6}>
-                        <FormControl variant="outlined" className={classes.formControl}>
-                            <InputLabel id="demo-simple-select-outlined-label">Banned</InputLabel>
-                            <Select
-                                labelId="demo-simple-select-outlined-label"
-                                id="demo-simple-select-outlined"
-                                value={banned}
-                                onChange={handleChangeBanned}
-                                label="Banned"
-                            >
-                                <MenuItem value="all">
-                                    <em>All</em>
-                                </MenuItem>
-                                <MenuItem value="true">
-                                    True
-                                </MenuItem>
-                                <MenuItem value="false">
-                                    False
-                                </MenuItem>
-                            </Select>
+                                onChange={handleChangeFrom} />
                         </FormControl>
                     </Grid>
                 </Grid>
                 <Grid item xs={12}>
                     {
-                        dashboardUsers && dashboardUsers.isFetching
+                        deposits && deposits.isFetching
                             ? (<CircularProgress />)
                             : (
-                                <DashboardUsersTable
+                                <DepositsTable
                                     defaultPageSize={25}
                                     headCells={headCells || []}
-                                    dashboardUsers={dashboardUsers
-                                        && dashboardUsers.data
-                                        ? dashboardUsers.data
+                                    deposits={deposits
+                                        && deposits.data
+                                        ? deposits.data
                                         : []
                                     }
                                 />
@@ -205,7 +181,7 @@ const DepositsView = (props) => {
 }
 
 const mapStateToProps = (state) => ({
-    dashboardUsers: state.dashboardUsers,
+    deposits: state.deposits,
 })
 
 export default withRouter(connect(mapStateToProps, null)(DepositsView));

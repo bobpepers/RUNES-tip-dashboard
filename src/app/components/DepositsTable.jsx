@@ -35,17 +35,23 @@ import { Link } from 'react-router-dom';
 
 function createData(
     id,
-    userId,
+    txId,
     username,
-    lastActive,
-    banned
+    userId,
+    phase,
+    to_from,
+    amount,
+    confirmations,
 ) {
     return {
         id,
-        userId,
+        txId,
         username,
-        lastActive,
-        banned
+        userId,
+        phase,
+        to_from,
+        amount,
+        confirmations,
     };
 }
 
@@ -216,25 +222,28 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function UsersTable(props) {
+function DepositsTable(props) {
     const {
         headCells,
-        users,
+        deposits,
         defaultPageSize,
     } = props;
     const rows = [];
     const dispatch = useDispatch();
 
-    users.forEach((item) => {
+    deposits.forEach((item) => {
         console.log('item');
         console.log(item);
         rows.push(
             createData(
                 item.id,
-                item.userid,
-                item.username,
-                item.lastActive,
-                item.banned,
+                item.txId,
+                item.address.wallet.user.username,
+                item.address.wallet.user.userId,
+                item.phase,
+                item.to_from,
+                item.amount,
+                item.confirmations,
             ),
         );
     });
@@ -394,4 +403,4 @@ function mapStateToProps(state) {
 
 // export default AlertDialogSlide;
 
-export default connect(mapStateToProps, null)(UsersTable);
+export default connect(mapStateToProps, null)(DepositsTable);

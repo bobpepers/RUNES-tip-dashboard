@@ -7,12 +7,12 @@ import {
 } from './types/index';
 
 
-export function fetchServerAction(id, groupId, serverName, platform) {
+export function fetchDepositsAction(id, txId, userId, username, from) {
     return function (dispatch) {
         dispatch({
             type: FETCH_DEPOSITS_BEGIN,
         });
-        axios.post(`${process.env.API_URL}/deposits`, { id, groupId, serverName, platform })
+        axios.post(`${process.env.API_URL}/deposits`, { id, txId, userId, username, from })
             .then((response) => {
                 console.log('SUCESSSSS');
                 console.log(response);
