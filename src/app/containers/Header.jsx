@@ -68,7 +68,7 @@ const Header = (props) => {
         className="navbar navbar-default"
         expand="lg"
       >
-        <Link to="/" className="nav-link">wRUNES</Link>
+        <Link to="/" className="nav-link">RUNES-TIP</Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -138,7 +138,7 @@ const Header = (props) => {
                   </>
                 )
 
-                }
+            }
           </ul>
         </Navbar.Collapse>
       </Navbar>

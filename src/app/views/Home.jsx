@@ -13,6 +13,10 @@ import {
   Divider,
 } from '@mui/material';
 import { withRouter } from '../hooks/withRouter';
+import {
+  fetchNodeStatusAction,
+} from '../actions/nodeStatus';
+
 
 import Logo from '../assets/images/logo.svg';
 
@@ -35,10 +39,17 @@ const styles = {
 };
 
 const Home = (props) => {
-  const { classes } = props;
+  const { nodeStatus } = props;
   const navigate = useNavigate();
-  console.log('RunesX Home View');
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchNodeStatusAction());
+  }, []);
+
+  useEffect(() => {
+    console.log(nodeStatus);
+  }, [nodeStatus]);
 
   const routeChangeSwap = () => {
     const path = 'bridge';
@@ -62,8 +73,7 @@ const Home = (props) => {
           xl={3}
           className="zindexOne"
         >
-          <Logo />
-
+          123
         </Grid>
       </Grid>
       <Grid
@@ -73,23 +83,19 @@ const Home = (props) => {
         <Divider variant="middle" />
 
         <Grid item xs={12}>
-          <Button
-            fullWidth
-            variant="contained"
-            size="large"
-            onClick={() => routeChangeSwap()}
-          >
-            Swap
-          </Button>
+
         </Grid>
       </Grid>
     </div>
   );
 }
+
 Home.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = (state) => ({ })
+const mapStateToProps = (state) => ({
+  nodeStatus: state.nodeStatus
+})
 
 export default withStyles(styles)(withRouter(connect(mapStateToProps, null)(Home)));
