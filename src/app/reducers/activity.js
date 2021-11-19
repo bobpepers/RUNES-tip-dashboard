@@ -2,6 +2,7 @@ import {
     FETCH_ACTIVITY_BEGIN,
     FETCH_ACTIVITY_SUCCESS,
     FETCH_ACTIVITY_FAIL,
+    INSERT_ACTIVITY,
 } from '../actions/types/index';
 
 const initialState = {
@@ -28,6 +29,15 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 error: action.error,
+                isFetching: false,
+            };
+        case INSERT_ACTIVITY:
+            return {
+                ...state,
+                data: [
+                    action.payload,
+                    ...state.data
+                ],
                 isFetching: false,
             };
         default:

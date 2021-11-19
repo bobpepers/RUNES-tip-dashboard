@@ -7,10 +7,12 @@ import PropTypes from 'prop-types';
 import withStyles from '@mui/styles/withStyles';
 import { useNavigate } from 'react-router-dom';
 import { connect, useDispatch } from 'react-redux';
+
 import {
   Grid,
   // Button,
   Divider,
+  Typography,
 } from '@mui/material';
 import { withRouter } from '../hooks/withRouter';
 import {
@@ -89,19 +91,25 @@ const Home = (props) => {
           className="zindexOne"
           justifyContent="center"
         >
-          <h3>Status</h3>
-          <p>
-            {nodeStatus.data
-              && nodeStatus.data.status
-              ? 'Online'
-              : 'Offline'}
-          </p>
-          <p>
+          <Typography
+            variant="h6"
+            gutterBottom
+            component="div"
+            align="center"
+          >
+            Status
+          </Typography>
+          <Typography
+            variant="subtitle1"
+            gutterBottom
+            component="div"
+            align="center"
+          >
             {nodeStatus.data
               && nodeStatus.data.peers
               ? `${nodeStatus.data.peers.length} peers`
-              : '0 peers'}
-          </p>
+              : 'offline'}
+          </Typography>
         </Grid>
         <Grid
           item
@@ -113,13 +121,25 @@ const Home = (props) => {
           className="zindexOne"
           justifyContent="center"
         >
-          <h3>Liability</h3>
-          <p>
+          <Typography
+            variant="h6"
+            gutterBottom
+            component="div"
+            align="center"
+          >
+            Liability
+          </Typography>
+          <Typography
+            variant="subtitle1"
+            gutterBottom
+            component="div"
+            align="center"
+          >
             {liability.data
               && liability.data
               ? `${liability.data / 1e8} RUNES`
               : '0 RUNES'}
-          </p>
+          </Typography>
         </Grid>
         <Grid
           item
@@ -131,13 +151,25 @@ const Home = (props) => {
           className="zindexOne"
           justifyContent="center"
         >
-          <h3>Balance</h3>
-          <p>
+          <Typography
+            variant="h6"
+            gutterBottom
+            component="div"
+            align="center"
+          >
+            Balance
+          </Typography>
+          <Typography
+            variant="subtitle1"
+            gutterBottom
+            component="div"
+            align="center"
+          >
             {balance.data
               && balance.data
               ? `${balance.data / 1e8} RUNES`
               : '0 RUNES'}
-          </p>
+          </Typography>
         </Grid>
       </Grid>
 
