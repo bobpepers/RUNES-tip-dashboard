@@ -17,6 +17,9 @@ const renderItems = (data) => {
           <Moment interval={1000} fromNow>{activity.createdAt}</Moment>
         </Grid>
         <Grid item xs={2} align="center">
+          {activity.type === 'tip_f' && 'Tip: fail'}
+          {activity.type === 'tip_s' && 'Tip: success'}
+          {activity.type === 'tip_i' && 'Tip: insufficient Balance'}
           {activity.type === 'info' && 'Info Request success'}
           {activity.type === 'balance' && 'Balance Request success'}
           {activity.type === 'depositAccepted' && 'Deposit Accepted'}
@@ -27,7 +30,11 @@ const renderItems = (data) => {
           {activity.type === 'withdrawComplete' && 'Withdrawal Complete'}
         </Grid>
         <Grid item xs={4} align="center">
-          {activity.type === 'balance' && `by ${activity.earner.username}`}
+          {activity.type === 'tip_f' && `by: ${activity.spender.username}`}
+          {activity.type === 'tip_s' && `by: ${activity.spender.username} (${activity.spender.user_id})
+to: ${activity.earner.username} (${activity.earner.user_id})`}
+          {activity.type === 'tip_i' && `by: ${activity.spender.username}`}
+          {activity.type === 'balance' && `by ${activity.earner.username} (${activity.earner.user_id})`}
           {activity.type === 'info' && `by ${activity.earner.username}`}
           {activity.type === 'depositAccepted' && `accepted ${activity.earner.username}'s (${activity.earner.user_id}) deposit`}
           {activity.type === 'depositComplete' && `confirmed ${activity.earner.username}'s (${activity.earner.user_id}) deposit`}
@@ -37,7 +44,10 @@ const renderItems = (data) => {
           {activity.type === 'withdrawComplete' && `${activity.spender.username} (${activity.spender.user_id})  withdrawal complete`}
         </Grid>
         <Grid item xs={2} align="center">
-          {activity.type === 'balance' && `id: ${activity.earner.user_id}`}
+          {activity.type === 'tip_f' && `amount: ${activity.amount / 1e8}`}
+          {activity.type === 'tip_s' && `amount: ${activity.amount / 1e8}`}
+          {activity.type === 'tip_i' && `amount: ${activity.amount / 1e8}`}
+          {activity.type === 'balance' && ''}
           {activity.type === 'info' && `id: ${activity.earner.user_id}`}
           {activity.type === 'depositAccepted' && `Amount: ${activity.amount / 1e8}`}
           {activity.type === 'depositComplete' && `Amount: ${activity.amount / 1e8}`}
@@ -47,6 +57,10 @@ const renderItems = (data) => {
           {activity.type === 'withdrawComplete' && `Amount: ${activity.amount / 1e8}`}
         </Grid>
         <Grid item xs={2} align="center">
+          {activity.type === 'tip_f' && `amount: ${activity.amount / 1e8}`}
+          {activity.type === 'tip_s' && `spender balance: ${activity.spender_balance / 1e8}
+earner balance: ${activity.earner_balance / 1e8}`}
+          {activity.type === 'tip_i' && `spender: ${activity.amount / 1e8}`}
           {activity.type === 'depositAccepted' && ''}
           {activity.type === 'depositComplete' && `New Bal: ${activity.earner_balance / 1e8}`}
           {activity.type === 'withdrawRequested' && ''}
