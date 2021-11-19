@@ -1,6 +1,6 @@
 import React, {
   useEffect,
-  useState,
+  //useState,
   // Fragment,
 } from 'react';
 import PropTypes from 'prop-types';
@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { connect, useDispatch } from 'react-redux';
 import {
   Grid,
-  Button,
+  //Button,
   Divider,
 } from '@mui/material';
 import { withRouter } from '../hooks/withRouter';
@@ -17,8 +17,10 @@ import {
   fetchNodeStatusAction,
 } from '../actions/nodeStatus';
 
-
-import Logo from '../assets/images/logo.svg';
+import {
+  fetchLiabilityAction,
+} from '../actions/liability';
+//import Logo from '../assets/images/logo.svg';
 
 const styles = {
   card: {
@@ -39,20 +41,25 @@ const styles = {
 };
 
 const Home = (props) => {
-  const { nodeStatus } = props;
+  const {
+    nodeStatus,
+    liability,
+  } = props;
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchNodeStatusAction());
+    dispatch(fetchLiabilityAction());
   }, []);
 
-  useEffect(() => {
-    console.log("nodeStatus");
-    console.log(nodeStatus);
-  }, [nodeStatus]);
+  useEffect(() => { },
+    [
+      nodeStatus,
+      liability,
+    ]);
 
-  const routeChangeSwap = () => {
+  const routeChangeExample = () => {
     const path = 'bridge';
     navigate(path);
   }
@@ -75,10 +82,40 @@ const Home = (props) => {
           className="zindexOne"
           justifyContent="center"
         >
-          <p>{nodeStatus.data && nodeStatus.data.status ? 'Online' : 'Offline'}</p>
-          <p>{nodeStatus.data && nodeStatus.data.peers ? `${nodeStatus.data.peers.length} peers` : '0 peers'}</p>
+          <h3>Status</h3>
+          <p>
+            {nodeStatus.data
+              && nodeStatus.data.status
+              ? 'Online'
+              : 'Offline'}
+          </p>
+          <p>
+            {nodeStatus.data
+              && nodeStatus.data.peers
+              ? `${nodeStatus.data.peers.length} peers`
+              : '0 peers'}
+          </p>
+        </Grid>
+        <Grid
+          item
+          xs={6}
+          sm={6}
+          md={4}
+          lg={3}
+          xl={3}
+          className="zindexOne"
+          justifyContent="center"
+        >
+          <h3>Liability</h3>
+          <p>
+            {liability.data
+              && liability.data
+              ? `${liability.data} RUNES`
+              : '0 RUNES'}
+          </p>
         </Grid>
       </Grid>
+
       <Grid
         container
         spacing={0}
@@ -98,7 +135,9 @@ Home.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  nodeStatus: state.nodeStatus
+  nodeStatus: state.nodeStatus,
+  liability: state.liability,
+  balance: state.balance,
 })
 
 export default withStyles(styles)(withRouter(connect(mapStateToProps, null)(Home)));

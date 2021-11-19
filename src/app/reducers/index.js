@@ -11,6 +11,8 @@ import users from "./users";
 import deposits from "./deposits";
 import withdrawals from "./withdrawals";
 import dashboardUsers from "./dashboardUsers";
+import liability from "./liability";
+import balance from "./balance";
 
 const rootReducer = combineReducers({
   form,
@@ -26,6 +28,8 @@ const rootReducer = combineReducers({
   deposits: deposits,
   withdrawals: withdrawals,
   dashboardUsers: dashboardUsers,
+  liability: liability,
+  balance: balance,
 
 });
 

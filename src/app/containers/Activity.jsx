@@ -17,6 +17,7 @@ const renderItems = (data) => {
                     <Moment interval={1000} fromNow>{activity.createdAt}</Moment>
                 </Grid>
                 <Grid item xs={2} align="center">
+                    {activity.type === 'balance' && 'Balance Request success'}
                     {activity.type === 'depositAccepted' && 'Deposit Accepted'}
                     {activity.type === 'depositComplete' && 'Deposit Complete'}
                     {activity.type === 'withdrawRequested' && 'Withdrawal Requested'}
