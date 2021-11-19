@@ -66,13 +66,14 @@ const ActivityContainer = (props) => {
   const { activity } = props;
   useEffect(() => { }, [activity]);
   const activitiesPerPage = 20;
-  const totalPages = !activity
-    && activity
+  const totalPages = activity
     ? Math.ceil(activity.length / activitiesPerPage)
     : 0;
   const [activePage, setCurrentPage] = useState(1);
 
   const handleNextPage = () => {
+    console.log(totalPages);
+    console.log(activePage);
     if (totalPages > activePage) {
       setCurrentPage(activePage + 1)
     }
@@ -84,7 +85,6 @@ const ActivityContainer = (props) => {
     }
   };
 
-  // Logic for displaying current todos
   const indexOfLastActivity = activePage * activitiesPerPage;
   const indexOfFirstActivity = indexOfLastActivity - activitiesPerPage;
 
