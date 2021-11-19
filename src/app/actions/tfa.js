@@ -1,5 +1,5 @@
 import axios from 'axios';
-import history from '../history';
+// import history from '../history';
 import {
   ENABLE_2FA_IDLE,
   ENABLE_2FA_BEGIN,
@@ -9,7 +9,7 @@ import {
   DISABLE_2FA_BEGIN,
   DISABLE_2FA_SUCCESS,
   DISABLE_2FA_FAIL,
-  FETCH_USER_SUCCESS,
+  // FETCH_USER_SUCCESS,
   CHANGE_USER_TFA_STATE,
   AUTH_USER_TFA,
 } from './types/index';

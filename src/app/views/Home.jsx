@@ -1,6 +1,6 @@
 import React, {
   useEffect,
-  //useState,
+  // useState,
   // Fragment,
 } from 'react';
 import PropTypes from 'prop-types';
@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { connect, useDispatch } from 'react-redux';
 import {
   Grid,
-  //Button,
+  // Button,
   Divider,
 } from '@mui/material';
 import { withRouter } from '../hooks/withRouter';
@@ -20,7 +20,11 @@ import {
 import {
   fetchLiabilityAction,
 } from '../actions/liability';
-//import Logo from '../assets/images/logo.svg';
+
+import {
+  fetchBalanceAction,
+} from '../actions/balance';
+// import Logo from '../assets/images/logo.svg';
 
 const styles = {
   card: {
@@ -44,6 +48,7 @@ const Home = (props) => {
   const {
     nodeStatus,
     liability,
+    balance,
   } = props;
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -51,12 +56,14 @@ const Home = (props) => {
   useEffect(() => {
     dispatch(fetchNodeStatusAction());
     dispatch(fetchLiabilityAction());
+    dispatch(fetchBalanceAction());
   }, []);
 
   useEffect(() => { },
     [
       nodeStatus,
       liability,
+      balance,
     ]);
 
   const routeChangeExample = () => {
@@ -110,7 +117,25 @@ const Home = (props) => {
           <p>
             {liability.data
               && liability.data
-              ? `${liability.data} RUNES`
+              ? `${liability.data / 1e8} RUNES`
+              : '0 RUNES'}
+          </p>
+        </Grid>
+        <Grid
+          item
+          xs={6}
+          sm={6}
+          md={4}
+          lg={3}
+          xl={3}
+          className="zindexOne"
+          justifyContent="center"
+        >
+          <h3>Balance</h3>
+          <p>
+            {balance.data
+              && balance.data
+              ? `${balance.data / 1e8} RUNES`
               : '0 RUNES'}
           </p>
         </Grid>
@@ -122,9 +147,7 @@ const Home = (props) => {
       >
         <Divider variant="middle" />
 
-        <Grid item xs={12}>
-
-        </Grid>
+        <Grid item xs={12} />
       </Grid>
     </div>
   );
