@@ -111,9 +111,7 @@ const ActivityContainer = (props) => {
           style={{ fontSize: '40px', float: 'left' }}
         />
       </Grid>
-      <Grid item xs={8}>
-        <h3 className="textCenter">Activity</h3>
-      </Grid>
+      <Grid item xs={8} />
       <Grid item xs={2} className="textcenter">
         <ArrowForwardIcon
           onClick={handleNextPage}

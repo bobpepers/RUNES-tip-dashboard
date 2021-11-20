@@ -149,7 +149,7 @@ const ActivityView = (props) => {
     <div className="height100 content">
       <Grid container>
         <Grid item xs={12}>
-          <h3>Deposits</h3>
+          <h3>Activity</h3>
         </Grid>
         <Grid container item xs={12}>
           <Grid container item xs={12} md={4}>

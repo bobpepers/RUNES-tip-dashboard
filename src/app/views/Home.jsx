@@ -167,7 +167,7 @@ const Home = (props) => {
           >
             {balance.data
               && balance.data
-              ? `${balance.data / 1e8} RUNES`
+              ? `${balance.data} RUNES`
               : '0 RUNES'}
           </Typography>
         </Grid>
