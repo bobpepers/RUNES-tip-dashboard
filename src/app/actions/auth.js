@@ -1,5 +1,6 @@
 import axios from 'axios';
-import history from '../history';
+import { useNavigate } from 'react-router-dom';
+// import history from '../history';
 import {
   SIGNUP_SUCCESS,
   SIGNUP_FAILURE,
@@ -26,14 +27,14 @@ export function authError(CONST, error) {
 /**
  * Sign up
  */
-export function signupUser(props) {
+export function signupUser(props, navigate) {
   const { captchaResponse } = props;
+
   return function (dispatch) {
     axios.post(`${process.env.API_URL}/signup`, { props, captchaResponse })
       .then(() => {
         dispatch({ type: SIGNUP_SUCCESS });
-
-        history.push(`/register/verify-register?email=${props.email}`);
+        dispatch(navigate(`/register/verify-register?email=${props.email}`));
       })
       .catch((error) => {
         if (error.response) {
@@ -90,14 +91,7 @@ export function signinUser(props) {
       { email, password, captchaResponse })
       .then((response) => {
         console.log(response);
-        console.log(response);
-        console.log(response);
-        console.log(response);
-        console.log(response);
-        console.log(response);
-        console.log(response);
-        console.log(response);
-        console.log("response");
+        console.log('response');
 
         dispatch({
           type: AUTH_USER,
@@ -165,7 +159,7 @@ export function resendVerification(props) {
 /**
  * Verify email
  */
-export function verifyEmail(props) {
+export function verifyEmail(props, navigate) {
   return function (dispatch) {
     axios.post(`${process.env.API_URL}/signup/verify-email`, props)
       .then((response) => {
@@ -173,7 +167,7 @@ export function verifyEmail(props) {
           type: AUTH_USER,
           payload: response,
         });
-        history.push('/register/verified');
+        navigate('/register/verified');
       })
       .catch((error) => {
         dispatch(authError(VERIFY_EMAIL_ERROR, error.response.data.error));

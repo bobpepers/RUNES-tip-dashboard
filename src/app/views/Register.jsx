@@ -5,6 +5,7 @@ import {
   formValueSelector,
   change,
 } from 'redux-form';
+import { useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
   Button,
@@ -51,7 +52,7 @@ const renderField = ({
         InputProps={InputProps}
         {...input}
       />
-      { touched && error && <div className="form-error">{error}</div> }
+      {touched && error && <div className="form-error">{error}</div>}
     </FormControl>
   </div>
 );
@@ -61,7 +62,9 @@ const Register = (props) => {
     handleSubmit,
     signupUser,
     initialize,
+    auth,
   } = props;
+  const navigate = useNavigate();
 
   const [values, setValues] = useState({
     password: '',
@@ -99,7 +102,7 @@ const Register = (props) => {
   ) => (
     <div className={`input-group ${touched && error ? 'has-error' : ''}`}>
       <FormControl
-      // className={clsx(classes.margin, classes.textField)}
+        // className={clsx(classes.margin, classes.textField)}
         variant="outlined"
         fullWidth
       >
@@ -120,12 +123,12 @@ const Register = (props) => {
                 {values.showPassword ? <Visibility /> : <VisibilityOff />}
               </IconButton>
             </InputAdornment>
-              )}
+          )}
           labelWidth={70}
           {...input}
         />
       </FormControl>
-      { touched && error && <div className="form-error">{error}</div> }
+      {touched && error && <div className="form-error">{error}</div>}
     </div>
   );
 
@@ -142,7 +145,7 @@ const Register = (props) => {
   ) => (
     <div className={`input-group ${touched && error ? 'has-error' : ''}`}>
       <FormControl
-      // className={clsx(classes.margin, classes.textField)}
+        // className={clsx(classes.margin, classes.textField)}
         variant="outlined"
         fullWidth
       >
@@ -163,22 +166,27 @@ const Register = (props) => {
                 {values.showRePassword ? <Visibility /> : <VisibilityOff />}
               </IconButton>
             </InputAdornment>
-              )}
+          )}
           labelWidth={70}
           {...input}
         />
       </FormControl>
-      { touched && error && <div className="form-error">{error}</div> }
+      {touched && error && <div className="form-error">{error}</div>}
     </div>
   );
 
   const handleFormSubmit = async (formProps) => {
-    await signupUser(formProps);
+    await signupUser(formProps, navigate);
   }
 
   return (
     <div className="form-container index600 shadow-w signinContainer content">
-      <Grid container alignItems="center" justify="center">
+      <Grid
+        container
+        alignItems="center"
+        justify="center"
+        justifyContent="center"
+      >
         <Grid
           item
           xs={12}
@@ -257,12 +265,12 @@ const Register = (props) => {
                   name="captchaResponse"
                 />
                 <div>
-                  { props.errorMessage && props.errorMessage.signup
-                && (
-                <div className="error-container">
-                  { props.errorMessage.signup }
-                </div>
-                ) }
+                  {props.errorMessage && props.errorMessage.signup
+                    && (
+                      <div className="error-container">
+                        {props.errorMessage.signup}
+                      </div>
+                    )}
                 </div>
               </Box>
               <Box
@@ -325,6 +333,7 @@ const selector = formValueSelector('signin');
 
 function mapStateToProps(state) {
   return {
+    auth: state.auth,
     errorMessage: state.auth.error,
     recaptchaValue: selector(state, 'captchaResponse'),
     initialValues: {

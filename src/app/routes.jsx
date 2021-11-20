@@ -11,6 +11,8 @@ import PropTypes from 'prop-types';
 import { connect, useDispatch } from 'react-redux';
 import RegisterVerify from './views/RegisterVerify';
 import VerifyEmail from './views/VerifyEmail';
+import RegisterVerified from './views/RegisterVerified';
+
 // import requireAuth from './components/hoc/RequireAuth';
 
 import withTracker from './hooks/withTracker';
@@ -123,6 +125,10 @@ const RoutesX = (props) => {
       <Route
         path="/register/verify-email"
         element={<VerifyEmail />}
+      />
+      <Route
+        path="/register/verified"
+        element={<RegisterVerified />}
       />
     </Routes>
   )

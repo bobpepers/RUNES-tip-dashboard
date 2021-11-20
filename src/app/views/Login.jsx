@@ -41,9 +41,58 @@ const renderField = ({
         inputProps={{ className: 'outlined-email-field' }}
         {...input}
       />
-      { touched && error && <div className="form-error">{error}</div> }
+      {touched && error && <div className="form-error">{error}</div>}
     </FormControl>
   </div>
+);
+
+const renderPasswordField = (
+  {
+    input,
+    type,
+    placeholder,
+    meta: {
+      touched,
+      error,
+    },
+    handleClickShowPassword,
+    mvalues,
+    handleChange,
+    handleMouseDownPassword,
+  },
+) => (
+  <div className={`input-group ${touched && error ? 'has-error' : ''}`}>
+    <FormControl
+      // className={clsx(classes.margin, classes.textField)}
+      variant="outlined"
+      fullWidth
+    >
+      <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+      <OutlinedInput
+        // id="outlined-adornment-password"
+        inputProps={{ className: 'outlined-adornment-password' }}
+        type={mvalues.showPassword ? 'text' : 'password'}
+        value={mvalues.password}
+        onChange={handleChange('password')}
+        endAdornment={(
+          <InputAdornment position="end">
+            <IconButton
+              aria-label="toggle password visibility"
+              onClick={handleClickShowPassword}
+              onMouseDown={handleMouseDownPassword}
+              edge="end"
+            >
+              {mvalues.showPassword ? <Visibility /> : <VisibilityOff />}
+            </IconButton>
+          </InputAdornment>
+        )}
+        labelWidth={70}
+        {...input}
+      />
+    </FormControl>
+    {touched && error && <div className="form-error">{error}</div>}
+  </div>
+
 );
 
 const Signin = (props) => {
@@ -68,45 +117,6 @@ const Signin = (props) => {
     event.preventDefault();
   };
 
-  const renderPasswordField = (
-    {
-      input, type, placeholder, meta: { touched, error },
-    },
-  ) => (
-    <div className={`input-group ${touched && error ? 'has-error' : ''}`}>
-      <FormControl
-      // className={clsx(classes.margin, classes.textField)}
-        variant="outlined"
-        fullWidth
-      >
-        <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-        <OutlinedInput
-          // id="outlined-adornment-password"
-          inputProps={{ className: 'outlined-adornment-password' }}
-          type={values.showPassword ? 'text' : 'password'}
-          value={values.password}
-          onChange={handleChange('password')}
-          endAdornment={(
-            <InputAdornment position="end">
-              <IconButton
-                aria-label="toggle password visibility"
-                onClick={handleClickShowPassword}
-                onMouseDown={handleMouseDownPassword}
-                edge="end"
-              >
-                {values.showPassword ? <Visibility /> : <VisibilityOff />}
-              </IconButton>
-            </InputAdornment>
-              )}
-          labelWidth={70}
-          {...input}
-        />
-      </FormControl>
-      { touched && error && <div className="form-error">{error}</div> }
-    </div>
-
-  );
-
   const handleFormSubmit = async (props) => {
     await signinUser(props);
   }
@@ -119,6 +129,7 @@ const Signin = (props) => {
         container
         alignItems="center"
         justify="center"
+        justifyContent="center"
       >
         <Grid
           item
@@ -158,6 +169,10 @@ const Signin = (props) => {
               >
                 <Field
                   name="password"
+                  handleClickShowPassword={handleClickShowPassword}
+                  mvalues={values}
+                  handleChange={handleChange}
+                  handleMouseDownPassword={handleMouseDownPassword}
                   component={renderPasswordField}
                   type="password"
                   placeholder="Password"
@@ -171,9 +186,9 @@ const Signin = (props) => {
                 <div className="password-forgot">
                   <Link className="shadow-w" to="/reset-password">I forgot my password</Link>
                 </div>
-                { props.errorMessage && props.errorMessage.signin && (
+                {props.errorMessage && props.errorMessage.signin && (
                   <div className="error-container signin-error">
-                    { props.errorMessage.signin }
+                    {props.errorMessage.signin}
                   </div>
                 )}
               </Box>
