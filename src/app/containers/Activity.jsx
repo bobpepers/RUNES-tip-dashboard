@@ -2,10 +2,92 @@ import React, { useEffect, useState } from 'react';
 import {
   Grid,
   CircularProgress,
+  Typography,
 } from '@mui/material';
 import Moment from 'react-moment';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+
+const renderEarnedSpendBalance = (activity) => (
+  <>
+    <Typography variant="subtitle1" gutterBottom component="div">
+      spender balance:
+      {' '}
+      {activity.spender_balance / 1e8}
+    </Typography>
+    <Typography variant="subtitle1" gutterBottom component="div">
+      earner balance:
+      {' '}
+      {activity.earner_balance / 1e8}
+    </Typography>
+  </>
+)
+
+const renderEarnerBalance = (activity) => (
+  <>
+    <Typography variant="subtitle1" gutterBottom component="div">
+      earner balance:
+      {' '}
+      {activity.earner_balance / 1e8}
+    </Typography>
+  </>
+)
+
+const renderSpenderBalance = (activity) => (
+  <>
+    <Typography variant="subtitle1" gutterBottom component="div">
+      spender balance:
+      {' '}
+      {activity.spender_balance / 1e8}
+    </Typography>
+  </>
+)
+
+const renderAmount = (activity) => (
+  <>
+    <Typography variant="subtitle1" gutterBottom component="div">
+      amount:
+      {' '}
+      {activity.amount / 1e8}
+    </Typography>
+  </>
+)
+
+const renderBy = (activity) => (
+  <>
+    <Typography variant="subtitle1" gutterBottom component="div">
+      to:
+      {' '}
+      {activity.spender && activity.spender.username}
+      {' '}
+      (
+      {activity.spender && activity.spender.user_id}
+      )
+    </Typography>
+  </>
+)
+
+const renderTo = (activity) => (
+  <>
+    <Typography variant="subtitle1" gutterBottom component="div">
+      to:
+      {' '}
+      {activity.earner && activity.earner.username}
+      {' '}
+      (
+      {activity.earner && activity.earner.user_id}
+      )
+    </Typography>
+  </>
+)
+
+const renderInsufficientBalance = () => (
+  <>
+    <Typography variant="subtitle1" gutterBottom component="div">
+      Insufficient balance
+    </Typography>
+  </>
+)
 
 const renderItems = (data) => {
   const parent = [];
@@ -17,10 +99,44 @@ const renderItems = (data) => {
           <Moment interval={1000} fromNow>{activity.createdAt}</Moment>
         </Grid>
         <Grid item xs={2} align="center">
+          {activity.type === 'thundertip_f' && 'ThunderTip: fail'}
+          {activity.type === 'thundertip_s' && 'ThunderTip: success'}
+          {activity.type === 'thunderstormtip_f' && 'ThunderStormTip: fail'}
+          {activity.type === 'thunderstormtip_s' && 'ThunderStormTip: success'}
+          {activity.type === 'raintip_f' && 'RainTip: fail'}
+          {activity.type === 'raintip_s' && 'RainTip: success'}
+          {activity.type === 'soaktip_f' && 'SoakTip: fail'}
+          {activity.type === 'soaktip_s' && 'SoakTip: success'}
+          {activity.type === 'floodtip_f' && 'FloodTip: fail'}
+          {activity.type === 'floodtip_s' && 'FloodTip: success'}
+          {activity.type === 'sleettip_f' && 'SleetTip: fail'}
+          {activity.type === 'sleettip_s' && 'SleetTip: success'}
+          {activity.type === 'reactdrop_f' && 'ReactDrop: fail'}
+          {activity.type === 'reactdrop_s' && 'ReactDrop: success'}
+          {activity.type === 'reactdrop_i' && 'ReactDrop: insufficient Balance'}
+          {activity.type === 'thunderstorm_f' && 'ThunderStorm: fail'}
+          {activity.type === 'thunderstorm_s' && 'ThunderStorm: success'}
+          {activity.type === 'thunderstorm_i' && 'ThunderStorm: insufficient Balance'}
+          {activity.type === 'thunder_f' && 'Thunder: fail'}
+          {activity.type === 'thunder_s' && 'Thunder: success'}
+          {activity.type === 'thunder_i' && 'Thunder: insufficient Balance'}
+          {activity.type === 'soak_f' && 'Soak: fail'}
+          {activity.type === 'soak_s' && 'Soak: success'}
+          {activity.type === 'soak_i' && 'Soak: insufficient Balance'}
+          {activity.type === 'sleet_f' && 'Sleet: fail'}
+          {activity.type === 'sleet_s' && 'Sleet: success'}
+          {activity.type === 'sleet_i' && 'Sleet: insufficient Balance'}
+          {activity.type === 'flood_f' && 'Flood: fail'}
+          {activity.type === 'flood_s' && 'Flood: success'}
+          {activity.type === 'flood_i' && 'Flood: insufficient Balance'}
+          {activity.type === 'rain_f' && 'Rain: fail'}
+          {activity.type === 'rain_s' && 'Rain: success'}
+          {activity.type === 'rain_i' && 'Rain: insufficient Balance'}
           {activity.type === 'tip_f' && 'Tip: fail'}
           {activity.type === 'tip_s' && 'Tip: success'}
           {activity.type === 'tip_i' && 'Tip: insufficient Balance'}
           {activity.type === 'info' && 'Info Request success'}
+          {activity.type === 'deposit' && 'Deposit address Request success'}
           {activity.type === 'balance' && 'Balance Request success'}
           {activity.type === 'depositAccepted' && 'Deposit Accepted'}
           {activity.type === 'depositComplete' && 'Deposit Complete'}
@@ -30,43 +146,198 @@ const renderItems = (data) => {
           {activity.type === 'withdrawComplete' && 'Withdrawal Complete'}
         </Grid>
         <Grid item xs={4} align="center">
-          {activity.type === 'tip_f' && `by: ${activity.spender.username}`}
-          {activity.type === 'tip_s' && `by: ${activity.spender.username} (${activity.spender.user_id})
-to: ${activity.earner.username} (${activity.earner.user_id})`}
-          {activity.type === 'tip_i' && `by: ${activity.spender.username}`}
-          {activity.type === 'balance' && `by ${activity.earner.username} (${activity.earner.user_id})`}
-          {activity.type === 'info' && `by ${activity.earner.username}`}
-          {activity.type === 'depositAccepted' && `accepted ${activity.earner.username}'s (${activity.earner.user_id}) deposit`}
-          {activity.type === 'depositComplete' && `confirmed ${activity.earner.username}'s (${activity.earner.user_id}) deposit`}
-          {activity.type === 'withdrawRequested' && `${activity.spender.username} (${activity.spender.user_id}) requested a withdrawal`}
-          {activity.type === 'withdrawAccepted' && `${activity.spender.username} (${activity.spender.user_id})  withdrawal accepted`}
-          {activity.type === 'withdrawRejected' && `${activity.spender.username} (${activity.spender.user_id})  withdrawal rejected`}
-          {activity.type === 'withdrawComplete' && `${activity.spender.username} (${activity.spender.user_id})  withdrawal complete`}
+          {(
+            activity.type === 'floodtip_s'
+            || activity.type === 'soaktip_s'
+
+            || activity.type === 'sleettip_s'
+            || activity.type === 'raintip_s'
+            || activity.type === 'thunderstormtip_s'
+            || activity.type === 'thundertip_s'
+            || activity.type === 'reactdroptip_s'
+
+            || activity.type === 'thundertip_f'
+            || activity.type === 'thunderstormtip_f'
+            || activity.type === 'raintip_f'
+            || activity.type === 'soaktip_f'
+            || activity.type === 'floodtip_f'
+            || activity.type === 'sleettip_f'
+          ) && renderTo(activity)}
+
+          {(
+            activity.type === 'reactdrop_s'
+            || activity.type === 'thunder_s'
+
+            || activity.type === 'thunderstorm_s'
+            || activity.type === 'soak_s'
+            || activity.type === 'sleet_s'
+            || activity.type === 'flood_s'
+            || activity.type === 'rain_s'
+
+            || activity.type === 'reactdrop_i'
+            || activity.type === 'thunderstorm_i'
+            || activity.type === 'thunder_i'
+            || activity.type === 'soak_i'
+            || activity.type === 'sleet_i'
+            || activity.type === 'flood_i'
+            || activity.type === 'rain_i'
+            || activity.type === 'tip_i'
+
+            || activity.type === 'reactdrop_f'
+            || activity.type === 'thunderstorm_f'
+            || activity.type === 'thunder_f'
+            || activity.type === 'soak_f'
+            || activity.type === 'soak_f'
+            || activity.type === 'sleet_f'
+            || activity.type === 'flood_f'
+            || activity.type === 'rain_f'
+            || activity.type === 'tip_f'
+
+            || activity.type === 'balance'
+            || activity.type === 'info'
+            || activity.type === 'deposit'
+            || activity.type === 'depositAccepted'
+            || activity.type === 'depositComplete'
+
+            || activity.type === 'withdrawRequested'
+            || activity.type === 'withdrawAccepted'
+            || activity.type === 'withdrawRejected'
+            || activity.type === 'withdrawComplete'
+          ) && renderBy(activity)}
+
+          {activity.type === 'tip_s' && (
+            <>
+              <Typography variant="subtitle1" gutterBottom component="div">
+                by:
+                {' '}
+                {activity.spender.username}
+                {' '}
+                (
+                {activity.spender.user_id}
+                )
+              </Typography>
+              <Typography variant="subtitle1" gutterBottom component="div">
+                to:
+                {' '}
+                {activity.earner.username}
+                {' '}
+                (
+                {activity.earner.user_id}
+                )
+              </Typography>
+            </>
+          )}
+
         </Grid>
         <Grid item xs={2} align="center">
-          {activity.type === 'tip_f' && `amount: ${activity.amount / 1e8}`}
-          {activity.type === 'tip_s' && `amount: ${activity.amount / 1e8}`}
-          {activity.type === 'tip_i' && `amount: ${activity.amount / 1e8}`}
+          {(
+            activity.type === 'reactdrop_s'
+            || activity.type === 'thunder_s'
+            || activity.type === 'soak_s'
+            || activity.type === 'thunderstorm_s'
+            || activity.type === 'sleet_s'
+            || activity.type === 'rain_s'
+            || activity.type === 'flood_s'
+            || activity.type === 'thundertip_s'
+            || activity.type === 'raintip_s'
+            || activity.type === 'soaktip_s'
+            || activity.type === 'floodtip_s'
+            || activity.type === 'sleettip_s'
+            || activity.type === 'thunderstormtip_s'
+            || activity.type === 'tip_s'
+
+            || activity.type === 'depositAccepted'
+            || activity.type === 'depositComplete'
+            || activity.type === 'withdrawRequested'
+            || activity.type === 'withdrawAccepted'
+            || activity.type === 'withdrawRejected'
+            || activity.type === 'withdrawComplete'
+
+            || activity.type === 'thundertip_f'
+            || activity.type === 'thunderstormtip_f'
+            || activity.type === 'raintip_f'
+            || activity.type === 'soaktip_f'
+            || activity.type === 'floodtip_f'
+            || activity.type === 'sleettip_f'
+            || activity.type === 'reactdrop_f'
+
+            || activity.type === 'thunderstorm_f'
+            || activity.type === 'thunder_f'
+            || activity.type === 'soak_f'
+            || activity.type === 'sleet_f'
+            || activity.type === 'flood_f'
+
+            || activity.type === 'rain_f'
+            || activity.type === 'tip_f'
+            || activity.type === 'flood_f'
+            || activity.type === 'flood_f'
+
+            || activity.type === 'reactdrop_i'
+            || activity.type === 'thunderstorm_i'
+            || activity.type === 'thunder_i'
+            || activity.type === 'soak_i'
+            || activity.type === 'sleet_i'
+            || activity.type === 'flood_i'
+            || activity.type === 'rain_i'
+            || activity.type === 'tip_i'
+          ) && renderAmount(activity)}
+
           {activity.type === 'balance' && ''}
           {activity.type === 'info' && `id: ${activity.earner.user_id}`}
-          {activity.type === 'depositAccepted' && `Amount: ${activity.amount / 1e8}`}
-          {activity.type === 'depositComplete' && `Amount: ${activity.amount / 1e8}`}
-          {activity.type === 'withdrawRequested' && `Amount: ${activity.amount / 1e8}`}
-          {activity.type === 'withdrawAccepted' && `Amount: ${activity.amount / 1e8}`}
-          {activity.type === 'withdrawRejected' && `Amount: ${activity.amount / 1e8}`}
-          {activity.type === 'withdrawComplete' && `Amount: ${activity.amount / 1e8}`}
+
         </Grid>
         <Grid item xs={2} align="center">
+          {(
+            activity.type === 'reactdrop_s'
+            || activity.type === 'thunder_s'
+            || activity.type === 'soak_s'
+            || activity.type === 'thunderstorm_s'
+            || activity.type === 'sleet_s'
+            || activity.type === 'rain_s'
+            || activity.type === 'flood_s'
+
+            || activity.type === 'reactdrop_f'
+            || activity.type === 'thunderstorm_f'
+            || activity.type === 'thunder_f'
+            || activity.type === 'soak_f'
+            || activity.type === 'sleet_f'
+            || activity.type === 'flood_f'
+            || activity.type === 'rain_f'
+            || activity.type === 'withdrawComplete'
+          ) && renderSpenderBalance(activity)}
+
+          {(
+            activity.type === 'tip_s'
+            || activity.type === 'floodtip_s'
+            || activity.type === 'thundertip_s'
+            || activity.type === 'thunderstormtip_s'
+            || activity.type === 'raintip_s'
+            || activity.type === 'soaktip_s'
+            || activity.type === 'sleettip_s'
+          ) && renderEarnedSpendBalance(activity)}
+
+          {(
+            activity.type === 'reactdrop_i'
+            || activity.type === 'thunder_i'
+            || activity.type === 'thunderstorm_i'
+            || activity.type === 'soak_i'
+            || activity.type === 'flood_i'
+            || activity.type === 'sleet_i'
+            || activity.type === 'rain_i'
+            || activity.type === 'tip_i'
+          ) && renderInsufficientBalance()}
+
+          {(
+            activity.type === 'depositComplete'
+
+          ) && renderEarnerBalance(activity)}
+
           {activity.type === 'tip_f' && `amount: ${activity.amount / 1e8}`}
-          {activity.type === 'tip_s' && `spender balance: ${activity.spender_balance / 1e8}
-earner balance: ${activity.earner_balance / 1e8}`}
-          {activity.type === 'tip_i' && `spender: ${activity.amount / 1e8}`}
+
           {activity.type === 'depositAccepted' && ''}
-          {activity.type === 'depositComplete' && `New Bal: ${activity.earner_balance / 1e8}`}
           {activity.type === 'withdrawRequested' && ''}
           {activity.type === 'withdrawAccepted' && ''}
           {activity.type === 'withdrawRejected' && ''}
-          {activity.type === 'withdrawComplete' && `New Bal: ${activity.spender_balance / 1e8}`}
         </Grid>
 
       </Grid>,
