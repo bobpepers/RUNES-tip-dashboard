@@ -48,7 +48,7 @@ const renderAmount = (activity) => (
     <Typography variant="subtitle1" gutterBottom component="div">
       amount:
       {' '}
-      {activity.amount / 1e8}
+      {activity.amount && activity.amount / 1e8}
     </Typography>
   </>
 )
@@ -56,7 +56,7 @@ const renderAmount = (activity) => (
 const renderBy = (activity) => (
   <>
     <Typography variant="subtitle1" gutterBottom component="div">
-      to:
+      by:
       {' '}
       {activity.spender && activity.spender.username}
       {' '}
@@ -114,6 +114,7 @@ const renderItems = (data) => {
           {activity.type === 'reactdrop_f' && 'ReactDrop: fail'}
           {activity.type === 'reactdrop_s' && 'ReactDrop: success'}
           {activity.type === 'reactdrop_i' && 'ReactDrop: insufficient Balance'}
+          {activity.type === 'reactdroptip_s' && 'ReactDropTip: success'}
           {activity.type === 'thunderstorm_f' && 'ThunderStorm: fail'}
           {activity.type === 'thunderstorm_s' && 'ThunderStorm: success'}
           {activity.type === 'thunderstorm_i' && 'ThunderStorm: insufficient Balance'}
@@ -136,6 +137,7 @@ const renderItems = (data) => {
           {activity.type === 'tip_s' && 'Tip: success'}
           {activity.type === 'tip_i' && 'Tip: insufficient Balance'}
           {activity.type === 'info' && 'Info Request success'}
+          {activity.type === 'help' && 'Help Request success'}
           {activity.type === 'deposit' && 'Deposit address Request success'}
           {activity.type === 'balance' && 'Balance Request success'}
           {activity.type === 'depositAccepted' && 'Deposit Accepted'}
@@ -162,6 +164,10 @@ const renderItems = (data) => {
             || activity.type === 'soaktip_f'
             || activity.type === 'floodtip_f'
             || activity.type === 'sleettip_f'
+
+            || activity.type === 'balance'
+            || activity.type === 'info'
+            || activity.type === 'help'
           ) && renderTo(activity)}
 
           {(
@@ -193,8 +199,6 @@ const renderItems = (data) => {
             || activity.type === 'rain_f'
             || activity.type === 'tip_f'
 
-            || activity.type === 'balance'
-            || activity.type === 'info'
             || activity.type === 'deposit'
             || activity.type === 'depositAccepted'
             || activity.type === 'depositComplete'
@@ -280,11 +284,12 @@ const renderItems = (data) => {
             || activity.type === 'flood_i'
             || activity.type === 'rain_i'
             || activity.type === 'tip_i'
+            || activity.type === 'reactdroptip_i'
+            || activity.type === 'reactdroptip_s'
           ) && renderAmount(activity)}
 
           {activity.type === 'balance' && ''}
           {activity.type === 'info' && `id: ${activity.earner.user_id}`}
-
         </Grid>
         <Grid item xs={2} align="center">
           {(
@@ -329,7 +334,7 @@ const renderItems = (data) => {
 
           {(
             activity.type === 'depositComplete'
-
+            || activity.type === 'reactdroptip_s'
           ) && renderEarnerBalance(activity)}
 
           {activity.type === 'tip_f' && `amount: ${activity.amount / 1e8}`}
@@ -357,8 +362,6 @@ const ActivityContainer = (props) => {
   const [activePage, setCurrentPage] = useState(1);
 
   const handleNextPage = () => {
-    console.log(totalPages);
-    console.log(activePage);
     if (totalPages > activePage) {
       setCurrentPage(activePage + 1)
     }
