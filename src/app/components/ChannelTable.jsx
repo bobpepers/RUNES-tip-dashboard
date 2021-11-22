@@ -24,25 +24,22 @@ import {
 import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { Link } from 'react-router-dom';
-
 import BanDialog from './BanDialog';
-//import {
-//    startTradeAction,
-//    secondTradeIdleAction,
-//    fetchCurrentTradeIdle,
-//} from '../actions/trade';
+
 
 function createData(
   id,
   channelId,
   channelName,
-  lastActive
+  lastActive,
+  banned,
 ) {
   return {
     id,
     channelId,
     channelName,
-    lastActive
+    lastActive,
+    banned,
   };
 }
 
@@ -221,17 +218,15 @@ function ChannelTable(props) {
     defaultPageSize,
   } = props;
   const rows = [];
-  const dispatch = useDispatch();
 
   channels.forEach((item) => {
-    console.log('item');
-    console.log(item);
     rows.push(
       createData(
         item.id,
         item.channelId,
         item.channelName,
-        item.lastActive
+        item.lastActive,
+        item.banned,
       ),
     );
   });
@@ -290,12 +285,6 @@ function ChannelTable(props) {
 
   const handleChangeDense = (event) => {
     setDense(event.target.checked);
-  };
-
-  const handleClickTrade = (id) => {
-    console.log(id);
-    dispatch(startTradeAction(id));
-    // setDense(event.target.checked);
   };
 
   const isSelected = (name) => selected.indexOf(name) !== -1;

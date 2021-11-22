@@ -72,7 +72,6 @@ const ChannelsView = (props) => {
   ]);
 
   const handleChangeId = (event) => {
-    console.log(event);
     setId(event.target.value);
   };
 
@@ -84,13 +83,13 @@ const ChannelsView = (props) => {
     setchannelName(event.target.value);
   };
 
-  const banChannel = (event) => {
-    dispatch(banChannelAction(id, channelId, channelName))
+  const banChannel = (id, banMessage) => {
+    console.log(banMessage);
+    console.log('bannMessage');
+    dispatch(banChannelAction(id, banMessage))
   };
 
-  useEffect(() => {
-    console.log(channels);
-  }, [channels]);
+  useEffect(() => { }, [channels]);
 
   return (
     <div className="height100 content">

@@ -4,6 +4,7 @@ import {
   FETCH_CHANNELS_BEGIN,
   FETCH_CHANNELS_SUCCESS,
   FETCH_CHANNELS_FAIL,
+  UPDATE_CHANNEL,
   ENQUEUE_SNACKBAR,
 } from './types/index';
 
@@ -70,19 +71,18 @@ export function fetchChannelsAction(id, channelId, channelName) {
 }
 
 
-export function banChannelAction(id) {
+export function banChannelAction(id, banMessage = '') {
   return function (dispatch) {
     dispatch({
       type: FETCH_CHANNELS_BEGIN,
     });
     axios.post(`${process.env.API_URL}/ban/channel`, {
       id,
+      banMessage,
     })
       .then((response) => {
-        console.log('SUCESSSSS');
-        console.log(response);
         dispatch({
-          type: FETCH_CHANNELS_SUCCESS,
+          type: UPDATE_CHANNEL,
           payload: response.data.channel,
         });
       }).catch((error) => {

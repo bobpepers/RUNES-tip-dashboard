@@ -27,8 +27,10 @@ export default function FormDialog(props) {
     setOpen(false);
   };
 
-  const handleChange = (prop) => (event) => {
+  const handleChange = (event) => {
+    console.log(event);
     setMessage(event.target.value);
+    console.log(message);
   };
 
   return (
@@ -48,6 +50,8 @@ export default function FormDialog(props) {
             id="banMessage"
             label="Ban Message"
             type="text"
+            multiline
+            maxRows={4}
             fullWidth
             variant="standard"
             onChange={handleChange}
