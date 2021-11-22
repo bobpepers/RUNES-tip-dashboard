@@ -19,6 +19,7 @@ import { makeStyles } from '@mui/styles';
 
 import {
     fetchServerAction,
+    banServerAction,
 } from '../actions/servers';
 
 // import Info from '../containers/Info';
@@ -94,9 +95,14 @@ const ServersView = (props) => {
         setPlatform(event.target.value);
     };
 
-    useEffect(() => {
-        console.log(servers);
-    }, [servers]);
+    useEffect(() => { }, [servers]);
+
+    const banServer = (id, banMessage) => {
+        console.log(banMessage);
+        console.log('bannMessage');
+        dispatch(banServerAction(id, banMessage))
+    };
+
 
     return (
         <div className="height100 content">
@@ -167,6 +173,7 @@ const ServersView = (props) => {
                             : (
                                 <ServerTable
                                     defaultPageSize={25}
+                                    banServer={banServer}
                                     headCells={headCells || []}
                                     servers={servers
                                         && servers.data

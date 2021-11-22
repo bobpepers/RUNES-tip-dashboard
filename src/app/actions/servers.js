@@ -3,6 +3,7 @@ import {
   FETCH_SERVERS_BEGIN,
   FETCH_SERVERS_SUCCESS,
   FETCH_SERVERS_FAIL,
+  UPDATE_SERVER,
   ENQUEUE_SNACKBAR,
 } from './types/index';
 
@@ -62,6 +63,58 @@ export function fetchServerAction(id, groupId, serverName, platform) {
           type: FETCH_SERVERS_FAIL,
           payload: error,
         });
+      });
+  }
+}
+
+export function banServerAction(id, banMessage = '') {
+  return function (dispatch) {
+    axios.post(`${process.env.API_URL}/ban/server`, {
+      id,
+      banMessage,
+    })
+      .then((response) => {
+        dispatch({
+          type: UPDATE_SERVER,
+          payload: response.data.server,
+        });
+      }).catch((error) => {
+        if (error.response) {
+          // client received an error response (5xx, 4xx)
+          dispatch({
+            type: ENQUEUE_SNACKBAR,
+            notification: {
+              message: `${error.response.status}: ${error.response.data.error}`,
+              key: new Date().getTime() + Math.random(),
+              options: {
+                variant: 'error',
+              },
+            },
+          });
+        } else if (error.request) {
+          // client never received a response, or request never left
+          dispatch({
+            type: ENQUEUE_SNACKBAR,
+            notification: {
+              message: 'Connection Timeout',
+              key: new Date().getTime() + Math.random(),
+              options: {
+                variant: 'error',
+              },
+            },
+          });
+        } else {
+          dispatch({
+            type: ENQUEUE_SNACKBAR,
+            notification: {
+              message: 'Unknown Error',
+              key: new Date().getTime() + Math.random(),
+              options: {
+                variant: 'error',
+              },
+            },
+          });
+        }
       });
   }
 }

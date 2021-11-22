@@ -19,6 +19,7 @@ import { makeStyles } from '@mui/styles';
 
 import {
     fetchUsersAction,
+    banUserAction,
 } from '../actions/users';
 
 // import Info from '../containers/Info';
@@ -103,9 +104,13 @@ const UsersView = (props) => {
         setUserId(event.target.value);
     };
 
-    useEffect(() => {
-        console.log(users);
-    }, [users]);
+    useEffect(() => { }, [users]);
+
+    const banUser = (id, banMessage) => {
+        console.log(banMessage);
+        console.log('bannMessage');
+        dispatch(banUserAction(id, banMessage))
+    };
 
     return (
         <div className="height100 content">
@@ -197,6 +202,7 @@ const UsersView = (props) => {
                             : (
                                 <UsersTable
                                     defaultPageSize={25}
+                                    banUser={banUser}
                                     headCells={headCells || []}
                                     users={users
                                         && users.data

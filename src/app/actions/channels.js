@@ -73,9 +73,6 @@ export function fetchChannelsAction(id, channelId, channelName) {
 
 export function banChannelAction(id, banMessage = '') {
   return function (dispatch) {
-    dispatch({
-      type: FETCH_CHANNELS_BEGIN,
-    });
     axios.post(`${process.env.API_URL}/ban/channel`, {
       id,
       banMessage,
@@ -122,10 +119,6 @@ export function banChannelAction(id, banMessage = '') {
             },
           });
         }
-        dispatch({
-          type: FETCH_CHANNELS_FAIL,
-          payload: error,
-        });
       });
   }
 }

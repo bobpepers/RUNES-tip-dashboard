@@ -13,10 +13,6 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_CHANNEL:
-      console.log(action.payload);
-      console.log(action.payload.id);
-      console.log('payload updatechannel');
-
       return {
         ...state,
         data: state.data.map(
