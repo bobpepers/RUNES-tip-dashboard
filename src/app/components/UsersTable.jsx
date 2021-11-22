@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
@@ -23,16 +23,9 @@ import {
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
-import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Link } from 'react-router-dom';
 import BanDialog from './BanDialog';
 
-//import {
-//    startTradeAction,
-//    secondTradeIdleAction,
-//    fetchCurrentTradeIdle,
-//} from '../actions/trade';
 
 function createData(
   id,
@@ -306,12 +299,6 @@ function UsersTable(props) {
     setDense(event.target.checked);
   };
 
-  const handleClickTrade = (id) => {
-    console.log(id);
-    dispatch(startTradeAction(id));
-    // setDense(event.target.checked);
-  };
-
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
@@ -416,12 +403,4 @@ function UsersTable(props) {
   );
 }
 
-function mapStateToProps(state) {
-  return {
-    //currentTrade: state.currentTrade.data,
-  }
-}
-
-// export default AlertDialogSlide;
-
-export default connect(mapStateToProps, null)(UsersTable);
+export default UsersTable;
