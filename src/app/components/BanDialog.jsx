@@ -28,9 +28,7 @@ export default function FormDialog(props) {
   };
 
   const handleChange = (event) => {
-    console.log(event);
     setMessage(event.target.value);
-    console.log(message);
   };
 
   return (
