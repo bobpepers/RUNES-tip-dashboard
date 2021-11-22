@@ -13,6 +13,8 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_USER:
+      console.log(action.payload);
+      console.log('action payload update user');
       return {
         ...state,
         data: state.data.map(

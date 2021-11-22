@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import withStyles from '@mui/styles/withStyles';
 import { useNavigate } from 'react-router-dom';
 import { connect, useDispatch } from 'react-redux';
-
+import ActivityView from './Activity';
 import {
   Grid,
   // Button,
@@ -179,7 +179,9 @@ const Home = (props) => {
       >
         <Divider variant="middle" />
 
-        <Grid item xs={12} />
+        <Grid item xs={12}>
+          <ActivityView />
+        </Grid>
       </Grid>
     </div>
   );

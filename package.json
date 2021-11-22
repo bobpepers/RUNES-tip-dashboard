@@ -94,6 +94,7 @@
     "@heroicons/react": "^1.0.5",
     "@lingui/core": "^3.12.1",
     "@lingui/react": "^3.12.1",
+    "@mui/core": "^5.0.0-alpha.54",
     "@mui/icons-material": "^5.1.1",
     "@mui/material": "^5.1.1",
     "@mui/styles": "^5.1.1",

@@ -11,13 +11,21 @@ import {
   Nav,
   // NavDropdown,
 } from 'react-bootstrap';
-
+import {
+  Button,
+  MenuItem,
+  Menu,
+} from '@mui/material';
+import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
 import MobileNav from '../assets/images/mobileNav.svg';
 // import Notifications from '../components/Notifications';
 // import ConnectButton from '../components/ConnectButton';
+import ButtonUnstyled, { buttonUnstyledClasses } from '@mui/core/ButtonUnstyled';
+import { styled } from '@mui/system';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import IconButton from '@mui/material/IconButton';
 
-// import 'bootstrap/dist/css/bootstrap.css';
 
 const Header = (props) => {
   // const { t } = props;
@@ -32,6 +40,12 @@ const Header = (props) => {
   const dispatch = useDispatch();
   const [menu, setMenu] = useState(false);
   const [height, setHeight] = useState(0);
+  const [anchorElManagement, setAnchorElManagement] = useState(null);
+  const openManagement = Boolean(anchorElManagement);
+  const [anchorElFunctions, setAnchorElFunctions] = useState(null);
+  const openFunctions = Boolean(anchorElFunctions);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const isMenuOpen = Boolean(anchorEl);
 
   const handleWindowResize = useCallback((event) => {
     console.log('resize window');
@@ -55,7 +69,29 @@ const Header = (props) => {
 
   const toggleMenu = () => {
     setMenu(!menu);
-  }
+  };
+
+
+  const handleClickManagement = (event) => {
+    setAnchorElManagement(event.currentTarget);
+  };
+  const handleCloseManagement = () => {
+    setAnchorElManagement(null);
+  };
+
+  const handleClickFunctions = (event) => {
+    setAnchorElFunctions(event.currentTarget);
+  };
+  const handleCloseFunctions = () => {
+    setAnchorElFunctions(null);
+  };
+  const handleProfileMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+    //handleMobileMenuClose();
+  };
 
   const show = (menu) ? 'show' : '';
 
@@ -82,102 +118,207 @@ const Header = (props) => {
           className={`collapse navbar-collapse ${show}`}
         >
           <Nav className="mr-auto rNavbar">
-            <Link
-              className="nav-link"
+            <Button
+              component={Link}
+              variant="outlined"
+              style={{
+                fontSize: "14px",
+                fontWeight: 200,
+                marginRight: "10px",
+              }}
+              size="large"
               to="/"
+              aria-controls="basic-menu"
+              aria-haspopup="true"
             >
               Dashboard
-            </Link>
-            <Link
-              className="nav-link"
-              to="/users"
-            >
-              Users
-            </Link>
+            </Button>
+            {/*
             <Link
               className="nav-link"
               to="/activity"
             >
               Activity
             </Link>
-            <Link
-              className="nav-link"
-              to="/servers"
+            */}
+
+            <Button
+              aria-controls="basic-menu"
+              aria-haspopup="true"
+              aria-expanded={openManagement ? 'true' : undefined}
+              onClick={handleClickManagement}
+              variant="outlined"
+              style={{
+                fontSize: "14px",
+                fontWeight: 200,
+                marginRight: "10px",
+              }}
             >
-              Servers
-            </Link>
-            <Link
-              className="nav-link"
-              to="/channels"
+              Management
+            </Button>
+            <Menu
+              anchorEl={anchorElManagement}
+              open={openManagement}
+              onClose={handleCloseManagement}
+              MenuListProps={{
+                //  'aria-labelledby': 'basic-button',
+              }}
             >
-              Channels
-            </Link>
-            <Link
-              className="nav-link"
-              to="/deposits"
+              <MenuItem onClick={handleCloseManagement}>
+                <Link
+                  className="nav-link"
+                  to="/servers"
+                >
+                  Servers
+                </Link>
+
+              </MenuItem>
+              <MenuItem onClick={handleCloseManagement}>
+                <Link
+                  className="nav-link"
+                  to="/channels"
+                >
+                  Channels
+                </Link>
+              </MenuItem>
+              <MenuItem onClick={handleCloseManagement}>
+                <Link
+                  className="nav-link"
+                  to="/users"
+                >
+                  Users
+                </Link>
+              </MenuItem>
+              <MenuItem onClick={handleCloseManagement}>
+                <Link
+                  className="nav-link"
+                  to="/dashboardusers"
+                >
+                  DashboardUsers
+                </Link>
+              </MenuItem>
+            </Menu>
+
+
+            <Button
+              aria-controls="basic-menu"
+              aria-haspopup="true"
+              aria-expanded={openFunctions ? 'true' : undefined}
+              onClick={handleClickFunctions}
+              variant="outlined"
+              style={{
+                fontSize: "14px",
+                fontWeight: 200,
+                marginRight: "10px",
+              }}
             >
-              Deposits
-            </Link>
-            <Link
-              className="nav-link"
-              to="/withdrawals"
+              Functions
+            </Button>
+            <Menu
+              anchorEl={anchorElFunctions}
+              open={openFunctions}
+              onClose={handleCloseFunctions}
+              MenuListProps={{
+                //  'aria-labelledby': 'basic-button',
+              }}
             >
-              Withdrawals
-            </Link>
-            <Link
-              className="nav-link"
-              to="/dashboardusers"
-            >
-              DashboardUsers
-            </Link>
+              <MenuItem onClick={handleCloseFunctions}>
+                <Link
+                  className="nav-link"
+                  to="/deposits"
+                >
+                  Deposits
+                </Link>
+
+              </MenuItem>
+              <MenuItem onClick={handleCloseFunctions}>
+                <Link
+                  className="nav-link"
+                  to="/withdrawals"
+                >
+                  Withdrawals
+                </Link>
+              </MenuItem>
+            </Menu>
           </Nav>
           <ul>
-            {
-              authenticated
-                ? (
-                  <>
-                    <li>
-                      <Link
-                        className="nav-link"
-                        to="/settings"
-                      >
-                        settings
-                      </Link>
 
-                    </li>
-                    <li>
-                      <Link
-                        className="nav-link"
-                        to="/logout"
-                      >
-                        logout
-                      </Link>
-                    </li>
-                  </>
-                )
-                : (
-                  <>
-                    <li>
-                      <Link
-                        className="nav-link"
-                        to="/login"
-                      >
-                        login
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        className="nav-link"
-                        to="/register"
-                      >
-                        register
-                      </Link>
+            <>
+              <li>
+                <IconButton
+                  size="large"
+                  edge="end"
+                  aria-label="account of current user"
+                  aria-controls='primary-search-account-menu'
+                  aria-haspopup="true"
+                  onClick={handleProfileMenuOpen}
+                  color="inherit"
+                >
+                  <AccountCircle />
+                </IconButton>
+                <Menu
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  id="primary-search-account-menu"
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={isMenuOpen}
+                  onClose={handleMenuClose}
+                >
+                  {
+                    authenticated
+                      ? (
+                        <>
+                          <MenuItem onClick={handleMenuClose}>
+                            <Link
+                              className="nav-link"
+                              to="/settings"
+                            >
+                              settings
+                            </Link>
+                          </MenuItem>
+                          <MenuItem onClick={handleMenuClose}>
+                            <Link
+                              className="nav-link"
+                              to="/logout"
+                            >
+                              logout
+                            </Link>
+                          </MenuItem>
+                        </>
+                      )
+                      : (
+                        <>
+                          <MenuItem onClick={handleMenuClose}>
+                            <Link
+                              className="nav-link"
+                              to="/login"
+                            >
+                              login
+                            </Link>
+                          </MenuItem>
+                          <MenuItem onClick={handleMenuClose}>
+                            <Link
+                              className="nav-link"
+                              to="/register"
+                            >
+                              register
+                            </Link>
+                          </MenuItem>
+                        </>
+                      )
 
-                    </li>
-                  </>
-                )
+                  }
+                </Menu>
 
-            }
+              </li>
+            </>
           </ul>
         </Navbar.Collapse>
       </Navbar>
