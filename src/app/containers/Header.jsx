@@ -68,7 +68,6 @@ const Header = (props) => {
         className="navbar navbar-default"
         expand="lg"
       >
-        <Link to="/" className="nav-link">RUNES-TIP</Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -97,15 +96,21 @@ const Header = (props) => {
             </Link>
             <Link
               className="nav-link"
+              to="/activity"
+            >
+              Activity
+            </Link>
+            <Link
+              className="nav-link"
               to="/servers"
             >
               Servers
             </Link>
             <Link
               className="nav-link"
-              to="/activity"
+              to="/channels"
             >
-              Activity
+              Channels
             </Link>
             <Link
               className="nav-link"

@@ -1,7 +1,7 @@
 import {
-  FETCH_SERVERS_BEGIN,
-  FETCH_SERVERS_SUCCESS,
-  FETCH_SERVERS_FAIL,
+  FETCH_CHANNELS_BEGIN,
+  FETCH_CHANNELS_SUCCESS,
+  FETCH_CHANNELS_FAIL,
 } from '../actions/types/index';
 
 const initialState = {
@@ -11,19 +11,19 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_SERVERS_BEGIN:
+    case FETCH_CHANNELS_BEGIN:
       return {
         ...state,
         isFetching: true,
         error: null,
       };
-    case FETCH_SERVERS_SUCCESS:
+    case FETCH_CHANNELS_SUCCESS:
       return {
         ...state,
         data: action.payload,
         isFetching: false,
       };
-    case FETCH_SERVERS_FAIL:
+    case FETCH_CHANNELS_FAIL:
       console.log('Error: ', action.error);
       return {
         ...state,

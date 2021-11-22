@@ -13,6 +13,7 @@ import withdrawals from "./withdrawals";
 import dashboardUsers from "./dashboardUsers";
 import liability from "./liability";
 import balance from "./balance";
+import channels from "./channels";
 
 const rootReducer = combineReducers({
   form,
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
 
   nodeStatus: nodeStatus,
   servers: servers,
+  channels: channels,
   activity: activity,
   users: users,
   deposits: deposits,

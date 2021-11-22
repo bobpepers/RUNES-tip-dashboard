@@ -29,6 +29,7 @@ import Servers from './views/Servers';
 import Users from './views/Users';
 import Activity from './views/Activity';
 import Deposits from './views/Deposits';
+import Channels from './views/Channels';
 import Withdrawals from './views/Withdrawals';
 import DashboardUsers from './views/DashboardUsers';
 import { authenticated } from './actions/auth';
@@ -89,6 +90,10 @@ const RoutesX = (props) => {
         <Route
           path="/servers"
           element={<Servers />}
+        />
+        <Route
+          path="/channels"
+          element={<Channels />}
         />
         <Route
           path="/activity"
