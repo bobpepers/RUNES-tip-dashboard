@@ -32,6 +32,9 @@ const headCells = [
     id: 'dbId', numeric: false, disablePadding: true, label: 'id',
   },
   {
+    id: 'server', numeric: true, disablePadding: false, label: 'server',
+  },
+  {
     id: 'channelId', numeric: true, disablePadding: false, label: 'channel id',
   },
   {
@@ -39,6 +42,9 @@ const headCells = [
   },
   {
     id: 'lastActive', numeric: true, disablePadding: false, label: 'last active',
+  },
+  {
+    id: 'banned', numeric: true, disablePadding: false, label: 'banned',
   },
 ];
 

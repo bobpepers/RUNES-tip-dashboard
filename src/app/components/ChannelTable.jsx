@@ -33,6 +33,9 @@ function createData(
   channelName,
   lastActive,
   banned,
+  group_id,
+  groupId,
+  groupName,
 ) {
   return {
     id,
@@ -40,6 +43,9 @@ function createData(
     channelName,
     lastActive,
     banned,
+    group_id,
+    groupId,
+    groupName,
   };
 }
 
@@ -227,6 +233,9 @@ function ChannelTable(props) {
         item.channelName,
         item.lastActive,
         item.banned,
+        item.group.id,
+        item.group.groupId,
+        item.group.groupName
       ),
     );
   });
@@ -336,6 +345,7 @@ function ChannelTable(props) {
                         </p>
 
                       </TableCell>
+                      <TableCell align="right">#{row.group_id} {row.groupName} ({row.groupId})</TableCell>
                       <TableCell align="right">{row.channelId}</TableCell>
                       <TableCell align="right">{row.channelName}</TableCell>
 
