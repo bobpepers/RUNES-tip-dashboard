@@ -35,6 +35,7 @@ import {
   fetchFeatures,
   addFeature,
   updateFeature,
+  removeFeature,
 } from '../actions/features';
 import { fetchServerAction } from '../actions/servers';
 import { fetchChannelsAction } from '../actions/channels';
@@ -93,44 +94,42 @@ const FeaturesView = (props) => {
     status: false,
     rowKey: null,
   });
-  const [unitIso, setUnitIso] = useState(null);
-  const [unitName, setUnitName] = useState(null);
+  const [unitMin, setUnitMin] = useState(null);
+  const [unitEnabled, setUnitEnabled] = useState(null);
   const [serverId, setServerId] = useState('All');
 
-  const onEdit = ({ id, currentUnitIso, currentUnitName }) => {
+  const onEdit = ({ id, currentUnitMin, currentUnitEnabled }) => {
     setInEditMode({
       status: true,
       rowKey: id,
     })
-    setUnitIso(currentUnitIso);
-    setUnitName(currentUnitName);
+    setUnitMin(currentUnitMin);
+    setUnitEnabled(currentUnitEnabled);
+  }
+
+  const onRemove = async (id) => {
+    await dispatch(removeFeature(id));
   }
 
   const onSave = async ({ id }) => {
-    await dispatch(updateFeature(id, unitName, unitIso));
+    await dispatch(updateFeature(id, unitMin, unitEnabled));
     setInEditMode({
       status: false,
       rowKey: null,
     })
-    // reset the unit price state value
-    setUnitIso(null);
-    setUnitName(null);
+    setUnitMin(null);
+    setUnitEnabled(null);
   }
 
   const onCancel = () => {
-    // reset the inEditMode state value
     setInEditMode({
       status: false,
       rowKey: null,
     })
-    // reset the unit price state value
-    setUnitIso(null);
-    setUnitName(null);
+    setUnitMin(null);
+    setUnitEnabled(null);
   }
   const changeServer = (val, preVal) => {
-    console.log('e');
-    console.log(val);
-    console.log(preVal);
     setServerId(preVal);
   }
 
@@ -140,12 +139,7 @@ const FeaturesView = (props) => {
     dispatch(fetchChannelsAction('', '', '', serverId));
   }, [serverId]);
 
-  useEffect(() => {
-    console.log('FEATURES');
-    console.log(features);
-    console.log(servers);
-    console.log(channels);
-  }, [
+  useEffect(() => { }, [
     features,
     servers,
     channels,
@@ -222,7 +216,7 @@ const FeaturesView = (props) => {
               name="channel"
               component={renderSelectField}
               //onChange={changeServer}
-              label="Channel"
+              label="Channel (optional)"
             >
               <MenuItem key="all" value="all">
                 All
@@ -287,6 +281,7 @@ const FeaturesView = (props) => {
               <TableCell align="right">server</TableCell>
               <TableCell align="right">channel</TableCell>
               <TableCell align="right">min</TableCell>
+              <TableCell align="right">enabled</TableCell>
               <TableCell align="right">edit/remove</TableCell>
             </TableRow>
           </TableHead>
@@ -305,49 +300,49 @@ const FeaturesView = (props) => {
                     </TableCell>
                     <TableCell align="right">
                       {
+                        feature.name
+                      }
+                    </TableCell>
+                    <TableCell align="right">
+                      {
+                        feature.group && feature.group.groupName
+                      }
+                    </TableCell>
+                    <TableCell align="right">
+                      {feature.channel && feature.channel.channelName}
+                    </TableCell>
+                    <TableCell align="right">
+                      {
                         inEditMode.status && inEditMode.rowKey === feature.id ? (
-                          <input
-                            value={unitName}
-                            onChange={(event) => setUnitName(event.target.value)}
+                          <TextField
+                            value={unitMin}
+                            onChange={(event) => setUnitMin(event.target.value)}
                           />
+
                         ) : (
-                          feature.name
+                          feature.min / 1e8
                         )
                       }
                     </TableCell>
                     <TableCell align="right">
                       {
                         inEditMode.status && inEditMode.rowKey === feature.id ? (
-                          <input
-                            value={unitIso}
-                            onChange={(event) => setUnitIso(event.target.value)}
-                          />
+
+                          <Select
+                            label="Enabled"
+                            //defaultValue={unitEnabled ? 'true' : 'false'}
+                            value={unitEnabled}
+                            onChange={(event) => setUnitEnabled(event.target.value)}
+                          >
+                            <MenuItem key="enableTrue" value="true">
+                              True
+                            </MenuItem>
+                            <MenuItem key="enableFalse" value="false">
+                              False
+                            </MenuItem>
+                          </Select>
                         ) : (
-                          feature.iso
-                        )
-                      }
-                    </TableCell>
-                    <TableCell align="right">
-                      {
-                        inEditMode.status && inEditMode.rowKey === feature.id ? (
-                          <input
-                            value={unitIso}
-                            onChange={(event) => setUnitIso(event.target.value)}
-                          />
-                        ) : (
-                          feature.iso
-                        )
-                      }
-                    </TableCell>
-                    <TableCell align="right">
-                      {
-                        inEditMode.status && inEditMode.rowKey === feature.id ? (
-                          <input
-                            value={unitIso}
-                            onChange={(event) => setUnitIso(event.target.value)}
-                          />
-                        ) : (
-                          feature.iso
+                          feature.enabled ? 'true' : 'false'
                         )
                       }
                     </TableCell>
@@ -361,8 +356,8 @@ const FeaturesView = (props) => {
                               size="large"
                               onClick={() => onSave({
                                 id: feature.id,
-                                iso: unitIso,
-                                name: unitName,
+                                min: unitMin,
+                                enabled: unitEnabled,
                               })}
                             >
                               Save
@@ -379,50 +374,34 @@ const FeaturesView = (props) => {
                             </Button>
                           </>
                         ) : (
-                          <Button
-                            variant="contained"
-                            color="primary"
-                            size="large"
-                            onClick={() => onEdit({
-                              id: feature.id,
-                              currentUnitIso: feature.iso,
-                              currentUnitName: feature.currency_name,
-                            })}
-                          >
-                            Edit
-                          </Button>
+                          <>
+                            <Button
+                              variant="contained"
+                              color="primary"
+                              size="large"
+                              onClick={() => onEdit({
+                                id: feature.id,
+                                currentUnitMin: feature.min / 1e8,
+                                currentUnitEnabled: feature.enabled,
+                              })}
+                            >
+                              Edit
+                            </Button>
+                            {
+                              feature.type === 'local' && (
+                                <Button
+                                  variant="contained"
+                                  color="primary"
+                                  size="large"
+                                  onClick={() => onRemove(feature.id)}
+                                >
+                                  Remove
+                                </Button>
+                              )
+                            }
+                          </>
                         )
                       }
-
-                      {/* {country.status
-                      ? (
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          size="large"
-                          onClick={() => ban(country.id)}
-                        >
-                          Disable
-                        </Button>
-                      )
-                      : (
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          size="large"
-                          onClick={() => ban(country.id)}
-                        >
-                          Enable
-                        </Button>
-                      )}
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      size="large"
-                      onClick={() => ban(country.id)}
-                    >
-                      Delete
-                    </Button> */}
                     </TableCell>
                   </TableRow>
                 )
