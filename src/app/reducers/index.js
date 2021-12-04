@@ -14,6 +14,7 @@ import dashboardUsers from "./dashboardUsers";
 import liability from "./liability";
 import balance from "./balance";
 import channels from "./channels";
+import features from "./features";
 
 const rootReducer = combineReducers({
   form,
@@ -32,6 +33,7 @@ const rootReducer = combineReducers({
   dashboardUsers: dashboardUsers,
   liability: liability,
   balance: balance,
+  features: features,
 
 });
 

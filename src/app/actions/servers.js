@@ -13,7 +13,10 @@ export function fetchServerAction(id, groupId, serverName, platform) {
       type: FETCH_SERVERS_BEGIN,
     });
     axios.post(`${process.env.API_URL}/servers`, {
-      id, groupId, serverName, platform,
+      id,
+      groupId,
+      serverName,
+      platform,
     })
       .then((response) => {
         console.log('SUCESSSSS');

@@ -34,6 +34,8 @@ import Withdrawals from './views/Withdrawals';
 import DashboardUsers from './views/DashboardUsers';
 import { authenticated } from './actions/auth';
 
+import Features from './views/Features';
+
 function RequireAuth(props) {
   const {
     Isauthenticated,
@@ -86,6 +88,11 @@ const RoutesX = (props) => {
         <Route
           path="/users"
           element={<Users />}
+        />
+
+        <Route
+          path="/features"
+          element={<Features />}
         />
         <Route
           path="/servers"

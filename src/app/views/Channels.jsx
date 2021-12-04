@@ -70,8 +70,8 @@ const ChannelsView = (props) => {
   const [channelName, setchannelName] = useState('');
 
 
-  useEffect(() => dispatch(fetchChannelsAction(id, channelId, channelName)), [dispatch]);
-  useEffect(() => dispatch(fetchChannelsAction(id, channelId, channelName)), [
+  useEffect(() => dispatch(fetchChannelsAction(id, channelId, channelName, 'all')), [dispatch]);
+  useEffect(() => dispatch(fetchChannelsAction(id, channelId, channelName, 'all')), [
     id,
     channelId,
     channelName
