@@ -174,16 +174,17 @@ export function addFeature(obj) {
   }
 }
 
-export function updateFeature(id, banMessage = '') {
+export function updateFeature(id, min, enabled) {
   return function (dispatch) {
     axios.post(`${process.env.API_URL}/feature/update`, {
       id,
-      banMessage,
+      min,
+      enabled
     })
       .then((response) => {
         dispatch({
           type: UPDATE_FEATURE,
-          payload: response.data.channel,
+          payload: response.data.feature,
         });
       }).catch((error) => {
         if (error.response) {
