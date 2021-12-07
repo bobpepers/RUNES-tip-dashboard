@@ -7,13 +7,13 @@ import PropTypes from 'prop-types';
 import withStyles from '@mui/styles/withStyles';
 import { useNavigate } from 'react-router-dom';
 import { connect, useDispatch } from 'react-redux';
-import ActivityView from './Activity';
 import {
   Grid,
   // Button,
   Divider,
   Typography,
 } from '@mui/material';
+import ActivityView from './Activity';
 import { withRouter } from '../hooks/withRouter';
 import {
   fetchNodeStatusAction,
@@ -46,7 +46,7 @@ const styles = {
   },
 };
 
-const Home = (props) => {
+const Home = function (props) {
   const {
     nodeStatus,
     liability,
@@ -61,12 +61,14 @@ const Home = (props) => {
     dispatch(fetchBalanceAction());
   }, []);
 
-  useEffect(() => { },
+  useEffect(
+    () => { },
     [
       nodeStatus,
       liability,
       balance,
-    ]);
+    ],
+  );
 
   const routeChangeExample = () => {
     const path = 'bridge';

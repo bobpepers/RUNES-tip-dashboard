@@ -1,8 +1,7 @@
 import {
-  FETCH_WITHDRAWALS_BEGIN,
-  FETCH_WITHDRAWALS_SUCCESS,
-  FETCH_WITHDRAWALS_FAIL,
-  UPDATE_WITHDRAWAL,
+  ACCEPT_WITHDRAWAL_FAIL,
+  ACCEPT_WITHDRAWAL_SUCCESS,
+  ACCEPT_WITHDRAWAL_BEGIN,
 } from '../actions/types/index';
 
 const initialState = {
@@ -12,30 +11,19 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case UPDATE_WITHDRAWAL:
-      return {
-        ...state,
-        data: state.data.map(
-          (withdrawal) => (withdrawal.id === action.payload.id
-            ? { ...action.payload }
-            : withdrawal),
-        ),
-        isFetching: false,
-        error: null,
-      };
-    case FETCH_WITHDRAWALS_BEGIN:
+    case ACCEPT_WITHDRAWAL_BEGIN:
       return {
         ...state,
         isFetching: true,
         error: null,
       };
-    case FETCH_WITHDRAWALS_SUCCESS:
+    case ACCEPT_WITHDRAWAL_SUCCESS:
       return {
         ...state,
         data: action.payload,
         isFetching: false,
       };
-    case FETCH_WITHDRAWALS_FAIL:
+    case ACCEPT_WITHDRAWAL_FAIL:
       console.log('Error: ', action.error);
       return {
         ...state,

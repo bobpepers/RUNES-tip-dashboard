@@ -16,6 +16,9 @@ import balance from "./balance";
 import channels from "./channels";
 import features from "./features";
 
+import acceptWithdrawal from "./acceptWithdrawal";
+import declineWithdrawal from "./declineWithdrawal";
+
 const rootReducer = combineReducers({
   form,
   auth: auth,
@@ -34,6 +37,8 @@ const rootReducer = combineReducers({
   liability: liability,
   balance: balance,
   features: features,
+  acceptWithdrawal: acceptWithdrawal,
+  declineWithdrawal: declineWithdrawal,
 
 });
 

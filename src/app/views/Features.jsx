@@ -82,7 +82,7 @@ const renderSelectField = ({
   </FormControl>
 )
 
-const FeaturesView = (props) => {
+const FeaturesView = function (props) {
   const {
     features,
     servers,
@@ -202,32 +202,28 @@ const FeaturesView = (props) => {
               onChange={(val, prevVal) => changeServer(val, prevVal)}
               label="Server"
             >
-              {servers && servers.data && servers.data.map(server => {
-                return (
-                  <MenuItem key={server.id} value={server.id}>
-                    {server.groupName}
-                  </MenuItem>
-                )
-              })}
+              {servers && servers.data && servers.data.map((server) => (
+                <MenuItem key={server.id} value={server.id}>
+                  {server.groupName}
+                </MenuItem>
+              ))}
             </Field>
           </Grid>
           <Grid item xs={4}>
             <Field
               name="channel"
               component={renderSelectField}
-              //onChange={changeServer}
+              // onChange={changeServer}
               label="Channel (optional)"
             >
               <MenuItem key="all" value="all">
                 All
               </MenuItem>
-              {channels && channels.data && channels.data.map(channel => {
-                return (
-                  <MenuItem key={channel.id} value={channel.id}>
-                    {channel.channelName}
-                  </MenuItem>
-                )
-              })}
+              {channels && channels.data && channels.data.map((channel) => (
+                <MenuItem key={channel.id} value={channel.id}>
+                  {channel.channelName}
+                </MenuItem>
+              ))}
             </Field>
           </Grid>
           <Grid item xs={4}>
@@ -242,7 +238,7 @@ const FeaturesView = (props) => {
             <Field
               name="enabled"
               component={renderSelectField}
-              //onChange={changeServer}
+              // onChange={changeServer}
               label="Enabled"
             >
               <MenuItem key="1" value="enable">
@@ -330,7 +326,7 @@ const FeaturesView = (props) => {
 
                           <Select
                             label="Enabled"
-                            //defaultValue={unitEnabled ? 'true' : 'false'}
+                            // defaultValue={unitEnabled ? 'true' : 'false'}
                             value={unitEnabled}
                             onChange={(event) => setUnitEnabled(event.target.value)}
                           >
