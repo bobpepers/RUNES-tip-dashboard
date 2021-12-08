@@ -95,15 +95,19 @@ const FeaturesView = function (props) {
     rowKey: null,
   });
   const [unitMin, setUnitMin] = useState(null);
+  const [unitFee, setUnitFee] = useState(null);
   const [unitEnabled, setUnitEnabled] = useState(null);
   const [serverId, setServerId] = useState('All');
 
-  const onEdit = ({ id, currentUnitMin, currentUnitEnabled }) => {
+  const onEdit = ({
+    id, currentUnitMin, currentUnitFee, currentUnitEnabled,
+  }) => {
     setInEditMode({
       status: true,
       rowKey: id,
     })
     setUnitMin(currentUnitMin);
+    setUnitFee(currentUnitFee);
     setUnitEnabled(currentUnitEnabled);
   }
 
@@ -112,12 +116,13 @@ const FeaturesView = function (props) {
   }
 
   const onSave = async ({ id }) => {
-    await dispatch(updateFeature(id, unitMin, unitEnabled));
+    await dispatch(updateFeature(id, unitMin, unitFee, unitEnabled));
     setInEditMode({
       status: false,
       rowKey: null,
     })
     setUnitMin(null);
+    setUnitFee(null);
     setUnitEnabled(null);
   }
 
@@ -127,6 +132,7 @@ const FeaturesView = function (props) {
       rowKey: null,
     })
     setUnitMin(null);
+    setUnitFee(null);
     setUnitEnabled(null);
   }
   const changeServer = (val, preVal) => {
@@ -236,6 +242,14 @@ const FeaturesView = function (props) {
           </Grid>
           <Grid item xs={4}>
             <Field
+              name="fee"
+              component={renderField}
+              type="number"
+              placeholder="fee %"
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <Field
               name="enabled"
               component={renderSelectField}
               // onChange={changeServer}
@@ -277,7 +291,9 @@ const FeaturesView = function (props) {
               <TableCell align="right">server</TableCell>
               <TableCell align="right">channel</TableCell>
               <TableCell align="right">min</TableCell>
+              <TableCell align="right">fee %</TableCell>
               <TableCell align="right">enabled</TableCell>
+              <TableCell align="right">last updated by:</TableCell>
               <TableCell align="right">edit/remove</TableCell>
             </TableRow>
           </TableHead>
@@ -323,7 +339,19 @@ const FeaturesView = function (props) {
                     <TableCell align="right">
                       {
                         inEditMode.status && inEditMode.rowKey === feature.id ? (
+                          <TextField
+                            value={unitFee}
+                            onChange={(event) => setUnitFee(event.target.value)}
+                          />
 
+                        ) : (
+                          feature.fee / 1e2
+                        )
+                      }
+                    </TableCell>
+                    <TableCell align="right">
+                      {
+                        inEditMode.status && inEditMode.rowKey === feature.id ? (
                           <Select
                             label="Enabled"
                             // defaultValue={unitEnabled ? 'true' : 'false'}
@@ -338,8 +366,13 @@ const FeaturesView = function (props) {
                             </MenuItem>
                           </Select>
                         ) : (
-                          feature.enabled ? 'true' : 'false'
+                          <span>{feature.enabled ? 'true' : 'false'}</span>
                         )
+                      }
+                    </TableCell>
+                    <TableCell align="right">
+                      {
+                        feature.user && feature.user.username
                       }
                     </TableCell>
                     <TableCell align="right">
@@ -353,6 +386,7 @@ const FeaturesView = function (props) {
                               onClick={() => onSave({
                                 id: feature.id,
                                 min: unitMin,
+                                fee: unitFee,
                                 enabled: unitEnabled,
                               })}
                             >
@@ -378,6 +412,7 @@ const FeaturesView = function (props) {
                               onClick={() => onEdit({
                                 id: feature.id,
                                 currentUnitMin: feature.min / 1e8,
+                                currentUnitFee: feature.fee / 1e2,
                                 currentUnitEnabled: feature.enabled,
                               })}
                             >
@@ -427,6 +462,9 @@ const validate = (formProps) => {
   }
   if (!formProps.min) {
     errors.min = 'Min is required'
+  }
+  if (!formProps.fee) {
+    errors.fee = 'Fee is required'
   }
   if (!formProps.enabled) {
     errors.enabled = 'Enabled is required'

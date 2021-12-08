@@ -1,6 +1,3 @@
-
-
-
 import axios from 'axios';
 import {
   FETCH_FEATURES_BEGIN,
@@ -18,9 +15,9 @@ export function fetchFeatures() {
       type: FETCH_FEATURES_BEGIN,
     });
     axios.post(`${process.env.API_URL}/features`, {
-      //id,
-      //channelId,
-      //channelName
+      // id,
+      // channelId,
+      // channelName
     })
       .then((response) => {
         console.log('SUCESSSSS');
@@ -174,12 +171,13 @@ export function addFeature(obj) {
   }
 }
 
-export function updateFeature(id, min, enabled) {
+export function updateFeature(id, min, fee, enabled) {
   return function (dispatch) {
     axios.post(`${process.env.API_URL}/feature/update`, {
       id,
       min,
-      enabled
+      fee,
+      enabled,
     })
       .then((response) => {
         dispatch({
