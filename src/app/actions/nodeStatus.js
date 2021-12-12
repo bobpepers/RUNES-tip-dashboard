@@ -11,7 +11,7 @@ export function fetchNodeStatusAction() {
     dispatch({
       type: FETCH_NODESTATUS_BEGIN,
     });
-    axios.get(`${window.config.apiUrl}/status`)
+    axios.get(`${window.myConfig.apiUrl}/status`)
       .then((response) => {
         console.log('SUCESSSSS');
 

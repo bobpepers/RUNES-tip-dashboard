@@ -31,7 +31,7 @@ export function signupUser(props, navigate) {
   const { captchaResponse } = props;
 
   return function (dispatch) {
-    axios.post(`${window.config.apiUrl}/signup`, { props, captchaResponse })
+    axios.post(`${window.myConfig.apiUrl}/signup`, { props, captchaResponse })
       .then(() => {
         dispatch({ type: SIGNUP_SUCCESS });
         dispatch(navigate(`/register/verify-register?email=${props.email}`));
@@ -88,7 +88,7 @@ export function signinUser(props) {
   /* Set a header including the token */
   return function (dispatch) {
     axios.post(
-      `${window.config.apiUrl}/signin`,
+      `${window.myConfig.apiUrl}/signin`,
       { email, password, captchaResponse },
     )
       .then((response) => {
@@ -150,7 +150,7 @@ export function signinUser(props) {
  */
 export function resendVerification(props) {
   return function (dispatch) {
-    axios.post(`${window.config.apiUrl}/resend-verify-code`, props)
+    axios.post(`${window.myConfig.apiUrl}/resend-verify-code`, props)
       .then(() => {
         dispatch({ type: SIGNUP_SUCCESS });
       })
@@ -163,7 +163,7 @@ export function resendVerification(props) {
  */
 export function verifyEmail(props, navigate) {
   return function (dispatch) {
-    axios.post(`${window.config.apiUrl}/signup/verify-email`, props)
+    axios.post(`${window.myConfig.apiUrl}/signup/verify-email`, props)
       .then((response) => {
         dispatch({
           type: AUTH_USER,
@@ -182,7 +182,7 @@ export function verifyEmail(props, navigate) {
  */
 export function signoutUser() {
   return function (dispatch) {
-    axios.get(`${window.config.apiUrl}/logout`)
+    axios.get(`${window.myConfig.apiUrl}/logout`)
       .then((response) => {
         dispatch({ type: UNAUTH_USER });
         // history.push('/');
@@ -199,7 +199,7 @@ export function signoutUser() {
  */
 export function authenticated() {
   return function (dispatch) {
-    axios.get(`${window.config.apiUrl}/authenticated`)
+    axios.get(`${window.myConfig.apiUrl}/authenticated`)
       .then((response) => {
         // if (response.data.success === true) {
         dispatch({

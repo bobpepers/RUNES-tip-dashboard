@@ -14,7 +14,7 @@ export function fetchFeatures() {
     dispatch({
       type: FETCH_FEATURES_BEGIN,
     });
-    axios.post(`${window.config.apiUrl}/features`, {
+    axios.post(`${window.myConfig.apiUrl}/features`, {
       // id,
       // channelId,
       // channelName
@@ -73,7 +73,7 @@ export function fetchFeatures() {
 
 export function removeFeature(id) {
   return function (dispatch) {
-    axios.post(`${window.config.apiUrl}/feature/remove`, { id })
+    axios.post(`${window.myConfig.apiUrl}/feature/remove`, { id })
       .then((response) => {
         console.log(response);
         dispatch({
@@ -123,7 +123,7 @@ export function removeFeature(id) {
 
 export function addFeature(obj) {
   return function (dispatch) {
-    axios.post(`${window.config.apiUrl}/feature/add`, obj)
+    axios.post(`${window.myConfig.apiUrl}/feature/add`, obj)
       .then((response) => {
         console.log(response);
         dispatch({
@@ -173,7 +173,7 @@ export function addFeature(obj) {
 
 export function updateFeature(id, min, fee, enabled) {
   return function (dispatch) {
-    axios.post(`${window.config.apiUrl}/feature/update`, {
+    axios.post(`${window.myConfig.apiUrl}/feature/update`, {
       id,
       min,
       fee,

@@ -11,7 +11,7 @@ export function fetchDashboardUsersAction(id, email, username, role, banned) {
     dispatch({
       type: FETCH_DASHBOARDUSERS_BEGIN,
     });
-    axios.post(`${window.config.apiUrl}/dashboardusers`, {
+    axios.post(`${window.myConfig.apiUrl}/dashboardusers`, {
       id, email, username, role, banned,
     })
       .then((response) => {

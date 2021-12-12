@@ -12,7 +12,7 @@ export function fetchBotSettings() {
     dispatch({
       type: FETCH_BOTSETTINGS_BEGIN,
     });
-    axios.post(`${window.config.apiUrl}/bot/settings`, {
+    axios.post(`${window.myConfig.apiUrl}/bot/settings`, {
       // id,
       // channelId,
       // channelName
@@ -71,7 +71,7 @@ export function fetchBotSettings() {
 
 export function updateBotSettings(id, maintenance, enabled) {
   return function (dispatch) {
-    axios.post(`${window.config.apiUrl}/bot/settings/update`, {
+    axios.post(`${window.myConfig.apiUrl}/bot/settings/update`, {
       id,
       maintenance,
       enabled,

@@ -37,7 +37,7 @@ const Captcha = function (props) {
     <div style={{ display: 'inline-block' }}>
       <ReCAPTCHA
         ref={captcha}
-        sitekey={`${window.config.reCaptchaSiteKey}`}
+        sitekey={`${window.myConfig.reCaptchaSiteKey}`}
         onChange={(response) => onChange(response)}
       />
       <ErrorMessage>{touched ? error : ''}</ErrorMessage>

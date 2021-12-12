@@ -18,7 +18,7 @@ export function acceptWithdrawalAction(id) {
     dispatch({
       type: ACCEPT_WITHDRAWAL_BEGIN,
     });
-    axios.post(`${window.config.apiUrl}/withdrawal/accept`, {
+    axios.post(`${window.myConfig.apiUrl}/withdrawal/accept`, {
       id,
     })
       .then((response) => {
@@ -82,7 +82,7 @@ export function declineWithdrawalAction(id) {
     dispatch({
       type: DECLINE_WITHDRAWAL_BEGIN,
     });
-    axios.post(`${window.config.apiUrl}/withdrawal/decline`, {
+    axios.post(`${window.myConfig.apiUrl}/withdrawal/decline`, {
       id,
     })
       .then((response) => {
@@ -152,7 +152,7 @@ export function fetchWithdrawalsAction(
     dispatch({
       type: FETCH_WITHDRAWALS_BEGIN,
     });
-    axios.post(`${window.config.apiUrl}/withdrawals`, {
+    axios.post(`${window.myConfig.apiUrl}/withdrawals`, {
       id,
       txId,
       userId,

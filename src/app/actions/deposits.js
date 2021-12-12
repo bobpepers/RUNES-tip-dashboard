@@ -17,7 +17,7 @@ export function fetchDepositsAction(
     dispatch({
       type: FETCH_DEPOSITS_BEGIN,
     });
-    axios.post(`${window.config.apiUrl}/deposits`, {
+    axios.post(`${window.myConfig.apiUrl}/deposits`, {
       id,
       txId,
       userId,

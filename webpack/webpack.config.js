@@ -4,9 +4,6 @@ const Webpack = require('webpack');
 const TerserPlugin = require('terser-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const WebpackObfuscator = require('webpack-obfuscator');
-const dotenvDevelopment = require('dotenv').config({ path: Path.join(__dirname, '../.env.development') });
-const dotenvProduction = require('dotenv').config({ path: Path.join(__dirname, '../.env.production') });
-const fs = require('fs');
 
 module.exports = (options) => {
   const webpackConfig = {
@@ -144,9 +141,6 @@ module.exports = (options) => {
     },
 
     plugins: [
-      new Webpack.ProvidePlugin({
-        window: 'global/window',
-      }),
       new Webpack.ProvidePlugin({
         process: 'process/browser',
       }),

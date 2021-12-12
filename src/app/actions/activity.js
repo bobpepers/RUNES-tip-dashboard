@@ -11,7 +11,7 @@ export function fetchActivityAction(id, spender, earner, type, amount) {
     dispatch({
       type: FETCH_ACTIVITY_BEGIN,
     });
-    axios.post(`${window.config.apiUrl}/activity`, {
+    axios.post(`${window.myConfig.apiUrl}/activity`, {
       id, spender, earner, type, amount,
     })
       .then((response) => {

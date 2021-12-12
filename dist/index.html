@@ -2,34 +2,27 @@
 <html>
 
 <head>
-  <script>
-    var script = document.createElement('script');
-    script.type = 'text/javascript';
-    //script.async = true;
-
-    if ('production' == 'development') {
-      script.src = '/static/dev-config.js';
-    } else {
-      script.src = '/static/prod-config.js';
-    }
-    document.getElementsByTagName('head')[0].appendChild(script);
-
-    console.log(window);
-
-  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   <meta name="robots" content="index,follow">
   <meta name="googlebot" content="index,follow">
   <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8">
+  <script src="/static/config.js"></script>
+  <script>
+    if ('production' == 'development') {
+      setConfigDevelopment();
+    } else {
+      setConfigProduction();
+    }
+  </script>
   <title>RUNES tip Dashboard</title>
-<script defer="defer" src="/./scripts/runtime.app.5b224d0fbb09cb149de0.js"></script><script defer="defer" src="/./scripts/vendors.app.5b224d0fbb09cb149de0.js"></script><script defer="defer" src="/./scripts/main.app.5b224d0fbb09cb149de0.js"></script></head>
+<script defer="defer" src="/./scripts/runtime.app.c2365f98414778be9521.js"></script><script defer="defer" src="/./scripts/vendors.app.c2365f98414778be9521.js"></script><script defer="defer" src="/./scripts/main.app.c2365f98414778be9521.js"></script></head>
 
 <body class="light-theme">
   <div id="root"></div>
   <script>
-    document.title = `${window.config.name} tip dashboard`;
+    document.title = `${window.myConfig.name} tip dashboard`;
   </script>
 </body>
 

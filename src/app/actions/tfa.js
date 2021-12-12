@@ -47,7 +47,7 @@ export function enabletfa(obj) {
     dispatch({
       type: ENABLE_2FA_BEGIN,
     });
-    axios.post(`${window.config.apiUrl}/2fa/enable`, obj)
+    axios.post(`${window.myConfig.apiUrl}/2fa/enable`, obj)
       .then((response) => {
         console.log('actions/enable tfa action Success');
         console.log(response);
@@ -76,7 +76,7 @@ export function disabletfa(obj) {
       type: DISABLE_2FA_BEGIN,
     });
     console.log('enbale2fa actions/tfa.js');
-    axios.post(`${window.config.apiUrl}/2fa/disable`, obj)
+    axios.post(`${window.myConfig.apiUrl}/2fa/disable`, obj)
       .then((response) => {
         console.log('actions/disable tfa action Success');
         console.log(response);
@@ -110,7 +110,7 @@ export function unlocktfa(props) {
 
   return function (dispatch) {
     axios.post(
-      `${window.config.apiUrl}/2fa/unlock`,
+      `${window.myConfig.apiUrl}/2fa/unlock`,
       { tfa },
     )
       .then((response) => {

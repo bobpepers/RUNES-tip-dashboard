@@ -1,0 +1,15 @@
+const setConfigProduction = () => {
+  window.myConfig = {};
+  window.myConfig.myApiUrl = 'https://tip.runebase.io/api';
+  window.myConfig.wsEndPoint = 'https://tip.runebase.io';
+  window.myConfig.reCaptchaSiteKey = '6LcrikgdAAAAAL6FHGEvZaeQ7zmiTQkR89pxP1w8';
+  window.myConfig.myName = 'Runebase';
+}
+
+const setConfigDevelopment = () => {
+  window.myConfig = {};
+  window.myConfig.myApiUrl = 'https://tip.runebase.io/api';
+  window.myConfig.wsEndPoint = 'https://tip.runebase.io';
+  window.myConfig.reCaptchaSiteKey = '6LcrikgdAAAAAL6FHGEvZaeQ7zmiTQkR89pxP1w8';
+  window.myConfigmyName = 'Runebase';
+}

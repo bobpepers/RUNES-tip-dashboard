@@ -59,7 +59,7 @@ const ActivityView = function (props) {
     amount,
   ]);
   useEffect(() => {
-    const socket = io(window.config.wsEndPoint, {
+    const socket = io(window.myConfig.wsEndPoint, {
       path: '/socket.io',
     });
 
