@@ -12,7 +12,7 @@ export function fetchUsersAction(id, userId, username, platform, banned) {
     dispatch({
       type: FETCH_USERS_BEGIN,
     });
-    axios.post(`${process.env.API_URL}/users`, {
+    axios.post(`${window.config.apiUrl}/users`, {
       id,
       userId,
       username,
@@ -71,7 +71,7 @@ export function fetchUsersAction(id, userId, username, platform, banned) {
 
 export function banUserAction(id, banMessage = '') {
   return function (dispatch) {
-    axios.post(`${process.env.API_URL}/ban/user`, {
+    axios.post(`${window.config.apiUrl}/ban/user`, {
       id,
       banMessage,
     })

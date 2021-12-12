@@ -6,13 +6,23 @@ import {
   ENQUEUE_SNACKBAR,
 } from './types/index';
 
-export function fetchDepositsAction(id, txId, userId, username, from) {
+export function fetchDepositsAction(
+  id,
+  txId,
+  userId,
+  username,
+  from,
+) {
   return function (dispatch) {
     dispatch({
       type: FETCH_DEPOSITS_BEGIN,
     });
-    axios.post(`${process.env.API_URL}/deposits`, {
-      id, txId, userId, username, from,
+    axios.post(`${window.config.apiUrl}/deposits`, {
+      id,
+      txId,
+      userId,
+      username,
+      from,
     })
       .then((response) => {
         console.log('SUCESSSSS');

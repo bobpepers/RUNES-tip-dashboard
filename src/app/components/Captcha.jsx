@@ -3,7 +3,7 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import styled from 'styled-components';
 import { change } from 'redux-form';
 
-const Captcha = (props) => {
+const Captcha = function (props) {
   const {
     language,
     meta: {
@@ -37,10 +37,10 @@ const Captcha = (props) => {
     <div style={{ display: 'inline-block' }}>
       <ReCAPTCHA
         ref={captcha}
-        sitekey={`${process.env.RECAPTCHA_SITE_KEY}`}
+        sitekey={`${window.config.reCaptchaSiteKey}`}
         onChange={(response) => onChange(response)}
       />
-      <ErrorMessage>{ touched ? error : '' }</ErrorMessage>
+      <ErrorMessage>{touched ? error : ''}</ErrorMessage>
     </div>
   );
 }

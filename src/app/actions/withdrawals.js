@@ -18,7 +18,7 @@ export function acceptWithdrawalAction(id) {
     dispatch({
       type: ACCEPT_WITHDRAWAL_BEGIN,
     });
-    axios.post(`${process.env.API_URL}/withdrawal/accept`, {
+    axios.post(`${window.config.apiUrl}/withdrawal/accept`, {
       id,
     })
       .then((response) => {
@@ -82,7 +82,7 @@ export function declineWithdrawalAction(id) {
     dispatch({
       type: DECLINE_WITHDRAWAL_BEGIN,
     });
-    axios.post(`${process.env.API_URL}/withdrawal/decline`, {
+    axios.post(`${window.config.apiUrl}/withdrawal/decline`, {
       id,
     })
       .then((response) => {
@@ -141,13 +141,23 @@ export function declineWithdrawalAction(id) {
   }
 }
 
-export function fetchWithdrawalsAction(id, txId, userId, username, to) {
+export function fetchWithdrawalsAction(
+  id,
+  txId,
+  userId,
+  username,
+  to,
+) {
   return function (dispatch) {
     dispatch({
       type: FETCH_WITHDRAWALS_BEGIN,
     });
-    axios.post(`${process.env.API_URL}/withdrawals`, {
-      id, txId, userId, username, to,
+    axios.post(`${window.config.apiUrl}/withdrawals`, {
+      id,
+      txId,
+      userId,
+      username,
+      to,
     })
       .then((response) => {
         console.log('SUCESSSSS');

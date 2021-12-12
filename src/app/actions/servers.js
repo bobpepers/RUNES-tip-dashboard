@@ -12,7 +12,7 @@ export function fetchServerAction(id, groupId, serverName, platform) {
     dispatch({
       type: FETCH_SERVERS_BEGIN,
     });
-    axios.post(`${process.env.API_URL}/servers`, {
+    axios.post(`${window.config.apiUrl}/servers`, {
       id,
       groupId,
       serverName,
@@ -72,7 +72,7 @@ export function fetchServerAction(id, groupId, serverName, platform) {
 
 export function banServerAction(id, banMessage = '') {
   return function (dispatch) {
-    axios.post(`${process.env.API_URL}/ban/server`, {
+    axios.post(`${window.config.apiUrl}/ban/server`, {
       id,
       banMessage,
     })

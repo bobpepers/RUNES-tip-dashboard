@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ActivityView = (props) => {
+const ActivityView = function (props) {
   const {
     activity,
   } = props;
@@ -59,7 +59,7 @@ const ActivityView = (props) => {
     amount,
   ]);
   useEffect(() => {
-    const socket = io(process.env.WS_ENDPOINT, {
+    const socket = io(window.config.wsEndPoint, {
       path: '/socket.io',
     });
 

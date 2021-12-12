@@ -177,7 +177,7 @@ const Header = function (props) {
                   className="nav-link"
                   to="/features"
                 >
-                  Features
+                  Feature Settings
                 </Link>
 
               </MenuItem>

@@ -31,7 +31,7 @@ export function signupUser(props, navigate) {
   const { captchaResponse } = props;
 
   return function (dispatch) {
-    axios.post(`${process.env.API_URL}/signup`, { props, captchaResponse })
+    axios.post(`${window.config.apiUrl}/signup`, { props, captchaResponse })
       .then(() => {
         dispatch({ type: SIGNUP_SUCCESS });
         dispatch(navigate(`/register/verify-register?email=${props.email}`));
@@ -87,8 +87,10 @@ export function signinUser(props) {
 
   /* Set a header including the token */
   return function (dispatch) {
-    axios.post(`${process.env.API_URL}/signin`,
-      { email, password, captchaResponse })
+    axios.post(
+      `${window.config.apiUrl}/signin`,
+      { email, password, captchaResponse },
+    )
       .then((response) => {
         console.log(response);
         console.log('response');
@@ -148,7 +150,7 @@ export function signinUser(props) {
  */
 export function resendVerification(props) {
   return function (dispatch) {
-    axios.post(`${process.env.API_URL}/resend-verify-code`, props)
+    axios.post(`${window.config.apiUrl}/resend-verify-code`, props)
       .then(() => {
         dispatch({ type: SIGNUP_SUCCESS });
       })
@@ -161,7 +163,7 @@ export function resendVerification(props) {
  */
 export function verifyEmail(props, navigate) {
   return function (dispatch) {
-    axios.post(`${process.env.API_URL}/signup/verify-email`, props)
+    axios.post(`${window.config.apiUrl}/signup/verify-email`, props)
       .then((response) => {
         dispatch({
           type: AUTH_USER,
@@ -180,7 +182,7 @@ export function verifyEmail(props, navigate) {
  */
 export function signoutUser() {
   return function (dispatch) {
-    axios.get(`${process.env.API_URL}/logout`)
+    axios.get(`${window.config.apiUrl}/logout`)
       .then((response) => {
         dispatch({ type: UNAUTH_USER });
         // history.push('/');
@@ -197,7 +199,7 @@ export function signoutUser() {
  */
 export function authenticated() {
   return function (dispatch) {
-    axios.get(`${process.env.API_URL}/authenticated`)
+    axios.get(`${window.config.apiUrl}/authenticated`)
       .then((response) => {
         // if (response.data.success === true) {
         dispatch({

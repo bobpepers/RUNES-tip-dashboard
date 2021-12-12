@@ -11,7 +11,7 @@ export function fetchBalanceAction() {
     dispatch({
       type: FETCH_BALANCE_BEGIN,
     });
-    axios.get(`${process.env.API_URL}/balance`)
+    axios.get(`${window.config.apiUrl}/balance`)
       .then((response) => {
         dispatch({
           type: FETCH_BALANCE_SUCCESS,

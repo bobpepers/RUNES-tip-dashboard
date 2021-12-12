@@ -158,11 +158,6 @@ module.exports = (options) => {
               ? dotenvProduction.parsed.API_URL
               : dotenvDevelopment.parsed.API_URL,
           ),
-          PROOF_OF_RESERVE: JSON.stringify(
-            options.isProduction
-              ? dotenvProduction.parsed.PROOF_OF_RESERVE
-              : dotenvDevelopment.parsed.PROOF_OF_RESERVE,
-          ),
           WS_ENDPOINT: JSON.stringify(
             options.isProduction
               ? dotenvProduction.parsed.WS_ENDPOINT
@@ -177,6 +172,7 @@ module.exports = (options) => {
       }),
       new HtmlWebpackPlugin({
         template: Path.join(__dirname, '../src/index.html'),
+        NODE_ENV: options.isProduction ? 'production' : 'development',
         minify: {
           removeComments: false,
         },

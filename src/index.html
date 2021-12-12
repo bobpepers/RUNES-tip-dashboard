@@ -1,15 +1,35 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-    <meta name="robots" content="index,follow"/>
-    <meta name="googlebot" content="index,follow"/>    
-    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
-    <title>RUNES tip Dashboard</title>
-  </head>
-  <body class="light-theme">
-    <div id="root"></div>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <meta name="robots" content="index,follow" />
+  <meta name="googlebot" content="index,follow" />
+  <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
+  <title>RUNES tip Dashboard</title>
+  <script>
+    console.log('<%= htmlWebpackPlugin.options.NODE_ENV %>');
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.async = true;
+
+    if ('<%= htmlWebpackPlugin.options.NODE_ENV %>' == 'development') {
+      script.src = '/static/dev-config.js';
+    } else {
+      script.src = '/static/prod-config.js';
+    }
+    document.getElementsByTagName('head')[0].appendChild(script);
+    document.title = `${window.config.name} tip dashboard`;
+  </script>
+</head>
+
+<body class="light-theme">
+  <div id="root"></div>
+  <script>
+    document.title = `${window.config.name} tip dashboard`;
+  </script>
+</body>
+
 </html>

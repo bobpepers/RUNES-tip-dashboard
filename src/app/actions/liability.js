@@ -11,7 +11,7 @@ export function fetchLiabilityAction() {
     dispatch({
       type: FETCH_LIABILITY_BEGIN,
     });
-    axios.get(`${process.env.API_URL}/liability`)
+    axios.get(`${window.config.apiUrl}/liability`)
       .then((response) => {
         console.log('SUCESSSSS');
 

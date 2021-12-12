@@ -1,4 +1,3 @@
-
 import axios from 'axios';
 import {
   FETCH_CHANNELS_BEGIN,
@@ -13,7 +12,7 @@ export function fetchChannelsAction(id, channelId, channelName, serverId) {
     dispatch({
       type: FETCH_CHANNELS_BEGIN,
     });
-    axios.post(`${process.env.API_URL}/channels`, {
+    axios.post(`${window.config.apiUrl}/channels`, {
       id,
       channelId,
       channelName,
@@ -71,10 +70,9 @@ export function fetchChannelsAction(id, channelId, channelName, serverId) {
   }
 }
 
-
 export function banChannelAction(id, banMessage = '') {
   return function (dispatch) {
-    axios.post(`${process.env.API_URL}/ban/channel`, {
+    axios.post(`${window.config.apiUrl}/ban/channel`, {
       id,
       banMessage,
     })

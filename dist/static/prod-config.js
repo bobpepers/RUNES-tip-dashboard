@@ -1,0 +1,1 @@
+window.config={apiUrl:"https://tip.runebase.io/api",wsEndPoint:"https://tip.runebase.io",reCaptchaSiteKey:"6LcrikgdAAAAAL6FHGEvZaeQ7zmiTQkR89pxP1w8",name:"Runebase"};
