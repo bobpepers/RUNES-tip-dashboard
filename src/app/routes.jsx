@@ -32,11 +32,12 @@ import Deposits from './views/Deposits';
 import Channels from './views/Channels';
 import Withdrawals from './views/Withdrawals';
 import DashboardUsers from './views/DashboardUsers';
+import BotSettings from './views/BotSettings';
 import { authenticated } from './actions/auth';
 
 import Features from './views/Features';
 
-function RequireAuth(props) {
+const RequireAuth = function (props) {
   const {
     Isauthenticated,
     tfaLocked,
@@ -68,7 +69,7 @@ function RequireAuth(props) {
   return <Outlet />;
 }
 
-const RoutesX = (props) => {
+const RoutesX = function (props) {
   const {
     theme,
   } = props;
@@ -89,7 +90,10 @@ const RoutesX = (props) => {
           path="/users"
           element={<Users />}
         />
-
+        <Route
+          path="/bot/settings"
+          element={<BotSettings />}
+        />
         <Route
           path="/features"
           element={<Features />}

@@ -18,16 +18,15 @@ import {
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
-import MobileNav from '../assets/images/mobileNav.svg';
 // import Notifications from '../components/Notifications';
 // import ConnectButton from '../components/ConnectButton';
 import ButtonUnstyled, { buttonUnstyledClasses } from '@mui/core/ButtonUnstyled';
 import { styled } from '@mui/system';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import IconButton from '@mui/material/IconButton';
+import MobileNav from '../assets/images/mobileNav.svg';
 
-
-const Header = (props) => {
+const Header = function (props) {
   // const { t } = props;
   const {
     t,
@@ -71,7 +70,6 @@ const Header = (props) => {
     setMenu(!menu);
   };
 
-
   const handleClickManagement = (event) => {
     setAnchorElManagement(event.currentTarget);
   };
@@ -90,7 +88,7 @@ const Header = (props) => {
   };
   const handleMenuClose = () => {
     setAnchorEl(null);
-    //handleMobileMenuClose();
+    // handleMobileMenuClose();
   };
 
   const show = (menu) ? 'show' : '';
@@ -122,9 +120,9 @@ const Header = (props) => {
               component={Link}
               variant="outlined"
               style={{
-                fontSize: "14px",
+                fontSize: '14px',
                 fontWeight: 200,
-                marginRight: "10px",
+                marginRight: '10px',
               }}
               size="large"
               to="/"
@@ -149,9 +147,9 @@ const Header = (props) => {
               onClick={handleClickManagement}
               variant="outlined"
               style={{
-                fontSize: "14px",
+                fontSize: '14px',
                 fontWeight: 200,
-                marginRight: "10px",
+                marginRight: '10px',
               }}
             >
               Management
@@ -164,6 +162,25 @@ const Header = (props) => {
                 //  'aria-labelledby': 'basic-button',
               }}
             >
+              <MenuItem onClick={handleCloseManagement}>
+                <Link
+                  className="nav-link"
+                  to="/bot/settings"
+                >
+                  Bot Settings
+                </Link>
+
+              </MenuItem>
+
+              <MenuItem onClick={handleCloseManagement}>
+                <Link
+                  className="nav-link"
+                  to="/features"
+                >
+                  Features
+                </Link>
+
+              </MenuItem>
               <MenuItem onClick={handleCloseManagement}>
                 <Link
                   className="nav-link"
@@ -199,7 +216,6 @@ const Header = (props) => {
               </MenuItem>
             </Menu>
 
-
             <Button
               aria-controls="basic-menu"
               aria-haspopup="true"
@@ -207,9 +223,9 @@ const Header = (props) => {
               onClick={handleClickFunctions}
               variant="outlined"
               style={{
-                fontSize: "14px",
+                fontSize: '14px',
                 fontWeight: 200,
-                marginRight: "10px",
+                marginRight: '10px',
               }}
             >
               Functions
@@ -222,15 +238,7 @@ const Header = (props) => {
                 //  'aria-labelledby': 'basic-button',
               }}
             >
-              <MenuItem onClick={handleCloseFunctions}>
-                <Link
-                  className="nav-link"
-                  to="/features"
-                >
-                  Features
-                </Link>
 
-              </MenuItem>
               <MenuItem onClick={handleCloseFunctions}>
                 <Link
                   className="nav-link"
@@ -252,82 +260,80 @@ const Header = (props) => {
           </Nav>
           <ul>
 
-            <>
-              <li>
-                <IconButton
-                  size="large"
-                  edge="end"
-                  aria-label="account of current user"
-                  aria-controls='primary-search-account-menu'
-                  aria-haspopup="true"
-                  onClick={handleProfileMenuOpen}
-                  color="inherit"
-                >
-                  <AccountCircle />
-                </IconButton>
-                <Menu
-                  anchorEl={anchorEl}
-                  anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  id="primary-search-account-menu"
-                  keepMounted
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  open={isMenuOpen}
-                  onClose={handleMenuClose}
-                >
-                  {
-                    authenticated
-                      ? (
-                        <>
-                          <MenuItem onClick={handleMenuClose}>
-                            <Link
-                              className="nav-link"
-                              to="/settings"
-                            >
-                              settings
-                            </Link>
-                          </MenuItem>
-                          <MenuItem onClick={handleMenuClose}>
-                            <Link
-                              className="nav-link"
-                              to="/logout"
-                            >
-                              logout
-                            </Link>
-                          </MenuItem>
-                        </>
-                      )
-                      : (
-                        <>
-                          <MenuItem onClick={handleMenuClose}>
-                            <Link
-                              className="nav-link"
-                              to="/login"
-                            >
-                              login
-                            </Link>
-                          </MenuItem>
-                          <MenuItem onClick={handleMenuClose}>
-                            <Link
-                              className="nav-link"
-                              to="/register"
-                            >
-                              register
-                            </Link>
-                          </MenuItem>
-                        </>
-                      )
+            <li>
+              <IconButton
+                size="large"
+                edge="end"
+                aria-label="account of current user"
+                aria-controls="primary-search-account-menu"
+                aria-haspopup="true"
+                onClick={handleProfileMenuOpen}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+              <Menu
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                id="primary-search-account-menu"
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={isMenuOpen}
+                onClose={handleMenuClose}
+              >
+                {
+                  authenticated
+                    ? (
+                      <>
+                        <MenuItem onClick={handleMenuClose}>
+                          <Link
+                            className="nav-link"
+                            to="/settings"
+                          >
+                            settings
+                          </Link>
+                        </MenuItem>
+                        <MenuItem onClick={handleMenuClose}>
+                          <Link
+                            className="nav-link"
+                            to="/logout"
+                          >
+                            logout
+                          </Link>
+                        </MenuItem>
+                      </>
+                    )
+                    : (
+                      <>
+                        <MenuItem onClick={handleMenuClose}>
+                          <Link
+                            className="nav-link"
+                            to="/login"
+                          >
+                            login
+                          </Link>
+                        </MenuItem>
+                        <MenuItem onClick={handleMenuClose}>
+                          <Link
+                            className="nav-link"
+                            to="/register"
+                          >
+                            register
+                          </Link>
+                        </MenuItem>
+                      </>
+                    )
 
-                  }
-                </Menu>
+                }
+              </Menu>
 
-              </li>
-            </>
+            </li>
           </ul>
         </Navbar.Collapse>
       </Navbar>

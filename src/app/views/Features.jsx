@@ -372,7 +372,7 @@ const FeaturesView = function (props) {
                     </TableCell>
                     <TableCell align="right">
                       {
-                        feature.user && feature.user.username
+                        feature.dashboardUser && feature.dashboardUser.username
                       }
                     </TableCell>
                     <TableCell align="right">

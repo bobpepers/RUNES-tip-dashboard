@@ -15,6 +15,7 @@ import liability from "./liability";
 import balance from "./balance";
 import channels from "./channels";
 import features from "./features";
+import botSettings from "./botSettings";
 
 import acceptWithdrawal from "./acceptWithdrawal";
 import declineWithdrawal from "./declineWithdrawal";
@@ -39,6 +40,7 @@ const rootReducer = combineReducers({
   features: features,
   acceptWithdrawal: acceptWithdrawal,
   declineWithdrawal: declineWithdrawal,
+  botSettings: botSettings,
 
 });
 
