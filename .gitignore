@@ -6,5 +6,5 @@ npm-debug.log
 .env
 .env.development
 .env.production
-static/dev-config.js
-static/prod-config.js
+static/config.js
+
