@@ -18,7 +18,11 @@ module.exports = (options) => {
       'webpack/hot/dev-server',
       Path.join(__dirname, '../src/app/index'),
     ],
+    node: {
+      global: true,
+    },
     output: {
+      globalObject: 'this',
       path: Path.join(__dirname, '../dist'),
       filename: `./scripts/[name].${options.jsFileName}`,
       chunkFilename: '[id].[chunkhash].js',

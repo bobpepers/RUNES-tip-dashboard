@@ -10,7 +10,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
   <title>RUNES tip Dashboard</title>
   <script>
-    console.log('<%= htmlWebpackPlugin.options.NODE_ENV %>');
     var script = document.createElement('script');
     script.type = 'text/javascript';
     script.async = true;
@@ -21,8 +20,9 @@
       script.src = '/static/prod-config.js';
     }
     document.getElementsByTagName('head')[0].appendChild(script);
-    document.title = `${window.config.name} tip dashboard`;
+
     console.log(window);
+    document.title = `${window.config.name} tip dashboard`;
     console.log(global);
   </script>
 </head>
