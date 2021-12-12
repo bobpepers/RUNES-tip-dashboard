@@ -1,1 +1,1 @@
-window.config={apiUrl:"https://localhost/api",wsEndPoint:"https://localhost",reCaptchaSiteKey:"6LcrikgdAAAAAL6FHGEvZaeQ7zmiTQkR89pxP1w8",name:"Runebase"};
+window.config={apiUrl:"https://localhost/api",wsEndPoint:"https://localhost",reCaptchaSiteKey:"6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI",name:"Runebase"};

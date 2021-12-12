@@ -150,26 +150,6 @@ module.exports = (options) => {
       new Webpack.ProvidePlugin({
         Buffer: ['buffer', 'Buffer'],
       }),
-      new Webpack.DefinePlugin({
-        'process.env': {
-          NODE_ENV: JSON.stringify(options.isProduction ? 'production' : 'development'),
-          API_URL: JSON.stringify(
-            options.isProduction
-              ? dotenvProduction.parsed.API_URL
-              : dotenvDevelopment.parsed.API_URL,
-          ),
-          WS_ENDPOINT: JSON.stringify(
-            options.isProduction
-              ? dotenvProduction.parsed.WS_ENDPOINT
-              : dotenvDevelopment.parsed.WS_ENDPOINT,
-          ),
-          RECAPTCHA_SITE_KEY: JSON.stringify(
-            options.isProduction
-              ? dotenvProduction.parsed.RECAPTCHA_SITE_KEY
-              : dotenvDevelopment.parsed.RECAPTCHA_SITE_KEY,
-          ),
-        },
-      }),
       new HtmlWebpackPlugin({
         template: Path.join(__dirname, '../src/index.html'),
         NODE_ENV: options.isProduction ? 'production' : 'development',

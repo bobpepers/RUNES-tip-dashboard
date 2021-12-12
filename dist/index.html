@@ -8,26 +8,28 @@
   <meta name="robots" content="index,follow">
   <meta name="googlebot" content="index,follow">
   <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8">
-  <script src="/static/development-config.js"></script>
   <title>RUNES tip Dashboard</title>
   <script>
-    console.log(process.env.NODE_ENV);
+    console.log('production');
     var script = document.createElement('script');
     script.type = 'text/javascript';
+    script.async = true;
 
-    if (process.env.NODE_ENV === 'development') {
+    if ('production' == 'development') {
       script.src = '/static/dev-config.js';
     } else {
       script.src = '/static/prod-config.js';
     }
     document.getElementsByTagName('head')[0].appendChild(script);
     document.title = `${window.config.name} tip dashboard`;
-    console.log(process.env.NODE_ENV);
   </script>
-<script defer="defer" src="/./scripts/runtime.app.371e6bf12fd6724ce64d.js"></script><script defer="defer" src="/./scripts/vendors.app.371e6bf12fd6724ce64d.js"></script><script defer="defer" src="/./scripts/main.app.371e6bf12fd6724ce64d.js"></script></head>
+<script defer="defer" src="/./scripts/runtime.app.2162ec72b9639520cb1d.js"></script><script defer="defer" src="/./scripts/vendors.app.2162ec72b9639520cb1d.js"></script><script defer="defer" src="/./scripts/main.app.2162ec72b9639520cb1d.js"></script></head>
 
 <body class="light-theme">
   <div id="root"></div>
+  <script>
+    document.title = `${window.config.name} tip dashboard`;
+  </script>
 </body>
 
 </html>
