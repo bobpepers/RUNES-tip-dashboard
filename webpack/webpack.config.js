@@ -22,7 +22,6 @@ module.exports = (options) => {
       global: true,
     },
     output: {
-      globalObject: 'this',
       path: Path.join(__dirname, '../dist'),
       filename: `./scripts/[name].${options.jsFileName}`,
       chunkFilename: '[id].[chunkhash].js',
