@@ -12,7 +12,7 @@
   <script>
     var script = document.createElement('script');
     script.type = 'text/javascript';
-    script.async = true;
+    //script.async = true;
 
     if ('production' == 'development') {
       script.src = '/static/dev-config.js';
@@ -22,10 +22,9 @@
     document.getElementsByTagName('head')[0].appendChild(script);
 
     console.log(window);
-    document.title = `${window.config.name} tip dashboard`;
-    console.log(global);
+
   </script>
-<script defer="defer" src="/./scripts/runtime.app.514e0ac3f5332e1dfef2.js"></script><script defer="defer" src="/./scripts/vendors.app.514e0ac3f5332e1dfef2.js"></script><script defer="defer" src="/./scripts/main.app.514e0ac3f5332e1dfef2.js"></script></head>
+<script defer="defer" src="/./scripts/runtime.app.a62f598b9b6ead366f3c.js"></script><script defer="defer" src="/./scripts/vendors.app.a62f598b9b6ead366f3c.js"></script><script defer="defer" src="/./scripts/main.app.a62f598b9b6ead366f3c.js"></script></head>
 
 <body class="light-theme">
   <div id="root"></div>

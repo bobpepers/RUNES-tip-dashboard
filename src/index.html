@@ -2,17 +2,10 @@
 <html>
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-  <meta name="robots" content="index,follow" />
-  <meta name="googlebot" content="index,follow" />
-  <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
-  <title>RUNES tip Dashboard</title>
   <script>
     var script = document.createElement('script');
     script.type = 'text/javascript';
-    script.async = true;
+    //script.async = true;
 
     if ('<%= htmlWebpackPlugin.options.NODE_ENV %>' == 'development') {
       script.src = '/static/dev-config.js';
@@ -22,9 +15,15 @@
     document.getElementsByTagName('head')[0].appendChild(script);
 
     console.log(window);
-    document.title = `${window.config.name} tip dashboard`;
-    console.log(global);
+
   </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <meta name="robots" content="index,follow" />
+  <meta name="googlebot" content="index,follow" />
+  <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
+  <title>RUNES tip Dashboard</title>
 </head>
 
 <body class="light-theme">
