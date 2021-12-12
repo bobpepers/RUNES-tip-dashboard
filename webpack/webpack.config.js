@@ -19,7 +19,6 @@ module.exports = (options) => {
       Path.join(__dirname, '../src/app/index'),
     ],
     output: {
-      globalObject: 'this',
       path: Path.join(__dirname, '../dist'),
       filename: `./scripts/[name].${options.jsFileName}`,
       chunkFilename: '[id].[chunkhash].js',
@@ -145,6 +144,9 @@ module.exports = (options) => {
     },
 
     plugins: [
+      new Webpack.ProvidePlugin({
+        window: 'global/window',
+      }),
       new Webpack.ProvidePlugin({
         process: 'process/browser',
       }),
