@@ -24,20 +24,16 @@ const Captcha = function (props) {
   }, [submitting, submitFailed]);
 
   const onChange = (value) => {
-    dispatch(change('contact', 'captchaResponse', value));
     dispatch(change('signin', 'captchaResponse', value));
     dispatch(change('signup', 'captchaResponse', value));
-    dispatch(change('surfComplete', 'captchaResponse', value));
-    dispatch(change('claimFaucet', 'captchaResponse', value));
     dispatch(change('resetpassword', 'captchaResponse', value));
-    dispatch(change('report', 'captchaResponse', value));
   };
 
   return (
     <div style={{ display: 'inline-block' }}>
       <ReCAPTCHA
         ref={captcha}
-        sitekey={`${window.myConfig.reCaptchaSiteKey}`}
+        sitekey={window.myConfig.reCaptchaSiteKey}
         onChange={(response) => onChange(response)}
       />
       <ErrorMessage>{touched ? error : ''}</ErrorMessage>
