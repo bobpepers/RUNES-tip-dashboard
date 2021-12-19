@@ -171,12 +171,19 @@ export function addFeature(obj) {
   }
 }
 
-export function updateFeature(id, min, fee, enabled) {
+export function updateFeature(
+  id,
+  min,
+  fee,
+  maxSampleSize,
+  enabled,
+) {
   return function (dispatch) {
     axios.post(`${window.myConfig.apiUrl}/feature/update`, {
       id,
       min,
       fee,
+      maxSampleSize,
       enabled,
     })
       .then((response) => {

@@ -96,11 +96,16 @@ const FeaturesView = function (props) {
   });
   const [unitMin, setUnitMin] = useState(null);
   const [unitFee, setUnitFee] = useState(null);
+  const [unitSampleSize, setUnitSampleSize] = useState(null);
   const [unitEnabled, setUnitEnabled] = useState(null);
   const [serverId, setServerId] = useState('All');
 
   const onEdit = ({
-    id, currentUnitMin, currentUnitFee, currentUnitEnabled,
+    id,
+    currentUnitMin,
+    currentUnitFee,
+    currentUnitSampleSize,
+    currentUnitEnabled,
   }) => {
     setInEditMode({
       status: true,
@@ -108,6 +113,7 @@ const FeaturesView = function (props) {
     })
     setUnitMin(currentUnitMin);
     setUnitFee(currentUnitFee);
+    setUnitSampleSize(currentUnitSampleSize);
     setUnitEnabled(currentUnitEnabled);
   }
 
@@ -116,13 +122,14 @@ const FeaturesView = function (props) {
   }
 
   const onSave = async ({ id }) => {
-    await dispatch(updateFeature(id, unitMin, unitFee, unitEnabled));
+    await dispatch(updateFeature(id, unitMin, unitFee, unitSampleSize, unitEnabled));
     setInEditMode({
       status: false,
       rowKey: null,
     })
     setUnitMin(null);
     setUnitFee(null);
+    setUnitSampleSize(null);
     setUnitEnabled(null);
   }
 
@@ -133,6 +140,7 @@ const FeaturesView = function (props) {
     })
     setUnitMin(null);
     setUnitFee(null);
+    setUnitSampleSize(null);
     setUnitEnabled(null);
   }
   const changeServer = (val, preVal) => {
@@ -196,7 +204,10 @@ const FeaturesView = function (props) {
               <MenuItem key="10" value="soak">
                 soak
               </MenuItem>
-              <MenuItem key="11" value="withdraw">
+              <MenuItem key="11" value="flood">
+                flood
+              </MenuItem>
+              <MenuItem key="12" value="withdraw">
                 withdraw
               </MenuItem>
             </Field>
@@ -292,6 +303,7 @@ const FeaturesView = function (props) {
               <TableCell align="right">channel</TableCell>
               <TableCell align="right">min</TableCell>
               <TableCell align="right">fee %</TableCell>
+              <TableCell align="right">maxSampleSize</TableCell>
               <TableCell align="right">enabled</TableCell>
               <TableCell align="right">last updated by:</TableCell>
               <TableCell align="right">edit/remove</TableCell>
@@ -352,6 +364,19 @@ const FeaturesView = function (props) {
                     <TableCell align="right">
                       {
                         inEditMode.status && inEditMode.rowKey === feature.id ? (
+                          <TextField
+                            value={unitSampleSize}
+                            onChange={(event) => setUnitSampleSize(event.target.value)}
+                          />
+
+                        ) : (
+                          feature.maxSampleSize
+                        )
+                      }
+                    </TableCell>
+                    <TableCell align="right">
+                      {
+                        inEditMode.status && inEditMode.rowKey === feature.id ? (
                           <Select
                             label="Enabled"
                             // defaultValue={unitEnabled ? 'true' : 'false'}
@@ -387,6 +412,7 @@ const FeaturesView = function (props) {
                                 id: feature.id,
                                 min: unitMin,
                                 fee: unitFee,
+                                maxSampleSize: unitSampleSize,
                                 enabled: unitEnabled,
                               })}
                             >
@@ -413,6 +439,7 @@ const FeaturesView = function (props) {
                                 id: feature.id,
                                 currentUnitMin: feature.min / 1e8,
                                 currentUnitFee: feature.fee / 1e2,
+                                currentUnitSampleSize: feature.maxSampleSize,
                                 currentUnitEnabled: feature.enabled,
                               })}
                             >
