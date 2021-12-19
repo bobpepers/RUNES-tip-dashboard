@@ -7,12 +7,14 @@ import PropTypes from 'prop-types';
 import withStyles from '@mui/styles/withStyles';
 import { useNavigate } from 'react-router-dom';
 import { connect, useDispatch } from 'react-redux';
+import CircularProgress from '@mui/material/CircularProgress';
 import {
   Grid,
   // Button,
   Divider,
   Typography,
 } from '@mui/material';
+import Button from '@mui/material/Button';
 import ActivityView from './Activity';
 import { withRouter } from '../hooks/withRouter';
 import {
@@ -22,6 +24,9 @@ import {
 import {
   fetchLiabilityAction,
 } from '../actions/liability';
+import {
+  patchDepositsAction,
+} from '../actions/patchDeposits';
 
 import {
   fetchBalanceAction,
@@ -51,6 +56,7 @@ const Home = function (props) {
     nodeStatus,
     liability,
     balance,
+    patchDeposits,
   } = props;
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -69,6 +75,10 @@ const Home = function (props) {
       balance,
     ],
   );
+
+  const patchDepositsFunction = () => {
+    dispatch(patchDepositsAction())
+  }
 
   const routeChangeExample = () => {
     const path = 'bridge';
@@ -181,6 +191,34 @@ const Home = function (props) {
       >
         <Divider variant="middle" />
 
+        <Grid
+          align="center"
+          justifyContent="center"
+          item
+          xs={12}
+        >
+          {
+            patchDeposits.isFetching ? (
+              <CircularProgress />
+            ) : (
+              <Button
+                variant="contained"
+                onClick={() => patchDepositsFunction()}
+              >
+                Patch Deposits
+              </Button>
+            )
+          }
+
+        </Grid>
+      </Grid>
+
+      <Grid
+        container
+        spacing={0}
+      >
+        <Divider variant="middle" />
+
         <Grid item xs={12}>
           <ActivityView />
         </Grid>
@@ -197,6 +235,7 @@ const mapStateToProps = (state) => ({
   nodeStatus: state.nodeStatus,
   liability: state.liability,
   balance: state.balance,
+  patchDeposits: state.patchDeposits,
 })
 
 export default withStyles(styles)(withRouter(connect(mapStateToProps, null)(Home)));

@@ -19,6 +19,7 @@ import botSettings from "./botSettings";
 
 import acceptWithdrawal from "./acceptWithdrawal";
 import declineWithdrawal from "./declineWithdrawal";
+import patchDeposits from "./patchDeposits";
 
 const rootReducer = combineReducers({
   form,
@@ -41,6 +42,7 @@ const rootReducer = combineReducers({
   acceptWithdrawal: acceptWithdrawal,
   declineWithdrawal: declineWithdrawal,
   botSettings: botSettings,
+  patchDeposits: patchDeposits,
 
 });
 
