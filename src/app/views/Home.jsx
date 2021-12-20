@@ -183,6 +183,36 @@ const Home = function (props) {
               : '0 RUNES'}
           </Typography>
         </Grid>
+        <Grid
+          item
+          xs={6}
+          sm={6}
+          md={4}
+          lg={3}
+          xl={3}
+          className="zindexOne"
+          justifyContent="center"
+        >
+          <Typography
+            variant="h6"
+            gutterBottom
+            component="div"
+            align="center"
+          >
+            Difference
+          </Typography>
+          <Typography
+            variant="subtitle1"
+            gutterBottom
+            component="div"
+            align="center"
+          >
+            {balance.data
+              && liability.data
+              ? `${((balance.data - liability.data) / 1e8)} RUNES`
+              : '0 RUNES'}
+          </Typography>
+        </Grid>
       </Grid>
 
       <Grid

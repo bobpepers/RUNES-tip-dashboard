@@ -24,69 +24,57 @@ const renderEarnedSpendBalance = (activity) => (
 )
 
 const renderEarnerBalance = (activity) => (
-  <>
-    <Typography variant="subtitle1" gutterBottom component="div">
-      earner balance:
-      {' '}
-      {activity.earner_balance / 1e8}
-    </Typography>
-  </>
+  <Typography variant="subtitle1" gutterBottom component="div">
+    earner balance:
+    {' '}
+    {activity.earner_balance / 1e8}
+  </Typography>
 )
 
 const renderSpenderBalance = (activity) => (
-  <>
-    <Typography variant="subtitle1" gutterBottom component="div">
-      spender balance:
-      {' '}
-      {activity.spender_balance / 1e8}
-    </Typography>
-  </>
+  <Typography variant="subtitle1" gutterBottom component="div">
+    spender balance:
+    {' '}
+    {activity.spender_balance / 1e8}
+  </Typography>
 )
 
 const renderAmount = (activity) => (
-  <>
-    <Typography variant="subtitle1" gutterBottom component="div">
-      amount:
-      {' '}
-      {activity.amount && activity.amount / 1e8}
-    </Typography>
-  </>
+  <Typography variant="subtitle1" gutterBottom component="div">
+    amount:
+    {' '}
+    {activity.amount && activity.amount / 1e8}
+  </Typography>
 )
 
 const renderBy = (activity) => (
-  <>
-    <Typography variant="subtitle1" gutterBottom component="div">
-      by:
-      {' '}
-      {activity.spender && activity.spender.username}
-      {' '}
-      (
-      {activity.spender && activity.spender.user_id}
-      )
-    </Typography>
-  </>
+  <Typography variant="subtitle1" gutterBottom component="div">
+    by:
+    {' '}
+    {activity.spender && activity.spender.username}
+    {' '}
+    (
+    {activity.spender && activity.spender.user_id}
+    )
+  </Typography>
 )
 
 const renderTo = (activity) => (
-  <>
-    <Typography variant="subtitle1" gutterBottom component="div">
-      to:
-      {' '}
-      {activity.earner && activity.earner.username}
-      {' '}
-      (
-      {activity.earner && activity.earner.user_id}
-      )
-    </Typography>
-  </>
+  <Typography variant="subtitle1" gutterBottom component="div">
+    to:
+    {' '}
+    {activity.earner && activity.earner.username}
+    {' '}
+    (
+    {activity.earner && activity.earner.user_id}
+    )
+  </Typography>
 )
 
 const renderInsufficientBalance = () => (
-  <>
-    <Typography variant="subtitle1" gutterBottom component="div">
-      Insufficient balance
-    </Typography>
-  </>
+  <Typography variant="subtitle1" gutterBottom component="div">
+    Insufficient balance
+  </Typography>
 )
 
 const renderItems = (data) => {
@@ -99,6 +87,8 @@ const renderItems = (data) => {
           <Moment interval={1000} fromNow>{activity.createdAt}</Moment>
         </Grid>
         <Grid item xs={2} align="center">
+          {activity.type === 'faucettip_s' && 'Claim Faucet'}
+          {activity.type === 'waterFaucet' && 'Water Faucet'}
           {activity.type === 'thundertip_f' && 'ThunderTip: fail'}
           {activity.type === 'thundertip_s' && 'ThunderTip: success'}
           {activity.type === 'thunderstormtip_f' && 'ThunderStormTip: fail'}
@@ -164,6 +154,8 @@ const renderItems = (data) => {
             || activity.type === 'soaktip_f'
             || activity.type === 'floodtip_f'
             || activity.type === 'sleettip_f'
+            || activity.type === 'faucettip_s'
+            || activity.type === 'deposit'
 
             || activity.type === 'balance'
             || activity.type === 'info'
@@ -199,7 +191,6 @@ const renderItems = (data) => {
             || activity.type === 'rain_f'
             || activity.type === 'tip_f'
 
-            || activity.type === 'deposit'
             || activity.type === 'depositAccepted'
             || activity.type === 'depositComplete'
 
@@ -286,6 +277,7 @@ const renderItems = (data) => {
             || activity.type === 'tip_i'
             || activity.type === 'reactdroptip_i'
             || activity.type === 'reactdroptip_s'
+            || activity.type === 'waterFaucet'
           ) && renderAmount(activity)}
 
           {activity.type === 'balance' && ''}
@@ -335,6 +327,7 @@ const renderItems = (data) => {
           {(
             activity.type === 'depositComplete'
             || activity.type === 'reactdroptip_s'
+            || activity.type === 'waterFaucet'
           ) && renderEarnerBalance(activity)}
 
           {activity.type === 'tip_f' && `amount: ${activity.amount / 1e8}`}
@@ -352,7 +345,7 @@ const renderItems = (data) => {
   return parent;
 }
 
-const ActivityContainer = (props) => {
+const ActivityContainer = function (props) {
   const { activity } = props;
   useEffect(() => { }, [activity]);
   const activitiesPerPage = 20;
