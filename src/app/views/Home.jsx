@@ -31,6 +31,11 @@ import {
 import {
   fetchBalanceAction,
 } from '../actions/balance';
+
+import {
+  fetchFaucetBalanceAction,
+} from '../actions/faucetBalance';
+
 // import Logo from '../assets/images/logo.svg';
 
 const styles = {
@@ -57,6 +62,7 @@ const Home = function (props) {
     liability,
     balance,
     patchDeposits,
+    faucetBalance,
   } = props;
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -65,6 +71,7 @@ const Home = function (props) {
     dispatch(fetchNodeStatusAction());
     dispatch(fetchLiabilityAction());
     dispatch(fetchBalanceAction());
+    dispatch(fetchFaucetBalanceAction());
   }, []);
 
   useEffect(
@@ -73,6 +80,7 @@ const Home = function (props) {
       nodeStatus,
       liability,
       balance,
+      faucetBalance,
     ],
   );
 
@@ -209,7 +217,37 @@ const Home = function (props) {
           >
             {balance.data
               && liability.data
-              ? `${((balance.data - liability.data) / 1e8)} RUNES`
+              ? `${((Number(balance.data) - (Number(liability.data) / 1e8)))} RUNES`
+              : '0 RUNES'}
+          </Typography>
+        </Grid>
+        <Grid
+          item
+          xs={6}
+          sm={6}
+          md={4}
+          lg={3}
+          xl={3}
+          className="zindexOne"
+          justifyContent="center"
+        >
+          <Typography
+            variant="h6"
+            gutterBottom
+            component="div"
+            align="center"
+          >
+            Faucet Balance
+          </Typography>
+          <Typography
+            variant="subtitle1"
+            gutterBottom
+            component="div"
+            align="center"
+          >
+            {faucetBalance.data
+              && faucetBalance.data
+              ? `${faucetBalance.data / 1e8} RUNES`
               : '0 RUNES'}
           </Typography>
         </Grid>
@@ -266,6 +304,7 @@ const mapStateToProps = (state) => ({
   liability: state.liability,
   balance: state.balance,
   patchDeposits: state.patchDeposits,
+  faucetBalance: state.faucetBalance,
 })
 
 export default withStyles(styles)(withRouter(connect(mapStateToProps, null)(Home)));

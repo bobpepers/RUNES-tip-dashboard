@@ -20,6 +20,7 @@ import botSettings from "./botSettings";
 import acceptWithdrawal from "./acceptWithdrawal";
 import declineWithdrawal from "./declineWithdrawal";
 import patchDeposits from "./patchDeposits";
+import faucetBalance from './faucetBalance';
 
 const rootReducer = combineReducers({
   form,
@@ -43,6 +44,7 @@ const rootReducer = combineReducers({
   declineWithdrawal: declineWithdrawal,
   botSettings: botSettings,
   patchDeposits: patchDeposits,
+  faucetBalance: faucetBalance,
 
 });
 
