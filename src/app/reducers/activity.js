@@ -35,7 +35,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 data: [
-                    action.payload,
+                    ...action.payload,
                     ...state.data
                 ],
                 isFetching: false,
