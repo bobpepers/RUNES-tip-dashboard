@@ -51,10 +51,10 @@ const renderBy = (activity) => (
   <Typography variant="subtitle1" gutterBottom component="div">
     by:
     {' '}
-    {activity.spender && activity.spender.username}
+    {activity.spender && activity.spender.username && activity.spender.username}
     {' '}
     (
-    {activity.spender && activity.spender.user_id}
+    {activity.spender && activity.spender.user_id && activity.spender.user_id}
     )
   </Typography>
 )
@@ -63,10 +63,10 @@ const renderTo = (activity) => (
   <Typography variant="subtitle1" gutterBottom component="div">
     to:
     {' '}
-    {activity.earner && activity.earner.username}
+    {activity.earner && activity.earner.username && activity.earner.username}
     {' '}
     (
-    {activity.earner && activity.earner.user_id}
+    {activity.earner && activity.earner.user_id && activity.earner.user_id}
     )
   </Typography>
 )
@@ -205,19 +205,19 @@ const renderItems = (data) => {
               <Typography variant="subtitle1" gutterBottom component="div">
                 by:
                 {' '}
-                {activity.spender.username}
+                {activity.spender && activity.spender.username}
                 {' '}
                 (
-                {activity.spender.user_id}
+                {activity.spender && activity.spender.user_id}
                 )
               </Typography>
               <Typography variant="subtitle1" gutterBottom component="div">
                 to:
                 {' '}
-                {activity.earner.username}
+                {activity.earner && activity.earner.username}
                 {' '}
                 (
-                {activity.earner.user_id}
+                {activity.earner && activity.earner.user_id}
                 )
               </Typography>
             </>
