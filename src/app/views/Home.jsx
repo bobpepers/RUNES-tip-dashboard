@@ -157,8 +157,8 @@ const Home = function (props) {
           >
             {liability.data
               && liability.data
-              ? `${liability.data / 1e8} RUNES`
-              : '0 RUNES'}
+              ? `${liability.data / 1e8} ${window.myConfig.ticker}`
+              : `0 ${window.myConfig.ticker}`}
           </Typography>
         </Grid>
         <Grid
@@ -187,8 +187,8 @@ const Home = function (props) {
           >
             {balance.data
               && balance.data
-              ? `${balance.data} RUNES`
-              : '0 RUNES'}
+              ? `${balance.data} ${window.myConfig.ticker}`
+              : `0 ${window.myConfig.ticker}`}
           </Typography>
         </Grid>
         <Grid
@@ -217,8 +217,8 @@ const Home = function (props) {
           >
             {balance.data
               && liability.data
-              ? `${((Number(balance.data) - (Number(liability.data) / 1e8)))} RUNES`
-              : '0 RUNES'}
+              ? `${((Number(balance.data) - (Number(liability.data) / 1e8))).toFixed(8)} ${window.myConfig.ticker}`
+              : `0 ${window.myConfig.ticker}`}
           </Typography>
         </Grid>
         <Grid
@@ -247,8 +247,8 @@ const Home = function (props) {
           >
             {faucetBalance.data
               && faucetBalance.data
-              ? `${faucetBalance.data / 1e8} RUNES`
-              : '0 RUNES'}
+              ? `${faucetBalance.data / 1e8} ${window.myConfig.ticker}`
+              : `0 ${window.myConfig.ticker}`}
           </Typography>
         </Grid>
       </Grid>

@@ -18,7 +18,6 @@ server {
     ssl_certificate_key /etc/ssl/private/localhost.key;
     ssl_protocols TLSv1.2 TLSv1.1 TLSv1;
 
-
     location / {
         proxy_pass http://127.0.0.1:8012;
         proxy_set_header Host $host;
