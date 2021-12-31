@@ -357,16 +357,16 @@ const WithdrawalsTable = function (props) {
                         </p>
 
                       </TableCell>
-                      <TableCell align="right">{row.userId}</TableCell>
-                      <TableCell align="right">{row.username}</TableCell>
-                      <TableCell align="right">{row.to_from}</TableCell>
+                      <TableCell align="right">{row.userId && row.userId}</TableCell>
+                      <TableCell align="right">{row.username && row.username}</TableCell>
+                      <TableCell align="right">{row.to_from && row.to_from}</TableCell>
 
                       <TableCell align="right">
                         {row.txId}
                       </TableCell>
                       <TableCell align="right">{row.amount / 1e8}</TableCell>
-                      <TableCell align="right">{row.confirmations}</TableCell>
-                      <TableCell align="right">{row.phase}</TableCell>
+                      <TableCell align="right">{row.confirmations && row.confirmations}</TableCell>
+                      <TableCell align="right">{row.phase && row.phase}</TableCell>
                       <TableCell align="right">
                         {
                           row.phase === 'review'

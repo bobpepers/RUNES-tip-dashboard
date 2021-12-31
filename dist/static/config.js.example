@@ -4,6 +4,7 @@ const setConfigDevelopment = () => {
   window.myConfig.wsEndPoint = 'https://localhost';
   window.myConfig.reCaptchaSiteKey = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
   window.myConfig.name = 'Runebase';
+  window.myConfig.ticker = 'RUNES';
 }
 
 const setConfigProduction = () => {
@@ -12,5 +13,6 @@ const setConfigProduction = () => {
   window.myConfig.wsEndPoint = 'https://tip.runebase.io';
   window.myConfig.reCaptchaSiteKey = '6LcrikgdAAAAAL6FHGEvZaeQ7zmiTQkR89pxP1w8';
   window.myConfig.name = 'Runebase';
+  window.myConfig.ticker = 'RUNES';
 }
 
