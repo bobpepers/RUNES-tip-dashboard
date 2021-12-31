@@ -238,8 +238,8 @@ const DepositsTable = function (props) {
       createData(
         item.id,
         item.txid,
-        item.address.wallet.user.username,
-        item.address.wallet.user.user_id,
+        item.address ? item.address.wallet.user.username : '',
+        item.address ? item.address.wallet.user.user_id : '',
         item.phase,
         item.to_from,
         item.amount,

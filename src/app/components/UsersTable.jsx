@@ -26,7 +26,6 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import { Link } from 'react-router-dom';
 import BanDialog from './BanDialog';
 
-
 function createData(
   id,
   userId,
@@ -35,7 +34,7 @@ function createData(
   locked,
   total,
   lastActive,
-  banned
+  banned,
 ) {
   return {
     id,
@@ -45,7 +44,7 @@ function createData(
     locked,
     total,
     lastActive,
-    banned
+    banned,
   };
 }
 
@@ -75,7 +74,7 @@ function stableSort(array, comparator) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-function EnhancedTableHead(props) {
+const EnhancedTableHead = function (props) {
   const {
     headCells,
     classes,
@@ -149,7 +148,7 @@ const useToolbarStyles = makeStyles((theme) => ({
   },
 }));
 
-const EnhancedTableToolbar = (props) => {
+const EnhancedTableToolbar = function (props) {
   const classes = useToolbarStyles();
   const { numSelected } = props;
 
@@ -186,7 +185,7 @@ const EnhancedTableToolbar = (props) => {
       )}
     </Toolbar>
   );
-};
+}
 
 EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
@@ -216,7 +215,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function UsersTable(props) {
+const UsersTable = function (props) {
   const {
     headCells,
     users,
@@ -232,9 +231,9 @@ function UsersTable(props) {
         item.id,
         item.user_id,
         item.username,
-        item.wallet.available,
-        item.wallet.locked,
-        item.wallet.available + item.wallet.locked,
+        item.wallet ? item.wallet.available : 0,
+        item.wallet ? item.wallet.locked : 0,
+        item.wallet ? item.wallet.available + item.wallet.locked : 0,
         item.lastSeen,
         item.banned,
       ),
