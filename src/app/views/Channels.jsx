@@ -61,6 +61,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ChannelsView = (props) => {
   const {
+    auth,
     channels,
   } = props;
   const dispatch = useDispatch();
@@ -70,11 +71,12 @@ const ChannelsView = (props) => {
   const [channelName, setchannelName] = useState('');
 
 
-  useEffect(() => dispatch(fetchChannelsAction(id, channelId, channelName, 'all')), [dispatch]);
+  //useEffect(() => dispatch(fetchChannelsAction(id, channelId, channelName, 'all')), [auth]);
   useEffect(() => dispatch(fetchChannelsAction(id, channelId, channelName, 'all')), [
     id,
     channelId,
-    channelName
+    channelName,
+    auth,
   ]);
 
   const handleChangeId = (event) => {
@@ -162,6 +164,7 @@ const ChannelsView = (props) => {
 }
 
 const mapStateToProps = (state) => ({
+  auth: state.auth,
   channels: state.channels,
 })
 

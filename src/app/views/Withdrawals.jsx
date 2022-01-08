@@ -215,6 +215,7 @@ const WithdrawalsView = function (props) {
 }
 
 const mapStateToProps = (state) => ({
+  auth: state.auth,
   withdrawals: state.withdrawals,
   acceptWithdrawal: state.acceptWithdrawal,
   declineWithdrawal: state.declineWithdrawal,

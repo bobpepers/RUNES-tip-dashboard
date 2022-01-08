@@ -160,6 +160,8 @@ const renderItems = (data) => {
             || activity.type === 'balance'
             || activity.type === 'info'
             || activity.type === 'help'
+            || activity.type === 'depositAccepted'
+            || activity.type === 'depositComplete'
           ) && renderTo(activity)}
 
           {(
@@ -191,8 +193,7 @@ const renderItems = (data) => {
             || activity.type === 'rain_f'
             || activity.type === 'tip_f'
 
-            || activity.type === 'depositAccepted'
-            || activity.type === 'depositComplete'
+
 
             || activity.type === 'withdrawRequested'
             || activity.type === 'withdrawAccepted'

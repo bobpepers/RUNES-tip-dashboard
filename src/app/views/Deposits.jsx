@@ -63,6 +63,7 @@ const useStyles = makeStyles((theme) => ({
 
 const DepositsView = function (props) {
   const {
+    auth,
     deposits,
   } = props;
   const dispatch = useDispatch();
@@ -73,13 +74,13 @@ const DepositsView = function (props) {
   const [username, setUsername] = useState('');
   const [from, setFrom] = useState('');
 
-  useEffect(() => dispatch(fetchDepositsAction(
-    id,
-    txId,
-    userId,
-    username,
-    from,
-  )), [dispatch]);
+  //useEffect(() => dispatch(fetchDepositsAction(
+  //  id,
+  //  txId,
+  //  userId,
+  //  username,
+  //  from,
+  //)), [dispatch]);
 
   useEffect(() => dispatch(fetchDepositsAction(
     id,
@@ -93,6 +94,7 @@ const DepositsView = function (props) {
     userId,
     username,
     from,
+    auth,
   ]);
 
   const handleChangeId = (event) => {
@@ -205,6 +207,7 @@ const DepositsView = function (props) {
 }
 
 const mapStateToProps = (state) => ({
+  auth: state.auth,
   deposits: state.deposits,
 })
 

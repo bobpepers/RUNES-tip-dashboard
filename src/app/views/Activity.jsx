@@ -59,7 +59,13 @@ const ActivityView = function (props) {
 
   useEffect(() => {
     if (auth.authenticated) {
-      dispatch(fetchActivityAction(id, spender, earner, type, amount));
+      dispatch(fetchActivityAction(
+        id,
+        spender,
+        earner,
+        type,
+        amount
+      ));
     }
   }, [
     auth,

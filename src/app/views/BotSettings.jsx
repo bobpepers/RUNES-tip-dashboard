@@ -27,6 +27,7 @@ import {
 
 const BotSettingsView = function (props) {
   const {
+    auth,
     botSettings,
   } = props;
   const dispatch = useDispatch();
@@ -70,8 +71,12 @@ const BotSettingsView = function (props) {
   }
 
   useEffect(() => {
-    dispatch(fetchBotSettings());
-  }, []);
+    if (auth.authenticated) {
+      dispatch(fetchBotSettings());
+    }
+  }, [
+    auth,
+  ]);
 
   useEffect(() => { }, [
     botSettings,
@@ -202,6 +207,7 @@ const BotSettingsView = function (props) {
 
 function mapStateToProps(state) {
   return {
+    auth: state.auth,
     botSettings: state.botSettings,
   };
 }

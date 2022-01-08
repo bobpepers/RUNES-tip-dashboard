@@ -66,6 +66,7 @@ const useStyles = makeStyles((theme) => ({
 
 const UsersView = function (props) {
   const {
+    auth,
     users,
   } = props;
   const dispatch = useDispatch();
@@ -76,13 +77,14 @@ const UsersView = function (props) {
   const [platform, setPlatform] = useState('All');
   const [userId, setUserId] = useState('');
 
-  useEffect(() => dispatch(fetchUsersAction(id, userId, username, platform, banned)), [dispatch]);
+  //useEffect(() => dispatch(fetchUsersAction(id, userId, username, platform, banned)), [dispatch]);
   useEffect(() => dispatch(fetchUsersAction(id, userId, username, platform, banned)), [
     id,
     username,
     banned,
     platform,
     userId,
+    auth,
   ]);
 
   const handleChangeId = (event) => {
@@ -222,6 +224,7 @@ const UsersView = function (props) {
 }
 
 const mapStateToProps = (state) => ({
+  auth: state.auth,
   users: state.users,
 })
 

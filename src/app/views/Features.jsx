@@ -84,6 +84,7 @@ const renderSelectField = ({
 
 const FeaturesView = function (props) {
   const {
+    auth,
     features,
     servers,
     channels,
@@ -151,7 +152,10 @@ const FeaturesView = function (props) {
     dispatch(fetchFeatures());
     dispatch(fetchServerAction('', '', '', 'All'));
     dispatch(fetchChannelsAction('', '', '', serverId));
-  }, [serverId]);
+  }, [
+    serverId,
+    auth,
+  ]);
 
   useEffect(() => { }, [
     features,
@@ -473,6 +477,7 @@ const FeaturesView = function (props) {
 
 function mapStateToProps(state) {
   return {
+    auth: state.auth,
     features: state.features,
     servers: state.servers,
     channels: state.channels,
