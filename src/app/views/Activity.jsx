@@ -40,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ActivityView = function (props) {
   const {
+    auth,
     activity,
   } = props;
   const dispatch = useDispatch();
@@ -50,14 +51,25 @@ const ActivityView = function (props) {
   const [type, setType] = useState('');
   const [amount, setAmount] = useState('');
 
-  useEffect(() => dispatch(fetchActivityAction(id, spender, earner, type, amount)), [dispatch]);
-  useEffect(() => dispatch(fetchActivityAction(id, spender, earner, type, amount)), [
+  //useEffect(() => {
+  //  if (auth.authenticated) {
+  //    dispatch(fetchActivityAction(id, spender, earner, type, amount));
+  //  }
+  //}, []);
+
+  useEffect(() => {
+    if (auth.authenticated) {
+      dispatch(fetchActivityAction(id, spender, earner, type, amount));
+    }
+  }, [
+    auth,
     id,
     spender,
     earner,
     type,
     amount,
   ]);
+
   useEffect(() => {
     const socket = io(window.myConfig.wsEndPoint, {
       path: '/socket.io',
@@ -230,6 +242,7 @@ const ActivityView = function (props) {
 }
 
 const mapStateToProps = (state) => ({
+  auth: state.auth,
   activity: state.activity,
 })
 

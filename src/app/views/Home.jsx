@@ -58,6 +58,7 @@ const styles = {
 
 const Home = function (props) {
   const {
+    auth,
     nodeStatus,
     liability,
     balance,
@@ -68,15 +69,22 @@ const Home = function (props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchNodeStatusAction());
-    dispatch(fetchLiabilityAction());
-    dispatch(fetchBalanceAction());
-    dispatch(fetchFaucetBalanceAction());
-  }, []);
+    if (auth.authenticated) {
+      dispatch(fetchNodeStatusAction());
+      dispatch(fetchLiabilityAction());
+      dispatch(fetchBalanceAction());
+      dispatch(fetchFaucetBalanceAction());
+    }
+  }, [
+    auth,
+  ]);
 
   useEffect(
-    () => { },
+    () => {
+      console.log(auth);
+    },
     [
+      auth,
       nodeStatus,
       liability,
       balance,
@@ -300,6 +308,7 @@ Home.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
+  auth: state.auth,
   nodeStatus: state.nodeStatus,
   liability: state.liability,
   balance: state.balance,
