@@ -74,13 +74,13 @@ const DepositsView = function (props) {
   const [username, setUsername] = useState('');
   const [from, setFrom] = useState('');
 
-  //useEffect(() => dispatch(fetchDepositsAction(
+  // useEffect(() => dispatch(fetchDepositsAction(
   //  id,
   //  txId,
   //  userId,
   //  username,
   //  from,
-  //)), [dispatch]);
+  // )), [dispatch]);
 
   useEffect(() => dispatch(fetchDepositsAction(
     id,
@@ -186,7 +186,8 @@ const DepositsView = function (props) {
         </Grid>
         <Grid item xs={12}>
           {
-            deposits && deposits.isFetching
+            deposits
+              && deposits.isFetching
               ? (<CircularProgress />)
               : (
                 <DepositsTable

@@ -136,6 +136,11 @@ const renderItems = (data) => {
           {activity.type === 'withdrawAccepted' && 'Withdrawal Accepted'}
           {activity.type === 'withdrawRejected' && 'Withdrawal Rejected'}
           {activity.type === 'withdrawComplete' && 'Withdrawal Complete'}
+          {activity.type === 'hurricanetip_f' && 'HurricaneTip: fail'}
+          {activity.type === 'hurricanetip_s' && 'HurricaneTip: success'}
+          {activity.type === 'hurricane_f' && 'Hurricane: fail'}
+          {activity.type === 'hurricane_s' && 'Hurricane: success'}
+          {activity.type === 'hurricane_i' && 'Hurricane: insufficient Balance'}
         </Grid>
         <Grid item xs={4} align="center">
           {(
@@ -147,6 +152,8 @@ const renderItems = (data) => {
             || activity.type === 'thunderstormtip_s'
             || activity.type === 'thundertip_s'
             || activity.type === 'reactdroptip_s'
+            || activity.type === 'hurricanetip_s'
+            || activity.type === 'faucettip_s'
 
             || activity.type === 'thundertip_f'
             || activity.type === 'thunderstormtip_f'
@@ -154,7 +161,8 @@ const renderItems = (data) => {
             || activity.type === 'soaktip_f'
             || activity.type === 'floodtip_f'
             || activity.type === 'sleettip_f'
-            || activity.type === 'faucettip_s'
+            || activity.type === 'hurricanetip_f'
+
             || activity.type === 'deposit'
 
             || activity.type === 'balance'
@@ -173,6 +181,7 @@ const renderItems = (data) => {
             || activity.type === 'sleet_s'
             || activity.type === 'flood_s'
             || activity.type === 'rain_s'
+            || activity.type === 'hurricane_s'
 
             || activity.type === 'reactdrop_i'
             || activity.type === 'thunderstorm_i'
@@ -182,6 +191,7 @@ const renderItems = (data) => {
             || activity.type === 'flood_i'
             || activity.type === 'rain_i'
             || activity.type === 'tip_i'
+            || activity.type === 'hurricane_i'
 
             || activity.type === 'reactdrop_f'
             || activity.type === 'thunderstorm_f'
@@ -192,8 +202,7 @@ const renderItems = (data) => {
             || activity.type === 'flood_f'
             || activity.type === 'rain_f'
             || activity.type === 'tip_f'
-
-
+            || activity.type === 'hurricane_f'
 
             || activity.type === 'withdrawRequested'
             || activity.type === 'withdrawAccepted'
@@ -241,6 +250,8 @@ const renderItems = (data) => {
             || activity.type === 'sleettip_s'
             || activity.type === 'thunderstormtip_s'
             || activity.type === 'tip_s'
+            || activity.type === 'hurricane_s'
+            || activity.type === 'hurricanetip_s'
 
             || activity.type === 'depositAccepted'
             || activity.type === 'depositComplete'
@@ -256,6 +267,7 @@ const renderItems = (data) => {
             || activity.type === 'floodtip_f'
             || activity.type === 'sleettip_f'
             || activity.type === 'reactdrop_f'
+            || activity.type === 'hurricane_f'
 
             || activity.type === 'thunderstorm_f'
             || activity.type === 'thunder_f'
@@ -277,6 +289,7 @@ const renderItems = (data) => {
             || activity.type === 'rain_i'
             || activity.type === 'tip_i'
             || activity.type === 'reactdroptip_i'
+            || activity.type === 'hurricane_i'
             || activity.type === 'reactdroptip_s'
             || activity.type === 'waterFaucet'
           ) && renderAmount(activity)}
@@ -293,6 +306,7 @@ const renderItems = (data) => {
             || activity.type === 'sleet_s'
             || activity.type === 'rain_s'
             || activity.type === 'flood_s'
+            || activity.type === 'hurricane_s'
 
             || activity.type === 'reactdrop_f'
             || activity.type === 'thunderstorm_f'
@@ -301,6 +315,7 @@ const renderItems = (data) => {
             || activity.type === 'sleet_f'
             || activity.type === 'flood_f'
             || activity.type === 'rain_f'
+            || activity.type === 'hurricane_f'
             || activity.type === 'withdrawComplete'
           ) && renderSpenderBalance(activity)}
 
@@ -312,6 +327,7 @@ const renderItems = (data) => {
             || activity.type === 'raintip_s'
             || activity.type === 'soaktip_s'
             || activity.type === 'sleettip_s'
+            || activity.type === 'hurricanetip_s'
           ) && renderEarnedSpendBalance(activity)}
 
           {(
@@ -323,6 +339,7 @@ const renderItems = (data) => {
             || activity.type === 'sleet_i'
             || activity.type === 'rain_i'
             || activity.type === 'tip_i'
+            || activity.type === 'hurricane_i'
           ) && renderInsufficientBalance()}
 
           {(
