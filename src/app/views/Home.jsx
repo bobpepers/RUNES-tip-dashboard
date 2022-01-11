@@ -22,6 +22,14 @@ import {
 } from '../actions/nodeStatus';
 
 import {
+  fetchBlockNumberAction,
+} from '../actions/blockNumber';
+
+import {
+  startSyncAction,
+} from '../actions/startSync';
+
+import {
   fetchLiabilityAction,
 } from '../actions/liability';
 import {
@@ -64,9 +72,21 @@ const Home = function (props) {
     balance,
     patchDeposits,
     faucetBalance,
+    blockNumber,
+    startSync,
   } = props;
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const refreshStats = () => {
+    if (auth.authenticated) {
+      dispatch(fetchNodeStatusAction());
+      dispatch(fetchLiabilityAction());
+      dispatch(fetchBalanceAction());
+      dispatch(fetchFaucetBalanceAction());
+      dispatch(fetchBlockNumberAction());
+    }
+  }
 
   useEffect(() => {
     if (auth.authenticated) {
@@ -74,9 +94,11 @@ const Home = function (props) {
       dispatch(fetchLiabilityAction());
       dispatch(fetchBalanceAction());
       dispatch(fetchFaucetBalanceAction());
+      dispatch(fetchBlockNumberAction());
     }
   }, [
     auth,
+    startSync,
   ]);
 
   useEffect(
@@ -89,11 +111,15 @@ const Home = function (props) {
       liability,
       balance,
       faucetBalance,
+      blockNumber,
     ],
   );
 
   const patchDepositsFunction = () => {
     dispatch(patchDepositsAction())
+  }
+  const startSyncFunction = () => {
+    dispatch(startSyncAction())
   }
 
   const routeChangeExample = () => {
@@ -105,7 +131,7 @@ const Home = function (props) {
     <div className="height100 content">
       <Grid
         container
-        spacing={0}
+        spacing={1}
         justifyContent="center"
         className="zindexOne"
       >
@@ -259,19 +285,85 @@ const Home = function (props) {
               : `0 ${window.myConfig.ticker}`}
           </Typography>
         </Grid>
+        <Grid
+          item
+          xs={6}
+          sm={6}
+          md={4}
+          lg={3}
+          xl={3}
+          className="zindexOne"
+          justifyContent="center"
+        >
+          <Typography
+            variant="h6"
+            gutterBottom
+            component="div"
+            align="center"
+          >
+            Node blockNumber
+          </Typography>
+          <Typography
+            variant="subtitle1"
+            gutterBottom
+            component="div"
+            align="center"
+          >
+            {blockNumber.data
+              && blockNumber.data
+              ? `${blockNumber.data.node}`
+              : '0'}
+          </Typography>
+        </Grid>
+        <Grid
+          item
+          xs={6}
+          sm={6}
+          md={4}
+          lg={3}
+          xl={3}
+          className="zindexOne"
+          justifyContent="center"
+        >
+          <Typography
+            variant="h6"
+            gutterBottom
+            component="div"
+            align="center"
+          >
+            DB blockNumber
+          </Typography>
+          <Typography
+            variant="subtitle1"
+            gutterBottom
+            component="div"
+            align="center"
+          >
+            {blockNumber.data
+              && blockNumber.data
+              ? `${blockNumber.data.db}`
+              : '0'}
+          </Typography>
+        </Grid>
       </Grid>
 
       <Grid
         container
         spacing={0}
+        style={{
+          marginTop: '5px',
+          marginBottom: '5px',
+        }}
       >
-        <Divider variant="middle" />
+        <Divider
+          style={{ width: '100%' }}
+        />
 
         <Grid
           align="center"
           justifyContent="center"
           item
-          xs={12}
+          xs={4}
         >
           {
             patchDeposits.isFetching ? (
@@ -285,15 +377,58 @@ const Home = function (props) {
               </Button>
             )
           }
+        </Grid>
+        <Grid
+          align="center"
+          justifyContent="center"
+          item
+          xs={4}
+        >
+          {
+            blockNumber.isFetching ? (
+              <CircularProgress />
+            ) : (
+              <Button
+                variant="contained"
+                onClick={() => refreshStats()}
+              >
+                Refresh Stats
+              </Button>
+            )
+          }
 
         </Grid>
+        <Grid
+          align="center"
+          justifyContent="center"
+          item
+          xs={4}
+        >
+          {
+            startSync.isFetching ? (
+              <CircularProgress />
+            ) : (
+              <Button
+                variant="contained"
+                onClick={() => startSyncFunction()}
+              >
+                Start Sync
+              </Button>
+            )
+          }
+
+        </Grid>
+
       </Grid>
 
       <Grid
         container
         spacing={0}
+        style={{ marginTop: '5px' }}
       >
-        <Divider variant="middle" />
+        <Divider
+          style={{ width: '100%' }}
+        />
 
         <Grid item xs={12}>
           <ActivityView />
@@ -314,6 +449,8 @@ const mapStateToProps = (state) => ({
   balance: state.balance,
   patchDeposits: state.patchDeposits,
   faucetBalance: state.faucetBalance,
+  blockNumber: state.blockNumber,
+  startSync: state.startSync,
 })
 
 export default withStyles(styles)(withRouter(connect(mapStateToProps, null)(Home)));

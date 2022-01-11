@@ -21,6 +21,8 @@ import acceptWithdrawal from "./acceptWithdrawal";
 import declineWithdrawal from "./declineWithdrawal";
 import patchDeposits from "./patchDeposits";
 import faucetBalance from './faucetBalance';
+import blockNumber from './blockNumber';
+import startSync from './startSync';
 
 const rootReducer = combineReducers({
   form,
@@ -45,6 +47,8 @@ const rootReducer = combineReducers({
   botSettings: botSettings,
   patchDeposits: patchDeposits,
   faucetBalance: faucetBalance,
+  blockNumber: blockNumber,
+  startSync: startSync,
 
 });
 
