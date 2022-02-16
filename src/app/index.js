@@ -14,7 +14,6 @@ import reduxThunk from 'redux-thunk';
 // import socketIOClient from 'socket.io-client';
 import { SnackbarProvider } from 'notistack';
 import Button from '@mui/material/Button';
-import CookieConsent from 'react-cookie-consent';
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
 import ParticlesRunebase from './components/ParticlesRunebase';
@@ -64,26 +63,28 @@ const store = createStoreWithMiddleware(reducers);
 //  store.dispatch(onUpdateTransaction(data));
 // });
 
-const Loader = () => (
-  <div className="container h-100 loader">
-    <div className="row align-items-center h-100">
-      <div className="col-6 mx-auto text-center">
-        <img className="mx-auto" src={Runebase} alt="" />
-        <p className="text-center">Loading</p>
-        <div id="fountainG">
-          <div id="fountainG_1" className="fountainG" />
-          <div id="fountainG_2" className="fountainG" />
-          <div id="fountainG_3" className="fountainG" />
-          <div id="fountainG_4" className="fountainG" />
-          <div id="fountainG_5" className="fountainG" />
-          <div id="fountainG_6" className="fountainG" />
-          <div id="fountainG_7" className="fountainG" />
-          <div id="fountainG_8" className="fountainG" />
+function Loader() {
+  return (
+    <div className="container h-100 loader">
+      <div className="row align-items-center h-100">
+        <div className="col-6 mx-auto text-center">
+          <img className="mx-auto" src={Runebase} alt="" />
+          <p className="text-center">Loading</p>
+          <div id="fountainG">
+            <div id="fountainG_1" className="fountainG" />
+            <div id="fountainG_2" className="fountainG" />
+            <div id="fountainG_3" className="fountainG" />
+            <div id="fountainG_4" className="fountainG" />
+            <div id="fountainG_5" className="fountainG" />
+            <div id="fountainG_6" className="fountainG" />
+            <div id="fountainG_7" className="fountainG" />
+            <div id="fountainG_8" className="fountainG" />
+          </div>
         </div>
       </div>
     </div>
-  </div>
-);
+  )
+}
 
 // if (user && user.token) {
 //  store.dispatch({ type: AUTH_USER });

@@ -17,8 +17,6 @@ object-assign
  * @license  MIT
  */
 
-/*! For license information please see index.js.LICENSE.txt */
-
 /*! Moment Duration Format v2.2.2
  *  https://github.com/jsmreese/moment-duration-format
  *  Date: 2018-02-16
@@ -60,7 +58,7 @@ object-assign
  * @license MIT
  */
 
-/** @license MUI v5.2.6
+/** @license MUI v5.4.1
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.

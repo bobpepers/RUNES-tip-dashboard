@@ -41,6 +41,7 @@ function createData(
   phase,
   to_from,
   amount,
+  createdAt,
   confirmations,
 ) {
   return {
@@ -51,6 +52,7 @@ function createData(
     phase,
     to_from,
     amount,
+    createdAt,
     confirmations,
   };
 }
@@ -247,6 +249,7 @@ const WithdrawalsTable = function (props) {
         item.phase,
         item.to_from,
         item.amount,
+        item.createdAt,
         item.confirmations,
       ),
     );
@@ -365,6 +368,7 @@ const WithdrawalsTable = function (props) {
                         {row.txId}
                       </TableCell>
                       <TableCell align="right">{row.amount / 1e8}</TableCell>
+                      <TableCell align="right">{row.createdAt}</TableCell>
                       <TableCell align="right">{row.confirmations && row.confirmations}</TableCell>
                       <TableCell align="right">{row.phase && row.phase}</TableCell>
                       <TableCell align="right">

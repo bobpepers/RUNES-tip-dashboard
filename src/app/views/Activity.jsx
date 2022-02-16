@@ -51,11 +51,11 @@ const ActivityView = function (props) {
   const [type, setType] = useState('');
   const [amount, setAmount] = useState('');
 
-  //useEffect(() => {
+  // useEffect(() => {
   //  if (auth.authenticated) {
   //    dispatch(fetchActivityAction(id, spender, earner, type, amount));
   //  }
-  //}, []);
+  // }, []);
 
   useEffect(() => {
     if (auth.authenticated) {
@@ -64,7 +64,7 @@ const ActivityView = function (props) {
         spender,
         earner,
         type,
-        amount
+        amount,
       ));
     }
   }, [

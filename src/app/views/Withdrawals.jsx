@@ -44,6 +44,9 @@ const headCells = [
     id: 'amount', numeric: true, disablePadding: false, label: 'amount',
   },
   {
+    id: 'time', numeric: true, disablePadding: false, label: 'time',
+  },
+  {
     id: 'confirmations', numeric: true, disablePadding: false, label: 'confirmations',
   },
   {
