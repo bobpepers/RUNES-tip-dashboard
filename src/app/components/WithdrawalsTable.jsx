@@ -242,15 +242,15 @@ const WithdrawalsTable = function (props) {
     console.log(item);
     rows.push(
       createData(
-        item.id,
-        item.txid,
+        item.id ? item.id : '',
+        item.txid ? item.txid : '',
         item.address ? item.address.wallet.user.username : '',
         item.address ? item.address.wallet.user.user_id : '',
-        item.phase,
-        item.to_from,
-        item.amount,
-        item.createdAt,
-        item.confirmations,
+        item.phase ? item.phase : '',
+        item.to_from ? item.to_from : '',
+        item.amount ? item.amount : 0,
+        item.createdAt ? item.createdAt : '',
+        item.confirmations ? item.confirmations : '',
       ),
     );
   });
@@ -349,13 +349,13 @@ const WithdrawalsTable = function (props) {
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.name}
+                      key={row.name && row.name}
                       selected={isItemSelected}
                     >
                       <TableCell component="th" id={labelId} scope="row" padding="none">
                         <p>
-                          <Link style={{ color: 'blue' }} to={`/public_profile/${row.username}`}>
-                            {row.id}
+                          <Link style={{ color: 'blue' }} to={`/public_profile/${row.username && row.username}`}>
+                            {row.id && row.id}
                           </Link>
                         </p>
 
@@ -367,8 +367,8 @@ const WithdrawalsTable = function (props) {
                       <TableCell align="right">
                         {row.txId}
                       </TableCell>
-                      <TableCell align="right">{row.amount / 1e8}</TableCell>
-                      <TableCell align="right">{row.createdAt}</TableCell>
+                      <TableCell align="right">{row.amount && row.amount / 1e8}</TableCell>
+                      <TableCell align="right">{row.createdAt && row.createdAt}</TableCell>
                       <TableCell align="right">{row.confirmations && row.confirmations}</TableCell>
                       <TableCell align="right">{row.phase && row.phase}</TableCell>
                       <TableCell align="right">
