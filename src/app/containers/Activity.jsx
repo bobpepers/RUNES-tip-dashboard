@@ -126,6 +126,7 @@ const renderItems = (data) => {
           {activity.type === 'tip_f' && 'Tip: fail'}
           {activity.type === 'tip_s' && 'Tip: success'}
           {activity.type === 'tip_i' && 'Tip: insufficient Balance'}
+          {activity.type === 'tiptip_s' && 'TipTip: success'}
           {activity.type === 'info' && 'Info Request success'}
           {activity.type === 'help' && 'Help Request success'}
           {activity.type === 'deposit' && 'Deposit address Request success'}
@@ -154,6 +155,7 @@ const renderItems = (data) => {
             || activity.type === 'reactdroptip_s'
             || activity.type === 'hurricanetip_s'
             || activity.type === 'faucettip_s'
+            || activity.type === 'tiptip_s'
 
             || activity.type === 'thundertip_f'
             || activity.type === 'thunderstormtip_f'
@@ -252,6 +254,7 @@ const renderItems = (data) => {
             || activity.type === 'tip_s'
             || activity.type === 'hurricane_s'
             || activity.type === 'hurricanetip_s'
+            || activity.type === 'tiptip_s'
 
             || activity.type === 'depositAccepted'
             || activity.type === 'depositComplete'
@@ -307,6 +310,7 @@ const renderItems = (data) => {
             || activity.type === 'rain_s'
             || activity.type === 'flood_s'
             || activity.type === 'hurricane_s'
+            || activity.type === 'tip_s'
 
             || activity.type === 'reactdrop_f'
             || activity.type === 'thunderstorm_f'
@@ -328,6 +332,7 @@ const renderItems = (data) => {
             || activity.type === 'soaktip_s'
             || activity.type === 'sleettip_s'
             || activity.type === 'hurricanetip_s'
+            || activity.type === 'tiptip_s'
           ) && renderEarnedSpendBalance(activity)}
 
           {(

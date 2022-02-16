@@ -84,7 +84,13 @@ const WithdrawalsView = function (props) {
   const [to, setTo] = useState('');
 
   useEffect(() => dispatch(fetchWithdrawalsAction(id, txId, userId, username, to)), [dispatch]);
-  useEffect(() => dispatch(fetchWithdrawalsAction(id, txId, userId, username, to)), [
+  useEffect(() => dispatch(fetchWithdrawalsAction(
+    id,
+    txId,
+    userId,
+    username,
+    to,
+  )), [
     id,
     txId,
     userId,

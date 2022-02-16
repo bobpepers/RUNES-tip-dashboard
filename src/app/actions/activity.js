@@ -12,7 +12,11 @@ export function fetchActivityAction(id, spender, earner, type, amount) {
       type: FETCH_ACTIVITY_BEGIN,
     });
     axios.post(`${window.myConfig.apiUrl}/activity`, {
-      id, spender, earner, type, amount,
+      id,
+      spender,
+      earner,
+      type,
+      amount,
     })
       .then((response) => {
         console.log('SUCESSSSS');
