@@ -23,6 +23,9 @@ import patchDeposits from "./patchDeposits";
 import faucetBalance from './faucetBalance';
 import blockNumber from './blockNumber';
 import startSync from './startSync';
+import triviaQuestions from './triviaQuestions';
+import insertTrivia from './insertTrivia';
+import removeTrivia from './removeTrivia';
 
 const rootReducer = combineReducers({
   form,
@@ -49,6 +52,9 @@ const rootReducer = combineReducers({
   faucetBalance: faucetBalance,
   blockNumber: blockNumber,
   startSync: startSync,
+  triviaQuestions: triviaQuestions,
+  insertTrivia: insertTrivia,
+  removeTrivia: removeTrivia,
 
 });
 

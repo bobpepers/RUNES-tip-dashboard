@@ -34,6 +34,7 @@ import Withdrawals from './views/Withdrawals';
 import DashboardUsers from './views/DashboardUsers';
 import BotSettings from './views/BotSettings';
 import { authenticated } from './actions/auth';
+import TriviaManagement from './views/TriviaManagement';
 
 import Features from './views/Features';
 
@@ -121,6 +122,10 @@ const RoutesX = function (props) {
         <Route
           path="/dashboardusers"
           element={<DashboardUsers />}
+        />
+        <Route
+          path="/triviamanagement"
+          element={<TriviaManagement />}
         />
 
       </Route>

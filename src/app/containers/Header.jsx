@@ -162,58 +162,62 @@ const Header = function (props) {
                 //  'aria-labelledby': 'basic-button',
               }}
             >
-              <MenuItem onClick={handleCloseManagement}>
-                <Link
-                  className="nav-link"
-                  to="/bot/settings"
-                >
+              <Link
+                className="nav-link"
+                to="/bot/settings"
+              >
+                <MenuItem onClick={handleCloseManagement}>
                   Bot Settings
-                </Link>
-
-              </MenuItem>
-
-              <MenuItem onClick={handleCloseManagement}>
-                <Link
-                  className="nav-link"
-                  to="/features"
-                >
+                </MenuItem>
+              </Link>
+              <Link
+                className="nav-link"
+                to="/features"
+              >
+                <MenuItem onClick={handleCloseManagement}>
                   Feature Settings
-                </Link>
-
-              </MenuItem>
-              <MenuItem onClick={handleCloseManagement}>
-                <Link
-                  className="nav-link"
-                  to="/servers"
-                >
+                </MenuItem>
+              </Link>
+              <Link
+                className="nav-link"
+                to="/servers"
+              >
+                <MenuItem onClick={handleCloseManagement}>
                   Servers
-                </Link>
-
-              </MenuItem>
-              <MenuItem onClick={handleCloseManagement}>
-                <Link
-                  className="nav-link"
-                  to="/channels"
-                >
+                </MenuItem>
+              </Link>
+              <Link
+                className="nav-link"
+                to="/channels"
+              >
+                <MenuItem onClick={handleCloseManagement}>
                   Channels
-                </Link>
-              </MenuItem>
-              <MenuItem onClick={handleCloseManagement}>
-                <Link
-                  className="nav-link"
-                  to="/users"
-                >
+                </MenuItem>
+              </Link>
+              <Link
+                className="nav-link"
+                to="/users"
+              >
+                <MenuItem onClick={handleCloseManagement}>
                   Users
-                </Link>
-              </MenuItem>
-              <MenuItem onClick={handleCloseManagement}>
-                <Link
-                  className="nav-link"
-                  to="/dashboardusers"
-                >
+                </MenuItem>
+              </Link>
+              <Link
+                className="nav-link"
+                to="/triviamanagement"
+              >
+                <MenuItem onClick={handleCloseManagement}>
+                  Trivia
+                </MenuItem>
+              </Link>
+              <Link
+                className="nav-link"
+                to="/dashboardusers"
+              >
+                <MenuItem onClick={handleCloseManagement}>
                   DashboardUsers
-                </Link>
-              </MenuItem>
+                </MenuItem>
+              </Link>
             </Menu>
 
             <Button
@@ -238,24 +242,22 @@ const Header = function (props) {
                 //  'aria-labelledby': 'basic-button',
               }}
             >
-
-              <MenuItem onClick={handleCloseFunctions}>
-                <Link
-                  className="nav-link"
-                  to="/deposits"
-                >
+              <Link
+                className="nav-link"
+                to="/deposits"
+              >
+                <MenuItem onClick={handleCloseFunctions}>
                   Deposits
-                </Link>
-
-              </MenuItem>
-              <MenuItem onClick={handleCloseFunctions}>
-                <Link
-                  className="nav-link"
-                  to="/withdrawals"
-                >
+                </MenuItem>
+              </Link>
+              <Link
+                className="nav-link"
+                to="/withdrawals"
+              >
+                <MenuItem onClick={handleCloseFunctions}>
                   Withdrawals
-                </Link>
-              </MenuItem>
+                </MenuItem>
+              </Link>
             </Menu>
           </Nav>
           <ul>
