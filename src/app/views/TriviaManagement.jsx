@@ -97,7 +97,9 @@ const TriviaManagement = function (props) {
     dispatch(insertTriviaAction({
       question: inputQuestion,
       answers: inputAnswerList,
-    }))
+    }));
+    setInputAnswerList([{ answer: '', correct: 'false' }]);
+    setInputQuestion('');
   };
 
   const handleRemoveClick = (index) => {
