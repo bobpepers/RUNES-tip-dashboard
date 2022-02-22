@@ -16,12 +16,13 @@ import {
   MenuItem,
 } from '@mui/material';
 // import Button from '@mui/material/Button';
-import ActivityView from './Activity';
+// import ActivityView from './Activity';
 import { withRouter } from '../hooks/withRouter';
 import {
   fetchTriviaQuestions,
   insertTriviaAction,
   removeTriviaAction,
+  switchTriviaAction,
 } from '../actions/trivia';
 
 // import Logo from '../assets/images/logo.svg';
@@ -122,6 +123,10 @@ const TriviaManagement = function (props) {
     dispatch(removeTriviaAction(id))
   };
 
+  const handleSwitchTrivia = (id) => {
+    dispatch(switchTriviaAction(id))
+  };
+
   return (
     <div className="height100 content">
       <Grid container>
@@ -217,13 +222,26 @@ const TriviaManagement = function (props) {
             <>
               <Grid container style={{ border: 'solid 1px black' }}>
                 <Grid item xs={1}>{d.id}</Grid>
-                <Grid item xs={9}>{d.question}</Grid>
-                <Grid item xs={2}>
+                <Grid item xs={8}>{d.question}</Grid>
+                <Grid item xs={1}>
+                  used:
+                  {' '}
+                  {d.trivia.length}
+                </Grid>
+                <Grid item xs={1}>
                   <Button
                     variant="contained"
                     onClick={() => handleRemoveTrivia(d.id)}
                   >
                     remove
+                  </Button>
+                </Grid>
+                <Grid item xs={1}>
+                  <Button
+                    variant="contained"
+                    onClick={() => handleSwitchTrivia(d.id)}
+                  >
+                    {d.enabled ? 'disable' : 'enable'}
                   </Button>
                 </Grid>
               </Grid>

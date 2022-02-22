@@ -26,6 +26,7 @@ import startSync from './startSync';
 import triviaQuestions from './triviaQuestions';
 import insertTrivia from './insertTrivia';
 import removeTrivia from './removeTrivia';
+import switchTrivia from './switchTrivia';
 
 const rootReducer = combineReducers({
   form,
@@ -55,6 +56,7 @@ const rootReducer = combineReducers({
   triviaQuestions: triviaQuestions,
   insertTrivia: insertTrivia,
   removeTrivia: removeTrivia,
+  switchTrivia: switchTrivia,
 
 });
 
