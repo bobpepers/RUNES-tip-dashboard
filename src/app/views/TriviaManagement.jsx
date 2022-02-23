@@ -185,7 +185,8 @@ const TriviaManagement = function (props) {
                 </Grid>
                 <Grid item xs={12} style={{ marginTop: '10px' }}>
                   {
-                    inputAnswerList.length - 1 === i
+                    inputAnswerList.length < 5
+                    && inputAnswerList.length - 1 === i
                   && (
                     <Button
                       fullWidth
