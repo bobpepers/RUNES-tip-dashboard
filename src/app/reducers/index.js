@@ -27,6 +27,7 @@ import triviaQuestions from './triviaQuestions';
 import insertTrivia from './insertTrivia';
 import removeTrivia from './removeTrivia';
 import switchTrivia from './switchTrivia';
+import errors from './errors';
 
 const rootReducer = combineReducers({
   form,
@@ -57,6 +58,7 @@ const rootReducer = combineReducers({
   insertTrivia: insertTrivia,
   removeTrivia: removeTrivia,
   switchTrivia: switchTrivia,
+  errors: errors,
 
 });
 

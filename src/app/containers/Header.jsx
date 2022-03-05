@@ -258,6 +258,14 @@ const Header = function (props) {
                   Withdrawals
                 </MenuItem>
               </Link>
+              <Link
+                className="nav-link"
+                to="/errors"
+              >
+                <MenuItem onClick={handleCloseFunctions}>
+                  Errors
+                </MenuItem>
+              </Link>
             </Menu>
           </Nav>
           <ul>
