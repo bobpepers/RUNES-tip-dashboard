@@ -88,6 +88,7 @@ const renderItems = (data) => {
         </Grid>
         <Grid item xs={2} align="center">
           {activity.type === 'faucettip_s' && 'Claim Faucet'}
+          {activity.type === 'faucettip_t' && 'Claim Faucet too fast'}
           {activity.type === 'waterFaucet' && 'Water Faucet'}
           {activity.type === 'thundertip_f' && 'ThunderTip: fail'}
           {activity.type === 'thundertip_s' && 'ThunderTip: success'}
@@ -160,6 +161,7 @@ const renderItems = (data) => {
             || activity.type === 'reactdroptip_s'
             || activity.type === 'hurricanetip_s'
             || activity.type === 'faucettip_s'
+            || activity.type === 'faucettip_t'
             || activity.type === 'tiptip_s'
             || activity.type === 'triviatip_s'
 
@@ -263,6 +265,7 @@ const renderItems = (data) => {
             || activity.type === 'hurricane_s'
             || activity.type === 'hurricanetip_s'
             || activity.type === 'tiptip_s'
+            || activity.type === 'faucettip_s'
 
             || activity.type === 'trivia_s'
 
@@ -348,6 +351,7 @@ const renderItems = (data) => {
             || activity.type === 'hurricanetip_s'
             || activity.type === 'tiptip_s'
             || activity.type === 'triviatip_s'
+            || activity.type === 'faucettip_s'
           ) && renderEarnedSpendBalance(activity)}
 
           {(
@@ -367,6 +371,7 @@ const renderItems = (data) => {
             activity.type === 'depositComplete'
             || activity.type === 'reactdroptip_s'
             || activity.type === 'waterFaucet'
+            || activity.type === 'balance'
           ) && renderEarnerBalance(activity)}
 
           {activity.type === 'tip_f' && `amount: ${activity.amount / 1e8}`}
