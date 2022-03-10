@@ -15,14 +15,14 @@ import {
   MenuItem,
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { withRouter } from '../hooks/withRouter';
+import { withRouter } from '../../hooks/withRouter';
 
 import {
   fetchWithdrawalsAction,
   acceptWithdrawalAction,
   declineWithdrawalAction,
-} from '../actions/withdrawals';
-import WithdrawalsTable from '../components/WithdrawalsTable';
+} from '../../actions/withdrawals';
+import WithdrawalsTable from '../../components/WithdrawalsTable';
 
 const headCells = [
   {

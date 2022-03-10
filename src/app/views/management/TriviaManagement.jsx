@@ -17,13 +17,13 @@ import {
 } from '@mui/material';
 // import Button from '@mui/material/Button';
 // import ActivityView from './Activity';
-import { withRouter } from '../hooks/withRouter';
+import { withRouter } from '../../hooks/withRouter';
 import {
   fetchTriviaQuestions,
   insertTriviaAction,
   removeTriviaAction,
   switchTriviaAction,
-} from '../actions/trivia';
+} from '../../actions/trivia';
 
 // import Logo from '../assets/images/logo.svg';
 

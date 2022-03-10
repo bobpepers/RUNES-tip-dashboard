@@ -3,7 +3,7 @@ import { QuestionMarkCircleIcon as SolidQuestionMarkCircleIcon } from '@heroicon
 // import Tooltip from './ToolTip';
 import Tooltip from '@mui/material/Tooltip';
 
-const QuestionHelper = ({ children, text }) => {
+function QuestionHelper({ children, text }) {
   const [show, setShow] = useState(false)
 
   const open = useCallback(() => setShow(true), [setShow])

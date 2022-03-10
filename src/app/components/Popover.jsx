@@ -10,7 +10,10 @@ function classNames(...classes) {
 }
 
 export default function Popover({
-  content, show, children, placement = 'auto',
+  content,
+  show,
+  children,
+  placement = 'auto',
 }) {
   const [referenceElement, setReferenceElement] = useState(null)
   const [popperElement, setPopperElement] = useState(null)

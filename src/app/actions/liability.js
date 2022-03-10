@@ -13,9 +13,6 @@ export function fetchLiabilityAction() {
     });
     axios.get(`${window.myConfig.apiUrl}/liability`)
       .then((response) => {
-        console.log('SUCESSSSS');
-
-        console.log(response);
         dispatch({
           type: FETCH_LIABILITY_SUCCESS,
           payload: response.data.liability,

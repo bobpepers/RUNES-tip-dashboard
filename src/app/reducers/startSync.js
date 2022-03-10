@@ -11,26 +11,26 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case START_SYNCBLOCKS_BEGIN:
-      return {
-        ...state,
-        isFetching: true,
-        error: null,
-      };
-    case START_SYNCBLOCKS_SUCCESS:
-      return {
-        ...state,
-        data: action.payload,
-        isFetching: false,
-      };
-    case START_SYNCBLOCKS_FAIL:
-      console.log('Error: ', action.error);
-      return {
-        ...state,
-        error: action.error,
-        isFetching: false,
-      };
-    default:
-      return state;
+  case START_SYNCBLOCKS_BEGIN:
+    return {
+      ...state,
+      isFetching: true,
+      error: null,
+    };
+  case START_SYNCBLOCKS_SUCCESS:
+    return {
+      ...state,
+      data: action.payload,
+      isFetching: false,
+    };
+  case START_SYNCBLOCKS_FAIL:
+    console.log('Error: ', action.error);
+    return {
+      ...state,
+      error: action.error,
+      isFetching: false,
+    };
+  default:
+    return state;
   }
 };

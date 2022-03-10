@@ -7,7 +7,12 @@ import {
   ENQUEUE_SNACKBAR,
 } from './types/index';
 
-export function fetchChannelsAction(id, channelId, channelName, serverId) {
+export function fetchChannelsAction(
+  id,
+  channelId,
+  channelName,
+  serverId,
+) {
   return function (dispatch) {
     dispatch({
       type: FETCH_CHANNELS_BEGIN,

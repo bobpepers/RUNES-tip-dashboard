@@ -1,25 +1,26 @@
 import { combineReducers } from 'redux';
 import { reducer as form } from 'redux-form';
 import auth from './auth';
-import tfa from "./tfa";
+import tfa from './tfa';
+import resetPassword from './resetPassword';
 import theme from './changeTheme';
-import alert from "./alert";
-import nodeStatus from "./nodeStatus";
-import servers from "./servers";
-import activity from "./activity";
-import users from "./users";
-import deposits from "./deposits";
-import withdrawals from "./withdrawals";
-import dashboardUsers from "./dashboardUsers";
-import liability from "./liability";
-import balance from "./balance";
-import channels from "./channels";
-import features from "./features";
-import botSettings from "./botSettings";
+import alert from './alert';
+import nodeStatus from './nodeStatus';
+import servers from './servers';
+import activity from './activity';
+import users from './users';
+import deposits from './deposits';
+import withdrawals from './withdrawals';
+import dashboardUsers from './dashboardUsers';
+import liability from './liability';
+import balance from './balance';
+import channels from './channels';
+import features from './features';
+import botSettings from './botSettings';
 
-import acceptWithdrawal from "./acceptWithdrawal";
-import declineWithdrawal from "./declineWithdrawal";
-import patchDeposits from "./patchDeposits";
+import acceptWithdrawal from './acceptWithdrawal';
+import declineWithdrawal from './declineWithdrawal';
+import patchDeposits from './patchDeposits';
 import faucetBalance from './faucetBalance';
 import blockNumber from './blockNumber';
 import startSync from './startSync';
@@ -31,34 +32,35 @@ import errors from './errors';
 
 const rootReducer = combineReducers({
   form,
-  auth: auth,
-  tfa: tfa,
-  theme: theme,
-  alert: alert,
+  auth,
+  resetPass: resetPassword,
+  tfa,
+  theme,
+  alert,
 
-  nodeStatus: nodeStatus,
-  servers: servers,
-  channels: channels,
-  activity: activity,
-  users: users,
-  deposits: deposits,
-  withdrawals: withdrawals,
-  dashboardUsers: dashboardUsers,
-  liability: liability,
-  balance: balance,
-  features: features,
-  acceptWithdrawal: acceptWithdrawal,
-  declineWithdrawal: declineWithdrawal,
-  botSettings: botSettings,
-  patchDeposits: patchDeposits,
-  faucetBalance: faucetBalance,
-  blockNumber: blockNumber,
-  startSync: startSync,
-  triviaQuestions: triviaQuestions,
-  insertTrivia: insertTrivia,
-  removeTrivia: removeTrivia,
-  switchTrivia: switchTrivia,
-  errors: errors,
+  nodeStatus,
+  servers,
+  channels,
+  activity,
+  users,
+  deposits,
+  withdrawals,
+  dashboardUsers,
+  liability,
+  balance,
+  features,
+  acceptWithdrawal,
+  declineWithdrawal,
+  botSettings,
+  patchDeposits,
+  faucetBalance,
+  blockNumber,
+  startSync,
+  triviaQuestions,
+  insertTrivia,
+  removeTrivia,
+  switchTrivia,
+  errors,
 
 });
 

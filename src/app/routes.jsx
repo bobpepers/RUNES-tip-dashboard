@@ -9,10 +9,6 @@ import {
 } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect, useDispatch } from 'react-redux';
-import RegisterVerify from './views/RegisterVerify';
-import VerifyEmail from './views/VerifyEmail';
-import RegisterVerified from './views/RegisterVerified';
-
 // import requireAuth from './components/hoc/RequireAuth';
 
 import withTracker from './hooks/withTracker';
@@ -22,22 +18,32 @@ import withTracker from './hooks/withTracker';
 
 import toggleTheme from './helpers/toggleTheme';
 
-import Register from './views/Register';
 import Home from './views/Home';
 import Login from './views/Login';
-import Servers from './views/Servers';
-import Users from './views/Users';
 import Activity from './views/Activity';
-import Deposits from './views/Deposits';
-import Channels from './views/Channels';
-import Withdrawals from './views/Withdrawals';
-import DashboardUsers from './views/DashboardUsers';
-import BotSettings from './views/BotSettings';
-import { authenticated } from './actions/auth';
-import TriviaManagement from './views/TriviaManagement';
-import Errors from './views/Errors';
 
-import Features from './views/Features';
+import Register from './views/register/Register';
+import RegisterVerify from './views/register/RegisterVerify';
+import VerifyEmail from './views/register/VerifyEmail';
+import RegisterVerified from './views/register/RegisterVerified';
+
+import ResetPassword from './views/resetPassword/ResetPassword';
+import ResetPasswordVerify from './views/resetPassword/ResetPasswordVerify';
+import ResetPasswordNew from './views/resetPassword/ResetPasswordNew';
+
+import Servers from './views/management/Servers';
+import Channels from './views/management/Channels';
+import TriviaManagement from './views/management/TriviaManagement';
+import Users from './views/management/Users';
+import BotSettings from './views/management/BotSettings';
+import Features from './views/management/Features';
+import DashboardUsers from './views/management/DashboardUsers';
+
+import Deposits from './views/functions/Deposits';
+import Withdrawals from './views/functions/Withdrawals';
+import Errors from './views/functions/Errors';
+
+import { authenticated } from './actions/auth';
 
 const RequireAuth = function (props) {
   const {
@@ -142,6 +148,20 @@ const RoutesX = function (props) {
       <Route
         path="/login"
         element={<Login />}
+      />
+
+      <Route
+        path="/reset-password"
+        element={<ResetPassword />}
+      />
+
+      <Route
+        path="/reset-password/verify"
+        element={<ResetPasswordVerify />}
+      />
+      <Route
+        path="/reset-password/new"
+        element={<ResetPasswordNew />}
       />
 
       <Route

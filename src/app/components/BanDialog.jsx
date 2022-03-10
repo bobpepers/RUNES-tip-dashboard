@@ -37,7 +37,18 @@ export default function FormDialog(props) {
         Ban
       </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Ban {name} #{id} ({otherId})</DialogTitle>
+        <DialogTitle>
+          Ban
+          {' '}
+          {name}
+          {' '}
+          #
+          {id}
+          {' '}
+          (
+          {otherId}
+          )
+        </DialogTitle>
         <DialogContent>
           <DialogContentText>
             Please state reason for ban, this message will be show to user/channel/group

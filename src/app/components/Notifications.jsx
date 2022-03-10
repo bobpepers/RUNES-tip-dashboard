@@ -11,7 +11,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import Button from '@mui/material/Button';
 
-const Notifications = (props) => {
+function Notifications(props) {
   const { trade } = props;
   const navigate = useNavigate();
   const dispatch = useDispatch();

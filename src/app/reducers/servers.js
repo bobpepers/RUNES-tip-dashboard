@@ -12,37 +12,37 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case UPDATE_SERVER:
-      return {
-        ...state,
-        data: state.data.map(
-          (server) => (server.id === action.payload.id
-            ? { ...action.payload }
-            : server),
-        ),
-        isFetching: false,
-        error: null,
-      };
-    case FETCH_SERVERS_BEGIN:
-      return {
-        ...state,
-        isFetching: true,
-        error: null,
-      };
-    case FETCH_SERVERS_SUCCESS:
-      return {
-        ...state,
-        data: action.payload,
-        isFetching: false,
-      };
-    case FETCH_SERVERS_FAIL:
-      console.log('Error: ', action.error);
-      return {
-        ...state,
-        error: action.error,
-        isFetching: false,
-      };
-    default:
-      return state;
+  case UPDATE_SERVER:
+    return {
+      ...state,
+      data: state.data.map(
+        (server) => (server.id === action.payload.id
+          ? { ...action.payload }
+          : server),
+      ),
+      isFetching: false,
+      error: null,
+    };
+  case FETCH_SERVERS_BEGIN:
+    return {
+      ...state,
+      isFetching: true,
+      error: null,
+    };
+  case FETCH_SERVERS_SUCCESS:
+    return {
+      ...state,
+      data: action.payload,
+      isFetching: false,
+    };
+  case FETCH_SERVERS_FAIL:
+    console.log('Error: ', action.error);
+    return {
+      ...state,
+      error: action.error,
+      isFetching: false,
+    };
+  default:
+    return state;
   }
 };

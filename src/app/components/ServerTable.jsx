@@ -142,7 +142,7 @@ const useToolbarStyles = makeStyles((theme) => ({
   },
 }));
 
-const EnhancedTableToolbar = (props) => {
+function EnhancedTableToolbar(props) {
   const classes = useToolbarStyles();
   const { numSelected } = props;
 
@@ -179,7 +179,7 @@ const EnhancedTableToolbar = (props) => {
       )}
     </Toolbar>
   );
-};
+}
 
 EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,

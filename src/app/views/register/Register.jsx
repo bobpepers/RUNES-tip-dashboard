@@ -23,8 +23,8 @@ import {
   VisibilityOff,
 } from '@mui/icons-material';
 
-import * as actions from '../actions/auth';
-import Captcha from '../components/Captcha';
+import * as actions from '../../actions/auth';
+import Captcha from '../../components/Captcha';
 
 const renderField = ({
   InputProps,
@@ -57,7 +57,7 @@ const renderField = ({
   </div>
 );
 
-const Register = (props) => {
+function Register(props) {
   const {
     handleSubmit,
     signupUser,

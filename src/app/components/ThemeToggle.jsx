@@ -24,7 +24,7 @@ const ThemeSwitch = withStyles({
 })(Switch);
 
 // tslint:disable:jsx-no-lambda
-const ThemeToggle = (props) => {
+function ThemeToggle(props) {
   const {
     theme: {
       theme,

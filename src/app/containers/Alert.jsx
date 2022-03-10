@@ -5,7 +5,7 @@ import { removeSnackbar } from '../actions/alert';
 
 let displayed = [];
 
-const Notifier = () => {
+function Notifier() {
   const dispatch = useDispatch();
   const notifications = useSelector((store) => store.alert.notifications || []);
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
@@ -53,6 +53,6 @@ const Notifier = () => {
   }, [notifications, closeSnackbar, enqueueSnackbar, dispatch]);
 
   return null;
-};
+}
 
 export default Notifier;

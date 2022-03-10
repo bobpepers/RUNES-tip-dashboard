@@ -14,7 +14,9 @@ const Captcha = function (props) {
       dispatch,
     },
   } = props;
+
   const captcha = createRef();
+
   useEffect(() => {
     window.recaptchaOptions = { lang: language };
   }, [language]);
@@ -30,11 +32,18 @@ const Captcha = function (props) {
   };
 
   return (
-    <div style={{ display: 'inline-block' }}>
+    <div style={{
+      display: 'inline-block',
+    }}
+    >
       <ReCAPTCHA
         ref={captcha}
-        sitekey={window.myConfig.reCaptchaSiteKey}
-        onChange={(response) => onChange(response)}
+        sitekey={
+          window.myConfig.reCaptchaSiteKey
+        }
+        onChange={
+          (response) => onChange(response)
+        }
       />
       <ErrorMessage>{touched ? error : ''}</ErrorMessage>
     </div>

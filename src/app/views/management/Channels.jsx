@@ -1,31 +1,23 @@
 import React, {
   useEffect,
   useState,
-  useLayoutEffect,
-  // Fragment,
 } from 'react';
-import { withRouter } from '../hooks/withRouter';
 import { connect, useDispatch } from 'react-redux';
 import {
   Grid,
-  InputLabel,
-  Select,
   FormControl,
   CircularProgress,
   TextField,
-  MenuItem,
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { withRouter } from '../../hooks/withRouter';
 
 import {
   fetchChannelsAction,
   banChannelAction,
-} from '../actions/channels';
+} from '../../actions/channels';
 
-// import Info from '../containers/Info';
-// import * as actions from '../actions/auth';
-import ChannelTable from '../components/ChannelTable';
-
+import ChannelTable from '../../components/ChannelTable';
 
 const headCells = [
   {
@@ -59,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ChannelsView = (props) => {
+function ChannelsView(props) {
   const {
     auth,
     channels,
@@ -70,8 +62,7 @@ const ChannelsView = (props) => {
   const [channelId, setchannelId] = useState('');
   const [channelName, setchannelName] = useState('');
 
-
-  //useEffect(() => dispatch(fetchChannelsAction(id, channelId, channelName, 'all')), [auth]);
+  // useEffect(() => dispatch(fetchChannelsAction(id, channelId, channelName, 'all')), [auth]);
   useEffect(() => dispatch(fetchChannelsAction(id, channelId, channelName, 'all')), [
     id,
     channelId,
@@ -113,7 +104,8 @@ const ChannelsView = (props) => {
                 value={id}
                 label="id"
                 variant="filled"
-                onChange={handleChangeId} />
+                onChange={handleChangeId}
+              />
             </FormControl>
           </Grid>
           <Grid container item xs={12} md={3}>
@@ -124,7 +116,8 @@ const ChannelsView = (props) => {
                 label="discord id"
                 variant="filled"
                 floatingLabelText="channelId"
-                onChange={handleChangechannelId} />
+                onChange={handleChangechannelId}
+              />
             </FormControl>
           </Grid>
 
@@ -135,7 +128,8 @@ const ChannelsView = (props) => {
                 value={channelName}
                 label="server name"
                 variant="filled"
-                onChange={handleChangechannelName} />
+                onChange={handleChangechannelName}
+              />
             </FormControl>
           </Grid>
         </Grid>
@@ -151,8 +145,7 @@ const ChannelsView = (props) => {
                   channels={channels
                     && channels.data
                     ? channels.data
-                    : []
-                  }
+                    : []}
                 />
               )
           }

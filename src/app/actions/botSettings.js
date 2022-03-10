@@ -18,8 +18,6 @@ export function fetchBotSettings() {
       // channelName
     })
       .then((response) => {
-        console.log('SUCESSSSS');
-        console.log(response);
         dispatch({
           type: FETCH_BOTSETTINGS_SUCCESS,
           payload: response.data.settings,

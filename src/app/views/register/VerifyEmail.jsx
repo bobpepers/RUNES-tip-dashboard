@@ -14,14 +14,14 @@ import {
 import {
   resendVerification,
   verifyEmail,
-} from '../actions/auth';
+} from '../../actions/auth';
 
 const useQuery = () => {
   const { search } = useLocation();
   return useMemo(() => new URLSearchParams(search), [search]);
 }
 
-const VerifyEmail = (props) => {
+function VerifyEmail(props) {
   const {
     errorMessage,
     auth,

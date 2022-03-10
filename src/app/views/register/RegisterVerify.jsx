@@ -14,7 +14,7 @@ import {
 } from 'react-router-dom';
 import {
   resendVerification,
-} from '../actions/auth';
+} from '../../actions/auth';
 
 const useQuery = () => {
   const { search } = useLocation();

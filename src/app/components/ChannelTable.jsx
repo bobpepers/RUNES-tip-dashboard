@@ -26,7 +26,6 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import { Link } from 'react-router-dom';
 import BanDialog from './BanDialog';
 
-
 function createData(
   id,
   channelId,
@@ -149,7 +148,7 @@ const useToolbarStyles = makeStyles((theme) => ({
   },
 }));
 
-const EnhancedTableToolbar = (props) => {
+function EnhancedTableToolbar(props) {
   const classes = useToolbarStyles();
   const { numSelected } = props;
 
@@ -186,7 +185,7 @@ const EnhancedTableToolbar = (props) => {
       )}
     </Toolbar>
   );
-};
+}
 
 EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
@@ -235,7 +234,7 @@ function ChannelTable(props) {
         item.banned,
         item.group.id,
         item.group.groupId,
-        item.group.groupName
+        item.group.groupName,
       ),
     );
   });
@@ -345,7 +344,16 @@ function ChannelTable(props) {
                         </p>
 
                       </TableCell>
-                      <TableCell align="right">#{row.group_id} {row.groupName} ({row.groupId})</TableCell>
+                      <TableCell align="right">
+                        #
+                        {row.group_id}
+                        {' '}
+                        {row.groupName}
+                        {' '}
+                        (
+                        {row.groupId}
+                        )
+                      </TableCell>
                       <TableCell align="right">{row.channelId}</TableCell>
                       <TableCell align="right">{row.channelName}</TableCell>
 

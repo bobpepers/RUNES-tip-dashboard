@@ -95,7 +95,7 @@ const renderPasswordField = (
 
 );
 
-const Signin = (props) => {
+function Signin(props) {
   const {
     handleSubmit,
     signinUser,

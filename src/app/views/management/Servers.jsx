@@ -4,7 +4,6 @@ import React, {
   useLayoutEffect,
   // Fragment,
 } from 'react';
-import { withRouter } from '../hooks/withRouter';
 import { connect, useDispatch } from 'react-redux';
 import {
   Grid,
@@ -16,15 +15,16 @@ import {
   MenuItem,
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { withRouter } from '../../hooks/withRouter';
 
 import {
   fetchServerAction,
   banServerAction,
-} from '../actions/servers';
+} from '../../actions/servers';
 
 // import Info from '../containers/Info';
 // import * as actions from '../actions/auth';
-import ServerTable from '../components/ServerTable';
+import ServerTable from '../../components/ServerTable';
 
 const headers = [
   'db id',
@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ServersView = (props) => {
+function ServersView(props) {
   const {
     auth,
     servers,
@@ -71,8 +71,7 @@ const ServersView = (props) => {
   const [serverName, setServerName] = useState('');
   const [platform, setPlatform] = useState('All');
 
-
-  //useEffect(() => dispatch(fetchServerAction(id, groupId, serverName, platform)), [dispatch]);
+  // useEffect(() => dispatch(fetchServerAction(id, groupId, serverName, platform)), [dispatch]);
   useEffect(() => dispatch(fetchServerAction(id, groupId, serverName, platform)), [
     id,
     groupId,
@@ -105,7 +104,6 @@ const ServersView = (props) => {
     dispatch(banServerAction(id, banMessage))
   };
 
-
   return (
     <div className="height100 content">
       <Grid container>
@@ -120,7 +118,8 @@ const ServersView = (props) => {
                 value={id}
                 label="id"
                 variant="filled"
-                onChange={handleChangeId} />
+                onChange={handleChangeId}
+              />
             </FormControl>
           </Grid>
           <Grid container item xs={12} md={3}>
@@ -131,7 +130,8 @@ const ServersView = (props) => {
                 label="discord id"
                 variant="filled"
                 floatingLabelText="groupId"
-                onChange={handleChangegroupId} />
+                onChange={handleChangegroupId}
+              />
             </FormControl>
           </Grid>
 
@@ -142,7 +142,8 @@ const ServersView = (props) => {
                 value={serverName}
                 label="server name"
                 variant="filled"
-                onChange={handleChangeServerName} />
+                onChange={handleChangeServerName}
+              />
             </FormControl>
           </Grid>
           <Grid container item xs={12} md={3}>
@@ -180,8 +181,7 @@ const ServersView = (props) => {
                   servers={servers
                     && servers.data
                     ? servers.data
-                    : []
-                  }
+                    : []}
                 />
               )
           }

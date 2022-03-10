@@ -25,8 +25,6 @@ export function fetchDepositsAction(
       from,
     })
       .then((response) => {
-        console.log('SUCESSSSS');
-        console.log(response);
         dispatch({
           type: FETCH_DEPOSITS_SUCCESS,
           payload: response.data.deposits,

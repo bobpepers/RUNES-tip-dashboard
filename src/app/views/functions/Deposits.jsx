@@ -15,12 +15,12 @@ import {
   MenuItem,
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { withRouter } from '../hooks/withRouter';
+import { withRouter } from '../../hooks/withRouter';
 
 import {
   fetchDepositsAction,
-} from '../actions/deposits';
-import DepositsTable from '../components/DepositsTable';
+} from '../../actions/deposits';
+import DepositsTable from '../../components/DepositsTable';
 
 const headCells = [
   {

@@ -18,7 +18,7 @@ import { withTranslation } from 'react-i18next';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ThemeToggle from '../components/ThemeToggle';
 
-const Footer = (props) => {
+function Footer(props) {
   const {
     t,
     i18n,
@@ -86,8 +86,8 @@ const Footer = (props) => {
           // direction="row"
         >
           <Button
-                          // aria-controls="simple-menu"
-                          // aria-haspopup="true"
+            // aria-controls="simple-menu"
+            // aria-haspopup="true"
             onClick={handleClickLangMenu}
             className="langPadding toggleLangWrapper"
             id="user-nav-dropdown"

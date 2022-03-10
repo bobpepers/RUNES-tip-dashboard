@@ -11,26 +11,26 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_BLOCKNUMBER_BEGIN:
-      return {
-        ...state,
-        isFetching: true,
-        error: null,
-      };
-    case FETCH_BLOCKNUMBER_SUCCESS:
-      return {
-        ...state,
-        data: action.payload,
-        isFetching: false,
-      };
-    case FETCH_BLOCKNUMBER_FAIL:
-      console.log('Error: ', action.error);
-      return {
-        ...state,
-        error: action.error,
-        isFetching: false,
-      };
-    default:
-      return state;
+  case FETCH_BLOCKNUMBER_BEGIN:
+    return {
+      ...state,
+      isFetching: true,
+      error: null,
+    };
+  case FETCH_BLOCKNUMBER_SUCCESS:
+    return {
+      ...state,
+      data: action.payload,
+      isFetching: false,
+    };
+  case FETCH_BLOCKNUMBER_FAIL:
+    console.log('Error: ', action.error);
+    return {
+      ...state,
+      error: action.error,
+      isFetching: false,
+    };
+  default:
+    return state;
   }
 };

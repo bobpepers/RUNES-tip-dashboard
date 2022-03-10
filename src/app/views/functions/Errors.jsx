@@ -14,10 +14,10 @@ import {
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Moment from 'react-moment';
-import { withRouter } from '../hooks/withRouter';
+import { withRouter } from '../../hooks/withRouter';
 import {
   fetchErrorsAction,
-} from '../actions/errors';
+} from '../../actions/errors';
 
 const styles = {
   card: {

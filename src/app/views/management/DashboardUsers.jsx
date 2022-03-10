@@ -4,6 +4,7 @@ import React, {
   useLayoutEffect,
   // Fragment,
 } from 'react';
+import { withRouter } from '../../hooks/withRouter';
 import { connect, useDispatch } from 'react-redux';
 import {
   Grid,
@@ -15,35 +16,24 @@ import {
   MenuItem,
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { withRouter } from '../hooks/withRouter';
 
 import {
-  fetchUsersAction,
-  banUserAction,
-} from '../actions/users';
-
-// import Info from '../containers/Info';
-// import * as actions from '../actions/auth';
-import UsersTable from '../components/UsersTable';
+  fetchDashboardUsersAction,
+} from '../../actions/dashboardUsers';
+import DashboardUsersTable from '../../components/DashboardUsersTable';
 
 const headCells = [
   {
     id: 'dbId', numeric: false, disablePadding: true, label: 'id',
   },
   {
-    id: 'userId', numeric: true, disablePadding: false, label: 'user id',
-  },
-  {
     id: 'username', numeric: true, disablePadding: false, label: 'username',
   },
   {
-    id: 'available', numeric: true, disablePadding: false, label: 'available',
+    id: 'email', numeric: true, disablePadding: false, label: 'email',
   },
   {
-    id: 'locked', numeric: true, disablePadding: false, label: 'locked',
-  },
-  {
-    id: 'total', numeric: true, disablePadding: false, label: 'total',
+    id: 'role', numeric: true, disablePadding: false, label: 'role',
   },
   {
     id: 'lastActive', numeric: true, disablePadding: false, label: 'last active',
@@ -64,26 +54,26 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const UsersView = function (props) {
+const DashboardUsersView = (props) => {
   const {
     auth,
-    users,
+    dashboardUsers,
   } = props;
   const dispatch = useDispatch();
   const classes = useStyles();
   const [id, setId] = useState('');
   const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [banned, setBanned] = useState('All');
-  const [platform, setPlatform] = useState('All');
-  const [userId, setUserId] = useState('');
+  const [role, setRole] = useState('All');
 
-  //useEffect(() => dispatch(fetchUsersAction(id, userId, username, platform, banned)), [dispatch]);
-  useEffect(() => dispatch(fetchUsersAction(id, userId, username, platform, banned)), [
+  //useEffect(() => dispatch(fetchDashboardUsersAction(id, email, username, role, banned)), [auth]);
+  useEffect(() => dispatch(fetchDashboardUsersAction(id, email, username, role, banned)), [
     id,
     username,
     banned,
-    platform,
-    userId,
+    role,
+    email,
     auth,
   ]);
 
@@ -99,26 +89,22 @@ const UsersView = function (props) {
   const handleChangeBanned = (event) => {
     setBanned(event.target.value);
   };
-  const handleChangePlatform = (event) => {
-    setPlatform(event.target.value);
+  const handleChangeRole = (event) => {
+    setRole(event.target.value);
   };
-  const handleChangeUserId = (event) => {
-    setUserId(event.target.value);
+  const handleChangeEmail = (event) => {
+    setEmail(event.target.value);
   };
 
-  useEffect(() => { }, [users]);
-
-  const banUser = (id, banMessage) => {
-    console.log(banMessage);
-    console.log('bannMessage');
-    dispatch(banUserAction(id, banMessage))
-  };
+  useEffect(() => {
+    console.log(dashboardUsers);
+  }, [dashboardUsers]);
 
   return (
     <div className="height100 content">
       <Grid container>
         <Grid item xs={12}>
-          <h3>Users</h3>
+          <h3>Dashboard Users</h3>
         </Grid>
         <Grid container item xs={12}>
           <Grid container item xs={12} md={4}>
@@ -128,19 +114,7 @@ const UsersView = function (props) {
                 value={id}
                 label="id"
                 variant="filled"
-                onChange={handleChangeId}
-              />
-            </FormControl>
-          </Grid>
-          <Grid container item xs={12} md={4}>
-            <FormControl variant="outlined" className={classes.formControl}>
-              <TextField
-                name="userId"
-                value={userId}
-                label="user id"
-                variant="filled"
-                onChange={handleChangeUserId}
-              />
+                onChange={handleChangeId} />
             </FormControl>
           </Grid>
 
@@ -151,28 +125,37 @@ const UsersView = function (props) {
                 value={username}
                 label="username"
                 variant="filled"
-                onChange={handleChangeUsername}
-              />
+                onChange={handleChangeUsername} />
+            </FormControl>
+          </Grid>
+          <Grid container item xs={12} md={4}>
+            <FormControl variant="outlined" className={classes.formControl}>
+              <TextField
+                name="email"
+                value={email}
+                label="email"
+                variant="filled"
+                onChange={handleChangeEmail} />
             </FormControl>
           </Grid>
           <Grid container item xs={12} md={6}>
             <FormControl variant="outlined" className={classes.formControl}>
-              <InputLabel id="demo-simple-select-outlined-label">Platform</InputLabel>
+              <InputLabel id="demo-simple-select-outlined-label">Role</InputLabel>
               <Select
                 labelId="demo-simple-select-outlined-label"
                 id="demo-simple-select-outlined"
-                value={platform}
-                onChange={handleChangePlatform}
-                label="Platform"
+                value={role}
+                onChange={handleChangeRole}
+                label="Role"
               >
                 <MenuItem value="all">
                   <em>All</em>
                 </MenuItem>
-                <MenuItem value="telegram">
-                  Telegram
+                <MenuItem value={8}>
+                  SuperAdmin
                 </MenuItem>
-                <MenuItem value="discord">
-                  Discord
+                <MenuItem value={4}>
+                  Admin
                 </MenuItem>
               </Select>
             </FormControl>
@@ -202,17 +185,17 @@ const UsersView = function (props) {
         </Grid>
         <Grid item xs={12}>
           {
-            users && users.isFetching
+            dashboardUsers && dashboardUsers.isFetching
               ? (<CircularProgress />)
               : (
-                <UsersTable
+                <DashboardUsersTable
                   defaultPageSize={25}
-                  banUser={banUser}
                   headCells={headCells || []}
-                  users={users
-                    && users.data
-                    ? users.data
-                    : []}
+                  dashboardUsers={dashboardUsers
+                    && dashboardUsers.data
+                    ? dashboardUsers.data
+                    : []
+                  }
                 />
               )
           }
@@ -225,7 +208,7 @@ const UsersView = function (props) {
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
-  users: state.users,
+  dashboardUsers: state.dashboardUsers,
 })
 
-export default withRouter(connect(mapStateToProps, null)(UsersView));
+export default withRouter(connect(mapStateToProps, null)(DashboardUsersView));

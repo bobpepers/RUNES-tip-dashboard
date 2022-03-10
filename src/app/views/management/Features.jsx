@@ -36,9 +36,9 @@ import {
   addFeature,
   updateFeature,
   removeFeature,
-} from '../actions/features';
-import { fetchServerAction } from '../actions/servers';
-import { fetchChannelsAction } from '../actions/channels';
+} from '../../actions/features';
+import { fetchServerAction } from '../../actions/servers';
+import { fetchChannelsAction } from '../../actions/channels';
 
 const renderField = ({
   input, type, placeholder, meta: { touched, error },

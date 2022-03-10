@@ -23,7 +23,7 @@ import {
 import {
   fetchBotSettings,
   updateBotSettings,
-} from '../actions/botSettings';
+} from '../../actions/botSettings';
 
 const BotSettingsView = function (props) {
   const {
