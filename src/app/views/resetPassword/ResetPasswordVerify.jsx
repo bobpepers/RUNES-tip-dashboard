@@ -1,70 +1,123 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, {
+  useState,
+  useEffect,
+} from 'react';
+import { connect, useDispatch } from 'react-redux';
 import * as qs from 'query-string';
 import {
   Button,
   Grid,
 } from '@mui/material';
-import * as actions from '../../actions/resetPassword';
+import {
+  reduxForm,
+  formValueSelector,
+  Field,
+  change,
+} from 'redux-form';
+import { useNavigate } from 'react-router-dom';
+import Captcha from '../../components/Captcha';
+import { resetPassword } from '../../actions/resetPassword';
 // import history from '../../history';
 
-class ResetPasswordVerify extends Component {
-  constructor(props) {
-    super(props);
+function ResetPasswordVerify(props) {
+  const {
+    handleSubmit,
+    pristine,
+    submitting,
+    // resetPassword,
+    errorMessage,
+  } = props;
+  const dispatch = useDispatch();
+  const [resend, setResend] = useState(false);
+  const [email, setEmail] = useState('');
+  const navigate = useNavigate();
 
-    this.state = { resend: false };
-  }
-
-  componentWillMount() {
-    const parsed = qs.parse(this.props.location.search);
-    this.email = parsed.email;
-
-    if (!this.props.resetPasswordProgress || !this.email) {
+  useEffect(() => {
+    const parsed = qs.parse(location.search);
+    setEmail(parsed.email);
+    if (!props.resetPasswordProgress || email === '') {
       // history.push('/signup');
     }
+  }, []);
+
+  const handleFormSubmit = async (formProps) => {
+    // await resetPassword(formProps, navigate);
+    formProps.email = email;
+    setResend(true);
+    dispatch(resetPassword(formProps, navigate));
   }
 
-  resendEmail(props) {
-    this.setState({ resend: true });
-    this.props.resetPassword(props);
-  }
-
-  render() {
-    return (
-      <div className="form-container index600 shadow-w signinContainer content">
-        <h2 className="textCenter">Reset Password</h2>
-        <h3 className="textCenter">
-          We've just emailed you password reset instructions at
-        </h3>
-        <h3 className="textCenter">
-          <u>{ this.email && this.email }</u>
-        </h3>
-        {
-          !this.state.resend
-            ? (
-              <Button
-                variant="contained"
-                color="primary"
-                fullWidth
-                size="large"
-                onClick={this.resendEmail.bind(this, { email: this.email })}
-              >
-                Resend instructions
-              </Button>
-            )
-            : (
-              <p className="resended textCenter">
-                Reset password instructions has been resent
-              </p>
-            )
-        }
-        {
-          this.props.errorMessage && this.props.errorMessage.resetPassword
-            && <div className="error-container">{ this.props.errorMessage.resetPassword }</div>
-        }
-      </div>
-    )
-  }
+  return (
+    <div className="form-container index600 shadow-w signinContainer content">
+      <Grid
+        container
+        alignItems="center"
+        justify="center"
+        justifyContent="center"
+        align="center"
+      >
+        <Grid item xs={4}>
+          <form onSubmit={handleSubmit(handleFormSubmit)}>
+            <Grid container direction="column" spacing={3}>
+              <Grid item>
+                <h2 className="textCenter">Reset Password</h2>
+              </Grid>
+              <Grid item>
+                <h3 className="textCenter">
+                  We&apos;ve just emailed you password reset instructions at
+                </h3>
+              </Grid>
+              <Grid item>
+                <h3 className="textCenter">
+                  <u>{ email && email }</u>
+                </h3>
+              </Grid>
+              <Grid item>
+                <Field
+                  component={Captcha}
+                  change={change}
+                  name="captchaResponse"
+                />
+              </Grid>
+              <Grid item>
+                {
+                  !resend
+                    ? (
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        disabled={pristine || submitting}
+                        type="submit"
+                        fullWidth
+                        size="large"
+                      >
+                        Resend instructions
+                      </Button>
+                    )
+                    : (
+                      <p className="resended textCenter">
+                        Reset password instructions has been resent
+                      </p>
+                    )
+                }
+              </Grid>
+              <Grid item>
+                {
+                  props.errorMessage
+                  && props.errorMessage.resetPassword
+                  && (
+                    <div className="error-container">
+                      { props.errorMessage.resetPassword }
+                    </div>
+                  )
+                }
+              </Grid>
+            </Grid>
+          </form>
+        </Grid>
+      </Grid>
+    </div>
+  )
 }
 
 function mapStateToProps(state) {
@@ -74,4 +127,15 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, actions)(ResetPasswordVerify);
+const validate = (formProps) => {
+  const errors = {};
+
+  if (!formProps.captchaResponse) {
+    errors.captchaResponse = 'Please validate the captcha.';
+  }
+
+  return errors;
+}
+
+export default connect(mapStateToProps, null)(reduxForm({ form: 'resetpasswordVerify', validate })(ResetPasswordVerify));
+// export default connect(mapStateToProps, null)(ResetPasswordVerify);

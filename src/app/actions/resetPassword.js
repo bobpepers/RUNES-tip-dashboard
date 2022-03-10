@@ -12,13 +12,17 @@ import {
 /**
  * Reset password
  */
-export function resetPassword(props, navigate) {
+export function resetPassword(
+  props,
+  navigate,
+) {
   // const { captchaResponse } = props;
   return function (dispatch) {
     axios.post(`${window.myConfig.apiUrl}/reset-password`, props)
       .then(() => {
-        console.log('SUCCESS RESET PASSWORD');
-        dispatch({ type: RESET_PASSWORD_SUCCESS });
+        dispatch({
+          type: RESET_PASSWORD_SUCCESS,
+        });
         dispatch({
           type: ENQUEUE_SNACKBAR,
           notification: {
@@ -29,12 +33,10 @@ export function resetPassword(props, navigate) {
             },
           },
         });
-        dispatch(navigate(`/reset-password/verify?email=${props.email}`));
-      })
-      .catch((error) => {
+        navigate(`/reset-password/verify?email=${props.email}`);
+      }).catch((error) => {
         if (error.response) {
           // client received an error response (5xx, 4xx)
-          console.log(error.response);
           dispatch({
             type: ENQUEUE_SNACKBAR,
             notification: {
@@ -145,7 +147,10 @@ export function verifyResetPassword(props) {
 /**
  * Reset password new
  */
-export function resetPasswordNew(props) {
+export function resetPasswordNew(
+  props,
+  navigate,
+) {
   return function (dispatch) {
     axios.post(`${window.myConfig.apiUrl}/reset-password/new`, props)
       .then((response) => {
@@ -162,8 +167,7 @@ export function resetPasswordNew(props) {
             },
           },
         });
-
-        history.push('/signin');
+        navigate('/login');
       })
       .catch((error) => {
         if (error.response) {

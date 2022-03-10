@@ -18,24 +18,54 @@ export default function (state = {
   switch (action.type) {
   case SIGNUP_SUCCESS:
     return {
-      ...state, tfaLocked: false, signup: true, error: {},
+      ...state,
+      tfaLocked: false,
+      signup: true,
+      error: {},
     };
   case SIGNUP_FAILURE:
     return {
-      ...state, tfaLocked: false, signup: false, error: { signup: action.payload },
+      ...state,
+      tfaLocked: false,
+      signup: false,
+      error: {
+        signup: action.payload,
+      },
     };
   case SIGNUP_RESEND_FAILURE:
     return {
-      ...state, tfaLocked: false, signup: true, error: { signupResend: action.payload },
+      ...state,
+      tfaLocked: false,
+      signup: true,
+      error: {
+        signupResend: action.payload,
+      },
     };
   case VERIFY_EMAIL_ERROR:
     return {
-      ...state, tfaLocked: false, signup: true, error: { verifyEmail: action.payload },
+      ...state,
+      tfaLocked: false,
+      signup: true,
+      error: {
+        verifyEmail: action.payload,
+      },
     };
   case SIGNIN_FAILURE:
-    return { ...state, tfaLocked: false, error: { signin: action.payload } };
+    return {
+      ...state,
+      tfaLocked: false,
+      error: {
+        signin: action.payload,
+      },
+    };
   case EMAIL_NOT_VERIFIED:
-    return { ...state, tfaLocked: false, error: { reverifyEmail: action.payload } };
+    return {
+      ...state,
+      tfaLocked: false,
+      error: {
+        reverifyEmail: action.payload,
+      },
+    };
   case AUTH_USER:
     return {
       ...state,
@@ -54,7 +84,11 @@ export default function (state = {
     };
   case UNAUTH_USER:
     return {
-      ...state, tfaLocked: false, authenticated: false, doneLoading: true, error: {},
+      ...state,
+      tfaLocked: false,
+      authenticated: false,
+      doneLoading: true,
+      error: {},
     };
   default:
     return state;

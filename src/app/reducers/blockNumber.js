@@ -24,7 +24,6 @@ export default (state = initialState, action) => {
       isFetching: false,
     };
   case FETCH_BLOCKNUMBER_FAIL:
-    console.log('Error: ', action.error);
     return {
       ...state,
       error: action.error,

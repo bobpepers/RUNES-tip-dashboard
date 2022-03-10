@@ -5,7 +5,7 @@ import {
   Field,
   change,
 } from 'redux-form';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import {
   Button,
   TextField,
@@ -13,7 +13,7 @@ import {
   Grid,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import * as actions from '../../actions/resetPassword';
+import { resetPassword } from '../../actions/resetPassword';
 import Captcha from '../../components/Captcha';
 
 const renderField = ({
@@ -25,7 +25,9 @@ const renderField = ({
     error,
   },
 }) => (
-  <div className={`input-group ${touched && error ? 'has-error' : ''}`}>
+  <div
+    className={`input-group ${touched && error ? 'has-error' : ''}`}
+  >
     <FormControl
       variant="outlined"
       fullWidth
@@ -55,19 +57,25 @@ function ResetPassword(props) {
     handleSubmit,
     pristine,
     submitting,
-    resetPassword,
     errorMessage,
   } = props;
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleFormSubmit = async (formProps) => {
-    await resetPassword(formProps, navigate);
+    await dispatch(resetPassword(formProps, navigate));
   }
 
   return (
     <div className="form-container index600 shadow-w signinContainer content">
       <h2 className="textCenter">Reset Password</h2>
-      <Grid container alignItems="center" justify="center">
+      <Grid
+        container
+        alignItems="center"
+        justify="center"
+        justifyContent="center"
+        align="center"
+      >
         <Grid item xs={4}>
           <form onSubmit={handleSubmit(handleFormSubmit)}>
             <Grid container direction="column" spacing={3}>
@@ -114,7 +122,6 @@ function ResetPassword(props) {
                 </Button>
               </Grid>
             </Grid>
-
           </form>
         </Grid>
       </Grid>
@@ -142,4 +149,4 @@ const mapStateToProps = (state) => ({
   recaptchaValue: selector(state, 'captchaResponse'),
 })
 
-export default connect(mapStateToProps, actions)(reduxForm({ form: 'resetpassword', validate })(ResetPassword));
+export default connect(mapStateToProps, null)(reduxForm({ form: 'resetpassword', validate })(ResetPassword));

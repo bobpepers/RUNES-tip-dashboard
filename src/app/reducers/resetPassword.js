@@ -8,16 +8,35 @@ import {
 export default function (state = {}, action) {
   switch (action.type) {
   case RESET_PASSWORD_SUCCESS:
-    return { ...state, resetPassword: true, error: {} };
+    return {
+      ...state,
+      resetPassword: true,
+      error: {},
+    };
   case RESET_PASSWORD_FAILURE:
-    return { ...state, resetPassword: false, error: { resetPassword: action.payload } };
+    return {
+      ...state,
+      resetPassword: false,
+      error: {
+        resetPassword: action.payload,
+      },
+    };
   case VERIFY_RESET_PASSWORD_SUCCESS:
     return {
-      ...state, verifyResetPassword: true, error: {}, resetPassword: false,
+      ...state,
+      verifyResetPassword: true,
+      error: {},
+      resetPassword: false,
     };
   case VERIFY_RESET_PASSWORD_FAILURE:
-    return { ...state, verifyResetPassword: false, error: { verifyResetPassword: action.payload } };
+    return {
+      ...state,
+      verifyResetPassword: false,
+      error: {
+        verifyResetPassword: action.payload,
+      },
+    };
+  default:
+    return state;
   }
-
-  return state;
 }
