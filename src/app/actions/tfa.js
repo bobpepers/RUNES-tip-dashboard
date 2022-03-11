@@ -1,5 +1,4 @@
 import axios from 'axios';
-// import history from '../history';
 import {
   ENABLE_2FA_IDLE,
   ENABLE_2FA_BEGIN,
@@ -9,7 +8,6 @@ import {
   DISABLE_2FA_BEGIN,
   DISABLE_2FA_SUCCESS,
   DISABLE_2FA_FAIL,
-  // FETCH_USER_SUCCESS,
   CHANGE_USER_TFA_STATE,
   AUTH_USER_TFA,
 } from './types/index';
@@ -49,8 +47,6 @@ export function enabletfa(obj) {
     });
     axios.post(`${window.myConfig.apiUrl}/2fa/enable`, obj)
       .then((response) => {
-        console.log('actions/enable tfa action Success');
-        console.log(response);
         dispatch({
           type: ENABLE_2FA_SUCCESS,
           payload: response.data,
@@ -75,7 +71,6 @@ export function disabletfa(obj) {
     dispatch({
       type: DISABLE_2FA_BEGIN,
     });
-    console.log('enbale2fa actions/tfa.js');
     axios.post(`${window.myConfig.apiUrl}/2fa/disable`, obj)
       .then((response) => {
         console.log('actions/disable tfa action Success');
@@ -103,7 +98,10 @@ export function disabletfa(obj) {
  * Unlock 2FA
  */
 
-export function unlocktfa(props, navigate) {
+export function unlocktfa(
+  props,
+  navigate,
+) {
   const { tfa } = props;
   return function (dispatch) {
     axios.post(
