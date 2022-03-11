@@ -29,6 +29,7 @@ import insertTrivia from './insertTrivia';
 import removeTrivia from './removeTrivia';
 import switchTrivia from './switchTrivia';
 import errors from './errors';
+import user from './user';
 
 const rootReducer = combineReducers({
   form,
@@ -39,6 +40,7 @@ const rootReducer = combineReducers({
   alert,
 
   nodeStatus,
+  user,
   servers,
   channels,
   activity,

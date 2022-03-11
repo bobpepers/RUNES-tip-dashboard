@@ -1,4 +1,7 @@
-import React, { useEffect, createRef } from 'react';
+import React, {
+  useEffect,
+  createRef,
+} from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import styled from 'styled-components';
 import { change } from 'redux-form';
@@ -18,18 +21,47 @@ const Captcha = function (props) {
   const captcha = createRef();
 
   useEffect(() => {
-    window.recaptchaOptions = { lang: language };
+    window.recaptchaOptions = {
+      lang: language,
+    };
   }, [language]);
 
   useEffect(() => {
     captcha.current.reset();
-  }, [submitting, submitFailed]);
+  }, [
+    submitting,
+    submitFailed,
+  ]);
 
   const onChange = (value) => {
-    dispatch(change('signin', 'captchaResponse', value));
-    dispatch(change('signup', 'captchaResponse', value));
-    dispatch(change('resetpassword', 'captchaResponse', value));
-    dispatch(change('resetpasswordVerify', 'captchaResponse', value));
+    dispatch(
+      change(
+        'signin',
+        'captchaResponse',
+        value,
+      ),
+    );
+    dispatch(
+      change(
+        'signup',
+        'captchaResponse',
+        value,
+      ),
+    );
+    dispatch(
+      change(
+        'resetpassword',
+        'captchaResponse',
+        value,
+      ),
+    );
+    dispatch(
+      change(
+        'resetpasswordVerify',
+        'captchaResponse',
+        value,
+      ),
+    );
   };
 
   return (

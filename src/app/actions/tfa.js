@@ -103,25 +103,20 @@ export function disabletfa(obj) {
  * Unlock 2FA
  */
 
-export function unlocktfa(props) {
+export function unlocktfa(props, navigate) {
   const { tfa } = props;
-  console.log(tfa);
-  console.log(props);
-
   return function (dispatch) {
     axios.post(
       `${window.myConfig.apiUrl}/2fa/unlock`,
       { tfa },
     )
       .then((response) => {
-        console.log(response);
-        console.log('unlocktfa response');
         dispatch({
           type: AUTH_USER_TFA,
           payload: response,
         });
-        // history.push('/dashboard');
-        window.location.href = '/advertisements';
+        navigate('/');
+        // window.location.href = '/';
       })
       .catch((error) => {
         console.log(error);

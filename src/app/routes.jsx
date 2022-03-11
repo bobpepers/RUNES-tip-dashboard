@@ -19,8 +19,9 @@ import withTracker from './hooks/withTracker';
 import toggleTheme from './helpers/toggleTheme';
 
 import Home from './views/Home';
-import Login from './views/Login';
+
 import Activity from './views/Activity';
+import Settings from './views/Settings';
 
 import Register from './views/register/Register';
 import RegisterVerify from './views/register/RegisterVerify';
@@ -42,6 +43,9 @@ import DashboardUsers from './views/management/DashboardUsers';
 import Deposits from './views/functions/Deposits';
 import Withdrawals from './views/functions/Withdrawals';
 import Errors from './views/functions/Errors';
+
+import Login from './views/login/Login';
+import LoginTFA from './views/login/Login2FA';
 
 import { authenticated } from './actions/auth';
 
@@ -138,6 +142,10 @@ const RoutesX = function (props) {
           path="/triviamanagement"
           element={<TriviaManagement />}
         />
+        <Route
+          path="/settings"
+          element={<Settings />}
+        />
 
       </Route>
 
@@ -148,6 +156,10 @@ const RoutesX = function (props) {
       <Route
         path="/login"
         element={<Login />}
+      />
+      <Route
+        path="/login/2fa"
+        element={<LoginTFA />}
       />
 
       <Route

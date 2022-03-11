@@ -22,8 +22,8 @@ import {
   TextField,
   Box,
 } from '@mui/material';
-import Captcha from '../components/Captcha';
-import * as actions from '../actions/auth';
+import Captcha from '../../components/Captcha';
+import * as actions from '../../actions/auth';
 
 const renderField = ({
   input, type, placeholder, meta: { touched, error },

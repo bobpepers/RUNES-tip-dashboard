@@ -85,7 +85,7 @@
     "webpack-obfuscator": "^3.5.1"
   },
   "dependencies": {
-    "@emotion/react": "^11.8.1",
+    "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
     "@fortawesome/fontawesome-free": "^6.0.0",
     "@headlessui/react": "^1.5.0",
@@ -118,6 +118,7 @@
     "npm": "^8.5.3",
     "path-browserify": "^1.0.1",
     "prop-types": "^15.8.1",
+    "qrcode": "^1.5.0",
     "query-string": "^7.1.1",
     "react": "^17.0.2",
     "react-bootstrap": "^2.2.0",
@@ -135,6 +136,8 @@
     "redux-form": "^8.3.8",
     "redux-thunk": "^2.4.1",
     "socket.io-client": "^4.4.1",
-    "styled-components": "^5.3.3"
+    "speakeasy": "^2.0.0",
+    "styled-components": "^5.3.3",
+    "url": "^0.11.0"
   }
 }
