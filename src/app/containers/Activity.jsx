@@ -169,7 +169,6 @@ const renderItems = (data) => {
           {activity.type === 'listtransactions_s' && 'List Transactions: success'}
           {activity.type === 'publicstats_s' && 'PublicStats: success'}
 
-          {activity.type === 'withdraw_f' && 'Withdraw: failed'}
           {activity.type === 'withdraw_i' && 'Withdraw: insufficient Balance'}
         </Grid>
         <Grid item xs={4} align="center">
