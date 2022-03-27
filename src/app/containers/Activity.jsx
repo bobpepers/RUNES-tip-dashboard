@@ -71,9 +71,11 @@ const renderTo = (activity) => (
   </Typography>
 )
 
-const renderInsufficientBalance = () => (
+const renderInsufficientBalance = (activity) => (
   <Typography variant="subtitle1" gutterBottom component="div">
-    Insufficient balance
+    available balance:
+    {' '}
+    {activity.spender_balance ? (activity.spender_balance / 1e8) : ''}
   </Typography>
 )
 
@@ -128,10 +130,26 @@ const renderItems = (data) => {
           {activity.type === 'tip_s' && 'Tip: success'}
           {activity.type === 'tip_i' && 'Tip: insufficient Balance'}
           {activity.type === 'tiptip_s' && 'TipTip: success'}
-          {activity.type === 'info' && 'Info Request success'}
-          {activity.type === 'help' && 'Help Request success'}
-          {activity.type === 'deposit' && 'Deposit address Request success'}
-          {activity.type === 'balance' && 'Balance Request success'}
+          {activity.type === 'info_s' && 'Info Request success'}
+          {activity.type === 'help_s' && 'Help Request success'}
+          {activity.type === 'price_s' && 'Price Request success'}
+          {activity.type === 'deposit_s' && 'Deposit address Request success'}
+          {activity.type === 'balance_s' && 'Balance Request success'}
+          {activity.type === 'info_f' && 'Info Request failed'}
+          {activity.type === 'help_f' && 'Help Request failed'}
+          {activity.type === 'price_f' && 'Price Request failed'}
+          {activity.type === 'deposit_f' && 'Deposit address Request failed'}
+          {activity.type === 'balance_f' && 'Balance Request failed'}
+          {activity.type === 'withdraw_f' && 'Withdraw Request failed'}
+          {activity.type === 'voicerain_f' && 'VoiceRain Request failed'}
+          {activity.type === 'stats_f' && 'Stats Request failed'}
+          {activity.type === 'publicstats_f' && 'PublicStats Request failed'}
+          {activity.type === 'listtransactions_f' && 'ListTransactions Request failed'}
+          {activity.type === 'ignoreme_f' && 'IgnoreMe Request failed'}
+          {activity.type === 'ignoreme_s' && 'IgnoreMe Request success'}
+          {activity.type === 'faucet_f' && 'Faucet Request failed'}
+          {activity.type === 'fees_f' && 'Fees Request failed'}
+          {activity.type === 'fees_s' && 'Fees Request success'}
           {activity.type === 'depositAccepted' && 'Deposit Accepted'}
           {activity.type === 'depositComplete' && 'Deposit Complete'}
           {activity.type === 'withdrawRequested' && 'Withdrawal Requested'}
@@ -148,12 +166,16 @@ const renderItems = (data) => {
           {activity.type === 'trivia_s' && 'Trivia: success'}
           {activity.type === 'trivia_i' && 'Trivia: insufficient Balance'}
           {activity.type === 'stats_s' && 'Stats: success'}
+          {activity.type === 'listtransactions_s' && 'List Transactions: success'}
+          {activity.type === 'publicstats_s' && 'PublicStats: success'}
+
+          {activity.type === 'withdraw_f' && 'Withdraw: failed'}
+          {activity.type === 'withdraw_i' && 'Withdraw: insufficient Balance'}
         </Grid>
         <Grid item xs={4} align="center">
           {(
             activity.type === 'floodtip_s'
             || activity.type === 'soaktip_s'
-
             || activity.type === 'sleettip_s'
             || activity.type === 'raintip_s'
             || activity.type === 'thunderstormtip_s'
@@ -164,6 +186,10 @@ const renderItems = (data) => {
             || activity.type === 'faucettip_t'
             || activity.type === 'tiptip_s'
             || activity.type === 'triviatip_s'
+            || activity.type === 'fees_s'
+            || activity.type === 'ignoreme_s'
+            || activity.type === 'listtransactions_s'
+            || activity.type === 'publicstats_s'
 
             || activity.type === 'thundertip_f'
             || activity.type === 'thunderstormtip_f'
@@ -173,11 +199,13 @@ const renderItems = (data) => {
             || activity.type === 'sleettip_f'
             || activity.type === 'hurricanetip_f'
 
-            || activity.type === 'deposit'
+            || activity.type === 'deposit_s'
+            || activity.type === 'stats_s'
 
-            || activity.type === 'balance'
-            || activity.type === 'info'
-            || activity.type === 'help'
+            || activity.type === 'balance_s'
+            || activity.type === 'info_s'
+            || activity.type === 'help_s'
+            || activity.type === 'price_s'
             || activity.type === 'depositAccepted'
             || activity.type === 'depositComplete'
           ) && renderTo(activity)}
@@ -203,6 +231,7 @@ const renderItems = (data) => {
             || activity.type === 'tip_i'
             || activity.type === 'hurricane_i'
             || activity.type === 'trivia_i'
+            || activity.type === 'withdraw_i'
 
             || activity.type === 'reactdrop_f'
             || activity.type === 'thunderstorm_f'
@@ -215,6 +244,7 @@ const renderItems = (data) => {
             || activity.type === 'tip_f'
             || activity.type === 'hurricane_f'
             || activity.type === 'trivia_f'
+            || activity.type === 'withdraw_f'
 
             || activity.type === 'withdrawRequested'
             || activity.type === 'withdrawAccepted'
@@ -311,9 +341,6 @@ const renderItems = (data) => {
             || activity.type === 'reactdroptip_s'
             || activity.type === 'waterFaucet'
           ) && renderAmount(activity)}
-
-          {activity.type === 'balance' && ''}
-          {activity.type === 'info' && `id: ${activity.earner.user_id}`}
         </Grid>
         <Grid item xs={2} align="center">
           {(
@@ -337,6 +364,7 @@ const renderItems = (data) => {
             || activity.type === 'rain_f'
             || activity.type === 'hurricane_f'
             || activity.type === 'trivia_f'
+            || activity.type === 'withdraw_f'
             || activity.type === 'withdrawComplete'
           ) && renderSpenderBalance(activity)}
 
@@ -365,13 +393,14 @@ const renderItems = (data) => {
             || activity.type === 'tip_i'
             || activity.type === 'hurricane_i'
             || activity.type === 'trivia_i'
-          ) && renderInsufficientBalance()}
+            || activity.type === 'withdraw_i'
+          ) && renderInsufficientBalance(activity)}
 
           {(
             activity.type === 'depositComplete'
             || activity.type === 'reactdroptip_s'
             || activity.type === 'waterFaucet'
-            || activity.type === 'balance'
+            || activity.type === 'balance_s'
           ) && renderEarnerBalance(activity)}
 
           {activity.type === 'tip_f' && `amount: ${activity.amount / 1e8}`}
