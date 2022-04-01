@@ -30,6 +30,7 @@ import removeTrivia from './removeTrivia';
 import switchTrivia from './switchTrivia';
 import errors from './errors';
 import user from './user';
+import priceCurrencies from './priceCurrencies';
 
 const rootReducer = combineReducers({
   form,
@@ -62,6 +63,7 @@ const rootReducer = combineReducers({
   insertTrivia,
   removeTrivia,
   switchTrivia,
+  priceCurrencies,
   errors,
 
 });

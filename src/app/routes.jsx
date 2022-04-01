@@ -39,6 +39,7 @@ import Users from './views/management/Users';
 import BotSettings from './views/management/BotSettings';
 import Features from './views/management/Features';
 import DashboardUsers from './views/management/DashboardUsers';
+import PriceCurrenciesManagement from './views/management/PriceCurrencies';
 
 import Deposits from './views/functions/Deposits';
 import Withdrawals from './views/functions/Withdrawals';
@@ -141,6 +142,10 @@ const RoutesX = function (props) {
         <Route
           path="/triviamanagement"
           element={<TriviaManagement />}
+        />
+        <Route
+          path="/pricecurrenciesmanagement"
+          element={<PriceCurrenciesManagement />}
         />
         <Route
           path="/settings"

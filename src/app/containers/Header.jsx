@@ -212,6 +212,14 @@ const Header = function (props) {
               </Link>
               <Link
                 className="nav-link"
+                to="/pricecurrenciesmanagement"
+              >
+                <MenuItem onClick={handleCloseManagement}>
+                  Price Currencies
+                </MenuItem>
+              </Link>
+              <Link
+                className="nav-link"
                 to="/dashboardusers"
               >
                 <MenuItem onClick={handleCloseManagement}>
