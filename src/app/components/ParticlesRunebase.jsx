@@ -1,12 +1,18 @@
 import React from 'react';
 import { withTranslation } from 'react-i18next';
-import Particles from 'react-particles-js';
+import Particles from 'react-tsparticles';
 import Runebase from '../assets/images/RunebaseFogLogo.png';
-
-// import { Clouds } from './Clouds';
 
 function ParticlesRunebase(props) {
   const { t } = props;
+  const particlesInit = (main) => {
+    console.log(main);
+  };
+
+  const particlesLoaded = (container) => {
+    console.log(container);
+  };
+
   return (
     <div id="info">
       <section className="top">
@@ -15,7 +21,10 @@ function ParticlesRunebase(props) {
         <div className="clouds" />
         <div className="particles">
           <Particles
-            params={{
+            id="tsparticles"
+            init={particlesInit}
+            loaded={particlesLoaded}
+            options={{
               particles: {
                 number: {
                   value: 60,
@@ -24,7 +33,7 @@ function ParticlesRunebase(props) {
                     value_area: 1500,
                   },
                 },
-                line_linked: {
+                links: {
                   enable: true,
                   opacity: 0.02,
                 },
@@ -36,10 +45,10 @@ function ParticlesRunebase(props) {
                   value: 1,
                 },
                 opacity: {
-                  anim: {
+                  animation: {
                     enable: true,
                     speed: 1,
-                    opacity_min: 0.05,
+                    value: 0.05,
                   },
                 },
               },
@@ -52,19 +61,27 @@ function ParticlesRunebase(props) {
                 },
                 modes: {
                   push: {
-                    particles_nb: 1,
+                    quantity: 1,
                   },
                 },
               },
-              retina_detect: true,
+              detectRetina: true,
             }}
           />
         </div>
         <div style={{
-          zIndex: 2, position: 'absolute', top: '0', bottom: '0', width: '100%', height: '100%',
+          zIndex: 2,
+          position: 'absolute',
+          top: '0',
+          bottom: '0',
+          width: '100%',
+          height: '100%',
         }}
         >
           <Particles
+            id="tsparticlesTwo"
+            init={particlesInit}
+            loaded={particlesLoaded}
             style={{
               zIndex: 2,
               position: 'absolute',
@@ -73,7 +90,7 @@ function ParticlesRunebase(props) {
               width: '100%',
               height: '100%',
             }}
-            params={{
+            options={{
               particles: {
                 number: {
                   value: 25,
@@ -84,31 +101,31 @@ function ParticlesRunebase(props) {
                 size: {
                   value: 15,
                   random: true,
-                  anim: {
+                  animation: {
+                    enable: true,
                     speed: 3,
-                    size_min: 0.3,
+                    minimumValue: 0.3,
                   },
                 },
-                line_linked: {
+                links: {
                   enable: false,
                 },
                 move: {
+                  enable: true,
                   random: true,
                   speed: 0.6,
                   direction: 'top',
-                  out_mode: 'out',
+                  outModes: {
+                    default: 'out',
+                  },
                 },
                 shape: {
-                  type: [
-                    'images',
-                  ],
-                  images: [
-                    {
-                      src: Runebase,
-                      height: 50,
-                      width: 50,
-                    },
-                  ],
+                  type: 'image',
+                  image: {
+                    src: Runebase,
+                    height: 50,
+                    width: 50,
+                  },
                 },
               },
               interactivity: {
@@ -127,7 +144,7 @@ function ParticlesRunebase(props) {
                     distance: 1,
                     duration: 2,
                     size: 0,
-                    opacity: 0,
+                    // opacity: 0,
                   },
                   repulse: {
                     distance: 400,
@@ -135,6 +152,7 @@ function ParticlesRunebase(props) {
                   },
                 },
               },
+              detectRetina: true,
             }}
           />
         </div>
