@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect, useDispatch } from 'react-redux';
 
-import { withTranslation } from 'react-i18next';
 import Badge from '@mui/material/Badge';
 import IconButton from '@mui/material/IconButton';
 import NotificationsIcon from '@mui/icons-material/Notifications';
@@ -125,4 +124,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(withTranslation()(Notifications));
+export default connect(mapStateToProps)(Notifications);

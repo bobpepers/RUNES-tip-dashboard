@@ -16,14 +16,14 @@ import {
   MenuItem,
   Menu,
 } from '@mui/material';
-import PropTypes from 'prop-types';
-import { withTranslation } from 'react-i18next';
+// import PropTypes from 'prop-types';
 // import Notifications from '../components/Notifications';
 // import ConnectButton from '../components/ConnectButton';
-import ButtonUnstyled, { buttonUnstyledClasses } from '@mui/core/ButtonUnstyled';
-import { styled } from '@mui/system';
+// import ButtonUnstyled, { buttonUnstyledClasses } from '@mui/core/ButtonUnstyled';
+// import { styled } from '@mui/system';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import IconButton from '@mui/material/IconButton';
+import { Trans } from '@lingui/macro'
 import MobileNav from '../assets/images/mobileNav.svg';
 
 const Header = function (props) {
@@ -129,7 +129,7 @@ const Header = function (props) {
               aria-controls="basic-menu"
               aria-haspopup="true"
             >
-              Dashboard
+              <Trans>Dashboard</Trans>
             </Button>
             {/*
             <Link
@@ -152,7 +152,7 @@ const Header = function (props) {
                 marginRight: '10px',
               }}
             >
-              Management
+              <Trans>Management</Trans>
             </Button>
             <Menu
               anchorEl={anchorElManagement}
@@ -365,4 +365,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(withTranslation()(Header));
+export default connect(mapStateToProps)(Header);

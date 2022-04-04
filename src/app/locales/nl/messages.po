@@ -1,0 +1,16 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2022-04-04 11:53+0200\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: nl\n"
+
+#: src/app/containers/Header.jsx:133
+msgid "Dashboard"
+msgstr ""
+
+#: src/app/containers/Header.jsx:156
+msgid "Management"
+msgstr ""

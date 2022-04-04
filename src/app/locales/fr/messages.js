@@ -1,0 +1,1 @@
+/*eslint-disable*/module.exports={messages:{"Dashboard":"Tableau de bord","Management":"Gestion"}};

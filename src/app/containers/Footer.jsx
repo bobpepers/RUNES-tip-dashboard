@@ -1,48 +1,60 @@
-import React from 'react';
+import React, {
+  useState,
+  useEffect,
+} from 'react';
 import {
-  connect,
-} from 'react-redux';
-// import makeStyles from '@mui/styles/makeStyles';
-import {
-  Grid,
-
-  Badge,
   Button,
+  Grid,
+  Badge,
 } from '@mui/material';
 import ReactCountryFlag from 'react-country-flag';
-
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import { withTranslation } from 'react-i18next';
-// import actions from 'redux-form/lib/actions';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ThemeToggle from '../components/ThemeToggle';
 
 function Footer(props) {
   const {
-    t,
     i18n,
-    error,
     loading,
   } = props;
+  const LANGUAGE_KEY = 'language';
+  const [language, setLanguage] = useState('');
+  const [anchorElLang, setAnchorElLang] = useState(null);
 
   const changeLanguage = (lng) => {
-    i18n.changeLanguage(lng);
+    i18n.activate(lng);
+    localStorage.setItem(LANGUAGE_KEY, lng);
+    setLanguage(lng);
   };
-  const getCurrentLng = () => i18n.language || window.localStorage.i18nextLng || '';
-  const countryCode = (country) => {
-    if (country === 'pt') {
-      return 'br';
+
+  useEffect(() => {
+    const persistedLanguage = localStorage.getItem(LANGUAGE_KEY);
+    if (persistedLanguage === 'null') {
+      changeLanguage('en');
     }
+    if (!persistedLanguage) {
+      changeLanguage('en');
+    }
+    if (language !== persistedLanguage && persistedLanguage !== 'null') {
+      changeLanguage(persistedLanguage);
+    }
+  }, []);
+
+  useEffect(() => { }, [language]);
+
+  const countryCode = (country) => {
     if (country === 'en') {
       return 'us';
     }
     if (country === 'nl') {
       return 'nl';
     }
+    if (country === 'fr') {
+      return 'fr';
+    }
+    return 'us';
   }
-
-  const [anchorElLang, setAnchorElLang] = React.useState(null);
 
   const handleClickLangMenu = (event) => {
     setAnchorElLang(event.currentTarget);
@@ -55,6 +67,7 @@ function Footer(props) {
   if (loading) {
     return <div>Loading...</div>;
   }
+
   return (
     <div className="infoBar footer">
       <Grid
@@ -97,9 +110,9 @@ function Footer(props) {
               color="secondary"
             >
               <span>
-                <ReactCountryFlag countryCode={countryCode(`${getCurrentLng()}`)} svg />
+                <ReactCountryFlag countryCode={countryCode(language)} svg />
                 {' '}
-                {t(`${getCurrentLng()}`)}
+                {`${language}`}
               </span>
             </Badge>
 
@@ -115,7 +128,7 @@ function Footer(props) {
             className="langPadding toggleLangWrapper"
           >
             <MenuItem
-              onClick={(event) => {
+              onClick={() => {
                 handleCloseLangMenu();
                 changeLanguage('en');
               }}
@@ -123,23 +136,23 @@ function Footer(props) {
               <div>
                 <ReactCountryFlag countryCode="us" svg />
                 {' '}
-                {t('en')}
+                en
               </div>
             </MenuItem>
             <MenuItem
-              onClick={(event) => {
+              onClick={() => {
                 handleCloseLangMenu();
-                changeLanguage('pt')
+                changeLanguage('fr')
               }}
             >
               <div>
-                <ReactCountryFlag countryCode="br" svg />
+                <ReactCountryFlag countryCode="fr" svg />
                 {' '}
-                {t('pt')}
+                fr
               </div>
             </MenuItem>
             <MenuItem
-              onClick={(event) => {
+              onClick={() => {
                 handleCloseLangMenu();
                 changeLanguage('nl')
               }}
@@ -147,7 +160,7 @@ function Footer(props) {
               <div>
                 <ReactCountryFlag countryCode="nl" svg />
                 {' '}
-                {t('nl')}
+                nl
               </div>
             </MenuItem>
           </Menu>
@@ -157,8 +170,4 @@ function Footer(props) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  // errorMessage: state.auth.error,
-})
-
-export default connect(mapStateToProps)(withTranslation()(Footer));
+export default Footer;

@@ -1,10 +1,8 @@
 import React from 'react';
-import { withTranslation } from 'react-i18next';
 import Particles from 'react-tsparticles';
 import Runebase from '../assets/images/RunebaseFogLogo.png';
 
 function ParticlesRunebase(props) {
-  const { t } = props;
   const particlesInit = (main) => {
     console.log(main);
   };
@@ -163,4 +161,4 @@ function ParticlesRunebase(props) {
   );
 }
 
-export default withTranslation()(ParticlesRunebase);
+export default ParticlesRunebase;

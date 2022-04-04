@@ -1,6 +1,10 @@
 {
   "parserOptions": {
-    "ecmaVersion": 2020
+    "ecmaVersion": 2020,
+    "ecmaFeatures": {
+      "js": true,
+      "jsx": true
+    }
   },
   "extends": "airbnb",
   "rules": {
@@ -15,6 +19,7 @@
   },
   "globals": {
     "document": true,
-    "window": true
+    "window": true,
+    "localStorage": true
   }
 }
