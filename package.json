@@ -25,8 +25,10 @@
     "Webpack Configuration",
     "RunesX",
     "Runebase",
-    "Token Bridge",
-    "Binance"
+    "Tipbot",
+    "Discord",
+    "Telegram",
+    "Matrix"
   ],
   "repository": {
     "type": "git",
