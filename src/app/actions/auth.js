@@ -182,6 +182,7 @@ export function verifyEmail(props, navigate) {
  */
 export function signoutUser() {
   return function (dispatch) {
+    console.log('signout user');
     axios.get(`${window.myConfig.apiUrl}/logout`)
       .then((response) => {
         dispatch({ type: UNAUTH_USER });
@@ -202,6 +203,7 @@ export function authenticated() {
     axios.get(`${window.myConfig.apiUrl}/authenticated`)
       .then((response) => {
         // if (response.data.success === true) {
+        console.log('AUTHENTICATION PASSED');
         dispatch({
           type: AUTH_USER_TFA,
           payload: response,
@@ -209,9 +211,9 @@ export function authenticated() {
         // }
         // history.push('/');
       })
-      .catch((response) => {
+      .catch((error) => {
         console.log('ERROR AUTHENTICATED');
-        console.log(response);
+        console.log(error);
       });
   }
 }

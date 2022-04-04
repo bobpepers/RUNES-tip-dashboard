@@ -1,4 +1,6 @@
-import React, { useEffect } from 'react';
+import React, {
+  useEffect,
+} from 'react';
 import {
   Route,
   Routes,
@@ -47,6 +49,7 @@ import Errors from './views/functions/Errors';
 
 import Login from './views/login/Login';
 import LoginTFA from './views/login/Login2FA';
+import LogoutView from './views/Logout';
 
 import { authenticated } from './actions/auth';
 
@@ -162,6 +165,11 @@ const RoutesX = function (props) {
         path="/login"
         element={<Login />}
       />
+      <Route
+        path="/logout"
+        element={<LogoutView />}
+      />
+
       <Route
         path="/login/2fa"
         element={<LoginTFA />}

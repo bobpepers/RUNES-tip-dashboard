@@ -21,7 +21,7 @@ const useQuery = () => {
   return useMemo(() => new URLSearchParams(search), [search]);
 }
 
-const RegisterVerify = (props) => {
+function RegisterVerify(props) {
   const {
     errorMessage,
   } = props;
