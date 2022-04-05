@@ -7,7 +7,6 @@ import {
 } from 'react-redux';
 import {
   Grid,
-  Button,
 } from '@mui/material';
 import { fetchUserData } from '../actions/user'
 import EnableTFA from '../components/settings/Enable2FA';

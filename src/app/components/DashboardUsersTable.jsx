@@ -5,7 +5,6 @@ import clsx from 'clsx';
 import { makeStyles } from '@mui/styles';
 import {
   Table,
-  Button,
   TableBody,
   TableCell,
   TableContainer,
@@ -23,15 +22,7 @@ import {
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
-import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Link } from 'react-router-dom';
-
-// import {
-//    startTradeAction,
-//    secondTradeIdleAction,
-//    fetchCurrentTradeIdle,
-// } from '../actions/trade';
 
 function createData(
   id,

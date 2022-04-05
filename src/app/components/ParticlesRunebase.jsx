@@ -1,6 +1,6 @@
 import React from 'react';
 import Particles from 'react-tsparticles';
-import Runebase from '../assets/images/RunebaseFogLogo.png';
+import Runebase from '../assets/images/runebaseloop.gif';
 
 function ParticlesRunebase(props) {
   const particlesInit = (main) => {
@@ -121,8 +121,8 @@ function ParticlesRunebase(props) {
                   type: 'image',
                   image: {
                     src: Runebase,
-                    height: 50,
-                    width: 50,
+                    height: 76,
+                    width: 100,
                   },
                 },
               },
@@ -134,7 +134,7 @@ function ParticlesRunebase(props) {
                   },
                   onclick: {
                     enable: true,
-                    mode: 'repulse',
+                    mode: 'attract',
                   },
                 },
                 modes: {
@@ -144,9 +144,10 @@ function ParticlesRunebase(props) {
                     size: 0,
                     // opacity: 0,
                   },
-                  repulse: {
-                    distance: 400,
-                    duration: 4,
+                  attract: {
+                    distance: 700,
+                    duration: 10,
+                    easing: 'ease-out-circ',
                   },
                 },
               },

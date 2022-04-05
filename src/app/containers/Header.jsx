@@ -9,25 +9,18 @@ import { Link } from 'react-router-dom';
 import {
   Navbar,
   Nav,
-  // NavDropdown,
 } from 'react-bootstrap';
 import {
   Button,
   MenuItem,
   Menu,
 } from '@mui/material';
-// import PropTypes from 'prop-types';
-// import Notifications from '../components/Notifications';
-// import ConnectButton from '../components/ConnectButton';
-// import ButtonUnstyled, { buttonUnstyledClasses } from '@mui/core/ButtonUnstyled';
-// import { styled } from '@mui/system';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import IconButton from '@mui/material/IconButton';
 import { Trans } from '@lingui/macro'
 import { ReactComponent as MobileNav } from '../assets/images/mobilenav.svg';
 
 const Header = function (props) {
-  // const { t } = props;
   const {
     t,
     i18n,

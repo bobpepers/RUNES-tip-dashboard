@@ -26,18 +26,6 @@ module.exports = (options) => {
       chunkIds: 'total-size',
       moduleIds: 'size',
       minimizer: [
-        new TerserPlugin({
-          parallel: true,
-          terserOptions: {
-            ecma: 6,
-            compress: {
-              drop_console: true,
-            },
-            output: {
-              comments: !!options.isProduction,
-            },
-          },
-        }),
         new ImageMinimizerPlugin({
           minimizer: {
             implementation: ImageMinimizerPlugin.imageminMinify,
@@ -47,6 +35,18 @@ module.exports = (options) => {
                 ['jpegtran', { progressive: true }],
                 ['optipng', { optimizationLevel: 5 }],
               ],
+            },
+          },
+        }),
+        new TerserPlugin({
+          parallel: true,
+          terserOptions: {
+            ecma: 6,
+            compress: {
+              drop_console: true,
+            },
+            output: {
+              comments: !!options.isProduction,
             },
           },
         }),

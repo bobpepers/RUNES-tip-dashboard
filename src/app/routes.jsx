@@ -13,8 +13,6 @@ import PropTypes from 'prop-types';
 import { connect, useDispatch } from 'react-redux';
 // import requireAuth from './components/hoc/RequireAuth';
 
-import withTracker from './hooks/withTracker';
-
 // import requireAuth from './components/hoc/RequireAuth';
 // import requireNotAuth from './components/hoc/RequireNotAuth';
 
