@@ -4,6 +4,7 @@ const Webpack = require('webpack');
 const TerserPlugin = require('terser-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const WebpackObfuscator = require('webpack-obfuscator');
+const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 
 module.exports = (options) => {
   const webpackConfig = {
@@ -37,6 +38,18 @@ module.exports = (options) => {
             },
           },
         }),
+        new ImageMinimizerPlugin({
+          minimizer: {
+            implementation: ImageMinimizerPlugin.imageminMinify,
+            options: {
+              plugins: [
+                ['gifsicle', { interlaced: true }],
+                ['jpegtran', { progressive: true }],
+                ['optipng', { optimizationLevel: 5 }],
+              ],
+            },
+          },
+        }),
       ],
       runtimeChunk: 'single',
       splitChunks: {
@@ -60,6 +73,7 @@ module.exports = (options) => {
         https: require.resolve('https-browserify'),
         os: require.resolve('os-browserify/browser'),
         url: require.resolve('url/'),
+        buffer: require.resolve('buffer/'),
         fs: false,
         module: false,
         typescript: false,
@@ -69,41 +83,33 @@ module.exports = (options) => {
       rules: [
         {
           test: /\.(gif|png|jpe?g)$/i,
+          type: 'asset',
+        },
+        {
+          test: /\.svg$/,
           use: [
-            'file-loader',
             {
-              loader: 'image-webpack-loader',
+              loader: '@svgr/webpack',
               options: {
-                mozjpeg: {
-                  progressive: true,
-                  quality: 65,
+                prettier: false,
+                svgo: false,
+                svgoConfig: {
+                  plugins: [{ removeViewBox: false }],
                 },
-                pngquant: {
-                  quality: [0.65, 0.90],
-                  speed: 4,
-                },
-                gifsicle: {
-                  interlaced: false,
-                },
-                webp: {
-                  quality: 75,
-                },
+                titleProp: true,
+                ref: true,
+              },
+            },
+            {
+              loader: 'file-loader',
+              options: {
+                name: 'static/images/[name].[hash].[ext]',
               },
             },
           ],
-        },
-        {
-          test: /\.(svg)$/,
-          oneOf: [
-            {
-              exclude: Path.join(__dirname, '../src/'),
-              use: 'file-loader',
-            },
-            {
-              exclude: Path.join(__dirname, '../node_modules/'),
-              use: ['babel-loader', 'react-svg-loader'],
-            },
-          ],
+          issuer: {
+            and: [/\.(ts|tsx|js|jsx|md|mdx)$/],
+          },
         },
         {
           test: /\.(eot|woff|woff2|ttf)(\?\S*)?$/,
