@@ -69,14 +69,8 @@ const DepositsView = function (props) {
   const [userId, setUserId] = useState('');
   const [username, setUsername] = useState('');
   const [from, setFrom] = useState('');
-
-  // useEffect(() => dispatch(fetchDepositsAction(
-  //  id,
-  //  txId,
-  //  userId,
-  //  username,
-  //  from,
-  // )), [dispatch]);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(50);
 
   useEffect(() => dispatch(fetchDepositsAction(
     id,
@@ -84,6 +78,8 @@ const DepositsView = function (props) {
     userId,
     username,
     from,
+    page * rowsPerPage,
+    rowsPerPage,
   )), [
     id,
     txId,
@@ -91,6 +87,8 @@ const DepositsView = function (props) {
     username,
     from,
     auth,
+    page,
+    rowsPerPage,
   ]);
 
   const handleChangeId = (event) => {
@@ -114,7 +112,9 @@ const DepositsView = function (props) {
 
   useEffect(() => {
     console.log(deposits);
-  }, [deposits]);
+  }, [
+    deposits,
+  ]);
 
   return (
     <div className="height100 content">
@@ -187,7 +187,12 @@ const DepositsView = function (props) {
               ? (<CircularProgress />)
               : (
                 <DepositsTable
-                  defaultPageSize={25}
+                  defaultPageSize={50}
+                  page={page}
+                  setPage={setPage}
+                  rowsPerPage={rowsPerPage}
+                  setRowsPerPage={setRowsPerPage}
+                  totalCount={deposits && deposits.count && deposits.count}
                   headCells={headCells || []}
                   deposits={deposits
                     && deposits.data

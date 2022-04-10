@@ -1,8 +1,6 @@
 import React, {
   useEffect,
   useState,
-  useLayoutEffect,
-  // Fragment,
 } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import {
@@ -21,9 +19,6 @@ import {
   fetchUsersAction,
   banUserAction,
 } from '../../actions/users';
-
-// import Info from '../containers/Info';
-// import * as actions from '../actions/auth';
 import UsersTable from '../../components/UsersTable';
 
 const headCells = [
@@ -76,19 +71,31 @@ const UsersView = function (props) {
   const [banned, setBanned] = useState('All');
   const [platform, setPlatform] = useState('All');
   const [userId, setUserId] = useState('');
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(25);
 
-  // useEffect(() => dispatch(fetchUsersAction(id, userId, username, platform, banned)), [dispatch]);
-  useEffect(() => dispatch(fetchUsersAction(id, userId, username, platform, banned)), [
+  useEffect(() => dispatch(
+    fetchUsersAction(
+      id,
+      userId,
+      username,
+      platform,
+      banned,
+      page * rowsPerPage,
+      rowsPerPage,
+    ),
+  ), [
     id,
     username,
     banned,
     platform,
     userId,
     auth,
+    page,
+    rowsPerPage,
   ]);
 
   const handleChangeId = (event) => {
-    console.log(event);
     setId(event.target.value);
   };
 
@@ -108,10 +115,11 @@ const UsersView = function (props) {
 
   useEffect(() => { }, [users]);
 
-  const banUser = (id, banMessage) => {
-    console.log(banMessage);
-    console.log('bannMessage');
-    dispatch(banUserAction(id, banMessage))
+  const banUser = (
+    banId,
+    banMessage,
+  ) => {
+    dispatch(banUserAction(banId, banMessage))
   };
 
   return (
@@ -206,7 +214,12 @@ const UsersView = function (props) {
               ? (<CircularProgress />)
               : (
                 <UsersTable
-                  defaultPageSize={25}
+                  defaultPageSize={page}
+                  page={page}
+                  setPage={setPage}
+                  rowsPerPage={rowsPerPage}
+                  setRowsPerPage={setRowsPerPage}
+                  totalCount={users && users.count && users.count}
                   banUser={banUser}
                   headCells={headCells || []}
                   users={users

@@ -147,6 +147,8 @@ export function fetchWithdrawalsAction(
   userId,
   username,
   to,
+  offset,
+  limit,
 ) {
   return function (dispatch) {
     dispatch({
@@ -158,13 +160,15 @@ export function fetchWithdrawalsAction(
       userId,
       username,
       to,
+      offset,
+      limit,
     })
       .then((response) => {
         console.log('SUCESSSSS');
         console.log(response);
         dispatch({
           type: FETCH_WITHDRAWALS_SUCCESS,
-          payload: response.data.withdrawals,
+          payload: response.data,
         });
       }).catch((error) => {
         if (error.response) {

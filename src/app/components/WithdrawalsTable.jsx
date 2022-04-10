@@ -1,5 +1,6 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, {
+  useState,
+} from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles } from '@mui/styles';
@@ -225,9 +226,13 @@ const WithdrawalsTable = function (props) {
     declineWithdrawalFunction,
     acceptWithdrawal,
     declineWithdrawal,
+    page,
+    setPage,
+    rowsPerPage,
+    setRowsPerPage,
+    totalCount,
   } = props;
   const rows = [];
-  const dispatch = useDispatch();
 
   withdrawals.forEach((item) => {
     console.log('item');
@@ -248,12 +253,10 @@ const WithdrawalsTable = function (props) {
   });
 
   const classes = useStyles();
-  const [order, setOrder] = React.useState('desc');
-  const [orderBy, setOrderBy] = React.useState('id');
-  const [selected, setSelected] = React.useState([]);
-  const [page, setPage] = React.useState(0);
-  const [dense, setDense] = React.useState(false);
-  const [rowsPerPage, setRowsPerPage] = React.useState(defaultPageSize);
+  const [order, setOrder] = useState('desc');
+  const [orderBy, setOrderBy] = useState('id');
+  const [selected, setSelected] = useState([]);
+  const [dense, setDense] = useState(false);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -305,8 +308,6 @@ const WithdrawalsTable = function (props) {
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
-
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
@@ -329,7 +330,6 @@ const WithdrawalsTable = function (props) {
             />
             <TableBody>
               {stableSort(rows, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
                   const isItemSelected = isSelected(row.name);
                   const labelId = `enhanced-table-checkbox-${index}`;
@@ -365,7 +365,10 @@ const WithdrawalsTable = function (props) {
                       <TableCell align="right">{row.phase && row.phase}</TableCell>
                       <TableCell align="right">
                         {
-                          row.phase === 'review'
+                          (
+                            row.phase === 'review'
+                            // || row.phase === 'failed'
+                          )
                             && !acceptWithdrawal.isFetching
                             && !declineWithdrawal.isFetching
                             ? (
@@ -390,18 +393,13 @@ const WithdrawalsTable = function (props) {
                     </TableRow>
                   );
                 })}
-              {emptyRows > 0 && (
-                <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
             </TableBody>
           </Table>
         </TableContainer>
         <TablePagination
           rowsPerPageOptions={[10, 25, 50, 100]}
           component="div"
-          count={rows.length}
+          count={totalCount}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}

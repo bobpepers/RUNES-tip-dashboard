@@ -123,7 +123,14 @@ const FeaturesView = function (props) {
   }
 
   const onSave = async ({ id }) => {
-    await dispatch(updateFeature(id, unitMin, unitFee, unitSampleSize, unitEnabled));
+    await dispatch(updateFeature(
+      id,
+      unitMin,
+      unitFee,
+      unitSampleSize,
+      unitEnabled,
+    ));
+
     setInEditMode({
       status: false,
       rowKey: null,
@@ -150,8 +157,28 @@ const FeaturesView = function (props) {
 
   useEffect(() => {
     dispatch(fetchFeatures());
-    dispatch(fetchServerAction('', '', '', 'All'));
-    dispatch(fetchChannelsAction('', '', '', serverId));
+
+    dispatch(
+      fetchServerAction(
+        '',
+        '',
+        '',
+        'All',
+        0,
+        99999,
+      ),
+    );
+
+    dispatch(
+      fetchChannelsAction(
+        '',
+        '',
+        '',
+        serverId,
+        0,
+        99999,
+      ),
+    );
   }, [
     serverId,
     auth,

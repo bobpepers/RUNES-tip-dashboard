@@ -70,14 +70,26 @@ function ServersView(props) {
   const [groupId, setGroupId] = useState('');
   const [serverName, setServerName] = useState('');
   const [platform, setPlatform] = useState('All');
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(25);
 
-  // useEffect(() => dispatch(fetchServerAction(id, groupId, serverName, platform)), [dispatch]);
-  useEffect(() => dispatch(fetchServerAction(id, groupId, serverName, platform)), [
+  useEffect(() => dispatch(
+    fetchServerAction(
+      id,
+      groupId,
+      serverName,
+      platform,
+      page * rowsPerPage,
+      rowsPerPage,
+    ),
+  ), [
     id,
     groupId,
     serverName,
     platform,
     auth,
+    page,
+    rowsPerPage,
   ]);
 
   const handleChangeId = (event) => {
@@ -176,6 +188,11 @@ function ServersView(props) {
               : (
                 <ServerTable
                   defaultPageSize={25}
+                  page={page}
+                  setPage={setPage}
+                  rowsPerPage={rowsPerPage}
+                  setRowsPerPage={setRowsPerPage}
+                  totalCount={servers && servers.count && servers.count}
                   banServer={banServer}
                   headCells={headCells || []}
                   servers={servers

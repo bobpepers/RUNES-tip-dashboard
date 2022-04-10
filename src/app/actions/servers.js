@@ -7,7 +7,14 @@ import {
   ENQUEUE_SNACKBAR,
 } from './types/index';
 
-export function fetchServerAction(id, groupId, serverName, platform) {
+export function fetchServerAction(
+  id,
+  groupId,
+  serverName,
+  platform,
+  offset,
+  limit,
+) {
   return function (dispatch) {
     dispatch({
       type: FETCH_SERVERS_BEGIN,
@@ -17,13 +24,15 @@ export function fetchServerAction(id, groupId, serverName, platform) {
       groupId,
       serverName,
       platform,
+      offset,
+      limit,
     })
       .then((response) => {
         console.log('SUCESSSSS');
         console.log(response);
         dispatch({
           type: FETCH_SERVERS_SUCCESS,
-          payload: response.data.servers,
+          payload: response.data,
         });
       }).catch((error) => {
         if (error.response) {

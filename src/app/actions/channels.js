@@ -12,6 +12,8 @@ export function fetchChannelsAction(
   channelId,
   channelName,
   serverId,
+  offset,
+  limit,
 ) {
   return function (dispatch) {
     dispatch({
@@ -22,13 +24,15 @@ export function fetchChannelsAction(
       channelId,
       channelName,
       serverId,
+      offset,
+      limit,
     })
       .then((response) => {
         console.log('SUCESSSSS');
         console.log(response);
         dispatch({
           type: FETCH_CHANNELS_SUCCESS,
-          payload: response.data.channels,
+          payload: response.data,
         });
       }).catch((error) => {
         if (error.response) {

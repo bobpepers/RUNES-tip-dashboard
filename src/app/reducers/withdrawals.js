@@ -32,7 +32,8 @@ export default (state = initialState, action) => {
   case FETCH_WITHDRAWALS_SUCCESS:
     return {
       ...state,
-      data: action.payload,
+      data: action.payload.withdrawals,
+      count: action.payload.count,
       isFetching: false,
     };
   case FETCH_WITHDRAWALS_FAIL:

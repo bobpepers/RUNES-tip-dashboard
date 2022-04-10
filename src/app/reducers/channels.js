@@ -32,7 +32,8 @@ export default (state = initialState, action) => {
   case FETCH_CHANNELS_SUCCESS:
     return {
       ...state,
-      data: action.payload,
+      data: action.payload.channels,
+      count: action.payload.count,
       isFetching: false,
     };
   case FETCH_CHANNELS_FAIL:

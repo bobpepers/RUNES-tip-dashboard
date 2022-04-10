@@ -12,6 +12,8 @@ export function fetchDepositsAction(
   userId,
   username,
   from,
+  offset,
+  limit,
 ) {
   return function (dispatch) {
     dispatch({
@@ -23,11 +25,13 @@ export function fetchDepositsAction(
       userId,
       username,
       from,
+      offset,
+      limit,
     })
       .then((response) => {
         dispatch({
           type: FETCH_DEPOSITS_SUCCESS,
-          payload: response.data.deposits,
+          payload: response.data,
         });
       }).catch((error) => {
         if (error.response) {

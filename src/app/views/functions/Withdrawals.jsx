@@ -77,20 +77,25 @@ const WithdrawalsView = function (props) {
   const [userId, setUserId] = useState('');
   const [username, setUsername] = useState('');
   const [to, setTo] = useState('');
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(50);
 
-  useEffect(() => dispatch(fetchWithdrawalsAction(id, txId, userId, username, to)), [dispatch]);
   useEffect(() => dispatch(fetchWithdrawalsAction(
     id,
     txId,
     userId,
     username,
     to,
+    page * rowsPerPage,
+    rowsPerPage,
   )), [
     id,
     txId,
     userId,
     username,
     to,
+    page,
+    rowsPerPage,
   ]);
 
   const handleChangeId = (event) => {
@@ -126,6 +131,8 @@ const WithdrawalsView = function (props) {
     withdrawals,
     acceptWithdrawal,
     declineWithdrawal,
+    page,
+    rowsPerPage,
   ]);
 
   return (
@@ -194,11 +201,17 @@ const WithdrawalsView = function (props) {
         </Grid>
         <Grid item xs={12}>
           {
-            withdrawals && withdrawals.isFetching
+            withdrawals
+            && withdrawals.isFetching
               ? (<CircularProgress />)
               : (
                 <WithdrawalsTable
-                  defaultPageSize={25}
+                  defaultPageSize={50}
+                  page={page}
+                  setPage={setPage}
+                  rowsPerPage={rowsPerPage}
+                  setRowsPerPage={setRowsPerPage}
+                  totalCount={withdrawals && withdrawals.count && withdrawals.count}
                   headCells={headCells || []}
                   acceptWithdrawalFunction={acceptWithdrawalFunction}
                   declineWithdrawalFunction={declineWithdrawalFunction}

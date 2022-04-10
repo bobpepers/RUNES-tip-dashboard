@@ -32,7 +32,8 @@ export default (state = initialState, action) => {
   case FETCH_SERVERS_SUCCESS:
     return {
       ...state,
-      data: action.payload,
+      data: action.payload.servers,
+      count: action.payload.count,
       isFetching: false,
     };
   case FETCH_SERVERS_FAIL:

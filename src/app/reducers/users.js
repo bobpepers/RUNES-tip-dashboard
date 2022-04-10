@@ -34,7 +34,8 @@ export default (state = initialState, action) => {
   case FETCH_USERS_SUCCESS:
     return {
       ...state,
-      data: action.payload,
+      data: action.payload.users,
+      count: action.payload.count,
       isFetching: false,
     };
   case FETCH_USERS_FAIL:

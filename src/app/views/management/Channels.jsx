@@ -61,13 +61,25 @@ function ChannelsView(props) {
   const [id, setId] = useState('');
   const [channelId, setchannelId] = useState('');
   const [channelName, setchannelName] = useState('');
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(25);
 
-  // useEffect(() => dispatch(fetchChannelsAction(id, channelId, channelName, 'all')), [auth]);
-  useEffect(() => dispatch(fetchChannelsAction(id, channelId, channelName, 'all')), [
+  useEffect(() => dispatch(
+    fetchChannelsAction(
+      id,
+      channelId,
+      channelName,
+      'all',
+      page * rowsPerPage,
+      rowsPerPage,
+    ),
+  ), [
     id,
     channelId,
     channelName,
     auth,
+    page,
+    rowsPerPage,
   ]);
 
   const handleChangeId = (event) => {
@@ -140,6 +152,11 @@ function ChannelsView(props) {
               : (
                 <ChannelTable
                   defaultPageSize={25}
+                  page={page}
+                  setPage={setPage}
+                  rowsPerPage={rowsPerPage}
+                  setRowsPerPage={setRowsPerPage}
+                  totalCount={channels && channels.count && channels.count}
                   headCells={headCells || []}
                   banChannel={banChannel}
                   channels={channels

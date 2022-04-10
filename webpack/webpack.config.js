@@ -66,7 +66,7 @@ module.exports = (options) => {
     resolve: {
       extensions: ['.js', '.jsx'],
       alias: {
-        path: require.resolve('path-browserify'),
+        // path: require.resolve('path-browserify'),
         crypto: require.resolve('crypto-browserify'),
         stream: require.resolve('stream-browserify'),
         http: require.resolve('stream-http'),

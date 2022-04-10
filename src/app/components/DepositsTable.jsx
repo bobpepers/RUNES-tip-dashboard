@@ -1,12 +1,12 @@
 /* eslint-disable camelcase */
-import React, { useEffect } from 'react';
-import { connect, useDispatch } from 'react-redux';
+import React, {
+  useState,
+} from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles } from '@mui/styles';
 import {
   Table,
-  Button,
   TableBody,
   TableCell,
   TableContainer,
@@ -220,9 +220,13 @@ const DepositsTable = function (props) {
     headCells,
     deposits,
     defaultPageSize,
+    page,
+    setPage,
+    rowsPerPage,
+    setRowsPerPage,
+    totalCount,
   } = props;
   const rows = [];
-  const dispatch = useDispatch();
 
   deposits.forEach((item) => {
     console.log('item');
@@ -242,12 +246,10 @@ const DepositsTable = function (props) {
   });
 
   const classes = useStyles();
-  const [order, setOrder] = React.useState('desc');
-  const [orderBy, setOrderBy] = React.useState('id');
-  const [selected, setSelected] = React.useState([]);
-  const [page, setPage] = React.useState(0);
-  const [dense, setDense] = React.useState(false);
-  const [rowsPerPage, setRowsPerPage] = React.useState(defaultPageSize);
+  const [order, setOrder] = useState('desc');
+  const [orderBy, setOrderBy] = useState('id');
+  const [selected, setSelected] = useState([]);
+  const [dense, setDense] = useState(false);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -297,15 +299,7 @@ const DepositsTable = function (props) {
     setDense(event.target.checked);
   };
 
-  const handleClickTrade = (id) => {
-    console.log(id);
-    dispatch(startTradeAction(id));
-    // setDense(event.target.checked);
-  };
-
   const isSelected = (name) => selected.indexOf(name) !== -1;
-
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
   return (
     <div className={classes.root}>
@@ -329,7 +323,6 @@ const DepositsTable = function (props) {
             />
             <TableBody>
               {stableSort(rows, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
                   const isItemSelected = isSelected(row.name);
                   const labelId = `enhanced-table-checkbox-${index}`;
@@ -365,18 +358,13 @@ const DepositsTable = function (props) {
                     </TableRow>
                   );
                 })}
-              {emptyRows > 0 && (
-                <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
             </TableBody>
           </Table>
         </TableContainer>
         <TablePagination
           rowsPerPageOptions={[10, 25, 50, 100]}
           component="div"
-          count={rows.length}
+          count={totalCount}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
@@ -391,12 +379,4 @@ const DepositsTable = function (props) {
   );
 }
 
-function mapStateToProps(state) {
-  return {
-    // currentTrade: state.currentTrade.data,
-  }
-}
-
-// export default AlertDialogSlide;
-
-export default connect(mapStateToProps, null)(DepositsTable);
+export default DepositsTable;

@@ -7,7 +7,15 @@ import {
   UPDATE_USER,
 } from './types/index';
 
-export function fetchUsersAction(id, userId, username, platform, banned) {
+export function fetchUsersAction(
+  id,
+  userId,
+  username,
+  platform,
+  banned,
+  offset,
+  limit,
+) {
   return function (dispatch) {
     dispatch({
       type: FETCH_USERS_BEGIN,
@@ -18,11 +26,13 @@ export function fetchUsersAction(id, userId, username, platform, banned) {
       username,
       platform,
       banned,
+      offset,
+      limit,
     })
       .then((response) => {
         dispatch({
           type: FETCH_USERS_SUCCESS,
-          payload: response.data.users,
+          payload: response.data,
         });
       }).catch((error) => {
         if (error.response) {
