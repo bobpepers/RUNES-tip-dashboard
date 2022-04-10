@@ -241,8 +241,8 @@ const WithdrawalsTable = function (props) {
       createData(
         item.id ? item.id : '',
         item.txid ? item.txid : '',
-        item.address ? item.address.wallet.user.username : '',
-        item.address ? item.address.wallet.user.user_id : '',
+        item.user ? item.user.username : '',
+        item.user ? item.user.user_id : '',
         item.phase ? item.phase : '',
         item.to_from ? item.to_from : '',
         item.amount ? item.amount : 0,

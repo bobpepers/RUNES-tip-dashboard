@@ -164,8 +164,6 @@ export function fetchWithdrawalsAction(
       limit,
     })
       .then((response) => {
-        console.log('SUCESSSSS');
-        console.log(response);
         dispatch({
           type: FETCH_WITHDRAWALS_SUCCESS,
           payload: response.data,

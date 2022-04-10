@@ -11,7 +11,6 @@ import {
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { withRouter } from '../../hooks/withRouter';
-
 import {
   fetchWithdrawalsAction,
   acceptWithdrawalAction,
@@ -99,7 +98,6 @@ const WithdrawalsView = function (props) {
   ]);
 
   const handleChangeId = (event) => {
-    console.log(event);
     setId(event.target.value);
   };
 
@@ -158,7 +156,7 @@ const WithdrawalsView = function (props) {
             <FormControl variant="outlined" className={classes.formControl}>
               <TextField
                 name="txId"
-                value={username}
+                value={txId}
                 label="tx id"
                 variant="filled"
                 onChange={handleChangeTxId}

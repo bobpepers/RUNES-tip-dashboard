@@ -139,7 +139,7 @@ const DepositsView = function (props) {
             <FormControl variant="outlined" className={classes.formControl}>
               <TextField
                 name="txId"
-                value={username}
+                value={txId}
                 label="tx id"
                 variant="filled"
                 onChange={handleChangeTxId}
