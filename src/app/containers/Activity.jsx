@@ -40,10 +40,16 @@ const renderSpenderBalance = (activity) => (
 )
 
 const renderAmount = (activity) => (
-  <Typography variant="subtitle1" gutterBottom component="div">
+  <Typography
+    variant="subtitle1"
+    gutterBottom
+    component="div"
+    style={{ wordBreak: 'break-word' }}
+  >
     amount:
     {' '}
     {activity.amount && activity.amount / 1e8}
+    {activity.failedAmount && activity.failedAmount}
   </Typography>
 )
 
