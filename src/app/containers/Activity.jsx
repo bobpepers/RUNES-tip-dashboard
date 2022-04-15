@@ -389,6 +389,7 @@ const renderItems = (data) => {
             || activity.type === 'hurricane_i'
             || activity.type === 'reactdroptip_s'
             || activity.type === 'waterFaucet'
+            || activity.type === 'withdraw_i'
             ) && renderAmount(activity)}
           </Grid>
           <Grid
