@@ -26,7 +26,7 @@ const renderEarnedSpendBalance = (activity) => (
 const renderEarnerBalance = (activity) => (
   <Typography variant="subtitle1" gutterBottom component="div">
     earner balance:
-    {' '}
+    <br />
     {activity.earner_balance / 1e8}
   </Typography>
 )
@@ -34,7 +34,7 @@ const renderEarnerBalance = (activity) => (
 const renderSpenderBalance = (activity) => (
   <Typography variant="subtitle1" gutterBottom component="div">
     spender balance:
-    {' '}
+    <br />
     {activity.spender_balance / 1e8}
   </Typography>
 )
@@ -47,7 +47,7 @@ const renderAmount = (activity) => (
     style={{ wordBreak: 'break-word' }}
   >
     amount:
-    {' '}
+    <br />
     {activity.amount && activity.amount / 1e8}
     {activity.failedAmount && activity.failedAmount}
   </Typography>
@@ -56,7 +56,7 @@ const renderAmount = (activity) => (
 const renderBy = (activity) => (
   <Typography variant="subtitle1" gutterBottom component="div">
     by:
-    {' '}
+    <br />
     {activity.spender && activity.spender.username && activity.spender.username}
     {' '}
     (
@@ -68,7 +68,7 @@ const renderBy = (activity) => (
 const renderTo = (activity) => (
   <Typography variant="subtitle1" gutterBottom component="div">
     to:
-    {' '}
+    <br />
     {activity.earner && activity.earner.username && activity.earner.username}
     {' '}
     (
@@ -80,7 +80,7 @@ const renderTo = (activity) => (
 const renderInsufficientBalance = (activity) => (
   <Typography variant="subtitle1" gutterBottom component="div">
     available balance:
-    {' '}
+    <br />
     {activity.spender_balance ? (activity.spender_balance / 1e8) : ''}
   </Typography>
 )
@@ -106,13 +106,22 @@ const renderItems = (data) => {
           <Grid
             item
             xs={6}
-            lg={2}
+            lg={1}
+            align="center"
           >
             <Moment interval={1000} fromNow>{activity.createdAt}</Moment>
           </Grid>
           <Grid
             item
             xs={6}
+            lg={1}
+            align="center"
+          >
+            {activity.id}
+          </Grid>
+          <Grid
+            item
+            xs={12}
             lg={2}
             align="center"
           >
