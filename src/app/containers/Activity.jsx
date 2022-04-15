@@ -58,6 +58,8 @@ const renderBy = (activity) => (
     by:
     <br />
     {activity.spender && activity.spender.username && activity.spender.username}
+    {activity.earner && !activity.earner.username && activity.earner.firstname && `${activity.earner.firstname} `}
+    {activity.earner && !activity.earner.username && activity.earner.lastname && activity.earner.lastname}
     {' '}
     (
     {activity.spender && activity.spender.user_id && activity.spender.user_id}
@@ -70,6 +72,8 @@ const renderTo = (activity) => (
     to:
     <br />
     {activity.earner && activity.earner.username && activity.earner.username}
+    {activity.earner && !activity.earner.username && activity.earner.firstname && `${activity.earner.firstname} `}
+    {activity.earner && !activity.earner.username && activity.earner.lastname && activity.earner.lastname}
     {' '}
     (
     {activity.earner && activity.earner.user_id && activity.earner.user_id}
