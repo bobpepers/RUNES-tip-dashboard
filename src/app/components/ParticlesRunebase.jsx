@@ -1,10 +1,12 @@
 import React from 'react';
 import Particles from 'react-tsparticles';
+import { loadFull } from 'tsparticles';
 import Runebase from '../assets/images/runebaseloop.gif';
 
-function ParticlesRunebase(props) {
-  const particlesInit = (main) => {
+function ParticlesRunebase() {
+  const particlesInit = async (main) => {
     console.log(main);
+    await loadFull(main);
   };
 
   const particlesLoaded = (container) => {

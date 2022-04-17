@@ -407,7 +407,7 @@ const renderItems = (data) => {
             || activity.type === 'rain_s'
             || activity.type === 'flood_s'
             || activity.type === 'hurricane_s'
-            || activity.type === 'tip_s'
+            // || activity.type === 'tip_s'
             || activity.type === 'trivia_s'
 
             || activity.type === 'reactdrop_f'
