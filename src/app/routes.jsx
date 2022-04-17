@@ -4,7 +4,7 @@ import React, {
 import {
   Route,
   Routes,
-  useNavigate,
+  // useNavigate,
   useLocation,
   Navigate,
   Outlet,
@@ -14,7 +14,6 @@ import { connect, useDispatch } from 'react-redux';
 // import requireAuth from './components/hoc/RequireAuth';
 
 // import requireAuth from './components/hoc/RequireAuth';
-// import requireNotAuth from './components/hoc/RequireNotAuth';
 
 import toggleTheme from './helpers/toggleTheme';
 
@@ -59,21 +58,17 @@ const RequireAuth = function (props) {
   } = props;
   const location = useLocation();
   const dispatch = useDispatch();
-  useEffect(() => dispatch(authenticated()), [dispatch]);
+
   useEffect(() => {
-    console.log(Isauthenticated);
-    if (!Isauthenticated && doneLoading) {
-      return <Navigate to="/login" state={{ from: location }} />;
-    }
-    if (tfaLocked && doneLoading) {
-      return <Navigate to="/login/2fa" state={{ from: location }} />;
-    }
-    return <Outlet />;
-  }, [
+    dispatch(authenticated());
+  }, []);
+
+  useEffect(() => { }, [
     Isauthenticated,
     doneLoading,
     tfaLocked,
   ]);
+
   if (!Isauthenticated && doneLoading) {
     return <Navigate to="/login" state={{ from: location }} />;
   }
@@ -89,7 +84,9 @@ const RoutesX = function (props) {
   } = props;
   useEffect(() => {
     toggleTheme(theme);
-  }, [theme]);
+  }, [
+    theme,
+  ]);
 
   return (
     <Routes>

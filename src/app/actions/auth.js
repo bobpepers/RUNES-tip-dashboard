@@ -1,15 +1,13 @@
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-// import history from '../history';
 import {
   SIGNUP_SUCCESS,
   SIGNUP_FAILURE,
   SIGNUP_RESEND_FAILURE,
   VERIFY_EMAIL_ERROR,
-  SIGNIN_FAILURE,
+  // SIGNIN_FAILURE,
   AUTH_USER,
   UNAUTH_USER,
-  EMAIL_NOT_VERIFIED,
+  // EMAIL_NOT_VERIFIED,
   AUTH_USER_TFA,
   ENQUEUE_SNACKBAR,
 } from './types/index';
@@ -17,12 +15,12 @@ import {
 /**
  * Error helper
  */
-export function authError(CONST, error) {
-  return {
-    type: CONST,
-    payload: error,
-  };
-}
+// export function authError(CONST, error) {
+//   return {
+//     type: CONST,
+//     payload: error,
+//   };
+// }
 
 /**
  * Sign up
@@ -73,7 +71,11 @@ export function signupUser(props, navigate) {
             },
           });
         }
-        dispatch(authError(SIGNUP_FAILURE, error.reponse.data.error));
+
+        dispatch({
+          type: SIGNUP_FAILURE,
+          payload: error.reponse.data.console.error,
+        });
       });
   }
 }
@@ -83,7 +85,11 @@ export function signupUser(props, navigate) {
  */
 
 export function signinUser(props) {
-  const { email, password, captchaResponse } = props;
+  const {
+    email,
+    password,
+    captchaResponse,
+  } = props;
 
   /* Set a header including the token */
   return function (dispatch) {
@@ -92,15 +98,11 @@ export function signinUser(props) {
       { email, password, captchaResponse },
     )
       .then((response) => {
-        console.log(response);
-        console.log('response');
-
         dispatch({
           type: AUTH_USER,
           payload: response,
         });
         window.location.href = '/';
-        // history.push('/dashboard');
       })
       .catch((error) => {
         if (error.response) {
@@ -139,8 +141,6 @@ export function signinUser(props) {
             },
           });
         }
-        console.log('some err');
-        console.log(error);
       });
   }
 }
@@ -152,9 +152,16 @@ export function resendVerification(props) {
   return function (dispatch) {
     axios.post(`${window.myConfig.apiUrl}/resend-verify-code`, props)
       .then(() => {
-        dispatch({ type: SIGNUP_SUCCESS });
+        dispatch({
+          type: SIGNUP_SUCCESS,
+        });
       })
-      .catch((response) => dispatch(authError(SIGNUP_RESEND_FAILURE, response.data)));
+      .catch((response) => dispatch(
+        {
+          type: SIGNUP_RESEND_FAILURE,
+          payload: response.data,
+        },
+      ));
   }
 }
 
@@ -172,7 +179,12 @@ export function verifyEmail(props, navigate) {
         navigate('/register/verified');
       })
       .catch((error) => {
-        dispatch(authError(VERIFY_EMAIL_ERROR, error.response.data.error));
+        dispatch(
+          {
+            type: VERIFY_EMAIL_ERROR,
+            payload: error.response.data.error,
+          },
+        );
       });
   }
 }
@@ -182,11 +194,11 @@ export function verifyEmail(props, navigate) {
  */
 export function signoutUser() {
   return function (dispatch) {
-    console.log('signout user');
     axios.get(`${window.myConfig.apiUrl}/logout`)
-      .then((response) => {
-        dispatch({ type: UNAUTH_USER });
-        // history.push('/');
+      .then(() => {
+        dispatch({
+          type: UNAUTH_USER,
+        });
         window.location.href = '/';
       })
       .catch((error) => {
@@ -202,14 +214,11 @@ export function authenticated() {
   return function (dispatch) {
     axios.get(`${window.myConfig.apiUrl}/authenticated`)
       .then((response) => {
-        // if (response.data.success === true) {
         console.log('AUTHENTICATION PASSED');
         dispatch({
           type: AUTH_USER_TFA,
           payload: response,
         });
-        // }
-        // history.push('/');
       })
       .catch((error) => {
         console.log('ERROR AUTHENTICATED');

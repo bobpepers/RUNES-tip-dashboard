@@ -6,7 +6,8 @@ import {
   StyledEngineProvider,
   createTheme,
 } from '@mui/material/styles';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { BrowserRouter } from 'react-router-dom';
@@ -125,7 +126,14 @@ function App() {
   );
 }
 
-ReactDOM.render(
-  <App />,
+// const root = createRoot(document.getElementById('root')); // createRoot(container!) if you use TypeScript
+createRoot(
   document.getElementById('root'),
+).render(
+  <App />,
 );
+
+// ReactDOM.render(
+//   <App />,
+//   document.getElementById('root'),
+// );

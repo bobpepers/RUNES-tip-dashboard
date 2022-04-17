@@ -301,7 +301,7 @@ const Header = function (props) {
                 {
                   authenticated
                     ? (
-                      <>
+                      <div>
                         <MenuItem onClick={handleMenuClose}>
                           <Link
                             className="nav-link"
@@ -318,10 +318,10 @@ const Header = function (props) {
                             logout
                           </Link>
                         </MenuItem>
-                      </>
+                      </div>
                     )
                     : (
-                      <>
+                      <div>
                         <MenuItem onClick={handleMenuClose}>
                           <Link
                             className="nav-link"
@@ -338,7 +338,7 @@ const Header = function (props) {
                             register
                           </Link>
                         </MenuItem>
-                      </>
+                      </div>
                     )
 
                 }

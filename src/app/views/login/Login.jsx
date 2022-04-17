@@ -26,7 +26,13 @@ import Captcha from '../../components/Captcha';
 import * as actions from '../../actions/auth';
 
 const renderField = ({
-  input, type, placeholder, meta: { touched, error },
+  input,
+  type,
+  placeholder,
+  meta: {
+    touched,
+    error,
+  },
 }) => (
   <div className={`input-group ${touched && error ? 'has-error' : ''}`}>
     <FormControl
@@ -86,7 +92,7 @@ const renderPasswordField = (
             </IconButton>
           </InputAdornment>
         )}
-        labelWidth={70}
+        // labelWidth={70}
         {...input}
       />
     </FormControl>
