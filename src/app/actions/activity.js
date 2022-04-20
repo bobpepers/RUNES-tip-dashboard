@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../axios';
 import {
   FETCH_ACTIVITY_BEGIN,
   FETCH_ACTIVITY_SUCCESS,

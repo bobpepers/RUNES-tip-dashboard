@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../axios';
 import {
   FETCH_CHANNELS_BEGIN,
   FETCH_CHANNELS_SUCCESS,

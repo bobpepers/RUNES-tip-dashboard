@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../axios';
 import {
   FETCH_USER_BEGIN,
   FETCH_USER_FAIL,

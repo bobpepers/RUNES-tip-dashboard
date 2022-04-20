@@ -1,5 +1,4 @@
-import axios from 'axios';
-// import history from '../history';
+import axios from '../axios';
 import {
   RESET_PASSWORD_SUCCESS,
   RESET_PASSWORD_FAILURE,

@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../axios';
 import {
   FETCH_TRIVIAQUESTIONS_BEGIN,
   FETCH_TRIVIAQUESTIONS_SUCCESS,

@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../axios';
 import {
   FETCH_SERVERS_BEGIN,
   FETCH_SERVERS_SUCCESS,

@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../axios';
 import {
   FETCH_BALANCE_BEGIN,
   FETCH_BALANCE_SUCCESS,

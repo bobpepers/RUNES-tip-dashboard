@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../axios';
 import {
   SIGNUP_SUCCESS,
   SIGNUP_FAILURE,
@@ -25,7 +25,10 @@ import {
 /**
  * Sign up
  */
-export function signupUser(props, navigate) {
+export function signupUser(
+  props,
+  navigate,
+) {
   const { captchaResponse } = props;
 
   return function (dispatch) {

@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../axios';
 import {
   FETCH_DEPOSITS_BEGIN,
   FETCH_DEPOSITS_SUCCESS,

@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../axios';
 import {
   FETCH_ERRORS_BEGIN,
   FETCH_ERRORS_SUCCESS,

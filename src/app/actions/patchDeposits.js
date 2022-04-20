@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../axios';
 import {
   PATCH_DEPOSITS_BEGIN,
   PATCH_DEPOSITS_SUCCESS,

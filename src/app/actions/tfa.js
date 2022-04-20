@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../axios';
 import {
   ENABLE_2FA_IDLE,
   ENABLE_2FA_BEGIN,

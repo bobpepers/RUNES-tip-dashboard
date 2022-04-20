@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../axios';
 import {
   START_SYNCBLOCKS_BEGIN,
   START_SYNCBLOCKS_SUCCESS,

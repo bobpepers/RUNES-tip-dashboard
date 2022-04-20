@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../axios';
 import {
   FETCH_NODESTATUS_BEGIN,
   FETCH_NODESTATUS_SUCCESS,

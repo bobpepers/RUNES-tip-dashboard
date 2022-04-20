@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../axios';
 import {
   FETCH_WITHDRAWALS_BEGIN,
   FETCH_WITHDRAWALS_SUCCESS,

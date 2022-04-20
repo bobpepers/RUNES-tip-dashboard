@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../axios';
 import {
   FETCH_BOTSETTINGS_BEGIN,
   FETCH_BOTSETTINGS_SUCCESS,

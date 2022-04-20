@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../axios';
 import {
   FETCH_BLOCKNUMBER_BEGIN,
   FETCH_BLOCKNUMBER_SUCCESS,
