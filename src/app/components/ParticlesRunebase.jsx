@@ -16,7 +16,6 @@ function ParticlesRunebase() {
   return (
     <div id="info">
       <section className="top">
-        <div className="foggy" />
         <div className="sliderbg" />
         <div className="clouds" />
         <div className="particles">

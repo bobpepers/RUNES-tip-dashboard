@@ -502,10 +502,14 @@ const ActivityContainer = function (props) {
       container
       item
       xs={12}
-      className="shadow-w index600 glassHeaderActivity"
+      className="index600 glassHeaderActivity"
       style={{ marginTop: '40px' }}
     >
-      <Grid item xs={2} className="textcenter" mx="auto">
+      <Grid
+        item
+        xs={2}
+        mx="auto"
+      >
         <ArrowBackIcon
           onClick={handlePreviousPage}
           className={activePage > 1 ? 'previousArrowActive' : 'previousArrowDisabled'}
@@ -516,7 +520,10 @@ const ActivityContainer = function (props) {
         />
       </Grid>
       <Grid item xs={8} />
-      <Grid item xs={2} className="textcenter">
+      <Grid
+        item
+        xs={2}
+      >
         <ArrowForwardIcon
           onClick={handleNextPage}
           className={totalPages > activePage ? 'nextArrowActive' : 'nextArrowDisabled'}
@@ -531,7 +538,7 @@ const ActivityContainer = function (props) {
         container
         item
         xs={12}
-        className="shadow-w glassHeader ml-20 mr-20"
+        className="glassHeader ml-20 mr-20"
       >
         {
           activity

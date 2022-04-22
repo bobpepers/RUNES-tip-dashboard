@@ -1,0 +1,72 @@
+// Containers
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'TeXGyreHeros-Regular';
+  height: 100%;
+}
+
+body {
+  //background: #000;
+  //background: rgba(0, 0, 0, 1);
+  overflow-x: hidden;
+}
+
+.content {
+  position: relative;
+  flex: 1;
+  z-index: 20;
+  padding-bottom: 50px;
+}
+
+.height100 {
+  height: 100%;
+}
+
+// Text
+
+.content {
+  color: var(--textColorGlobal);
+}
+
+h2 {
+  text-shadow: 0 0 black;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+// Input fields
+
+label.outlined-email-field-label {
+  color: var(--textColorGlobal);
+}
+
+button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-edgeEnd {
+  color: var(--textColorGlobal);
+}
+
+label.MuiFormLabel-root.MuiInputLabel-root.MuiInputLabel-formControl.MuiInputLabel-animated.MuiInputLabel-outlined {
+  color: white;
+}
+
+.MuiOutlinedInput-notchedOutline {
+  border-color: var(--textColorGlobal) !important;
+}
+
+input.outlined-email-field {
+  color: var(--textColorGlobal);
+}
+
+input.outlined-adornment-password {
+  color: var(--textColorGlobal);
+}
+
+svg.MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.css-i4bv87-MuiSvgIcon-root {
+  color: var(--textColorGlobal);
+}
+
+.form-error {
+  color: red;
+}

@@ -60,15 +60,15 @@ function ResetPasswordVerify(props) {
           <form onSubmit={handleSubmit(handleFormSubmit)}>
             <Grid container direction="column" spacing={3}>
               <Grid item>
-                <h2 className="textCenter">Reset Password</h2>
+                <h2 className="text-center">Reset Password</h2>
               </Grid>
               <Grid item>
-                <h3 className="textCenter">
+                <h3 className="text-center">
                   We&apos;ve just emailed you password reset instructions at
                 </h3>
               </Grid>
               <Grid item>
-                <h3 className="textCenter">
+                <h3 className="text-center">
                   <u>{ email && email }</u>
                 </h3>
               </Grid>
@@ -95,7 +95,7 @@ function ResetPasswordVerify(props) {
                       </Button>
                     )
                     : (
-                      <p className="resended textCenter">
+                      <p className="resended text-center">
                         Reset password instructions has been resent
                       </p>
                     )

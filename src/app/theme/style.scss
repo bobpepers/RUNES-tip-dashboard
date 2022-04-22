@@ -11,10 +11,6 @@
   font-weight: normal;
   src: local('TeXGyreHeros-Bold'), url('../assets/fonts/texgyreheros-bold.woff') format('woff');
 }
-    
-html, body {
-  font-family: 'TeXGyreHeros-Regular';
-}
 
 @import "./dark-theme.scss";
 @import "./light-theme.scss";
@@ -23,17 +19,3 @@ html, body {
 @import "../containers/bundle.scss";
 @import "../views/bundle.scss";
 
-html, body {
-  height: 100%;
-}
-
-.textCenter {
-  text-align: center;
-}
-
-.form-error {
-  color: red;
-}
-.content {
-  padding-bottom: 50px;
-}

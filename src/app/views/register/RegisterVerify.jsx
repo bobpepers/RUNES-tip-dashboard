@@ -44,17 +44,17 @@ function RegisterVerify(props) {
   }
 
   return (
-    <div className="content index600 shadow-w textCenter content">
-      <h2 className="textCenter">Activate account</h2>
-      <h3 className="textCenter">
-        Please confirm the verification code we've just emailed you at
+    <div className="content index600 shadow-w text-center content">
+      <h2 className="text-center">Activate account</h2>
+      <h3 className="text-center">
+        Please confirm the verification code we&apos;ve just emailed you at
         <br />
         <u>{email && email}</u>
       </h3>
       {
         !resend
           ? <Button variant="contained" color="primary" type="submit" className="btn" size="large" className="resend" onClick={() => resendEmail({ email })}>Resend email verification code</Button>
-          : <p className="resended textCenter">Email verification code has been resent</p>
+          : <p className="resended text-center">Email verification code has been resent</p>
       }
       {
         errorMessage && errorMessage.signupResend

@@ -145,7 +145,7 @@ function Signin(props) {
           lg={4}
           xl={4}
         >
-          <h2 className="textCenter">Sign in</h2>
+          <h2 className="text-center">Sign in</h2>
           <form onSubmit={handleSubmit(handleFormSubmit)}>
             <Box
               component={Grid}

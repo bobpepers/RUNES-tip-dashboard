@@ -55,8 +55,8 @@ function VerifyEmail(props) {
         errorMessage && errorMessage.verifyEmail
         && (
           <div>
-            <h2 className="textCenter">Failed to verify account</h2>
-            <h3 className="textCenter">
+            <h2 className="text-center">Failed to verify account</h2>
+            <h3 className="text-center">
               {errorMessage.verifyEmail.message === 'INCORRECT_TOKEN' && 'Incorrect Token'}
               {errorMessage.verifyEmail.message === 'AUTH_TOKEN_ALREADY_USED' && 'Token Already Used'}
               {errorMessage.verifyEmail.message === 'AUTH_TOKEN_EXPIRED' && 'Token Expired'}

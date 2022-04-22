@@ -95,6 +95,9 @@ function Footer(props) {
           sm={4}
           md={2}
           align="center"
+          style={{
+            marginBottom: 'auto',
+          }}
           // alignItems="center"
           // direction="row"
         >

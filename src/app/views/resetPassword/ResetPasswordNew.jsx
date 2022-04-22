@@ -70,7 +70,7 @@ function ResetPasswordNew(props) {
 
   return (
     <div className="form-container index600 shadow-w signinContainer content">
-      <h2 className="textCenter">New Password</h2>
+      <h2 className="text-center">New Password</h2>
       {
         /* Landing error message */
         errorMessage && errorMessage.verifyResetPassword
