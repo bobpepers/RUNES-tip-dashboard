@@ -26,28 +26,6 @@ import {
 // import * as actions from '../actions/auth';
 import ServerTable from '../../components/ServerTable';
 
-const headers = [
-  'db id',
-  'group id',
-  'server name',
-  'last active',
-];
-
-const headCells = [
-  {
-    id: 'dbId', numeric: false, disablePadding: true, label: 'id',
-  },
-  {
-    id: 'groupId', numeric: true, disablePadding: false, label: 'group id',
-  },
-  {
-    id: 'serverName', numeric: true, disablePadding: false, label: 'server name',
-  },
-  {
-    id: 'lastActive', numeric: true, disablePadding: false, label: 'last active',
-  },
-];
-
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
@@ -194,7 +172,6 @@ function ServersView(props) {
                   setRowsPerPage={setRowsPerPage}
                   totalCount={servers && servers.count && servers.count}
                   banServer={banServer}
-                  headCells={headCells || []}
                   servers={servers
                     && servers.data
                     ? servers.data

@@ -4,7 +4,6 @@ import React, {
   useLayoutEffect,
   // Fragment,
 } from 'react';
-import { withRouter } from '../../hooks/withRouter';
 import { connect, useDispatch } from 'react-redux';
 import {
   Grid,
@@ -16,32 +15,12 @@ import {
   MenuItem,
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { withRouter } from '../../hooks/withRouter';
 
 import {
   fetchDashboardUsersAction,
 } from '../../actions/dashboardUsers';
 import DashboardUsersTable from '../../components/DashboardUsersTable';
-
-const headCells = [
-  {
-    id: 'dbId', numeric: false, disablePadding: true, label: 'id',
-  },
-  {
-    id: 'username', numeric: true, disablePadding: false, label: 'username',
-  },
-  {
-    id: 'email', numeric: true, disablePadding: false, label: 'email',
-  },
-  {
-    id: 'role', numeric: true, disablePadding: false, label: 'role',
-  },
-  {
-    id: 'lastActive', numeric: true, disablePadding: false, label: 'last active',
-  },
-  {
-    id: 'banned', numeric: true, disablePadding: false, label: 'banned',
-  },
-];
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -54,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const DashboardUsersView = (props) => {
+function DashboardUsersView(props) {
   const {
     auth,
     dashboardUsers,
@@ -67,7 +46,7 @@ const DashboardUsersView = (props) => {
   const [banned, setBanned] = useState('All');
   const [role, setRole] = useState('All');
 
-  //useEffect(() => dispatch(fetchDashboardUsersAction(id, email, username, role, banned)), [auth]);
+  // useEffect(() => dispatch(fetchDashboardUsersAction(id, email, username, role, banned)), [auth]);
   useEffect(() => dispatch(fetchDashboardUsersAction(id, email, username, role, banned)), [
     id,
     username,
@@ -114,7 +93,8 @@ const DashboardUsersView = (props) => {
                 value={id}
                 label="id"
                 variant="filled"
-                onChange={handleChangeId} />
+                onChange={handleChangeId}
+              />
             </FormControl>
           </Grid>
 
@@ -125,7 +105,8 @@ const DashboardUsersView = (props) => {
                 value={username}
                 label="username"
                 variant="filled"
-                onChange={handleChangeUsername} />
+                onChange={handleChangeUsername}
+              />
             </FormControl>
           </Grid>
           <Grid container item xs={12} md={4}>
@@ -135,7 +116,8 @@ const DashboardUsersView = (props) => {
                 value={email}
                 label="email"
                 variant="filled"
-                onChange={handleChangeEmail} />
+                onChange={handleChangeEmail}
+              />
             </FormControl>
           </Grid>
           <Grid container item xs={12} md={6}>
@@ -190,12 +172,10 @@ const DashboardUsersView = (props) => {
               : (
                 <DashboardUsersTable
                   defaultPageSize={25}
-                  headCells={headCells || []}
                   dashboardUsers={dashboardUsers
                     && dashboardUsers.data
                     ? dashboardUsers.data
-                    : []
-                  }
+                    : []}
                 />
               )
           }

@@ -18,40 +18,6 @@ import {
 } from '../../actions/withdrawals';
 import WithdrawalsTable from '../../components/WithdrawalsTable';
 
-const headCells = [
-  {
-    id: 'dbId', numeric: false, disablePadding: true, label: 'id',
-  },
-  {
-    id: 'userId', numeric: true, disablePadding: false, label: 'userId',
-  },
-  {
-    id: 'username', numeric: true, disablePadding: false, label: 'username',
-  },
-  {
-    id: 'to', numeric: true, disablePadding: false, label: 'to',
-  },
-  {
-    id: 'txId', numeric: true, disablePadding: false, label: 'tx id',
-  },
-  {
-    id: 'amount', numeric: true, disablePadding: false, label: 'amount',
-  },
-  {
-    id: 'time', numeric: true, disablePadding: false, label: 'time',
-  },
-  {
-    id: 'confirmations', numeric: true, disablePadding: false, label: 'confirmations',
-  },
-  {
-    id: 'phase', numeric: true, disablePadding: false, label: 'phase',
-  },
-  {
-    id: 'action', numeric: true, disablePadding: false, label: 'action',
-  },
-
-];
-
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
@@ -210,7 +176,6 @@ const WithdrawalsView = function (props) {
                   rowsPerPage={rowsPerPage}
                   setRowsPerPage={setRowsPerPage}
                   totalCount={withdrawals && withdrawals.count && withdrawals.count}
-                  headCells={headCells || []}
                   acceptWithdrawalFunction={acceptWithdrawalFunction}
                   declineWithdrawalFunction={declineWithdrawalFunction}
                   acceptWithdrawal={acceptWithdrawal}

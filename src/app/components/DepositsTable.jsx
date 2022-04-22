@@ -26,6 +26,34 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { Link } from 'react-router-dom';
 
+const headCells = [
+  {
+    id: 'dbId', numeric: false, disablePadding: true, label: 'id',
+  },
+  {
+    id: 'userId', numeric: true, disablePadding: false, label: 'userId',
+  },
+  {
+    id: 'username', numeric: true, disablePadding: false, label: 'username',
+  },
+  {
+    id: 'from', numeric: true, disablePadding: false, label: 'from',
+  },
+  {
+    id: 'txId', numeric: true, disablePadding: false, label: 'tx id',
+  },
+  {
+    id: 'amount', numeric: true, disablePadding: false, label: 'amount',
+  },
+  {
+    id: 'confirmations', numeric: true, disablePadding: false, label: 'confirmations',
+  },
+  {
+    id: 'phase', numeric: true, disablePadding: false, label: 'phase',
+  },
+
+];
+
 function createData(
   id,
   txId,
@@ -76,7 +104,6 @@ function stableSort(array, comparator) {
 
 const EnhancedTableHead = function (props) {
   const {
-    headCells,
     classes,
     onSelectAllClick,
     order, orderBy,
@@ -217,7 +244,6 @@ const useStyles = makeStyles((theme) => ({
 
 const DepositsTable = function (props) {
   const {
-    headCells,
     deposits,
     defaultPageSize,
     page,
@@ -319,7 +345,6 @@ const DepositsTable = function (props) {
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
               rowCount={rows.length}
-              headCells={headCells}
             />
             <TableBody>
               {stableSort(rows, getComparator(order, orderBy))

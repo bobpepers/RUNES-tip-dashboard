@@ -24,6 +24,27 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { Link } from 'react-router-dom';
 
+const headCells = [
+  {
+    id: 'dbId', numeric: false, disablePadding: true, label: 'id',
+  },
+  {
+    id: 'username', numeric: true, disablePadding: false, label: 'username',
+  },
+  {
+    id: 'email', numeric: true, disablePadding: false, label: 'email',
+  },
+  {
+    id: 'role', numeric: true, disablePadding: false, label: 'role',
+  },
+  {
+    id: 'lastActive', numeric: true, disablePadding: false, label: 'last active',
+  },
+  {
+    id: 'banned', numeric: true, disablePadding: false, label: 'banned',
+  },
+];
+
 function createData(
   id,
   username,
@@ -70,7 +91,6 @@ function stableSort(array, comparator) {
 
 function EnhancedTableHead(props) {
   const {
-    headCells,
     classes,
     onSelectAllClick,
     order, orderBy,
@@ -211,7 +231,6 @@ const useStyles = makeStyles((theme) => ({
 
 function DashboardUsersTable(props) {
   const {
-    headCells,
     dashboardUsers,
     defaultPageSize,
   } = props;
@@ -317,7 +336,6 @@ function DashboardUsersTable(props) {
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
               rowCount={rows.length}
-              headCells={headCells}
             />
             <TableBody>
               {stableSort(rows, getComparator(order, orderBy))

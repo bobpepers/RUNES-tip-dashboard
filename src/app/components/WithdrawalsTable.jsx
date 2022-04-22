@@ -26,6 +26,39 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { Link } from 'react-router-dom';
 
+const headCells = [
+  {
+    id: 'dbId', numeric: false, disablePadding: true, label: 'id',
+  },
+  {
+    id: 'userId', numeric: true, disablePadding: false, label: 'userId',
+  },
+  {
+    id: 'username', numeric: true, disablePadding: false, label: 'username',
+  },
+  {
+    id: 'to', numeric: true, disablePadding: false, label: 'to',
+  },
+  {
+    id: 'txId', numeric: true, disablePadding: false, label: 'tx id',
+  },
+  {
+    id: 'amount', numeric: true, disablePadding: false, label: 'amount',
+  },
+  {
+    id: 'time', numeric: true, disablePadding: false, label: 'time',
+  },
+  {
+    id: 'confirmations', numeric: true, disablePadding: false, label: 'confirmations',
+  },
+  {
+    id: 'phase', numeric: true, disablePadding: false, label: 'phase',
+  },
+  {
+    id: 'action', numeric: true, disablePadding: false, label: 'action',
+  },
+];
+
 function createData(
   id,
   txId,
@@ -78,7 +111,6 @@ function stableSort(array, comparator) {
 
 const EnhancedTableHead = function (props) {
   const {
-    headCells,
     classes,
     onSelectAllClick,
     order, orderBy,
@@ -219,7 +251,6 @@ const useStyles = makeStyles((theme) => ({
 
 const WithdrawalsTable = function (props) {
   const {
-    headCells,
     withdrawals,
     defaultPageSize,
     acceptWithdrawalFunction,
@@ -326,7 +357,6 @@ const WithdrawalsTable = function (props) {
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
               rowCount={rows.length}
-              headCells={headCells}
             />
             <TableBody>
               {stableSort(rows, getComparator(order, orderBy))

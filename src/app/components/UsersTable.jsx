@@ -27,6 +27,33 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import { Link } from 'react-router-dom';
 import BanDialog from './BanDialog';
 
+const headCells = [
+  {
+    id: 'dbId', numeric: false, disablePadding: true, label: 'id',
+  },
+  {
+    id: 'userId', numeric: true, disablePadding: false, label: 'user id',
+  },
+  {
+    id: 'username', numeric: true, disablePadding: false, label: 'username',
+  },
+  {
+    id: 'available', numeric: true, disablePadding: false, label: 'available',
+  },
+  {
+    id: 'locked', numeric: true, disablePadding: false, label: 'locked',
+  },
+  {
+    id: 'total', numeric: true, disablePadding: false, label: 'total',
+  },
+  {
+    id: 'lastActive', numeric: true, disablePadding: false, label: 'last active',
+  },
+  {
+    id: 'banned', numeric: true, disablePadding: false, label: 'banned',
+  },
+];
+
 function createData(
   id,
   userId,
@@ -77,7 +104,6 @@ function stableSort(array, comparator) {
 
 const EnhancedTableHead = function (props) {
   const {
-    headCells,
     classes,
     onSelectAllClick,
     order, orderBy,
@@ -218,7 +244,6 @@ const useStyles = makeStyles((theme) => ({
 
 const UsersTable = function (props) {
   const {
-    headCells,
     users,
     banUser,
     defaultPageSize,
@@ -319,7 +344,6 @@ const UsersTable = function (props) {
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
               rowCount={rows.length}
-              headCells={headCells}
             />
             <TableBody>
               {stableSort(rows, getComparator(order, orderBy))

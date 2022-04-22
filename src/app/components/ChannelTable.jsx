@@ -25,6 +25,27 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import { Link } from 'react-router-dom';
 import BanDialog from './BanDialog';
 
+const headCells = [
+  {
+    id: 'dbId', numeric: false, disablePadding: true, label: 'id',
+  },
+  {
+    id: 'server', numeric: true, disablePadding: false, label: 'server',
+  },
+  {
+    id: 'channelId', numeric: true, disablePadding: false, label: 'channel id',
+  },
+  {
+    id: 'channelName', numeric: true, disablePadding: false, label: 'channel name',
+  },
+  {
+    id: 'lastActive', numeric: true, disablePadding: false, label: 'last active',
+  },
+  {
+    id: 'banned', numeric: true, disablePadding: false, label: 'banned',
+  },
+];
+
 function createData(
   id,
   channelId,
@@ -75,7 +96,6 @@ function stableSort(array, comparator) {
 
 function EnhancedTableHead(props) {
   const {
-    headCells,
     classes,
     onSelectAllClick,
     order, orderBy,
@@ -216,7 +236,6 @@ const useStyles = makeStyles((theme) => ({
 
 function ChannelTable(props) {
   const {
-    headCells,
     channels,
     banChannel,
     defaultPageSize,
@@ -317,7 +336,6 @@ function ChannelTable(props) {
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
               rowCount={rows.length}
-              headCells={headCells}
             />
             <TableBody>
               {stableSort(rows, getComparator(order, orderBy))

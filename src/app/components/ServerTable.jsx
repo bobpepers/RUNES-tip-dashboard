@@ -26,6 +26,21 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import { Link } from 'react-router-dom';
 import BanDialog from './BanDialog';
 
+const headCells = [
+  {
+    id: 'dbId', numeric: false, disablePadding: true, label: 'id',
+  },
+  {
+    id: 'groupId', numeric: true, disablePadding: false, label: 'group id',
+  },
+  {
+    id: 'serverName', numeric: true, disablePadding: false, label: 'server name',
+  },
+  {
+    id: 'lastActive', numeric: true, disablePadding: false, label: 'last active',
+  },
+];
+
 function createData(
   id,
   groupId,
@@ -70,7 +85,6 @@ function stableSort(array, comparator) {
 
 function EnhancedTableHead(props) {
   const {
-    headCells,
     classes,
     onSelectAllClick,
     order, orderBy,
@@ -211,7 +225,6 @@ const useStyles = makeStyles((theme) => ({
 
 function ServerTable(props) {
   const {
-    headCells,
     servers,
     banServer,
     defaultPageSize,
@@ -311,7 +324,6 @@ function ServerTable(props) {
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
               rowCount={rows.length}
-              headCells={headCells}
             />
             <TableBody>
               {stableSort(rows, getComparator(order, orderBy))

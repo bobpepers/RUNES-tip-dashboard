@@ -21,33 +21,6 @@ import {
 } from '../../actions/users';
 import UsersTable from '../../components/UsersTable';
 
-const headCells = [
-  {
-    id: 'dbId', numeric: false, disablePadding: true, label: 'id',
-  },
-  {
-    id: 'userId', numeric: true, disablePadding: false, label: 'user id',
-  },
-  {
-    id: 'username', numeric: true, disablePadding: false, label: 'username',
-  },
-  {
-    id: 'available', numeric: true, disablePadding: false, label: 'available',
-  },
-  {
-    id: 'locked', numeric: true, disablePadding: false, label: 'locked',
-  },
-  {
-    id: 'total', numeric: true, disablePadding: false, label: 'total',
-  },
-  {
-    id: 'lastActive', numeric: true, disablePadding: false, label: 'last active',
-  },
-  {
-    id: 'banned', numeric: true, disablePadding: false, label: 'banned',
-  },
-];
-
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
@@ -221,7 +194,6 @@ const UsersView = function (props) {
                   setRowsPerPage={setRowsPerPage}
                   totalCount={users && users.count && users.count}
                   banUser={banUser}
-                  headCells={headCells || []}
                   users={users
                     && users.data
                     ? users.data

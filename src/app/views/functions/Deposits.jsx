@@ -18,34 +18,6 @@ import {
 } from '../../actions/deposits';
 import DepositsTable from '../../components/DepositsTable';
 
-const headCells = [
-  {
-    id: 'dbId', numeric: false, disablePadding: true, label: 'id',
-  },
-  {
-    id: 'userId', numeric: true, disablePadding: false, label: 'userId',
-  },
-  {
-    id: 'username', numeric: true, disablePadding: false, label: 'username',
-  },
-  {
-    id: 'from', numeric: true, disablePadding: false, label: 'from',
-  },
-  {
-    id: 'txId', numeric: true, disablePadding: false, label: 'tx id',
-  },
-  {
-    id: 'amount', numeric: true, disablePadding: false, label: 'amount',
-  },
-  {
-    id: 'confirmations', numeric: true, disablePadding: false, label: 'confirmations',
-  },
-  {
-    id: 'phase', numeric: true, disablePadding: false, label: 'phase',
-  },
-
-];
-
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
@@ -193,7 +165,6 @@ const DepositsView = function (props) {
                   rowsPerPage={rowsPerPage}
                   setRowsPerPage={setRowsPerPage}
                   totalCount={deposits && deposits.count && deposits.count}
-                  headCells={headCells || []}
                   deposits={deposits
                     && deposits.data
                     ? deposits.data

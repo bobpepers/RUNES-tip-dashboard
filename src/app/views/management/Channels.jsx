@@ -19,27 +19,6 @@ import {
 
 import ChannelTable from '../../components/ChannelTable';
 
-const headCells = [
-  {
-    id: 'dbId', numeric: false, disablePadding: true, label: 'id',
-  },
-  {
-    id: 'server', numeric: true, disablePadding: false, label: 'server',
-  },
-  {
-    id: 'channelId', numeric: true, disablePadding: false, label: 'channel id',
-  },
-  {
-    id: 'channelName', numeric: true, disablePadding: false, label: 'channel name',
-  },
-  {
-    id: 'lastActive', numeric: true, disablePadding: false, label: 'last active',
-  },
-  {
-    id: 'banned', numeric: true, disablePadding: false, label: 'banned',
-  },
-];
-
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
@@ -157,7 +136,6 @@ function ChannelsView(props) {
                   rowsPerPage={rowsPerPage}
                   setRowsPerPage={setRowsPerPage}
                   totalCount={channels && channels.count && channels.count}
-                  headCells={headCells || []}
                   banChannel={banChannel}
                   channels={channels
                     && channels.data
