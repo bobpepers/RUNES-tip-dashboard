@@ -208,7 +208,9 @@ const renderItems = (data) => {
             {activity.type === 'stats_s' && 'Stats: success'}
             {activity.type === 'listtransactions_s' && 'List Transactions: success'}
             {activity.type === 'publicstats_s' && 'PublicStats: success'}
-
+            {activity.type === 'voicerain_s' && 'VoiceRain: success'}
+            {activity.type === 'voicerain_i' && 'VoiceRain: insufficient Balance'}
+            {activity.type === 'voiceraintip_s' && 'VoiceRainTip: success'}
             {activity.type === 'withdraw_i' && 'Withdraw: insufficient Balance'}
           </Grid>
           <Grid
@@ -264,6 +266,7 @@ const renderItems = (data) => {
             || activity.type === 'rain_s'
             || activity.type === 'hurricane_s'
             || activity.type === 'trivia_s'
+            || activity.type === 'voicerain_s'
 
             || activity.type === 'reactdrop_i'
             || activity.type === 'thunderstorm_i'
@@ -276,6 +279,7 @@ const renderItems = (data) => {
             || activity.type === 'hurricane_i'
             || activity.type === 'trivia_i'
             || activity.type === 'withdraw_i'
+            || activity.type === 'voicerain_i'
 
             || activity.type === 'reactdrop_f'
             || activity.type === 'thunderstorm_f'
@@ -289,6 +293,7 @@ const renderItems = (data) => {
             || activity.type === 'hurricane_f'
             || activity.type === 'trivia_f'
             || activity.type === 'withdraw_f'
+            || activity.type === 'voicerain_f'
 
             || activity.type === 'withdrawRequested'
             || activity.type === 'withdrawAccepted'
@@ -345,6 +350,7 @@ const renderItems = (data) => {
             || activity.type === 'hurricanetip_s'
             || activity.type === 'tiptip_s'
             || activity.type === 'faucettip_s'
+            || activity.type === 'voiceraintip_s'
 
             || activity.type === 'trivia_s'
 
@@ -364,6 +370,7 @@ const renderItems = (data) => {
             || activity.type === 'reactdrop_f'
             || activity.type === 'hurricane_f'
             || activity.type === 'trivia_f'
+            || activity.type === 'voicerain_f'
 
             || activity.type === 'thunderstorm_f'
             || activity.type === 'thunder_f'
@@ -390,6 +397,7 @@ const renderItems = (data) => {
             || activity.type === 'reactdroptip_s'
             || activity.type === 'waterFaucet'
             || activity.type === 'withdraw_i'
+            || activity.type === 'voicerain_i'
             ) && renderAmount(activity)}
           </Grid>
           <Grid
@@ -409,6 +417,7 @@ const renderItems = (data) => {
             || activity.type === 'hurricane_s'
             // || activity.type === 'tip_s'
             || activity.type === 'trivia_s'
+            || activity.type === 'voicerain_s'
 
             || activity.type === 'reactdrop_f'
             || activity.type === 'thunderstorm_f'
@@ -420,7 +429,21 @@ const renderItems = (data) => {
             || activity.type === 'hurricane_f'
             || activity.type === 'trivia_f'
             || activity.type === 'withdraw_f'
+            || activity.type === 'voicerain_f'
             || activity.type === 'withdrawComplete'
+
+            || activity.type === 'reactdrop_i'
+            || activity.type === 'thunder_i'
+            || activity.type === 'thunderstorm_i'
+            || activity.type === 'soak_i'
+            || activity.type === 'flood_i'
+            || activity.type === 'sleet_i'
+            || activity.type === 'rain_i'
+            || activity.type === 'tip_i'
+            || activity.type === 'hurricane_i'
+            || activity.type === 'trivia_i'
+            || activity.type === 'withdraw_i'
+            || activity.type === 'voicerain_i'
             ) && renderSpenderBalance(activity)}
 
             {(
@@ -435,21 +458,8 @@ const renderItems = (data) => {
             || activity.type === 'tiptip_s'
             || activity.type === 'triviatip_s'
             || activity.type === 'faucettip_s'
+            || activity.type === 'voiceraintip_s'
             ) && renderEarnedSpendBalance(activity)}
-
-            {(
-              activity.type === 'reactdrop_i'
-            || activity.type === 'thunder_i'
-            || activity.type === 'thunderstorm_i'
-            || activity.type === 'soak_i'
-            || activity.type === 'flood_i'
-            || activity.type === 'sleet_i'
-            || activity.type === 'rain_i'
-            || activity.type === 'tip_i'
-            || activity.type === 'hurricane_i'
-            || activity.type === 'trivia_i'
-            || activity.type === 'withdraw_i'
-            ) && renderInsufficientBalance(activity)}
 
             {(
               activity.type === 'depositComplete'
@@ -474,7 +484,9 @@ const renderItems = (data) => {
 }
 
 const ActivityContainer = function (props) {
-  const { activity } = props;
+  const {
+    activity,
+  } = props;
   useEffect(() => { }, [activity]);
   const activitiesPerPage = 20;
   const totalPages = activity
@@ -503,7 +515,9 @@ const ActivityContainer = function (props) {
       item
       xs={12}
       className="index600 glassHeaderActivity"
-      style={{ marginTop: '40px' }}
+      style={{
+        marginTop: '40px',
+      }}
     >
       <Grid
         item
