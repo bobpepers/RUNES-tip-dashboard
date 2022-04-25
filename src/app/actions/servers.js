@@ -4,7 +4,6 @@ import {
   FETCH_SERVERS_SUCCESS,
   FETCH_SERVERS_FAIL,
   UPDATE_SERVER,
-  ENQUEUE_SNACKBAR,
 } from './types/index';
 import { notistackErrorAdd } from './helpers/notistackError';
 

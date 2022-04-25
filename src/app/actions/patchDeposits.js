@@ -3,7 +3,6 @@ import {
   PATCH_DEPOSITS_BEGIN,
   PATCH_DEPOSITS_SUCCESS,
   PATCH_DEPOSITS_FAIL,
-  ENQUEUE_SNACKBAR,
 } from './types/index';
 import { notistackErrorAdd } from './helpers/notistackError';
 

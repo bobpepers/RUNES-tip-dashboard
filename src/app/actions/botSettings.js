@@ -4,7 +4,6 @@ import {
   FETCH_BOTSETTINGS_SUCCESS,
   FETCH_BOTSETTINGS_FAIL,
   UPDATE_BOTSETTINGS,
-  ENQUEUE_SNACKBAR,
 } from './types/index';
 import { notistackErrorAdd } from './helpers/notistackError';
 

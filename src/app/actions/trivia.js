@@ -20,7 +20,6 @@ import {
   DELETE_TRIVIAQUESTION,
   ADD_TRIVIAQUESTION,
 
-  ENQUEUE_SNACKBAR,
 } from './types/index';
 import { notistackErrorAdd } from './helpers/notistackError';
 

@@ -3,7 +3,6 @@ import {
   FETCH_DEPOSITS_BEGIN,
   FETCH_DEPOSITS_SUCCESS,
   FETCH_DEPOSITS_FAIL,
-  ENQUEUE_SNACKBAR,
 } from './types/index';
 import { notistackErrorAdd } from './helpers/notistackError';
 

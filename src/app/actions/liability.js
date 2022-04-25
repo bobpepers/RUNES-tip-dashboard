@@ -3,7 +3,6 @@ import {
   FETCH_LIABILITY_BEGIN,
   FETCH_LIABILITY_SUCCESS,
   FETCH_LIABILITY_FAIL,
-  ENQUEUE_SNACKBAR,
 } from './types/index';
 import { notistackErrorAdd } from './helpers/notistackError';
 

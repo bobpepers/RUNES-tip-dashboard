@@ -3,7 +3,6 @@ import {
   FETCH_BALANCE_BEGIN,
   FETCH_BALANCE_SUCCESS,
   FETCH_BALANCE_FAIL,
-  ENQUEUE_SNACKBAR,
 } from './types/index';
 import { notistackErrorAdd } from './helpers/notistackError';
 

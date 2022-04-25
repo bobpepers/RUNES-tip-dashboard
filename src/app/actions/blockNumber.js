@@ -3,7 +3,6 @@ import {
   FETCH_BLOCKNUMBER_BEGIN,
   FETCH_BLOCKNUMBER_SUCCESS,
   FETCH_BLOCKNUMBER_FAIL,
-  ENQUEUE_SNACKBAR,
 } from './types/index';
 import { notistackErrorAdd } from './helpers/notistackError';
 

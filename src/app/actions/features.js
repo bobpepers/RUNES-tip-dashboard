@@ -6,7 +6,6 @@ import {
   UPDATE_FEATURE,
   REMOVE_FEATURE,
   ADD_FEATURE,
-  ENQUEUE_SNACKBAR,
 } from './types/index';
 import { notistackErrorAdd } from './helpers/notistackError';
 

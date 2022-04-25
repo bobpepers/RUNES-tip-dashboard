@@ -3,7 +3,6 @@ import {
   FETCH_NODESTATUS_BEGIN,
   FETCH_NODESTATUS_SUCCESS,
   FETCH_NODESTATUS_FAIL,
-  ENQUEUE_SNACKBAR,
 } from './types/index';
 import { notistackErrorAdd } from './helpers/notistackError';
 

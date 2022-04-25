@@ -3,7 +3,6 @@ import {
   FETCH_USERS_BEGIN,
   FETCH_USERS_SUCCESS,
   FETCH_USERS_FAIL,
-  ENQUEUE_SNACKBAR,
   UPDATE_USER,
 } from './types/index';
 import { notistackErrorAdd } from './helpers/notistackError';

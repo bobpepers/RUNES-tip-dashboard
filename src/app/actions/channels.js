@@ -4,7 +4,6 @@ import {
   FETCH_CHANNELS_SUCCESS,
   FETCH_CHANNELS_FAIL,
   UPDATE_CHANNEL,
-  ENQUEUE_SNACKBAR,
 } from './types/index';
 import { notistackErrorAdd } from './helpers/notistackError';
 

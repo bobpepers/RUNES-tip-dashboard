@@ -3,7 +3,6 @@ import {
   FETCH_DASHBOARDUSERS_BEGIN,
   FETCH_DASHBOARDUSERS_SUCCESS,
   FETCH_DASHBOARDUSERS_FAIL,
-  ENQUEUE_SNACKBAR,
 } from './types/index';
 import { notistackErrorAdd } from './helpers/notistackError';
 

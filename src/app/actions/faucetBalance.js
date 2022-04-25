@@ -3,7 +3,6 @@ import {
   FETCH_FAUCET_BALANCE_BEGIN,
   FETCH_FAUCET_BALANCE_SUCCESS,
   FETCH_FAUCET_BALANCE_FAIL,
-  ENQUEUE_SNACKBAR,
 } from './types/index';
 import { notistackErrorAdd } from './helpers/notistackError';
 
