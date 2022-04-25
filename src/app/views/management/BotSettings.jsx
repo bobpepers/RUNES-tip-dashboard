@@ -82,7 +82,7 @@ const BotSettingsView = function (props) {
   ]);
 
   return (
-    <div className="content index600 height100 w-100 transactions transaction">
+    <div className="height100 content">
       <TableContainer>
         <Table
           size="small"
@@ -94,6 +94,7 @@ const BotSettingsView = function (props) {
               <TableCell align="right">name</TableCell>
               <TableCell align="right">maintenance</TableCell>
               <TableCell align="right">enabed</TableCell>
+              <TableCell align="right">modify</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

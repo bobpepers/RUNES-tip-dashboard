@@ -8,6 +8,7 @@ import { connect, useDispatch } from 'react-redux';
 import CircularProgress from '@mui/material/CircularProgress';
 import {
   Grid,
+  Pagination,
 } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
@@ -65,46 +66,59 @@ const Errors = function (props) {
     errors,
   } = props;
   const dispatch = useDispatch();
+  const [page, setPage] = useState(1);
+  const [rowsPerPage, setRowsPerPage] = useState(50);
+
+  const totalPages = errors && errors.count
+    ? Math.ceil(errors.count / rowsPerPage)
+    : 0;
 
   useEffect(() => {
     if (auth.authenticated) {
-      dispatch(fetchErrorsAction());
+      dispatch(fetchErrorsAction(
+        (page - 1) * rowsPerPage,
+        rowsPerPage,
+      ));
     }
   }, [
     auth,
+    page,
   ]);
 
   useEffect(
     () => {
-      console.log(auth);
-      console.log(errors);
+      console.log(page);
+      console.log(totalPages);
     },
     [
       auth,
       errors,
+      page,
     ],
   );
 
-  const activitiesPerPage = 20;
-  const totalPages = errors
-    ? Math.ceil(errors.length / activitiesPerPage)
-    : 0;
-  const [activePage, setCurrentPage] = useState(1);
+  const handleChangePage = (
+    event,
+    value,
+  ) => {
+    setPage(value);
+  }
 
   const handleNextPage = () => {
-    if (totalPages > activePage) {
-      setCurrentPage(activePage + 1)
+    if (totalPages > page) {
+      setPage(page + 1)
     }
+    console.log(page);
+    console.log(totalPages);
   };
 
   const handlePreviousPage = () => {
-    if (activePage > 1) {
-      setCurrentPage(activePage - 1)
+    if (page > 1) {
+      setPage(page - 1)
     }
+    console.log(page);
+    console.log(totalPages);
   };
-
-  const indexOfLastActivity = activePage * activitiesPerPage;
-  const indexOfFirstActivity = indexOfLastActivity - activitiesPerPage;
 
   return (
     <div className="height100 content">
@@ -114,20 +128,47 @@ const Errors = function (props) {
         style={{ marginTop: '5px' }}
       >
         <Grid item xs={12}>
-          <Grid container item xs={12} className="shadow-w index600 glassHeaderActivity" style={{ marginTop: '40px' }}>
+          <Grid
+            container
+            item
+            xs={12}
+            className="shadow-w index600 glassHeaderActivity"
+            style={{ marginTop: '40px' }}
+          >
             <Grid item xs={2} mx="auto">
               <ArrowBackIcon
                 onClick={handlePreviousPage}
-                className={activePage > 1 ? 'previousArrowActive' : 'previousArrowDisabled'}
-                style={{ fontSize: '40px', float: 'left' }}
+                className={page > 1 ? 'previousArrowActive' : 'previousArrowDisabled'}
+                style={{
+                  fontSize: '40px',
+                  float: 'left',
+                }}
               />
             </Grid>
-            <Grid item xs={8} />
+            <Grid
+              item
+              container
+              xs={8}
+              justifyContent="center"
+            >
+              <Pagination
+                page={page}
+                size="large"
+                color="primary"
+                count={totalPages}
+                onChange={handleChangePage}
+                hidePrevButton
+                hideNextButton
+              />
+            </Grid>
             <Grid item xs={2}>
               <ArrowForwardIcon
                 onClick={handleNextPage}
-                className={totalPages > activePage ? 'nextArrowActive' : 'nextArrowDisabled'}
-                style={{ fontSize: '40px', float: 'right' }}
+                className={totalPages > page ? 'nextArrowActive' : 'nextArrowDisabled'}
+                style={{
+                  fontSize: '40px',
+                  float: 'right',
+                }}
               />
               <Grid />
             </Grid>
@@ -135,7 +176,7 @@ const Errors = function (props) {
               {
                 errors
                 && errors.data
-                  ? renderItems(errors.data.slice(indexOfFirstActivity, indexOfLastActivity))
+                  ? renderItems(errors.data)
                   : <CircularProgress />
               }
             </Grid>

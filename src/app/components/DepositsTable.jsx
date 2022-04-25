@@ -3,7 +3,6 @@ import React, {
   useState,
 } from 'react';
 import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import { makeStyles } from '@mui/styles';
 import {
   Table,
@@ -14,16 +13,9 @@ import {
   TablePagination,
   TableRow,
   TableSortLabel,
-  Toolbar,
-  Typography,
-  Paper,
-  IconButton,
-  Tooltip,
   FormControlLabel,
   Switch,
 } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import FilterListIcon from '@mui/icons-material/FilterList';
 import { Link } from 'react-router-dom';
 
 const headCells = [
@@ -155,76 +147,9 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
-const useToolbarStyles = makeStyles((theme) => ({
-  root: {
-    paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(1),
-  },
-  highlight:
-    theme.palette.type === 'light'
-      ? {
-        color: theme.palette.secondary.main,
-        backgroundColor: theme.palette.secondary.light,
-      }
-      : {
-        color: theme.palette.text.primary,
-        backgroundColor: theme.palette.secondary.dark,
-      },
-  title: {
-    flex: '1 1 100%',
-  },
-}));
-
-const EnhancedTableToolbar = function (props) {
-  const classes = useToolbarStyles();
-  const { numSelected } = props;
-
-  return (
-    <Toolbar
-      className={clsx(classes.root, {
-        [classes.highlight]: numSelected > 0,
-      })}
-    >
-      {numSelected > 0 ? (
-        <Typography className={classes.title} color="inherit" variant="subtitle1" component="div">
-          {numSelected}
-          {' '}
-          selected
-        </Typography>
-      ) : (
-        <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
-          Nutrition
-        </Typography>
-      )}
-
-      {numSelected > 0 ? (
-        <Tooltip title="Delete">
-          <IconButton aria-label="delete">
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip>
-      ) : (
-        <Tooltip title="Filter list">
-          <IconButton aria-label="filter list">
-            <FilterListIcon />
-          </IconButton>
-        </Tooltip>
-      )}
-    </Toolbar>
-  );
-}
-
-EnhancedTableToolbar.propTypes = {
-  numSelected: PropTypes.number.isRequired,
-};
-
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
-  },
-  paper: {
-    width: '100%',
-    marginBottom: theme.spacing(2),
   },
   table: {
     minWidth: 750,
@@ -329,73 +254,71 @@ const DepositsTable = function (props) {
 
   return (
     <div className={classes.root}>
-      <Paper className={classes.paper}>
-        <TableContainer>
-          <Table
-            className={classes.table}
-            aria-labelledby="tableTitle"
-            size={dense ? 'small' : 'medium'}
-            aria-label="enhanced table"
-          >
-            <EnhancedTableHead
-              classes={classes}
-              numSelected={selected.length}
-              order={order}
-              orderBy={orderBy}
-              onSelectAllClick={handleSelectAllClick}
-              onRequestSort={handleRequestSort}
-              rowCount={rows.length}
-            />
-            <TableBody>
-              {stableSort(rows, getComparator(order, orderBy))
-                .map((row, index) => {
-                  const isItemSelected = isSelected(row.name);
-                  const labelId = `enhanced-table-checkbox-${index}`;
+      <TableContainer>
+        <Table
+          className={classes.table}
+          aria-labelledby="tableTitle"
+          size={dense ? 'small' : 'medium'}
+          aria-label="enhanced table"
+        >
+          <EnhancedTableHead
+            classes={classes}
+            numSelected={selected.length}
+            order={order}
+            orderBy={orderBy}
+            onSelectAllClick={handleSelectAllClick}
+            onRequestSort={handleRequestSort}
+            rowCount={rows.length}
+          />
+          <TableBody>
+            {stableSort(rows, getComparator(order, orderBy))
+              .map((row, index) => {
+                const isItemSelected = isSelected(row.name);
+                const labelId = `enhanced-table-checkbox-${index}`;
 
-                  return (
-                    <TableRow
-                      hover
-                      onClick={(event) => handleClick(event, row.name)}
-                      role="checkbox"
-                      aria-checked={isItemSelected}
-                      tabIndex={-1}
-                      key={row.name}
-                      selected={isItemSelected}
-                    >
-                      <TableCell component="th" id={labelId} scope="row" padding="none">
-                        <p>
-                          <Link style={{ color: 'blue' }} to={`/public_profile/${row.username}`}>
-                            {row.id}
-                          </Link>
-                        </p>
+                return (
+                  <TableRow
+                    hover
+                    onClick={(event) => handleClick(event, row.name)}
+                    role="checkbox"
+                    aria-checked={isItemSelected}
+                    tabIndex={-1}
+                    key={row.name}
+                    selected={isItemSelected}
+                  >
+                    <TableCell component="th" id={labelId} scope="row" padding="none">
+                      <p>
+                        <Link style={{ color: 'blue' }} to={`/public_profile/${row.username}`}>
+                          {row.id}
+                        </Link>
+                      </p>
 
-                      </TableCell>
-                      <TableCell align="right">{row.userId}</TableCell>
-                      <TableCell align="right">{row.username}</TableCell>
-                      <TableCell align="right">{row.from}</TableCell>
+                    </TableCell>
+                    <TableCell align="right">{row.userId}</TableCell>
+                    <TableCell align="right">{row.username}</TableCell>
+                    <TableCell align="right">{row.from}</TableCell>
 
-                      <TableCell align="right">
-                        {row.txId}
-                      </TableCell>
-                      <TableCell align="right">{row.amount / 1e8}</TableCell>
-                      <TableCell align="right">{row.confirmations}</TableCell>
-                      <TableCell align="right">{row.phase}</TableCell>
-                    </TableRow>
-                  );
-                })}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[10, 25, 50, 100]}
-          component="div"
-          count={totalCount}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </Paper>
+                    <TableCell align="right">
+                      {row.txId}
+                    </TableCell>
+                    <TableCell align="right">{row.amount / 1e8}</TableCell>
+                    <TableCell align="right">{row.confirmations}</TableCell>
+                    <TableCell align="right">{row.phase}</TableCell>
+                  </TableRow>
+                );
+              })}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[10, 25, 50, 100]}
+        component="div"
+        count={totalCount}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
       <FormControlLabel
         control={<Switch checked={dense} onChange={handleChangeDense} />}
         label="Dense padding"

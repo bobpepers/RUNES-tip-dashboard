@@ -17,12 +17,31 @@ body {
   flex: 1;
   z-index: 20;
   padding-bottom: 50px;
+  color: var(--textColorGlobal);
 }
 
 .height100 {
   height: 100%;
 }
 
+// Tables
+
+.content th {
+  color: var(--textColorGlobal);
+}
+
+.content td {
+  color: var(--textColorGlobal);
+}
+
+// Buttons
+svg.MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.nextArrowDisabled.css-i4bv87-MuiSvgIcon-root {
+  color: #cccccc;
+}
+
+svg.MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.previousArrowDisabled.css-i4bv87-MuiSvgIcon-root {
+  color: #cccccc;
+}
 // Text
 
 .content {
@@ -38,6 +57,21 @@ h2 {
 }
 
 // Input fields
+.css-1qgma8u-MuiButtonBase-root-MuiTableSortLabel-root.Mui-active {
+  color: var(--textColorGlobal);
+}
+
+.css-19mk8g1-MuiInputBase-root-MuiFilledInput-root:before {
+  border-bottom: 1px solid var(--textColorGlobal);
+}
+
+.MuiFormControl-root.MuiTextField-root.css-1u3bzj6-MuiFormControl-root-MuiTextField-root label {
+  color: var(--textColorGlobal);
+}
+
+p.MuiFormHelperText-root.MuiFormHelperText-sizeMedium.MuiFormHelperText-contained.css-1wc848c-MuiFormHelperText-root {
+  color: #ff3333;
+}
 
 label.outlined-email-field-label {
   color: var(--textColorGlobal);
@@ -48,7 +82,7 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-edgeEnd {
 }
 
 label.MuiFormLabel-root.MuiInputLabel-root.MuiInputLabel-formControl.MuiInputLabel-animated.MuiInputLabel-outlined {
-  color: white;
+  color: var(--textColorGlobal);
 }
 
 .MuiOutlinedInput-notchedOutline {
