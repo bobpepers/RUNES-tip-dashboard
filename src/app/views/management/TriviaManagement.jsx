@@ -1,22 +1,16 @@
 import React, {
   useEffect,
   useState,
-  // Fragment,
 } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '@mui/styles/withStyles';
-// import { useNavigate } from 'react-router-dom';
 import { connect, useDispatch } from 'react-redux';
 import CircularProgress from '@mui/material/CircularProgress';
 import {
   Grid,
   Button,
   TextField,
-  Select,
-  MenuItem,
 } from '@mui/material';
-// import Button from '@mui/material/Button';
-// import ActivityView from './Activity';
 import { withRouter } from '../../hooks/withRouter';
 import {
   fetchTriviaQuestions,
@@ -24,8 +18,6 @@ import {
   removeTriviaAction,
   switchTriviaAction,
 } from '../../actions/trivia';
-
-// import Logo from '../assets/images/logo.svg';
 
 const styles = {
   card: {

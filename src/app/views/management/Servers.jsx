@@ -1,8 +1,6 @@
 import React, {
   useEffect,
   useState,
-  useLayoutEffect,
-  // Fragment,
 } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import {
@@ -21,9 +19,6 @@ import {
   fetchServerAction,
   banServerAction,
 } from '../../actions/servers';
-
-// import Info from '../containers/Info';
-// import * as actions from '../actions/auth';
 import ServerTable from '../../components/ServerTable';
 
 const useStyles = makeStyles((theme) => ({

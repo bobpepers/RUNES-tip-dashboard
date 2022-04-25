@@ -180,8 +180,8 @@ const DepositsTable = function (props) {
   const rows = [];
 
   deposits.forEach((item) => {
-    console.log('item');
-    console.log(item);
+    // console.log('item');
+    // console.log(item);
     rows.push(
       createData(
         item.id,

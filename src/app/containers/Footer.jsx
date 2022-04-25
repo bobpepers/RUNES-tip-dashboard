@@ -27,6 +27,9 @@ function Footer(props) {
     localStorage.setItem(LANGUAGE_KEY, lng);
     setLanguage(lng);
   };
+  setTimeout(() => {
+    console.log('Hello, World!')
+  }, 3000);
 
   useEffect(() => {
     const persistedLanguage = localStorage.getItem(LANGUAGE_KEY);

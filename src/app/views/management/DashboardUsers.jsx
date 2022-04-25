@@ -1,8 +1,6 @@
 import React, {
   useEffect,
   useState,
-  useLayoutEffect,
-  // Fragment,
 } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import {

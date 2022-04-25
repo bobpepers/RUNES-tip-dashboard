@@ -1,5 +1,5 @@
-import { combineReducers } from 'redux';
 import { reducer as form } from 'redux-form';
+import { configureStore } from '@reduxjs/toolkit'
 import auth from './auth';
 import tfa from './tfa';
 import resetPassword from './resetPassword';
@@ -32,40 +32,41 @@ import errors from './errors';
 import user from './user';
 import priceCurrencies from './priceCurrencies';
 
-const rootReducer = combineReducers({
-  form,
-  auth,
-  resetPass: resetPassword,
-  tfa,
-  theme,
-  alert,
+const store = configureStore({
+  reducer: {
+    form,
+    auth,
+    resetPass: resetPassword,
+    tfa,
+    theme,
+    alert,
 
-  nodeStatus,
-  user,
-  servers,
-  channels,
-  activity,
-  users,
-  deposits,
-  withdrawals,
-  dashboardUsers,
-  liability,
-  balance,
-  features,
-  acceptWithdrawal,
-  declineWithdrawal,
-  botSettings,
-  patchDeposits,
-  faucetBalance,
-  blockNumber,
-  startSync,
-  triviaQuestions,
-  insertTrivia,
-  removeTrivia,
-  switchTrivia,
-  priceCurrencies,
-  errors,
+    nodeStatus,
+    user,
+    servers,
+    channels,
+    activity,
+    users,
+    deposits,
+    withdrawals,
+    dashboardUsers,
+    liability,
+    balance,
+    features,
+    acceptWithdrawal,
+    declineWithdrawal,
+    botSettings,
+    patchDeposits,
+    faucetBalance,
+    blockNumber,
+    startSync,
+    triviaQuestions,
+    insertTrivia,
+    removeTrivia,
+    switchTrivia,
+    priceCurrencies,
+    errors,
+  },
+})
 
-});
-
-export default rootReducer;
+export default store;

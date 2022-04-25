@@ -11,10 +11,6 @@ import {
 } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect, useDispatch } from 'react-redux';
-// import requireAuth from './components/hoc/RequireAuth';
-
-// import requireAuth from './components/hoc/RequireAuth';
-
 import toggleTheme from './helpers/toggleTheme';
 
 import Home from './views/Home';

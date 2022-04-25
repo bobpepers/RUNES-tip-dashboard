@@ -29,7 +29,7 @@ function Settings(props) {
   }, []);
 
   return (
-    <div className="form-container index600 shadow-w signinContainer content">
+    <div className="form-container index600 signinContainer content">
       <Grid
         container
         alignItems="center"

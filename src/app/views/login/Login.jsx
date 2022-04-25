@@ -129,7 +129,7 @@ function Signin(props) {
 
   return (
     <div
-      className="form-container index600 shadow-w signinContainer content"
+      className="form-container index600 signinContainer content"
     >
       <Grid
         container

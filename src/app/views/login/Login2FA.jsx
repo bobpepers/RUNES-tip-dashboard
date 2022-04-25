@@ -2,7 +2,7 @@ import React from 'react';
 import {
   reduxForm,
   Field,
-  formValueSelector,
+  // formValueSelector,
 } from 'redux-form';
 import { connect, useDispatch } from 'react-redux';
 import {
@@ -119,7 +119,9 @@ const validate = (formProps) => {
 
   return errors;
 }
-const selector = formValueSelector('tfalogin');
+
+// const selector = formValueSelector('tfalogin');
+
 const mapStateToProps = (state) => ({
   errorMessage: state.auth.error,
 })
