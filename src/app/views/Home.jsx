@@ -1,7 +1,6 @@
 import React, {
   useEffect,
-  // useState,
-  // Fragment,
+  useState,
 } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '@mui/styles/withStyles';
@@ -10,12 +9,14 @@ import { connect, useDispatch } from 'react-redux';
 import CircularProgress from '@mui/material/CircularProgress';
 import {
   Grid,
-  // Button,
   Divider,
   Typography,
 } from '@mui/material';
 import Button from '@mui/material/Button';
-import ActivityView from './Activity';
+
+import ActivityContainer from '../containers/Activity';
+import ActivityFilter from '../containers/filters/ActivityFilter';
+
 import { withRouter } from '../hooks/withRouter';
 import {
   fetchNodeStatusAction,
@@ -43,8 +44,6 @@ import {
 import {
   fetchFaucetBalanceAction,
 } from '../actions/faucetBalance';
-
-// import Logo from '../assets/images/logo.svg';
 
 const styles = {
   card: {
@@ -126,6 +125,12 @@ const Home = function (props) {
     const path = 'bridge';
     navigate(path);
   }
+
+  const [id, setId] = useState('');
+  const [spender, setSpender] = useState('');
+  const [earner, setEarner] = useState('');
+  const [type, setType] = useState('');
+  const [amount, setAmount] = useState('');
 
   return (
     <div className="height100 content">
@@ -429,9 +434,32 @@ const Home = function (props) {
         <Divider
           style={{ width: '100%' }}
         />
+        <Grid item xs={12}>
+          <h3>Activity</h3>
+        </Grid>
+        <Grid item xs={12}>
+          <ActivityFilter
+            id={id}
+            setId={setId}
+            spender={spender}
+            setSpender={setSpender}
+            earner={earner}
+            setEarner={setEarner}
+            type={type}
+            setType={setType}
+            amount={amount}
+            setAmount={setAmount}
+          />
+        </Grid>
 
         <Grid item xs={12}>
-          <ActivityView />
+          <ActivityContainer
+            id={id}
+            spender={spender}
+            earner={earner}
+            type={type}
+            amount={amount}
+          />
         </Grid>
       </Grid>
     </div>

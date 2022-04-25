@@ -19,7 +19,7 @@ import toggleTheme from './helpers/toggleTheme';
 
 import Home from './views/Home';
 
-import Activity from './views/Activity';
+// import Activity from './views/Activity';
 import Settings from './views/Settings';
 
 import Register from './views/register/Register';
@@ -117,10 +117,10 @@ const RoutesX = function (props) {
           path="/channels"
           element={<Channels />}
         />
-        <Route
+        {/* <Route
           path="/activity"
           element={<Activity />}
-        />
+        /> */}
         <Route
           path="/deposits"
           element={<Deposits />}

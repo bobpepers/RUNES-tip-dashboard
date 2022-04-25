@@ -9,18 +9,8 @@ import {
   UNAUTH_USER,
   // EMAIL_NOT_VERIFIED,
   AUTH_USER_TFA,
-  ENQUEUE_SNACKBAR,
 } from './types/index';
-
-/**
- * Error helper
- */
-// export function authError(CONST, error) {
-//   return {
-//     type: CONST,
-//     payload: error,
-//   };
-// }
+import { notistackErrorAdd } from './helpers/notistackError';
 
 /**
  * Sign up
@@ -38,42 +28,10 @@ export function signupUser(
         dispatch(navigate(`/register/verify-register?email=${props.email}`));
       })
       .catch((error) => {
-        if (error.response) {
-          // client received an error response (5xx, 4xx)
-          dispatch({
-            type: ENQUEUE_SNACKBAR,
-            notification: {
-              message: `${error.response.status}: ${error.response.data.error}`,
-              key: new Date().getTime() + Math.random(),
-              options: {
-                variant: 'error',
-              },
-            },
-          });
-        } else if (error.request) {
-          // client never received a response, or request never left
-          dispatch({
-            type: ENQUEUE_SNACKBAR,
-            notification: {
-              message: 'Connection Timeout',
-              key: new Date().getTime() + Math.random(),
-              options: {
-                variant: 'error',
-              },
-            },
-          });
-        } else {
-          dispatch({
-            type: ENQUEUE_SNACKBAR,
-            notification: {
-              message: 'Unknown Error',
-              key: new Date().getTime() + Math.random(),
-              options: {
-                variant: 'error',
-              },
-            },
-          });
-        }
+        notistackErrorAdd(
+          dispatch,
+          error,
+        );
 
         dispatch({
           type: SIGNUP_FAILURE,
@@ -108,42 +66,10 @@ export function signinUser(props) {
         window.location.href = '/';
       })
       .catch((error) => {
-        if (error.response) {
-          // client received an error response (5xx, 4xx)
-          dispatch({
-            type: ENQUEUE_SNACKBAR,
-            notification: {
-              message: `${error.response.status}: ${error.response.data.error}`,
-              key: new Date().getTime() + Math.random(),
-              options: {
-                variant: 'error',
-              },
-            },
-          });
-        } else if (error.request) {
-          // client never received a response, or request never left
-          dispatch({
-            type: ENQUEUE_SNACKBAR,
-            notification: {
-              message: 'Connection Timeout',
-              key: new Date().getTime() + Math.random(),
-              options: {
-                variant: 'error',
-              },
-            },
-          });
-        } else {
-          dispatch({
-            type: ENQUEUE_SNACKBAR,
-            notification: {
-              message: 'Unknown Error',
-              key: new Date().getTime() + Math.random(),
-              options: {
-                variant: 'error',
-              },
-            },
-          });
-        }
+        notistackErrorAdd(
+          dispatch,
+          error,
+        );
       });
   }
 }
