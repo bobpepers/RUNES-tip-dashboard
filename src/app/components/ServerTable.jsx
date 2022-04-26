@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 // import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@mui/styles';
@@ -176,10 +176,10 @@ function ServerTable(props) {
   });
 
   const classes = useStyles();
-  const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('id');
-  const [selected, setSelected] = React.useState([]);
-  const [dense, setDense] = React.useState(false);
+  const [order, setOrder] = useState('asc');
+  const [orderBy, setOrderBy] = useState('id');
+  const [selected, setSelected] = useState([]);
+  const [dense, setDense] = useState(false);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -267,11 +267,8 @@ function ServerTable(props) {
                   >
                     <TableCell component="th" id={labelId} scope="row" padding="none">
                       <p>
-                        <Link style={{ color: 'blue' }} to={`/public_profile/${row.username}`}>
-                          {row.id}
-                        </Link>
+                        {row.id}
                       </p>
-
                     </TableCell>
                     <TableCell align="right">{row.groupId}</TableCell>
                     <TableCell align="right">{row.groupName}</TableCell>

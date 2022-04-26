@@ -131,6 +131,7 @@ const Home = function (props) {
   const [earner, setEarner] = useState('');
   const [type, setType] = useState('');
   const [amount, setAmount] = useState('');
+  const [rowsPerPage, setRowsPerPage] = useState(50);
 
   return (
     <div className="height100 content">
@@ -459,6 +460,7 @@ const Home = function (props) {
             earner={earner}
             type={type}
             amount={amount}
+            rowsPerPage={rowsPerPage}
           />
         </Grid>
       </Grid>

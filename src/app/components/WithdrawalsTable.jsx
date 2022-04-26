@@ -1,5 +1,6 @@
 import React, {
   useState,
+  useEffect,
 } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@mui/styles';
@@ -16,7 +17,7 @@ import {
   FormControlLabel,
   Switch,
 } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const headCells = [
   {
@@ -61,6 +62,7 @@ function createData(
   amount,
   createdAt,
   confirmations,
+  userRowId,
 ) {
   return {
     id,
@@ -72,6 +74,7 @@ function createData(
     amount,
     createdAt,
     confirmations,
+    userRowId,
   };
 }
 
@@ -188,11 +191,19 @@ const WithdrawalsTable = function (props) {
     setRowsPerPage,
     totalCount,
   } = props;
+
+  const navigate = useNavigate();
+
+  useEffect(
+    () => { },
+    [
+      withdrawals,
+    ],
+  );
+
   const rows = [];
 
   withdrawals.forEach((item) => {
-    console.log('item');
-    console.log(item);
     rows.push(
       createData(
         item.id ? item.id : '',
@@ -204,6 +215,7 @@ const WithdrawalsTable = function (props) {
         item.amount ? item.amount : 0,
         item.createdAt ? item.createdAt : '',
         item.confirmations ? item.confirmations : '',
+        item.user ? item.user.id : '',
       ),
     );
   });
@@ -300,14 +312,23 @@ const WithdrawalsTable = function (props) {
                   >
                     <TableCell component="th" id={labelId} scope="row" padding="none">
                       <p>
-                        <Link style={{ color: 'blue' }} to={`/public_profile/${row.username && row.username}`}>
-                          {row.id && row.id}
-                        </Link>
+                        {row.id && row.id}
                       </p>
-
                     </TableCell>
-                    <TableCell align="right">{row.userId && row.userId}</TableCell>
-                    <TableCell align="right">{row.username && row.username}</TableCell>
+                    <TableCell align="right">
+                      <Button
+                        onClick={() => navigate(`/user/${row.userRowId}`)}
+                      >
+                        {row.userId && row.userId}
+                      </Button>
+                    </TableCell>
+                    <TableCell align="right">
+                      <Button
+                        onClick={() => navigate(`/user/${row.userRowId}`)}
+                      >
+                        {row.username && row.username}
+                      </Button>
+                    </TableCell>
                     <TableCell align="right">{row.to_from && row.to_from}</TableCell>
 
                     <TableCell align="right">

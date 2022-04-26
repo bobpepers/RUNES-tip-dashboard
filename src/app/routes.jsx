@@ -28,6 +28,8 @@ import ResetPasswordVerify from './views/resetPassword/ResetPasswordVerify';
 import ResetPasswordNew from './views/resetPassword/ResetPasswordNew';
 
 import Servers from './views/management/Servers';
+import UserView from './views/management/User';
+
 import Channels from './views/management/Channels';
 import TriviaManagement from './views/management/TriviaManagement';
 import Users from './views/management/Users';
@@ -96,6 +98,10 @@ const RoutesX = function (props) {
         <Route
           path="/users"
           element={<Users />}
+        />
+        <Route
+          path="/user/:userId"
+          element={<UserView />}
         />
         <Route
           path="/bot/settings"

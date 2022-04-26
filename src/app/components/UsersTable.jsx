@@ -16,7 +16,7 @@ import {
   FormControlLabel,
   Switch,
 } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import BanDialog from './BanDialog';
 
 const headCells = [
@@ -200,6 +200,7 @@ const UsersTable = function (props) {
   const [orderBy, setOrderBy] = useState('id');
   const [selected, setSelected] = useState([]);
   const [dense, setDense] = useState(false);
+  const navigate = useNavigate();
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -287,14 +288,29 @@ const UsersTable = function (props) {
                   >
                     <TableCell component="th" id={labelId} scope="row" padding="none">
                       <p>
-                        <Link style={{ color: 'blue' }} to={`/public_profile/${row.username}`}>
+                        <Button
+                          onClick={() => navigate(`/user/${row.id}`)}
+                        >
                           {row.id}
-                        </Link>
+                        </Button>
                       </p>
 
                     </TableCell>
-                    <TableCell align="right">{row.userId}</TableCell>
-                    <TableCell align="right">{row.username}</TableCell>
+                    <TableCell align="right">
+                      <Button
+                        onClick={() => navigate(`/user/${row.id}`)}
+                      >
+                        {row.userId}
+                      </Button>
+
+                    </TableCell>
+                    <TableCell align="right">
+                      <Button
+                        onClick={() => navigate(`/user/${row.id}`)}
+                      >
+                        {row.username}
+                      </Button>
+                    </TableCell>
                     <TableCell align="right">{row.available / 1e8}</TableCell>
                     <TableCell align="right">{row.locked / 1e8}</TableCell>
                     <TableCell align="right">{row.total / 1e8}</TableCell>

@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import React, {
   useState,
+  useEffect,
 } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@mui/styles';
@@ -15,8 +16,9 @@ import {
   TableSortLabel,
   FormControlLabel,
   Switch,
+  Button,
 } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const headCells = [
   {
@@ -55,6 +57,7 @@ function createData(
   to_from,
   amount,
   confirmations,
+  userRowId,
 ) {
   return {
     id,
@@ -65,6 +68,7 @@ function createData(
     to_from,
     amount,
     confirmations,
+    userRowId,
   };
 }
 
@@ -177,6 +181,16 @@ const DepositsTable = function (props) {
     setRowsPerPage,
     totalCount,
   } = props;
+
+  const navigate = useNavigate();
+
+  useEffect(
+    () => { },
+    [
+      deposits,
+    ],
+  );
+
   const rows = [];
 
   deposits.forEach((item) => {
@@ -192,6 +206,7 @@ const DepositsTable = function (props) {
         item.to_from,
         item.amount,
         item.confirmations,
+        item.user ? item.user.id : '',
       ),
     );
   });
@@ -288,14 +303,24 @@ const DepositsTable = function (props) {
                   >
                     <TableCell component="th" id={labelId} scope="row" padding="none">
                       <p>
-                        <Link style={{ color: 'blue' }} to={`/public_profile/${row.username}`}>
-                          {row.id}
-                        </Link>
+                        {row.id}
                       </p>
 
                     </TableCell>
-                    <TableCell align="right">{row.userId}</TableCell>
-                    <TableCell align="right">{row.username}</TableCell>
+                    <TableCell align="right">
+                      <Button
+                        onClick={() => navigate(`/user/${row.userRowId}`)}
+                      >
+                        {row.userId}
+                      </Button>
+                    </TableCell>
+                    <TableCell align="right">
+                      <Button
+                        onClick={() => navigate(`/user/${row.userRowId}`)}
+                      >
+                        {row.username}
+                      </Button>
+                    </TableCell>
                     <TableCell align="right">{row.from}</TableCell>
 
                     <TableCell align="right">

@@ -17,7 +17,13 @@ import { unlocktfa } from '../../actions/tfa';
 
 const renderNumberField = (
   {
-    input, label, meta: { touched, error }, ...custom
+    input,
+    label,
+    meta: {
+      touched,
+      error,
+    },
+    ...custom
   },
 ) => (
   <FormControl variant="outlined" fullWidth>

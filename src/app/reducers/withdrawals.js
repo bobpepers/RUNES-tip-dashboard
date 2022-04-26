@@ -8,6 +8,7 @@ import {
 const initialState = {
   isFetching: false, // Default to fetching..
   error: null,
+  data: null,
 };
 
 export default (state = initialState, action) => {
@@ -28,6 +29,7 @@ export default (state = initialState, action) => {
       ...state,
       isFetching: true,
       error: null,
+      data: null,
     };
   case FETCH_WITHDRAWALS_SUCCESS:
     return {
@@ -37,9 +39,10 @@ export default (state = initialState, action) => {
       isFetching: false,
     };
   case FETCH_WITHDRAWALS_FAIL:
-    console.log('Error: ', action.error);
     return {
       ...state,
+      data: null,
+      count: 0,
       error: action.error,
       isFetching: false,
     };

@@ -8,22 +8,25 @@ import {
 /**
  * Fetch User Data
  */
-export function fetchUserData() {
+export function fetchUserData(
+  id,
+) {
   return function (dispatch) {
     dispatch({
       type: FETCH_USER_BEGIN,
     });
-    axios.get(`${window.myConfig.apiUrl}/user`)
-      .then((response) => {
-        dispatch({
-          type: FETCH_USER_SUCCESS,
-          payload: response.data,
-        });
-      }).catch((error) => {
-        dispatch({
-          type: FETCH_USER_FAIL,
-          payload: error,
-        });
+    axios.post(`${window.myConfig.apiUrl}/user`, {
+      id,
+    }).then((response) => {
+      dispatch({
+        type: FETCH_USER_SUCCESS,
+        payload: response.data,
       });
+    }).catch((error) => {
+      dispatch({
+        type: FETCH_USER_FAIL,
+        payload: error,
+      });
+    });
   }
 }

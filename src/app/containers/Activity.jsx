@@ -30,10 +30,10 @@ const ActivityContainer = function (props) {
     earner,
     type,
     amount,
+    rowsPerPage,
   } = props;
   const dispatch = useDispatch();
 
-  const [rowsPerPage, setRowsPerPage] = useState(50);
   const [page, setPage] = useState(1);
 
   useEffect(() => {

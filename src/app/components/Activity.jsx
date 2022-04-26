@@ -4,10 +4,12 @@ import {
   CircularProgress,
   Typography,
   Pagination,
+  Button,
 } from '@mui/material';
 import Moment from 'react-moment';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { Link, useNavigate } from 'react-router-dom';
 
 const renderEarnedSpendBalance = (activity) => (
   <>
@@ -54,35 +56,53 @@ const renderAmount = (activity) => (
   </Typography>
 )
 
-const renderBy = (activity) => (
+const renderBy = (
+  activity,
+  navigate,
+) => (
   <Typography variant="subtitle1" gutterBottom component="div">
     by:
     <br />
-    {activity.spender && activity.spender.username && activity.spender.username}
-    {activity.earner && !activity.earner.username && activity.earner.firstname && `${activity.earner.firstname} `}
-    {activity.earner && !activity.earner.username && activity.earner.lastname && activity.earner.lastname}
-    {' '}
-    (
-    {activity.spender && activity.spender.user_id && activity.spender.user_id}
-    )
+    <Button
+      onClick={() => navigate(`/user/${activity.spender && activity.spender.id && activity.spender.id}`)}
+    >
+      {activity.spender && activity.spender.username && activity.spender.username}
+      {activity.spender && !activity.spender.username && activity.spender.firstname && `${activity.spender.firstname} `}
+      {activity.spender && !activity.spender.username && activity.spender.lastname && activity.spender.lastname}
+      {' '}
+      (
+      {activity.spender && activity.spender.user_id && activity.spender.user_id}
+      )
+    </Button>
   </Typography>
 )
 
-const renderTo = (activity) => (
+const renderTo = (
+  activity,
+  navigate,
+) => (
   <Typography variant="subtitle1" gutterBottom component="div">
     to:
     <br />
-    {activity.earner && activity.earner.username && activity.earner.username}
-    {activity.earner && !activity.earner.username && activity.earner.firstname && `${activity.earner.firstname} `}
-    {activity.earner && !activity.earner.username && activity.earner.lastname && activity.earner.lastname}
-    {' '}
-    (
-    {activity.earner && activity.earner.user_id && activity.earner.user_id}
-    )
+    <Button
+      onClick={() => navigate(`/user/${activity.earner && activity.earner.id && activity.earner.id}`)}
+    >
+      {activity.earner && activity.earner.username && activity.earner.username}
+      {activity.earner && !activity.earner.username && activity.earner.firstname && `${activity.earner.firstname} `}
+      {activity.earner && !activity.earner.username && activity.earner.lastname && activity.earner.lastname}
+      {' '}
+      (
+      {activity.earner && activity.earner.user_id && activity.earner.user_id}
+      )
+    </Button>
+
   </Typography>
 )
 
-const renderItems = (data) => {
+const renderItems = (
+  data,
+  navigate,
+) => {
   const parent = [];
   data.map((activity) => {
     console.log(activity);
@@ -247,7 +267,7 @@ const renderItems = (data) => {
             || activity.type === 'price_s'
             || activity.type === 'depositAccepted'
             || activity.type === 'depositComplete'
-            ) && renderTo(activity)}
+            ) && renderTo(activity, navigate)}
 
             {(
               activity.type === 'reactdrop_s'
@@ -292,7 +312,7 @@ const renderItems = (data) => {
             || activity.type === 'withdrawAccepted'
             || activity.type === 'withdrawRejected'
             || activity.type === 'withdrawComplete'
-            ) && renderBy(activity)}
+            ) && renderBy(activity, navigate)}
 
             {activity.type === 'tip_s' && (
               <>
@@ -506,6 +526,7 @@ const ActivityComponent = function (props) {
   ) => {
     setPage(value);
   }
+  const navigate = useNavigate();
 
   return (
     <Grid
@@ -569,7 +590,10 @@ const ActivityComponent = function (props) {
       >
         {
           activity
-            ? renderItems(activity)
+            ? renderItems(
+              activity,
+              navigate,
+            )
             : <CircularProgress />
         }
       </Grid>

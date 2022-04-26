@@ -31,6 +31,7 @@ import switchTrivia from './switchTrivia';
 import errors from './errors';
 import user from './user';
 import priceCurrencies from './priceCurrencies';
+import userInfo from './userInfo';
 
 const store = configureStore({
   reducer: {
@@ -66,6 +67,7 @@ const store = configureStore({
     switchTrivia,
     priceCurrencies,
     errors,
+    userInfo,
   },
 })
 
