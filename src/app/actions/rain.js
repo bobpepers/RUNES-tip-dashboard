@@ -10,8 +10,6 @@ import {
 import { notistackErrorAdd } from './helpers/notistackError';
 
 export function fetchRainsAction(
-  id,
-  address,
   offset,
   limit,
 ) {
@@ -20,8 +18,6 @@ export function fetchRainsAction(
       type: FETCH_RAINS_BEGIN,
     });
     axios.post(`${window.myConfig.apiUrl}/rains`, {
-      id,
-      address,
       offset,
       limit,
     })

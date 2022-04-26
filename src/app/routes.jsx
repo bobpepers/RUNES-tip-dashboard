@@ -40,6 +40,7 @@ import PriceCurrenciesManagement from './views/management/PriceCurrencies';
 import WithdrawalAddressesView from './views/management/WithdrawalAddresses';
 import WithdrawalAddressView from './views/management/WithdrawalAddress';
 import RainsView from './views/functions/Rains';
+import RainView from './views/functions/Rain';
 
 import Deposits from './views/functions/Deposits';
 import Withdrawals from './views/functions/Withdrawals';
@@ -133,6 +134,10 @@ const RoutesX = function (props) {
         <Route
           path="/rains"
           element={<RainsView />}
+        />
+        <Route
+          path="/rain/:rainId"
+          element={<RainView />}
         />
 
         {/* <Route
