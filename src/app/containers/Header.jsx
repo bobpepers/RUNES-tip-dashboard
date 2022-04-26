@@ -4,7 +4,7 @@ import React, {
   useRef,
   useCallback,
 } from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
   Navbar,
@@ -28,8 +28,6 @@ const Header = function (props) {
     user,
   } = props;
   const heightRef = useRef(null);
-  const [ref, setRef] = useState(null);
-  const dispatch = useDispatch();
   const [menu, setMenu] = useState(false);
   const [height, setHeight] = useState(0);
   const [anchorElManagement, setAnchorElManagement] = useState(null);
@@ -40,9 +38,7 @@ const Header = function (props) {
   const isMenuOpen = Boolean(anchorEl);
 
   const handleWindowResize = useCallback((event) => {
-    console.log('resize window');
     if (height !== heightRef.current.clientHeight) {
-      // this.setState({ height: this.div.clientHeight });
       setHeight(heightRef.current.clientHeight);
     }
   }, []);
@@ -86,7 +82,6 @@ const Header = function (props) {
 
   const show = (menu) ? 'show' : '';
 
-  // console.log(this.props.user);
   return (
     <header className="rootRow header" style={{ height }}>
       <Navbar
@@ -219,6 +214,14 @@ const Header = function (props) {
                   DashboardUsers
                 </MenuItem>
               </Link>
+              <Link
+                className="nav-link"
+                to="/withdrawaladdresses"
+              >
+                <MenuItem onClick={handleCloseManagement}>
+                  WithdrawalAddresses
+                </MenuItem>
+              </Link>
             </Menu>
 
             <Button
@@ -265,6 +268,94 @@ const Header = function (props) {
               >
                 <MenuItem onClick={handleCloseFunctions}>
                   Errors
+                </MenuItem>
+              </Link>
+              <Link
+                className="nav-link"
+                to="/tips"
+              >
+                <MenuItem onClick={handleCloseFunctions}>
+                  Tips
+                </MenuItem>
+              </Link>
+              <Link
+                className="nav-link"
+                to="/rains"
+              >
+                <MenuItem onClick={handleCloseFunctions}>
+                  Rains
+                </MenuItem>
+              </Link>
+              <Link
+                className="nav-link"
+                to="/soaks"
+              >
+                <MenuItem onClick={handleCloseFunctions}>
+                  Soaks
+                </MenuItem>
+              </Link>
+              <Link
+                className="nav-link"
+                to="/floods"
+              >
+                <MenuItem onClick={handleCloseFunctions}>
+                  Floods
+                </MenuItem>
+              </Link>
+              <Link
+                className="nav-link"
+                to="/sleets"
+              >
+                <MenuItem onClick={handleCloseFunctions}>
+                  Sleets
+                </MenuItem>
+              </Link>
+              <Link
+                className="nav-link"
+                to="/voicerains"
+              >
+                <MenuItem onClick={handleCloseFunctions}>
+                  Voicerains
+                </MenuItem>
+              </Link>
+              <Link
+                className="nav-link"
+                to="/thunders"
+              >
+                <MenuItem onClick={handleCloseFunctions}>
+                  Thunders
+                </MenuItem>
+              </Link>
+              <Link
+                className="nav-link"
+                to="/thunderstorms"
+              >
+                <MenuItem onClick={handleCloseFunctions}>
+                  Thunderstorms
+                </MenuItem>
+              </Link>
+              <Link
+                className="nav-link"
+                to="/hurricanes"
+              >
+                <MenuItem onClick={handleCloseFunctions}>
+                  Hurricanes
+                </MenuItem>
+              </Link>
+              <Link
+                className="nav-link"
+                to="/reactdrops"
+              >
+                <MenuItem onClick={handleCloseFunctions}>
+                  Reactdrops
+                </MenuItem>
+              </Link>
+              <Link
+                className="nav-link"
+                to="/trivia"
+              >
+                <MenuItem onClick={handleCloseFunctions}>
+                  Trivias
                 </MenuItem>
               </Link>
             </Menu>

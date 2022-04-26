@@ -179,6 +179,7 @@ const useStyles = makeStyles((theme) => ({
 
 const WithdrawalsTable = function (props) {
   const {
+    sliced,
     withdrawals,
     defaultPageSize,
     acceptWithdrawalFunction,
@@ -294,81 +295,163 @@ const WithdrawalsTable = function (props) {
             onRequestSort={handleRequestSort}
             rowCount={rows.length}
           />
-          <TableBody>
-            {stableSort(rows, getComparator(order, orderBy))
-              .map((row, index) => {
-                const isItemSelected = isSelected(row.name);
-                const labelId = `enhanced-table-checkbox-${index}`;
+          {
+            sliced ? (
+              <TableBody>
+                {stableSort(rows, getComparator(order, orderBy))
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row, index) => {
+                    const isItemSelected = isSelected(row.name);
+                    const labelId = `enhanced-table-checkbox-${index}`;
 
-                return (
-                  <TableRow
-                    hover
-                    onClick={(event) => handleClick(event, row.name)}
-                    role="checkbox"
-                    aria-checked={isItemSelected}
-                    tabIndex={-1}
-                    key={row.name && row.name}
-                    selected={isItemSelected}
-                  >
-                    <TableCell component="th" id={labelId} scope="row" padding="none">
-                      <p>
-                        {row.id && row.id}
-                      </p>
-                    </TableCell>
-                    <TableCell align="right">
-                      <Button
-                        onClick={() => navigate(`/user/${row.userRowId}`)}
+                    return (
+                      <TableRow
+                        hover
+                        onClick={(event) => handleClick(event, row.name)}
+                        role="checkbox"
+                        aria-checked={isItemSelected}
+                        tabIndex={-1}
+                        key={row.name && row.name}
+                        selected={isItemSelected}
                       >
-                        {row.userId && row.userId}
-                      </Button>
-                    </TableCell>
-                    <TableCell align="right">
-                      <Button
-                        onClick={() => navigate(`/user/${row.userRowId}`)}
-                      >
-                        {row.username && row.username}
-                      </Button>
-                    </TableCell>
-                    <TableCell align="right">{row.to_from && row.to_from}</TableCell>
+                        <TableCell component="th" id={labelId} scope="row" padding="none">
+                          <p>
+                            {row.id && row.id}
+                          </p>
+                        </TableCell>
+                        <TableCell align="right">
+                          <Button
+                            onClick={() => navigate(`/user/${row.userRowId}`)}
+                          >
+                            {row.userId && row.userId}
+                          </Button>
+                        </TableCell>
+                        <TableCell align="right">
+                          <Button
+                            onClick={() => navigate(`/user/${row.userRowId}`)}
+                          >
+                            {row.username && row.username}
+                          </Button>
+                        </TableCell>
+                        <TableCell align="right">{row.to_from && row.to_from}</TableCell>
 
-                    <TableCell align="right">
-                      {row.txId}
-                    </TableCell>
-                    <TableCell align="right">{row.amount && row.amount / 1e8}</TableCell>
-                    <TableCell align="right">{row.createdAt && row.createdAt}</TableCell>
-                    <TableCell align="right">{row.confirmations && row.confirmations}</TableCell>
-                    <TableCell align="right">{row.phase && row.phase}</TableCell>
-                    <TableCell align="right">
-                      {
-                        (
-                          row.phase === 'review'
-                        // || row.phase === 'failed'
-                        )
+                        <TableCell align="right">
+                          {row.txId}
+                        </TableCell>
+                        <TableCell align="right">{row.amount && row.amount / 1e8}</TableCell>
+                        <TableCell align="right">{row.createdAt && row.createdAt}</TableCell>
+                        <TableCell align="right">{row.confirmations && row.confirmations}</TableCell>
+                        <TableCell align="right">{row.phase && row.phase}</TableCell>
+                        <TableCell align="right">
+                          {
+                            (
+                              row.phase === 'review'
+                            // || row.phase === 'failed'
+                            )
                             && !acceptWithdrawal.isFetching
                             && !declineWithdrawal.isFetching
-                          ? (
-                            <>
-                              <Button
-                                onClick={() => acceptWithdrawalFunction(row.id)}
-                                variant="contained"
-                              >
-                                Accept
-                              </Button>
-                              <Button
-                                onClick={() => declineWithdrawalFunction(row.id)}
-                                variant="contained"
-                              >
-                                Decline
-                              </Button>
-                            </>
-                          )
-                          : ('loading')
-                      }
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
-          </TableBody>
+                              ? (
+                                <>
+                                  <Button
+                                    onClick={() => acceptWithdrawalFunction(row.id)}
+                                    variant="contained"
+                                  >
+                                    Accept
+                                  </Button>
+                                  <Button
+                                    onClick={() => declineWithdrawalFunction(row.id)}
+                                    variant="contained"
+                                  >
+                                    Decline
+                                  </Button>
+                                </>
+                              )
+                              : ('loading')
+                          }
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+              </TableBody>
+            ) : (
+              <TableBody>
+                {stableSort(rows, getComparator(order, orderBy))
+                  .map((row, index) => {
+                    const isItemSelected = isSelected(row.name);
+                    const labelId = `enhanced-table-checkbox-${index}`;
+
+                    return (
+                      <TableRow
+                        hover
+                        onClick={(event) => handleClick(event, row.name)}
+                        role="checkbox"
+                        aria-checked={isItemSelected}
+                        tabIndex={-1}
+                        key={row.name && row.name}
+                        selected={isItemSelected}
+                      >
+                        <TableCell component="th" id={labelId} scope="row" padding="none">
+                          <p>
+                            {row.id && row.id}
+                          </p>
+                        </TableCell>
+                        <TableCell align="right">
+                          <Button
+                            onClick={() => navigate(`/user/${row.userRowId}`)}
+                          >
+                            {row.userId && row.userId}
+                          </Button>
+                        </TableCell>
+                        <TableCell align="right">
+                          <Button
+                            onClick={() => navigate(`/user/${row.userRowId}`)}
+                          >
+                            {row.username && row.username}
+                          </Button>
+                        </TableCell>
+                        <TableCell align="right">{row.to_from && row.to_from}</TableCell>
+
+                        <TableCell align="right">
+                          {row.txId}
+                        </TableCell>
+                        <TableCell align="right">{row.amount && row.amount / 1e8}</TableCell>
+                        <TableCell align="right">{row.createdAt && row.createdAt}</TableCell>
+                        <TableCell align="right">{row.confirmations && row.confirmations}</TableCell>
+                        <TableCell align="right">{row.phase && row.phase}</TableCell>
+                        <TableCell align="right">
+                          {
+                            (
+                              row.phase === 'review'
+                            // || row.phase === 'failed'
+                            )
+                            && !acceptWithdrawal.isFetching
+                            && !declineWithdrawal.isFetching
+                              ? (
+                                <>
+                                  <Button
+                                    onClick={() => acceptWithdrawalFunction(row.id)}
+                                    variant="contained"
+                                  >
+                                    Accept
+                                  </Button>
+                                  <Button
+                                    onClick={() => declineWithdrawalFunction(row.id)}
+                                    variant="contained"
+                                  >
+                                    Decline
+                                  </Button>
+                                </>
+                              )
+                              : ('loading')
+                          }
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+              </TableBody>
+            )
+          }
+
         </Table>
       </TableContainer>
       <TablePagination

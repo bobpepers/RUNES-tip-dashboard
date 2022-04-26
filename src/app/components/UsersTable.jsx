@@ -169,6 +169,7 @@ const useStyles = makeStyles((theme) => ({
 
 const UsersTable = function (props) {
   const {
+    sliced,
     users,
     banUser,
     defaultPageSize,
@@ -270,75 +271,151 @@ const UsersTable = function (props) {
             onRequestSort={handleRequestSort}
             rowCount={rows.length}
           />
-          <TableBody>
-            {stableSort(rows, getComparator(order, orderBy))
-              .map((row, index) => {
-                const isItemSelected = isSelected(row.name);
-                const labelId = `enhanced-table-checkbox-${index}`;
+          {
+            sliced ? (
+              <TableBody>
+                {stableSort(rows, getComparator(order, orderBy))
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row, index) => {
+                    const isItemSelected = isSelected(row.name);
+                    const labelId = `enhanced-table-checkbox-${index}`;
 
-                return (
-                  <TableRow
-                    hover
-                    onClick={(event) => handleClick(event, row.name)}
-                    role="checkbox"
-                    aria-checked={isItemSelected}
-                    tabIndex={-1}
-                    key={row.name}
-                    selected={isItemSelected}
-                  >
-                    <TableCell component="th" id={labelId} scope="row" padding="none">
-                      <p>
-                        <Button
-                          onClick={() => navigate(`/user/${row.id}`)}
-                        >
-                          {row.id}
-                        </Button>
-                      </p>
-
-                    </TableCell>
-                    <TableCell align="right">
-                      <Button
-                        onClick={() => navigate(`/user/${row.id}`)}
+                    return (
+                      <TableRow
+                        hover
+                        onClick={(event) => handleClick(event, row.name)}
+                        role="checkbox"
+                        aria-checked={isItemSelected}
+                        tabIndex={-1}
+                        key={row.name}
+                        selected={isItemSelected}
                       >
-                        {row.userId}
-                      </Button>
+                        <TableCell component="th" id={labelId} scope="row" padding="none">
+                          <p>
+                            <Button
+                              onClick={() => navigate(`/user/${row.id}`)}
+                            >
+                              {row.id}
+                            </Button>
+                          </p>
 
-                    </TableCell>
-                    <TableCell align="right">
-                      <Button
-                        onClick={() => navigate(`/user/${row.id}`)}
+                        </TableCell>
+                        <TableCell align="right">
+                          <Button
+                            onClick={() => navigate(`/user/${row.id}`)}
+                          >
+                            {row.userId}
+                          </Button>
+
+                        </TableCell>
+                        <TableCell align="right">
+                          <Button
+                            onClick={() => navigate(`/user/${row.id}`)}
+                          >
+                            {row.username}
+                          </Button>
+                        </TableCell>
+                        <TableCell align="right">{row.available / 1e8}</TableCell>
+                        <TableCell align="right">{row.locked / 1e8}</TableCell>
+                        <TableCell align="right">{row.total / 1e8}</TableCell>
+
+                        <TableCell align="right">
+                          {row.lastActive}
+                        </TableCell>
+                        <TableCell align="right">
+                          {!row.banned ? (
+                            <BanDialog
+                              name={row.channelName}
+                              confirmBan={banUser}
+                              otherId={row.user_id}
+                              id={row.id}
+                            />
+                          ) : (
+                            <Button
+                              variant="outlined"
+                              onClick={() => banUser(row.id, '')}
+                            >
+                              UNBAN
+                            </Button>
+                          )}
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+              </TableBody>
+            ) : (
+              <TableBody>
+                {stableSort(rows, getComparator(order, orderBy))
+                  .map((row, index) => {
+                    const isItemSelected = isSelected(row.name);
+                    const labelId = `enhanced-table-checkbox-${index}`;
+
+                    return (
+                      <TableRow
+                        hover
+                        onClick={(event) => handleClick(event, row.name)}
+                        role="checkbox"
+                        aria-checked={isItemSelected}
+                        tabIndex={-1}
+                        key={row.name}
+                        selected={isItemSelected}
                       >
-                        {row.username}
-                      </Button>
-                    </TableCell>
-                    <TableCell align="right">{row.available / 1e8}</TableCell>
-                    <TableCell align="right">{row.locked / 1e8}</TableCell>
-                    <TableCell align="right">{row.total / 1e8}</TableCell>
+                        <TableCell component="th" id={labelId} scope="row" padding="none">
+                          <p>
+                            <Button
+                              onClick={() => navigate(`/user/${row.id}`)}
+                            >
+                              {row.id}
+                            </Button>
+                          </p>
 
-                    <TableCell align="right">
-                      {row.lastActive}
-                    </TableCell>
-                    <TableCell align="right">
-                      {!row.banned ? (
-                        <BanDialog
-                          name={row.channelName}
-                          confirmBan={banUser}
-                          otherId={row.user_id}
-                          id={row.id}
-                        />
-                      ) : (
-                        <Button
-                          variant="outlined"
-                          onClick={() => banUser(row.id, '')}
-                        >
-                          UNBAN
-                        </Button>
-                      )}
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
-          </TableBody>
+                        </TableCell>
+                        <TableCell align="right">
+                          <Button
+                            onClick={() => navigate(`/user/${row.id}`)}
+                          >
+                            {row.userId}
+                          </Button>
+
+                        </TableCell>
+                        <TableCell align="right">
+                          <Button
+                            onClick={() => navigate(`/user/${row.id}`)}
+                          >
+                            {row.username}
+                          </Button>
+                        </TableCell>
+                        <TableCell align="right">{row.available / 1e8}</TableCell>
+                        <TableCell align="right">{row.locked / 1e8}</TableCell>
+                        <TableCell align="right">{row.total / 1e8}</TableCell>
+
+                        <TableCell align="right">
+                          {row.lastActive}
+                        </TableCell>
+                        <TableCell align="right">
+                          {!row.banned ? (
+                            <BanDialog
+                              name={row.channelName}
+                              confirmBan={banUser}
+                              otherId={row.user_id}
+                              id={row.id}
+                            />
+                          ) : (
+                            <Button
+                              variant="outlined"
+                              onClick={() => banUser(row.id, '')}
+                            >
+                              UNBAN
+                            </Button>
+                          )}
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+              </TableBody>
+            )
+          }
+
         </Table>
       </TableContainer>
       <TablePagination

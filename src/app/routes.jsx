@@ -37,6 +37,8 @@ import BotSettings from './views/management/BotSettings';
 import Features from './views/management/Features';
 import DashboardUsers from './views/management/DashboardUsers';
 import PriceCurrenciesManagement from './views/management/PriceCurrencies';
+import WithdrawalAddressesView from './views/management/WithdrawalAddresses';
+import WithdrawalAddressView from './views/management/WithdrawalAddress';
 
 import Deposits from './views/functions/Deposits';
 import Withdrawals from './views/functions/Withdrawals';
@@ -119,6 +121,15 @@ const RoutesX = function (props) {
           path="/channels"
           element={<Channels />}
         />
+        <Route
+          path="/withdrawaladdresses"
+          element={<WithdrawalAddressesView />}
+        />
+        <Route
+          path="/withdrawaladdress/:addressId"
+          element={<WithdrawalAddressView />}
+        />
+
         {/* <Route
           path="/activity"
           element={<Activity />}

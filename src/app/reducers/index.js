@@ -32,6 +32,8 @@ import errors from './errors';
 import user from './user';
 import priceCurrencies from './priceCurrencies';
 import userInfo from './userInfo';
+import withdrawalAddresses from './withdrawalAddresses';
+import withdrawalAddress from './withdrawalAddress';
 
 const store = configureStore({
   reducer: {
@@ -68,6 +70,8 @@ const store = configureStore({
     priceCurrencies,
     errors,
     userInfo,
+    withdrawalAddresses,
+    withdrawalAddress,
   },
 })
 
