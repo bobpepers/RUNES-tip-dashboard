@@ -20,6 +20,13 @@ import {
   DELETE_TRIVIAQUESTION,
   ADD_TRIVIAQUESTION,
 
+  FETCH_TRIVIA_BEGIN,
+  FETCH_TRIVIA_SUCCESS,
+  FETCH_TRIVIA_FAIL,
+  FETCH_TRIVIAS_BEGIN,
+  FETCH_TRIVIAS_SUCCESS,
+  FETCH_TRIVIAS_FAIL,
+
 } from './types/index';
 import { notistackErrorAdd } from './helpers/notistackError';
 
@@ -140,5 +147,66 @@ export function fetchTriviaQuestions() {
           payload: error,
         });
       });
+  }
+}
+
+export function fetchTriviasAction(
+  id,
+  address,
+  offset,
+  limit,
+) {
+  return function (dispatch) {
+    dispatch({
+      type: FETCH_TRIVIAS_BEGIN,
+    });
+    axios.post(`${window.myConfig.apiUrl}/trivias`, {
+      id,
+      address,
+      offset,
+      limit,
+    })
+      .then((response) => {
+        dispatch({
+          type: FETCH_TRIVIAS_SUCCESS,
+          payload: response.data,
+        });
+      }).catch((error) => {
+        notistackErrorAdd(
+          dispatch,
+          error,
+        );
+        dispatch({
+          type: FETCH_TRIVIAS_FAIL,
+          payload: error,
+        });
+      });
+  }
+}
+
+export function fetchTriviaAction(
+  id,
+) {
+  return function (dispatch) {
+    dispatch({
+      type: FETCH_TRIVIA_BEGIN,
+    });
+    axios.post(`${window.myConfig.apiUrl}/trivia`, {
+      id,
+    }).then((response) => {
+      dispatch({
+        type: FETCH_TRIVIA_SUCCESS,
+        payload: response.data,
+      });
+    }).catch((error) => {
+      notistackErrorAdd(
+        dispatch,
+        error,
+      );
+      dispatch({
+        type: FETCH_TRIVIA_FAIL,
+        payload: error,
+      });
+    });
   }
 }

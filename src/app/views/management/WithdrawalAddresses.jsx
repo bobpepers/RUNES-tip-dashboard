@@ -5,16 +5,12 @@ import React, {
 import { connect, useDispatch } from 'react-redux';
 import {
   Grid,
-  InputLabel,
-  Select,
   FormControl,
   CircularProgress,
   TextField,
-  MenuItem,
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { withRouter } from '../../hooks/withRouter';
-
 import {
   fetchWithdrawalAddressesAction,
 } from '../../actions/withdrawalAddresses';

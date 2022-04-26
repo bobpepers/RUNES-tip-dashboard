@@ -12,28 +12,20 @@ import { connect, useDispatch } from 'react-redux';
 import CircularProgress from '@mui/material/CircularProgress';
 import {
   Grid,
-  Divider,
   Typography,
   Button,
 } from '@mui/material';
 import UsersTable from '../../components/UsersTable';
 import WithdrawalsTable from '../../components/WithdrawalsTable';
-import ActivityContainer from '../../containers/Activity';
-import DepositsTable from '../../components/DepositsTable';
 
 import { withRouter } from '../../hooks/withRouter';
 import {
   fetchWithdrawalAddressAction,
 } from '../../actions/withdrawalAddresses';
 import {
-  fetchWithdrawalsAction,
   acceptWithdrawalAction,
   declineWithdrawalAction,
 } from '../../actions/withdrawals';
-import {
-  fetchDepositsAction,
-} from '../../actions/deposits';
-// import WithdrawalsTable from '../../components/WithdrawalsTable';
 import {
   banUserAction,
 } from '../../actions/users';
@@ -84,10 +76,7 @@ const WithdrawalAddressView = function (props) {
     addressId,
   ]);
 
-  useEffect(() => {
-    console.log(withdrawalAddress);
-    console.log('withdrawalAddress');
-  }, [
+  useEffect(() => { }, [
     withdrawalAddress,
   ]);
 
@@ -99,7 +88,6 @@ const WithdrawalAddressView = function (props) {
   };
 
   const acceptWithdrawalFunction = (idWithdrawal) => {
-    console.log('acceptWithdrawal');
     dispatch(acceptWithdrawalAction(idWithdrawal))
   };
   const declineWithdrawalFunction = (idWithdrawal) => {
