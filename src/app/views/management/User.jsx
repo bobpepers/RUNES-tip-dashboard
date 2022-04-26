@@ -385,7 +385,7 @@ const UserView = function (props) {
               userInfo
               && userInfo.data
               && userInfo.data.wallet
-              && ((userInfo.data.wallet.available + userInfo.data.wallet.available) / 1e8)
+              && ((userInfo.data.wallet.available + userInfo.data.wallet.locked) / 1e8)
             }
           </Typography>
         </Grid>
