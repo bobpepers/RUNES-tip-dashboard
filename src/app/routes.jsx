@@ -42,6 +42,9 @@ import WithdrawalAddressView from './views/management/WithdrawalAddress';
 import RainsView from './views/functions/Rains';
 import RainView from './views/functions/Rain';
 
+import SoaksView from './views/functions/Soaks';
+import SoakView from './views/functions/Soak';
+
 import Deposits from './views/functions/Deposits';
 import Withdrawals from './views/functions/Withdrawals';
 import Errors from './views/functions/Errors';
@@ -138,6 +141,15 @@ const RoutesX = function (props) {
         <Route
           path="/rain/:rainId"
           element={<RainView />}
+        />
+
+        <Route
+          path="/soaks"
+          element={<SoaksView />}
+        />
+        <Route
+          path="/soak/:soakId"
+          element={<SoakView />}
         />
 
         {/* <Route

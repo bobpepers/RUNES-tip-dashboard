@@ -10,8 +10,6 @@ import {
 import { notistackErrorAdd } from './helpers/notistackError';
 
 export function fetchSoaksAction(
-  id,
-  address,
   offset,
   limit,
 ) {
@@ -20,8 +18,6 @@ export function fetchSoaksAction(
       type: FETCH_SOAKS_BEGIN,
     });
     axios.post(`${window.myConfig.apiUrl}/soaks`, {
-      id,
-      address,
       offset,
       limit,
     })

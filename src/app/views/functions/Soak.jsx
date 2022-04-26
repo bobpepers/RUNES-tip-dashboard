@@ -15,32 +15,32 @@ import {
 } from '@mui/material';
 import { withRouter } from '../../hooks/withRouter';
 import {
-  fetchRainAction,
-} from '../../actions/rain';
+  fetchSoakAction,
+} from '../../actions/soak';
 
-const RainView = function (props) {
+const SoakView = function (props) {
   const {
     auth,
-    rain,
+    soak,
   } = props;
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { rainId } = useParams();
+  const { soakId } = useParams();
 
   useEffect(() => {
     if (
       auth.authenticated
-      && rainId
+      && soakId
     ) {
-      dispatch(fetchRainAction(rainId));
+      dispatch(fetchSoakAction(soakId));
     }
   }, [
     auth,
-    rainId,
+    soakId,
   ]);
 
   useEffect(() => { }, [
-    rain,
+    soak,
   ]);
 
   return (
@@ -67,7 +67,7 @@ const RainView = function (props) {
             component="div"
             align="center"
           >
-            Rain Id:
+            Soak Id:
           </Typography>
           <Typography
             variant="h6"
@@ -76,10 +76,10 @@ const RainView = function (props) {
             align="center"
           >
             {
-              rain
-              && rain.data
-              && rain.data.id
-              && rain.data.id
+              soak
+              && soak.data
+              && soak.data.id
+              && soak.data.id
             }
           </Typography>
         </Grid>
@@ -108,10 +108,10 @@ const RainView = function (props) {
             align="center"
           >
             {
-              rain
-              && rain.data
-              && rain.data.user
-              && rain.data.user.username
+              soak
+              && soak.data
+              && soak.data.user
+              && soak.data.user.username
             }
           </Typography>
         </Grid>
@@ -141,10 +141,10 @@ const RainView = function (props) {
             align="center"
           >
             {
-              rain
-              && rain.data
-              && rain.data.user
-              && rain.data.user.firstname
+              soak
+              && soak.data
+              && soak.data.user
+              && soak.data.user.firstname
             }
           </Typography>
         </Grid>
@@ -174,10 +174,10 @@ const RainView = function (props) {
             align="center"
           >
             {
-              rain
-              && rain.data
-              && rain.data.user
-              && rain.data.user.lastname
+              soak
+              && soak.data
+              && soak.data.user
+              && soak.data.user.lastname
             }
           </Typography>
         </Grid>
@@ -207,10 +207,10 @@ const RainView = function (props) {
             align="center"
           >
             {
-              rain
-              && rain.data
-              && rain.data.user
-              && rain.data.user.user_id
+              soak
+              && soak.data
+              && soak.data.user
+              && soak.data.user.user_id
             }
           </Typography>
         </Grid>
@@ -247,9 +247,9 @@ const RainView = function (props) {
             align="center"
           >
             {
-              rain
-              && rain.data
-              && rain.data.amount / 1e8
+              soak
+              && soak.data
+              && soak.data.amount / 1e8
             }
           </Typography>
         </Grid>
@@ -279,9 +279,9 @@ const RainView = function (props) {
             align="center"
           >
             {
-              rain
-              && rain.data
-              && rain.data.feeAmount / 1e8
+              soak
+              && soak.data
+              && soak.data.feeAmount / 1e8
             }
           </Typography>
         </Grid>
@@ -311,9 +311,9 @@ const RainView = function (props) {
             align="center"
           >
             {
-              rain
-              && rain.data
-              && rain.data.userCount
+              soak
+              && soak.data
+              && soak.data.userCount
             }
           </Typography>
         </Grid>
@@ -348,10 +348,10 @@ const RainView = function (props) {
         >
           <p>Group</p>
           <p>
-            {rain.data && rain.data.group && rain.data.group.groupName}
+            {soak.data && soak.data.group && soak.data.group.groupName}
             {' '}
             (
-            {rain.data && rain.data.group && rain.data.group.groupId}
+            {soak.data && soak.data.group && soak.data.group.groupId}
             )
           </p>
         </Grid>
@@ -367,10 +367,10 @@ const RainView = function (props) {
         >
           <p>Channel</p>
           <p>
-            {rain.data && rain.data.channel && rain.data.channel.channelId}
+            {soak.data && soak.data.channel && soak.data.channel.channelId}
             {' '}
             (
-            {rain.data && rain.data.channel ? rain.data.channel.channelId : 'n/a'}
+            {soak.data && soak.data.channel ? soak.data.channel.channelId : 'n/a'}
             )
           </p>
         </Grid>
@@ -394,10 +394,10 @@ const RainView = function (props) {
         </Grid>
       </Grid>
       {
-        rain
-        && rain.data
-        && rain.data.raintips
-        && rain.data.raintips.map((row, index) => (
+        soak
+        && soak.data
+        && soak.data.soaktips
+        && soak.data.soaktips.map((row, index) => (
           <Grid
             container
             justifyContent="center"
@@ -462,13 +462,13 @@ const RainView = function (props) {
   );
 }
 
-RainView.propTypes = {
+SoakView.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
-  rain: state.rain,
+  soak: state.soak,
 })
 
-export default withRouter(connect(mapStateToProps, null)(RainView));
+export default withRouter(connect(mapStateToProps, null)(SoakView));
