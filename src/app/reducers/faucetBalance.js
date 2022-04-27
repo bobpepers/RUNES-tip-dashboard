@@ -20,11 +20,10 @@ export default (state = initialState, action) => {
   case FETCH_FAUCET_BALANCE_SUCCESS:
     return {
       ...state,
-      data: action.payload,
+      data: action.payload.result,
       isFetching: false,
     };
   case FETCH_FAUCET_BALANCE_FAIL:
-    console.log('Error: ', action.error);
     return {
       ...state,
       error: action.error,

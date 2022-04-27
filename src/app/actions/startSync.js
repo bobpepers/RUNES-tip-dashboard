@@ -15,7 +15,7 @@ export function startSyncAction() {
       .then((response) => {
         dispatch({
           type: START_SYNCBLOCKS_SUCCESS,
-          payload: response.data.sync,
+          payload: response.data.result,
         });
       }).catch((error) => {
         notistackErrorAdd(

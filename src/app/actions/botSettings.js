@@ -20,7 +20,7 @@ export function fetchBotSettings() {
       .then((response) => {
         dispatch({
           type: FETCH_BOTSETTINGS_SUCCESS,
-          payload: response.data.settings,
+          payload: response.data.result,
         });
       }).catch((error) => {
         notistackErrorAdd(
@@ -45,7 +45,7 @@ export function updateBotSettings(id, maintenance, enabled) {
       .then((response) => {
         dispatch({
           type: UPDATE_BOTSETTINGS,
-          payload: response.data.settings,
+          payload: response.data.result,
         });
       }).catch((error) => {
         notistackErrorAdd(

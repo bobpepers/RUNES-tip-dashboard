@@ -15,7 +15,7 @@ export function fetchLiabilityAction() {
       .then((response) => {
         dispatch({
           type: FETCH_LIABILITY_SUCCESS,
-          payload: response.data.liability,
+          payload: response.data.result,
         });
       }).catch((error) => {
         notistackErrorAdd(

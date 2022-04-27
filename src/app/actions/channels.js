@@ -56,7 +56,7 @@ export function banChannelAction(id, banMessage = '') {
       .then((response) => {
         dispatch({
           type: UPDATE_CHANNEL,
-          payload: response.data.channel,
+          payload: response.data.result,
         });
       }).catch((error) => {
         notistackErrorAdd(

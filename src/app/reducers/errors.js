@@ -20,7 +20,7 @@ export default (state = initialState, action) => {
   case FETCH_ERRORS_SUCCESS:
     return {
       ...state,
-      data: action.payload.errors,
+      data: action.payload.result,
       count: action.payload.count,
       isFetching: false,
     };

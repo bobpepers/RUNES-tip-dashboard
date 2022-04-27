@@ -26,8 +26,6 @@ export default (state = initialState, action) => {
       isFetching: false,
     };
   case REMOVE_PRICECURRENCIES:
-    console.log('Remove Feature');
-    console.log(action.payload);
     return {
       ...state,
       data: state.data.filter((item) => item.id !== action.payload.id),
@@ -53,11 +51,10 @@ export default (state = initialState, action) => {
   case FETCH_PRICECURRENCIES_SUCCESS:
     return {
       ...state,
-      data: action.payload,
+      data: action.payload.result,
       isFetching: false,
     };
   case FETCH_PRICECURRENCIES_FAIL:
-    console.log('Error: ', action.error);
     return {
       ...state,
       error: action.error,

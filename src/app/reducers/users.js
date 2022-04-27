@@ -13,8 +13,6 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
   case UPDATE_USER:
-    console.log(action.payload);
-    console.log('action payload update user');
     return {
       ...state,
       data: state.data.map(
@@ -34,12 +32,11 @@ export default (state = initialState, action) => {
   case FETCH_USERS_SUCCESS:
     return {
       ...state,
-      data: action.payload.users,
+      data: action.payload.result,
       count: action.payload.count,
       isFetching: false,
     };
   case FETCH_USERS_FAIL:
-    console.log('Error: ', action.error);
     return {
       ...state,
       error: action.error,

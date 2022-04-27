@@ -21,7 +21,7 @@ export default (state = initialState, action) => {
   case FETCH_ACTIVITY_SUCCESS:
     return {
       ...state,
-      data: action.payload.activity,
+      data: action.payload.result,
       count: action.payload.count,
       isFetching: false,
     };

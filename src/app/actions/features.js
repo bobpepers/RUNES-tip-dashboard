@@ -24,7 +24,7 @@ export function fetchFeatures() {
         console.log(response);
         dispatch({
           type: FETCH_FEATURES_SUCCESS,
-          payload: response.data.features,
+          payload: response.data.result,
         });
       }).catch((error) => {
         notistackErrorAdd(
@@ -46,7 +46,7 @@ export function removeFeature(id) {
         console.log(response);
         dispatch({
           type: REMOVE_FEATURE,
-          payload: response.data.feature,
+          payload: response.data.result,
         });
       }).catch((error) => {
         notistackErrorAdd(
@@ -64,7 +64,7 @@ export function addFeature(obj) {
         console.log(response);
         dispatch({
           type: ADD_FEATURE,
-          payload: response.data.feature,
+          payload: response.data.result,
         });
       }).catch((error) => {
         notistackErrorAdd(
@@ -93,7 +93,7 @@ export function updateFeature(
       .then((response) => {
         dispatch({
           type: UPDATE_FEATURE,
-          payload: response.data.feature,
+          payload: response.data.result,
         });
       }).catch((error) => {
         notistackErrorAdd(

@@ -166,9 +166,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SoaksTable = function (props) {
+const FunctionsTable = function (props) {
   const {
-    soaks,
+    functions,
+    linkParam,
     defaultPageSize,
     page,
     setPage,
@@ -177,9 +178,9 @@ const SoaksTable = function (props) {
     totalCount,
   } = props;
   const rows = [];
-  console.log(soaks);
+  console.log(functions);
 
-  soaks.forEach((item) => {
+  functions.forEach((item) => {
     rows.push(
       createData(
         item.id,
@@ -289,7 +290,7 @@ const SoaksTable = function (props) {
                     <TableCell component="th" id={labelId} scope="row" padding="none">
                       <p>
                         <Button
-                          onClick={() => navigate(`/soak/${row.id}`)}
+                          onClick={() => navigate(`/${linkParam}/${row.id}`)}
                         >
                           {row.id}
                         </Button>
@@ -326,7 +327,7 @@ const SoaksTable = function (props) {
                     <TableCell align="right">
                       <Button
                         variant="outlined"
-                        onClick={() => navigate(`/soak/${row.id}`)}
+                        onClick={() => navigate(`/${linkParam}/${row.id}`)}
                       >
                         View
                       </Button>
@@ -354,4 +355,4 @@ const SoaksTable = function (props) {
   );
 }
 
-export default SoaksTable;
+export default FunctionsTable;

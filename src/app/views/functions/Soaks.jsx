@@ -11,7 +11,7 @@ import { withRouter } from '../../hooks/withRouter';
 import {
   fetchSoaksAction,
 } from '../../actions/soak';
-import SoaksTable from '../../components/functions/SoaksTable';
+import FunctionsTable from '../../components/functions/FunctionsTable';
 
 const SoaksView = function (props) {
   const {
@@ -50,14 +50,15 @@ const SoaksView = function (props) {
             && soaks.count
             && !soaks.isFetching
               ? (
-                <SoaksTable
+                <FunctionsTable
                   defaultPageSize={50}
                   page={page}
                   setPage={setPage}
                   rowsPerPage={rowsPerPage}
                   setRowsPerPage={setRowsPerPage}
                   totalCount={soaks && soaks.count && soaks.count}
-                  soaks={soaks
+                  linkParam="soak"
+                  functions={soaks
                     && soaks.data
                     ? soaks.data
                     : []}

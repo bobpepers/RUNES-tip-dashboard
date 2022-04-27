@@ -20,7 +20,10 @@ export default (state = initialState, action) => {
   case FETCH_BLOCKNUMBER_SUCCESS:
     return {
       ...state,
-      data: action.payload,
+      data: {
+        node: action.payload.blockNumberNode,
+        db: action.payload.blockNumberDb,
+      },
       isFetching: false,
     };
   case FETCH_BLOCKNUMBER_FAIL:

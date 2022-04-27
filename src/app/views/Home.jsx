@@ -197,7 +197,8 @@ const Home = function (props) {
           >
             {liability.data
               && liability.data
-              ? `${liability.data / 1e8} ${window.myConfig.ticker}`
+              && liability.data.amount
+              ? `${liability.data.amount / 1e8} ${window.myConfig.ticker}`
               : `0 ${window.myConfig.ticker}`}
           </Typography>
         </Grid>
@@ -227,7 +228,8 @@ const Home = function (props) {
           >
             {balance.data
               && balance.data
-              ? `${balance.data} ${window.myConfig.ticker}`
+              && balance.data.amount
+              ? `${balance.data.amount} ${window.myConfig.ticker}`
               : `0 ${window.myConfig.ticker}`}
           </Typography>
         </Grid>
@@ -256,8 +258,10 @@ const Home = function (props) {
             align="center"
           >
             {balance.data
+              && balance.data.amount
               && liability.data
-              ? `${((Number(balance.data) - (Number(liability.data) / 1e8))).toFixed(8)} ${window.myConfig.ticker}`
+              && liability.data.amount
+              ? `${((Number(balance.data.amount) - (Number(liability.data.amount) / 1e8))).toFixed(8)} ${window.myConfig.ticker}`
               : `0 ${window.myConfig.ticker}`}
           </Typography>
         </Grid>
@@ -287,7 +291,8 @@ const Home = function (props) {
           >
             {faucetBalance.data
               && faucetBalance.data
-              ? `${faucetBalance.data / 1e8} ${window.myConfig.ticker}`
+              && faucetBalance.data.amount
+              ? `${faucetBalance.data.amount / 1e8} ${window.myConfig.ticker}`
               : `0 ${window.myConfig.ticker}`}
           </Typography>
         </Grid>

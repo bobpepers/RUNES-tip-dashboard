@@ -57,11 +57,11 @@ export default (state = initialState, action) => {
   case FETCH_TRIVIAQUESTIONS_SUCCESS:
     return {
       ...state,
-      data: action.payload,
+      data: action.payload.result,
+      count: action.payload.count,
       isFetching: false,
     };
   case FETCH_TRIVIAQUESTIONS_FAIL:
-    console.log('Error: ', action.error);
     return {
       ...state,
       error: action.error,

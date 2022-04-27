@@ -20,7 +20,7 @@ export function fetchUserData(
     }).then((response) => {
       dispatch({
         type: FETCH_USER_SUCCESS,
-        payload: response.data,
+        payload: response.data.result,
       });
     }).catch((error) => {
       dispatch({

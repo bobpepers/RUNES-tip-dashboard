@@ -32,12 +32,11 @@ export default (state = initialState, action) => {
   case FETCH_SERVERS_SUCCESS:
     return {
       ...state,
-      data: action.payload.servers,
+      data: action.payload.result,
       count: action.payload.count,
       isFetching: false,
     };
   case FETCH_SERVERS_FAIL:
-    console.log('Error: ', action.error);
     return {
       ...state,
       error: action.error,

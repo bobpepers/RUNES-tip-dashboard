@@ -25,7 +25,7 @@ export function fetchPriceCurrenciesAction() {
         console.log(response);
         dispatch({
           type: FETCH_PRICECURRENCIES_SUCCESS,
-          payload: response.data.currencies,
+          payload: response.data,
         });
       }).catch((error) => {
         notistackErrorAdd(
@@ -47,7 +47,7 @@ export function removePriceCurrenciesAction(id) {
         console.log(response);
         dispatch({
           type: REMOVE_PRICECURRENCIES,
-          payload: response.data.currency,
+          payload: response.data.result,
         });
       }).catch((error) => {
         notistackErrorAdd(
@@ -93,7 +93,7 @@ export function addPriceCurrenciesAction(obj) {
         console.log(response);
         dispatch({
           type: ADD_PRICECURRENCIES,
-          payload: response.data.currency,
+          payload: response.data.result,
         });
       }).catch((error) => {
         notistackErrorAdd(
@@ -120,7 +120,7 @@ export function updatePriceCurrenciesAction(
       .then((response) => {
         dispatch({
           type: UPDATE_PRICECURRENCIES,
-          payload: response.data.currency,
+          payload: response.data.result,
         });
       }).catch((error) => {
         notistackErrorAdd(

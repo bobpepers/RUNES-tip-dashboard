@@ -11,7 +11,7 @@ import { withRouter } from '../../hooks/withRouter';
 import {
   fetchRainsAction,
 } from '../../actions/rain';
-import RainsTable from '../../components/functions/RainsTable';
+import FunctionsTable from '../../components/functions/FunctionsTable';
 
 const RainsView = function (props) {
   const {
@@ -50,14 +50,15 @@ const RainsView = function (props) {
             && rains.count
             && !rains.isFetching
               ? (
-                <RainsTable
+                <FunctionsTable
                   defaultPageSize={50}
                   page={page}
                   setPage={setPage}
                   rowsPerPage={rowsPerPage}
                   setRowsPerPage={setRowsPerPage}
                   totalCount={rains && rains.count && rains.count}
-                  rains={rains
+                  linkParam="rain"
+                  functions={rains
                     && rains.data
                     ? rains.data
                     : []}

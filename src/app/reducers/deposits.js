@@ -22,7 +22,7 @@ export default (state = initialState, action) => {
   case FETCH_DEPOSITS_SUCCESS:
     return {
       ...state,
-      data: action.payload.deposits,
+      data: action.payload.result,
       count: action.payload.count,
       isFetching: false,
     };

@@ -56,7 +56,7 @@ export function banServerAction(id, banMessage = '') {
       .then((response) => {
         dispatch({
           type: UPDATE_SERVER,
-          payload: response.data.server,
+          payload: response.data.result,
         });
       }).catch((error) => {
         notistackErrorAdd(

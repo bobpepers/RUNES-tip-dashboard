@@ -47,7 +47,10 @@ export function fetchUsersAction(
   }
 }
 
-export function banUserAction(id, banMessage = '') {
+export function banUserAction(
+  id,
+  banMessage = '',
+) {
   return function (dispatch) {
     axios.post(`${window.myConfig.apiUrl}/ban/user`, {
       id,
@@ -56,7 +59,7 @@ export function banUserAction(id, banMessage = '') {
       .then((response) => {
         dispatch({
           type: UPDATE_USER,
-          payload: response.data.user,
+          payload: response.data.result,
         });
       }).catch((error) => {
         notistackErrorAdd(

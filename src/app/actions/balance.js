@@ -15,7 +15,7 @@ export function fetchBalanceAction() {
       .then((response) => {
         dispatch({
           type: FETCH_BALANCE_SUCCESS,
-          payload: response.data.balance,
+          payload: response.data.result,
         });
       }).catch((error) => {
         notistackErrorAdd(

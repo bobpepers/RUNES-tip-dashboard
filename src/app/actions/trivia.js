@@ -37,16 +37,13 @@ export function switchTriviaAction(id) {
     });
     axios.post(`${window.myConfig.apiUrl}/trivia/switch`, { id })
       .then((response) => {
-        console.log('SUCESSSSS');
-
-        console.log(response);
         dispatch({
           type: SWITCH_TRIVIA_SUCCESS,
-          payload: response.data.trivia,
+          payload: response.data.result,
         });
         dispatch({
           type: UPDATE_TRIVIAQUESTION,
-          payload: response.data.trivia,
+          payload: response.data.result,
         });
       }).catch((error) => {
         notistackErrorAdd(
@@ -61,65 +58,67 @@ export function switchTriviaAction(id) {
   }
 }
 
-export function removeTriviaAction(id) {
+export function removeTriviaAction(
+  id,
+) {
   return function (dispatch) {
     dispatch({
       type: REMOVE_TRIVIA_BEGIN,
     });
-    axios.post(`${window.myConfig.apiUrl}/trivia/remove`, { id })
-      .then((response) => {
-        console.log('SUCESSSSS');
-
-        console.log(response);
-        dispatch({
-          type: REMOVE_TRIVIA_SUCCESS,
-          payload: response.data.trivia,
-        });
-        dispatch({
-          type: DELETE_TRIVIAQUESTION,
-          payload: response.data.trivia,
-        });
-      }).catch((error) => {
-        notistackErrorAdd(
-          dispatch,
-          error,
-        );
-        dispatch({
-          type: REMOVE_TRIVIA_FAIL,
-          payload: error,
-        });
+    axios.post(`${window.myConfig.apiUrl}/trivia/remove`, {
+      id,
+    }).then((response) => {
+      dispatch({
+        type: REMOVE_TRIVIA_SUCCESS,
+        payload: response.data.result.id,
       });
+      dispatch({
+        type: DELETE_TRIVIAQUESTION,
+        payload: response.data.result.id,
+      });
+    }).catch((error) => {
+      notistackErrorAdd(
+        dispatch,
+        error,
+      );
+      dispatch({
+        type: REMOVE_TRIVIA_FAIL,
+        payload: error,
+      });
+    });
   }
 }
 
-export function insertTriviaAction(question, answers) {
+export function insertTriviaAction(
+  question,
+  answers,
+) {
   return function (dispatch) {
     dispatch({
       type: INSERT_TRIVIA_BEGIN,
     });
-    axios.post(`${window.myConfig.apiUrl}/trivia/insert`, { question, answers })
-      .then((response) => {
-        console.log('SUCESSSSS');
-
-        console.log(response);
-        dispatch({
-          type: INSERT_TRIVIA_SUCCESS,
-          payload: response.data.trivia,
-        });
-        dispatch({
-          type: ADD_TRIVIAQUESTION,
-          payload: response.data.trivia,
-        });
-      }).catch((error) => {
-        notistackErrorAdd(
-          dispatch,
-          error,
-        );
-        dispatch({
-          type: INSERT_TRIVIA_FAIL,
-          payload: error,
-        });
+    axios.post(`${window.myConfig.apiUrl}/trivia/insert`, {
+      question,
+      answers,
+    }).then((response) => {
+      dispatch({
+        type: INSERT_TRIVIA_SUCCESS,
+        payload: response.data.result,
       });
+      dispatch({
+        type: ADD_TRIVIAQUESTION,
+        payload: response.data.result,
+      });
+    }).catch((error) => {
+      notistackErrorAdd(
+        dispatch,
+        error,
+      );
+      dispatch({
+        type: INSERT_TRIVIA_FAIL,
+        payload: error,
+      });
+    });
   }
 }
 
@@ -135,7 +134,7 @@ export function fetchTriviaQuestions() {
         console.log(response);
         dispatch({
           type: FETCH_TRIVIAQUESTIONS_SUCCESS,
-          payload: response.data.trivia,
+          payload: response.data,
         });
       }).catch((error) => {
         notistackErrorAdd(

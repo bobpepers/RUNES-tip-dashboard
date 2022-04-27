@@ -15,7 +15,7 @@ export function fetchBlockNumberAction() {
       .then((response) => {
         dispatch({
           type: FETCH_BLOCKNUMBER_SUCCESS,
-          payload: response.data.blockNumber,
+          payload: response.data.result,
         });
       }).catch((error) => {
         notistackErrorAdd(

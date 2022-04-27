@@ -27,7 +27,7 @@ export default function userReducer(
     return {
       ...state,
       isFetching: false,
-      data: action.payload.user,
+      data: action.payload.result,
     };
 
   case FETCH_USERINFO_FAIL:

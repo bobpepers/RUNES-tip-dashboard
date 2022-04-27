@@ -20,7 +20,7 @@ export default (state = initialState, action) => {
   case FETCH_WITHDRAWALADDRESS_SUCCESS:
     return {
       ...state,
-      data: action.payload.withdrawalAddress,
+      data: action.payload.result,
       isFetching: false,
     };
   case FETCH_WITHDRAWALADDRESS_FAIL:

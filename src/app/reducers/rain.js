@@ -20,7 +20,7 @@ export default (state = initialState, action) => {
   case FETCH_RAIN_SUCCESS:
     return {
       ...state,
-      data: action.payload.rain,
+      data: action.payload.result,
       isFetching: false,
     };
   case FETCH_RAIN_FAIL:

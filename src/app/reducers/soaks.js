@@ -20,7 +20,7 @@ export default (state = initialState, action) => {
   case FETCH_SOAKS_SUCCESS:
     return {
       ...state,
-      data: action.payload.soaks,
+      data: action.payload.result,
       count: action.payload.count,
       isFetching: false,
     };
