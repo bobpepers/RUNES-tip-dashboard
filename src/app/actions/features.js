@@ -14,34 +14,31 @@ export function fetchFeatures() {
     dispatch({
       type: FETCH_FEATURES_BEGIN,
     });
-    axios.post(`${window.myConfig.apiUrl}/features`, {
+    axios.post(`${window.myConfig.apiUrl}/management/features`, {
       // id,
       // channelId,
       // channelName
-    })
-      .then((response) => {
-        console.log('SUCESSSSS');
-        console.log(response);
-        dispatch({
-          type: FETCH_FEATURES_SUCCESS,
-          payload: response.data.result,
-        });
-      }).catch((error) => {
-        notistackErrorAdd(
-          dispatch,
-          error,
-        );
-        dispatch({
-          type: FETCH_FEATUERS_FAIL,
-          payload: error,
-        });
+    }).then((response) => {
+      dispatch({
+        type: FETCH_FEATURES_SUCCESS,
+        payload: response.data.result,
       });
+    }).catch((error) => {
+      notistackErrorAdd(
+        dispatch,
+        error,
+      );
+      dispatch({
+        type: FETCH_FEATUERS_FAIL,
+        payload: error,
+      });
+    });
   }
 }
 
 export function removeFeature(id) {
   return function (dispatch) {
-    axios.post(`${window.myConfig.apiUrl}/feature/remove`, { id })
+    axios.post(`${window.myConfig.apiUrl}/management/feature/remove`, { id })
       .then((response) => {
         console.log(response);
         dispatch({
@@ -59,7 +56,7 @@ export function removeFeature(id) {
 
 export function addFeature(obj) {
   return function (dispatch) {
-    axios.post(`${window.myConfig.apiUrl}/feature/add`, obj)
+    axios.post(`${window.myConfig.apiUrl}/management/feature/add`, obj)
       .then((response) => {
         console.log(response);
         dispatch({
@@ -83,7 +80,7 @@ export function updateFeature(
   enabled,
 ) {
   return function (dispatch) {
-    axios.post(`${window.myConfig.apiUrl}/feature/update`, {
+    axios.post(`${window.myConfig.apiUrl}/management/feature/update`, {
       id,
       min,
       fee,

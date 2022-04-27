@@ -293,7 +293,7 @@ const UsersTable = function (props) {
                         <TableCell component="th" id={labelId} scope="row" padding="none">
                           <p>
                             <Button
-                              onClick={() => navigate(`/user/${row.id}`)}
+                              onClick={() => navigate(`/management/user/${row.id}`)}
                             >
                               {row.id}
                             </Button>
@@ -302,7 +302,7 @@ const UsersTable = function (props) {
                         </TableCell>
                         <TableCell align="right">
                           <Button
-                            onClick={() => navigate(`/user/${row.id}`)}
+                            onClick={() => navigate(`/management/user/${row.id}`)}
                           >
                             {row.userId}
                           </Button>
@@ -310,7 +310,7 @@ const UsersTable = function (props) {
                         </TableCell>
                         <TableCell align="right">
                           <Button
-                            onClick={() => navigate(`/user/${row.id}`)}
+                            onClick={() => navigate(`/management/user/${row.id}`)}
                           >
                             {row.username}
                           </Button>
@@ -363,7 +363,7 @@ const UsersTable = function (props) {
                         <TableCell component="th" id={labelId} scope="row" padding="none">
                           <p>
                             <Button
-                              onClick={() => navigate(`/user/${row.id}`)}
+                              onClick={() => navigate(`/management/user/${row.id}`)}
                             >
                               {row.id}
                             </Button>
@@ -372,7 +372,7 @@ const UsersTable = function (props) {
                         </TableCell>
                         <TableCell align="right">
                           <Button
-                            onClick={() => navigate(`/user/${row.id}`)}
+                            onClick={() => navigate(`/management/user/${row.id}`)}
                           >
                             {row.userId}
                           </Button>
@@ -380,7 +380,7 @@ const UsersTable = function (props) {
                         </TableCell>
                         <TableCell align="right">
                           <Button
-                            onClick={() => navigate(`/user/${row.id}`)}
+                            onClick={() => navigate(`/management/user/${row.id}`)}
                           >
                             {row.username}
                           </Button>

@@ -24,15 +24,15 @@ export function signupUser(
   return function (dispatch) {
     axios.post(`${window.myConfig.apiUrl}/signup`, { props, captchaResponse })
       .then(() => {
-        dispatch({ type: SIGNUP_SUCCESS });
+        dispatch({
+          type: SIGNUP_SUCCESS,
+        });
         dispatch(navigate(`/register/verify-register?email=${props.email}`));
-      })
-      .catch((error) => {
+      }).catch((error) => {
         notistackErrorAdd(
           dispatch,
           error,
         );
-
         dispatch({
           type: SIGNUP_FAILURE,
           payload: error.reponse.data.console.error,
@@ -57,14 +57,13 @@ export function signinUser(props) {
     axios.post(
       `${window.myConfig.apiUrl}/signin`,
       { email, password, captchaResponse },
-    )
-      .then((response) => {
-        dispatch({
-          type: AUTH_USER,
-          payload: response,
-        });
-        window.location.href = '/';
-      })
+    ).then((response) => {
+      dispatch({
+        type: AUTH_USER,
+        payload: response,
+      });
+      window.location.href = '/';
+    })
       .catch((error) => {
         notistackErrorAdd(
           dispatch,
@@ -84,8 +83,7 @@ export function resendVerification(props) {
         dispatch({
           type: SIGNUP_SUCCESS,
         });
-      })
-      .catch((response) => dispatch(
+      }).catch((response) => dispatch(
         {
           type: SIGNUP_RESEND_FAILURE,
           payload: response.data,

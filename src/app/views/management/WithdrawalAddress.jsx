@@ -15,8 +15,8 @@ import {
   Typography,
   Button,
 } from '@mui/material';
-import UsersTable from '../../components/UsersTable';
-import WithdrawalsTable from '../../components/WithdrawalsTable';
+import UsersTable from '../../components/management/UsersTable';
+import WithdrawalsTable from '../../components/functions/WithdrawalsTable';
 
 import { withRouter } from '../../hooks/withRouter';
 import {

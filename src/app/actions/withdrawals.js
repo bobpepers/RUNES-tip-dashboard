@@ -18,30 +18,27 @@ export function acceptWithdrawalAction(id) {
     dispatch({
       type: ACCEPT_WITHDRAWAL_BEGIN,
     });
-    axios.post(`${window.myConfig.apiUrl}/withdrawal/accept`, {
+    axios.post(`${window.myConfig.apiUrl}/functions/withdrawal/accept`, {
       id,
-    })
-      .then((response) => {
-        console.log('SUCESSSSS');
-        console.log(response);
-        dispatch({
-          type: ACCEPT_WITHDRAWAL_SUCCESS,
-          payload: response.data.withdrawal,
-        });
-        dispatch({
-          type: UPDATE_WITHDRAWAL,
-          payload: response.data.withdrawal,
-        });
-      }).catch((error) => {
-        notistackErrorAdd(
-          dispatch,
-          error,
-        );
-        dispatch({
-          type: ACCEPT_WITHDRAWAL_FAIL,
-          payload: error,
-        });
+    }).then((response) => {
+      dispatch({
+        type: ACCEPT_WITHDRAWAL_SUCCESS,
+        payload: response.data.withdrawal,
       });
+      dispatch({
+        type: UPDATE_WITHDRAWAL,
+        payload: response.data.withdrawal,
+      });
+    }).catch((error) => {
+      notistackErrorAdd(
+        dispatch,
+        error,
+      );
+      dispatch({
+        type: ACCEPT_WITHDRAWAL_FAIL,
+        payload: error,
+      });
+    });
   }
 }
 
@@ -50,30 +47,27 @@ export function declineWithdrawalAction(id) {
     dispatch({
       type: DECLINE_WITHDRAWAL_BEGIN,
     });
-    axios.post(`${window.myConfig.apiUrl}/withdrawal/decline`, {
+    axios.post(`${window.myConfig.apiUrl}/functions/withdrawal/decline`, {
       id,
-    })
-      .then((response) => {
-        console.log('SUCESSSSS');
-        console.log(response);
-        dispatch({
-          type: DECLINE_WITHDRAWAL_SUCCESS,
-          payload: response.data.withdrawal,
-        });
-        dispatch({
-          type: UPDATE_WITHDRAWAL,
-          payload: response.data.withdrawal,
-        });
-      }).catch((error) => {
-        notistackErrorAdd(
-          dispatch,
-          error,
-        );
-        dispatch({
-          type: DECLINE_WITHDRAWAL_FAIL,
-          payload: error,
-        });
+    }).then((response) => {
+      dispatch({
+        type: DECLINE_WITHDRAWAL_SUCCESS,
+        payload: response.data.withdrawal,
       });
+      dispatch({
+        type: UPDATE_WITHDRAWAL,
+        payload: response.data.withdrawal,
+      });
+    }).catch((error) => {
+      notistackErrorAdd(
+        dispatch,
+        error,
+      );
+      dispatch({
+        type: DECLINE_WITHDRAWAL_FAIL,
+        payload: error,
+      });
+    });
   }
 }
 
@@ -90,7 +84,7 @@ export function fetchWithdrawalsAction(
     dispatch({
       type: FETCH_WITHDRAWALS_BEGIN,
     });
-    axios.post(`${window.myConfig.apiUrl}/withdrawals`, {
+    axios.post(`${window.myConfig.apiUrl}/functions/withdrawals`, {
       id,
       txId,
       userId,
@@ -98,21 +92,20 @@ export function fetchWithdrawalsAction(
       to,
       offset,
       limit,
-    })
-      .then((response) => {
-        dispatch({
-          type: FETCH_WITHDRAWALS_SUCCESS,
-          payload: response.data,
-        });
-      }).catch((error) => {
-        notistackErrorAdd(
-          dispatch,
-          error,
-        );
-        dispatch({
-          type: FETCH_WITHDRAWALS_FAIL,
-          payload: error,
-        });
+    }).then((response) => {
+      dispatch({
+        type: FETCH_WITHDRAWALS_SUCCESS,
+        payload: response.data,
       });
+    }).catch((error) => {
+      notistackErrorAdd(
+        dispatch,
+        error,
+      );
+      dispatch({
+        type: FETCH_WITHDRAWALS_FAIL,
+        payload: error,
+      });
+    });
   }
 }

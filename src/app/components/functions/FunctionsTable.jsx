@@ -290,7 +290,7 @@ const FunctionsTable = function (props) {
                     <TableCell component="th" id={labelId} scope="row" padding="none">
                       <p>
                         <Button
-                          onClick={() => navigate(`/${linkParam}/${row.id}`)}
+                          onClick={() => navigate(`/functions/${linkParam}/${row.id}`)}
                         >
                           {row.id}
                         </Button>
@@ -299,7 +299,7 @@ const FunctionsTable = function (props) {
                     </TableCell>
                     <TableCell align="right">
                       <Button
-                        onClick={() => navigate(`/user/${row.userDbId}`)}
+                        onClick={() => navigate(`/management/user/${row.userDbId}`)}
                       >
                         {row.username}
                         {' '}
@@ -327,7 +327,7 @@ const FunctionsTable = function (props) {
                     <TableCell align="right">
                       <Button
                         variant="outlined"
-                        onClick={() => navigate(`/${linkParam}/${row.id}`)}
+                        onClick={() => navigate(`/functions/${linkParam}/${row.id}`)}
                       >
                         View
                       </Button>

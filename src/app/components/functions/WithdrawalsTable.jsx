@@ -321,14 +321,14 @@ const WithdrawalsTable = function (props) {
                         </TableCell>
                         <TableCell align="right">
                           <Button
-                            onClick={() => navigate(`/user/${row.userRowId}`)}
+                            onClick={() => navigate(`/management/user/${row.userRowId}`)}
                           >
                             {row.userId && row.userId}
                           </Button>
                         </TableCell>
                         <TableCell align="right">
                           <Button
-                            onClick={() => navigate(`/user/${row.userRowId}`)}
+                            onClick={() => navigate(`/management/user/${row.userRowId}`)}
                           >
                             {row.username && row.username}
                           </Button>
@@ -397,14 +397,14 @@ const WithdrawalsTable = function (props) {
                         </TableCell>
                         <TableCell align="right">
                           <Button
-                            onClick={() => navigate(`/user/${row.userRowId}`)}
+                            onClick={() => navigate(`/management/user/${row.userRowId}`)}
                           >
                             {row.userId && row.userId}
                           </Button>
                         </TableCell>
                         <TableCell align="right">
                           <Button
-                            onClick={() => navigate(`/user/${row.userRowId}`)}
+                            onClick={() => navigate(`/management/user/${row.userRowId}`)}
                           >
                             {row.username && row.username}
                           </Button>

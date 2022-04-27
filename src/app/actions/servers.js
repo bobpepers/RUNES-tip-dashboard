@@ -19,37 +19,34 @@ export function fetchServerAction(
     dispatch({
       type: FETCH_SERVERS_BEGIN,
     });
-    axios.post(`${window.myConfig.apiUrl}/servers`, {
+    axios.post(`${window.myConfig.apiUrl}/management/servers`, {
       id,
       groupId,
       serverName,
       platform,
       offset,
       limit,
-    })
-      .then((response) => {
-        console.log('SUCESSSSS');
-        console.log(response);
-        dispatch({
-          type: FETCH_SERVERS_SUCCESS,
-          payload: response.data,
-        });
-      }).catch((error) => {
-        notistackErrorAdd(
-          dispatch,
-          error,
-        );
-        dispatch({
-          type: FETCH_SERVERS_FAIL,
-          payload: error,
-        });
+    }).then((response) => {
+      dispatch({
+        type: FETCH_SERVERS_SUCCESS,
+        payload: response.data,
       });
+    }).catch((error) => {
+      notistackErrorAdd(
+        dispatch,
+        error,
+      );
+      dispatch({
+        type: FETCH_SERVERS_FAIL,
+        payload: error,
+      });
+    });
   }
 }
 
 export function banServerAction(id, banMessage = '') {
   return function (dispatch) {
-    axios.post(`${window.myConfig.apiUrl}/ban/server`, {
+    axios.post(`${window.myConfig.apiUrl}/management/server/ban`, {
       id,
       banMessage,
     })

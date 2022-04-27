@@ -16,7 +16,7 @@ export function fetchUserInfoDataAction(
     dispatch({
       type: FETCH_USERINFO_BEGIN,
     });
-    axios.post(`${window.myConfig.apiUrl}/userinfo`, {
+    axios.post(`${window.myConfig.apiUrl}/management/userinfo`, {
       id,
     }).then((response) => {
       dispatch({

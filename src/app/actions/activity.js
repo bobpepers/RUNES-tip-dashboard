@@ -37,7 +37,6 @@ export function fetchActivityAction(
         dispatch,
         error,
       );
-
       dispatch({
         type: FETCH_ACTIVITY_FAIL,
         payload: error,

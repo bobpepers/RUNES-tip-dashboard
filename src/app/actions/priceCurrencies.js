@@ -15,36 +15,32 @@ export function fetchPriceCurrenciesAction() {
     dispatch({
       type: FETCH_PRICECURRENCIES_BEGIN,
     });
-    axios.post(`${window.myConfig.apiUrl}/pricecurrencies`, {
+    axios.post(`${window.myConfig.apiUrl}/management/pricecurrencies`, {
       // id,
       // channelId,
       // channelName
-    })
-      .then((response) => {
-        console.log('SUCESSSSS');
-        console.log(response);
-        dispatch({
-          type: FETCH_PRICECURRENCIES_SUCCESS,
-          payload: response.data,
-        });
-      }).catch((error) => {
-        notistackErrorAdd(
-          dispatch,
-          error,
-        );
-        dispatch({
-          type: FETCH_PRICECURRENCIES_FAIL,
-          payload: error,
-        });
+    }).then((response) => {
+      dispatch({
+        type: FETCH_PRICECURRENCIES_SUCCESS,
+        payload: response.data,
       });
+    }).catch((error) => {
+      notistackErrorAdd(
+        dispatch,
+        error,
+      );
+      dispatch({
+        type: FETCH_PRICECURRENCIES_FAIL,
+        payload: error,
+      });
+    });
   }
 }
 
 export function removePriceCurrenciesAction(id) {
   return function (dispatch) {
-    axios.post(`${window.myConfig.apiUrl}/pricecurrencies/remove`, { id })
+    axios.post(`${window.myConfig.apiUrl}/management/pricecurrencies/remove`, { id })
       .then((response) => {
-        console.log(response);
         dispatch({
           type: REMOVE_PRICECURRENCIES,
           payload: response.data.result,
@@ -60,7 +56,7 @@ export function removePriceCurrenciesAction(id) {
 
 export function updatePricesAndConversionsAction() {
   return function (dispatch) {
-    axios.post(`${window.myConfig.apiUrl}/pricecurrencies/updateprice`)
+    axios.post(`${window.myConfig.apiUrl}/management/pricecurrencies/updateprice`)
       .then((response) => {
         console.log(response);
         dispatch({
@@ -88,7 +84,7 @@ export function updatePricesAndConversionsAction() {
 
 export function addPriceCurrenciesAction(obj) {
   return function (dispatch) {
-    axios.post(`${window.myConfig.apiUrl}/pricecurrencies/add`, obj)
+    axios.post(`${window.myConfig.apiUrl}/management/pricecurrencies/add`, obj)
       .then((response) => {
         console.log(response);
         dispatch({
@@ -111,7 +107,7 @@ export function updatePriceCurrenciesAction(
   type,
 ) {
   return function (dispatch) {
-    axios.post(`${window.myConfig.apiUrl}/pricecurrencies/update`, {
+    axios.post(`${window.myConfig.apiUrl}/management/pricecurrencies/update`, {
       id,
       name,
       iso,

@@ -17,7 +17,7 @@ import {
   banChannelAction,
 } from '../../actions/channels';
 
-import ChannelTable from '../../components/ChannelTable';
+import ChannelTable from '../../components/management/ChannelTable';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {

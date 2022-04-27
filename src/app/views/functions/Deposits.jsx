@@ -16,7 +16,7 @@ import { withRouter } from '../../hooks/withRouter';
 import {
   fetchDepositsAction,
 } from '../../actions/deposits';
-import DepositsTable from '../../components/DepositsTable';
+import DepositsTable from '../../components/functions/DepositsTable';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {

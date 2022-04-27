@@ -18,7 +18,7 @@ import {
 } from '@mui/material';
 
 import ActivityContainer from '../../containers/Activity';
-import DepositsTable from '../../components/DepositsTable';
+import DepositsTable from '../../components/functions/DepositsTable';
 
 import { withRouter } from '../../hooks/withRouter';
 import {
@@ -32,7 +32,7 @@ import {
 import {
   fetchDepositsAction,
 } from '../../actions/deposits';
-import WithdrawalsTable from '../../components/WithdrawalsTable';
+import WithdrawalsTable from '../../components/functions/WithdrawalsTable';
 
 const styles = {
   card: {

@@ -19,37 +19,34 @@ export function fetchChannelsAction(
     dispatch({
       type: FETCH_CHANNELS_BEGIN,
     });
-    axios.post(`${window.myConfig.apiUrl}/channels`, {
+    axios.post(`${window.myConfig.apiUrl}/management/channels`, {
       id,
       channelId,
       channelName,
       serverId,
       offset,
       limit,
-    })
-      .then((response) => {
-        console.log('SUCESSSSS');
-        console.log(response);
-        dispatch({
-          type: FETCH_CHANNELS_SUCCESS,
-          payload: response.data,
-        });
-      }).catch((error) => {
-        notistackErrorAdd(
-          dispatch,
-          error,
-        );
-        dispatch({
-          type: FETCH_CHANNELS_FAIL,
-          payload: error,
-        });
+    }).then((response) => {
+      dispatch({
+        type: FETCH_CHANNELS_SUCCESS,
+        payload: response.data,
       });
+    }).catch((error) => {
+      notistackErrorAdd(
+        dispatch,
+        error,
+      );
+      dispatch({
+        type: FETCH_CHANNELS_FAIL,
+        payload: error,
+      });
+    });
   }
 }
 
 export function banChannelAction(id, banMessage = '') {
   return function (dispatch) {
-    axios.post(`${window.myConfig.apiUrl}/ban/channel`, {
+    axios.post(`${window.myConfig.apiUrl}/management/channel/ban`, {
       id,
       banMessage,
     })

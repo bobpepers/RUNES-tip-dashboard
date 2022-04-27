@@ -18,7 +18,7 @@ import { withRouter } from '../../hooks/withRouter';
 import {
   fetchDashboardUsersAction,
 } from '../../actions/dashboardUsers';
-import DashboardUsersTable from '../../components/DashboardUsersTable';
+import DashboardUsersTable from '../../components/management/DashboardUsersTable';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {

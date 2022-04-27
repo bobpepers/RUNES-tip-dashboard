@@ -39,11 +39,9 @@ import DashboardUsers from './views/management/DashboardUsers';
 import PriceCurrenciesManagement from './views/management/PriceCurrencies';
 import WithdrawalAddressesView from './views/management/WithdrawalAddresses';
 import WithdrawalAddressView from './views/management/WithdrawalAddress';
-import RainsView from './views/functions/Rains';
-import RainView from './views/functions/Rain';
 
-import SoaksView from './views/functions/Soaks';
-import SoakView from './views/functions/Soak';
+import FunctionsView from './views/functions/Functions';
+import FunctionView from './views/functions/Function';
 
 import Deposits from './views/functions/Deposits';
 import Withdrawals from './views/functions/Withdrawals';
@@ -103,53 +101,224 @@ const RoutesX = function (props) {
           element={<Home />}
         />
         <Route
-          path="/users"
+          path="/management/users"
           element={<Users />}
         />
         <Route
-          path="/user/:userId"
+          path="/management/user/:userId"
           element={<UserView />}
         />
         <Route
-          path="/bot/settings"
+          path="/management/bot/settings"
           element={<BotSettings />}
         />
         <Route
-          path="/features"
+          path="/management/features"
           element={<Features />}
         />
         <Route
-          path="/servers"
+          path="/management/servers"
           element={<Servers />}
         />
         <Route
-          path="/channels"
+          path="/management/channels"
           element={<Channels />}
         />
         <Route
-          path="/withdrawaladdresses"
+          path="/management/withdrawaladdresses"
           element={<WithdrawalAddressesView />}
         />
         <Route
-          path="/withdrawaladdress/:addressId"
+          path="/management/withdrawaladdress/:addressId"
           element={<WithdrawalAddressView />}
-        />
-        <Route
-          path="/rains"
-          element={<RainsView />}
-        />
-        <Route
-          path="/rain/:rainId"
-          element={<RainView />}
         />
 
         <Route
-          path="/soaks"
-          element={<SoaksView />}
+          path="/functions/rains"
+          element={(
+            <FunctionsView
+              functionName="rain"
+            />
+          )}
         />
         <Route
-          path="/soak/:soakId"
-          element={<SoakView />}
+          path="/functions/rain/:functionId"
+          element={(
+            <FunctionView
+              functionName="rain"
+            />
+          )}
+        />
+
+        <Route
+          path="/functions/floods"
+          element={(
+            <FunctionsView
+              functionName="flood"
+            />
+          )}
+        />
+        <Route
+          path="/functions/flood/:functionId"
+          element={(
+            <FunctionView
+              functionName="flood"
+            />
+          )}
+        />
+
+        <Route
+          path="/functions/sleets"
+          element={(
+            <FunctionsView
+              functionName="sleet"
+            />
+          )}
+        />
+        <Route
+          path="/functions/sleet/:sleetId"
+          element={(
+            <FunctionView
+              functionName="sleet"
+            />
+          )}
+        />
+
+        <Route
+          path="/functions/soaks"
+          element={(
+            <FunctionsView
+              functionName="soak"
+            />
+          )}
+        />
+        <Route
+          path="/functions/soak/:functionId"
+          element={(
+            <FunctionView
+              functionName="soak"
+            />
+          )}
+        />
+
+        <Route
+          path="/functions/tips"
+          element={(
+            <FunctionsView
+              functionName="tip"
+            />
+          )}
+        />
+
+        <Route
+          path="/functions/tip/:functionId"
+          element={(
+            <FunctionView
+              functionName="tip"
+            />
+          )}
+        />
+
+        <Route
+          path="/functions/voicerains"
+          element={(
+            <FunctionsView
+              functionName="voicerain"
+            />
+          )}
+        />
+        <Route
+          path="/functions/voicerain/:functionId"
+          element={(
+            <FunctionView
+              functionName="voicerain"
+            />
+          )}
+        />
+
+        <Route
+          path="/functions/thunders"
+          element={(
+            <FunctionsView
+              functionName="thunder"
+            />
+          )}
+        />
+        <Route
+          path="/functions/thunder/:functionId"
+          element={(
+            <FunctionView
+              functionName="thunder"
+            />
+          )}
+        />
+
+        <Route
+          path="/functions/hurricanes"
+          element={(
+            <FunctionsView
+              functionName="hurricane"
+            />
+          )}
+        />
+        <Route
+          path="/functions/hurricane/:functionId"
+          element={(
+            <FunctionView
+              functionName="hurricane"
+            />
+          )}
+        />
+
+        <Route
+          path="/functions/thunderstorms"
+          element={(
+            <FunctionsView
+              functionName="thunderstorm"
+            />
+          )}
+        />
+        <Route
+          path="/functions/thunderstorm/:functionId"
+          element={(
+            <FunctionView
+              functionName="thunderstorm"
+            />
+          )}
+        />
+
+        <Route
+          path="/functions/trivias"
+          element={(
+            <FunctionsView
+              functionName="trivia"
+            />
+          )}
+        />
+        <Route
+          path="/functions/trivia/:functionId"
+          element={(
+            <FunctionView
+              functionName="trivia"
+            />
+          )}
+        />
+
+        <Route
+          path="/functions/reactdrops"
+          element={(
+            <FunctionsView
+              functionName="reactdrop"
+            />
+          )}
+        />
+        <Route
+          path="/functions/reactdrop/:functionId"
+          element={(
+            <FunctionView
+              functionName="reactdrop"
+            />
+          )}
         />
 
         {/* <Route
@@ -157,27 +326,27 @@ const RoutesX = function (props) {
           element={<Activity />}
         /> */}
         <Route
-          path="/deposits"
+          path="/functions/deposits"
           element={<Deposits />}
         />
         <Route
-          path="/withdrawals"
+          path="/functions/withdrawals"
           element={<Withdrawals />}
         />
         <Route
-          path="/errors"
+          path="/functions/errors"
           element={<Errors />}
         />
         <Route
-          path="/dashboardusers"
+          path="/management/dashboardusers"
           element={<DashboardUsers />}
         />
         <Route
-          path="/triviamanagement"
+          path="/management/trivia"
           element={<TriviaManagement />}
         />
         <Route
-          path="/pricecurrenciesmanagement"
+          path="/management/pricecurrencies"
           element={<PriceCurrenciesManagement />}
         />
         <Route

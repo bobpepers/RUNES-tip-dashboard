@@ -1,32 +1,29 @@
 import axios from '../axios';
 import {
-  FETCH_WITHDRAWALADDRESSES_BEGIN,
-  FETCH_WITHDRAWALADDRESSES_SUCCESS,
-  FETCH_WITHDRAWALADDRESSES_FAIL,
-  FETCH_WITHDRAWALADDRESS_BEGIN,
-  FETCH_WITHDRAWALADDRESS_SUCCESS,
-  FETCH_WITHDRAWALADDRESS_FAIL,
+  FETCH_BOTFUNCTIONS_BEGIN,
+  FETCH_BOTFUNCTIONS_SUCCESS,
+  FETCH_BOTFUNCTIONS_FAIL,
+  FETCH_BOTFUNCTION_BEGIN,
+  FETCH_BOTFUNCTION_SUCCESS,
+  FETCH_BOTFUNCTION_FAIL,
 } from './types/index';
 import { notistackErrorAdd } from './helpers/notistackError';
 
-export function fetchWithdrawalAddressesAction(
-  id,
-  address,
+export function fetchBotFunctionsAction(
+  name,
   offset,
   limit,
 ) {
   return function (dispatch) {
     dispatch({
-      type: FETCH_WITHDRAWALADDRESSES_BEGIN,
+      type: FETCH_BOTFUNCTIONS_BEGIN,
     });
-    axios.post(`${window.myConfig.apiUrl}/management/withdrawaladdresses`, {
-      id,
-      address,
+    axios.post(`${window.myConfig.apiUrl}/functions/${name}`, {
       offset,
       limit,
     }).then((response) => {
       dispatch({
-        type: FETCH_WITHDRAWALADDRESSES_SUCCESS,
+        type: FETCH_BOTFUNCTIONS_SUCCESS,
         payload: response.data,
       });
     }).catch((error) => {
@@ -35,25 +32,26 @@ export function fetchWithdrawalAddressesAction(
         error,
       );
       dispatch({
-        type: FETCH_WITHDRAWALADDRESSES_FAIL,
+        type: FETCH_BOTFUNCTIONS_FAIL,
         payload: error,
       });
     });
   }
 }
 
-export function fetchWithdrawalAddressAction(
+export function fetchBotFunctionAction(
+  name,
   id,
 ) {
   return function (dispatch) {
     dispatch({
-      type: FETCH_WITHDRAWALADDRESS_BEGIN,
+      type: FETCH_BOTFUNCTION_BEGIN,
     });
-    axios.post(`${window.myConfig.apiUrl}/management/withdrawaladdress`, {
+    axios.post(`${window.myConfig.apiUrl}/functions/${name}`, {
       id,
     }).then((response) => {
       dispatch({
-        type: FETCH_WITHDRAWALADDRESS_SUCCESS,
+        type: FETCH_BOTFUNCTION_SUCCESS,
         payload: response.data,
       });
     }).catch((error) => {
@@ -62,7 +60,7 @@ export function fetchWithdrawalAddressAction(
         error,
       );
       dispatch({
-        type: FETCH_WITHDRAWALADDRESS_FAIL,
+        type: FETCH_BOTFUNCTION_FAIL,
         payload: error,
       });
     });

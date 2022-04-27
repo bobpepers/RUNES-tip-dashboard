@@ -14,7 +14,7 @@ export function fetchErrorsAction(
     dispatch({
       type: FETCH_ERRORS_BEGIN,
     });
-    axios.post(`${window.myConfig.apiUrl}/errors`, {
+    axios.post(`${window.myConfig.apiUrl}/functions/errors`, {
       offset,
       limit,
     })

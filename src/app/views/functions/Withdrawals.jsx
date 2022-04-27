@@ -16,7 +16,7 @@ import {
   acceptWithdrawalAction,
   declineWithdrawalAction,
 } from '../../actions/withdrawals';
-import WithdrawalsTable from '../../components/WithdrawalsTable';
+import WithdrawalsTable from '../../components/functions/WithdrawalsTable';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {

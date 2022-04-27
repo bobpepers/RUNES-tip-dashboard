@@ -14,7 +14,7 @@ import { withRouter } from '../../hooks/withRouter';
 import {
   fetchWithdrawalAddressesAction,
 } from '../../actions/withdrawalAddresses';
-import WithdrawalAddressesTable from '../../components/functions/WithdrawalAddressesTable';
+import WithdrawalAddressesTable from '../../components/management/WithdrawalAddressesTable';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {

@@ -9,7 +9,7 @@ import {
 import Moment from 'react-moment';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const renderEarnedSpendBalance = (activity) => (
   <>

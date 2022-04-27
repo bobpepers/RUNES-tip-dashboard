@@ -152,7 +152,7 @@ const Header = function (props) {
             >
               <Link
                 className="nav-link"
-                to="/bot/settings"
+                to="/management/bot/settings"
               >
                 <MenuItem onClick={handleCloseManagement}>
                   Bot Settings
@@ -160,7 +160,7 @@ const Header = function (props) {
               </Link>
               <Link
                 className="nav-link"
-                to="/features"
+                to="/management/features"
               >
                 <MenuItem onClick={handleCloseManagement}>
                   Feature Settings
@@ -168,7 +168,7 @@ const Header = function (props) {
               </Link>
               <Link
                 className="nav-link"
-                to="/servers"
+                to="/management/servers"
               >
                 <MenuItem onClick={handleCloseManagement}>
                   Servers
@@ -176,7 +176,7 @@ const Header = function (props) {
               </Link>
               <Link
                 className="nav-link"
-                to="/channels"
+                to="/management/channels"
               >
                 <MenuItem onClick={handleCloseManagement}>
                   Channels
@@ -184,7 +184,7 @@ const Header = function (props) {
               </Link>
               <Link
                 className="nav-link"
-                to="/users"
+                to="/management/users"
               >
                 <MenuItem onClick={handleCloseManagement}>
                   Users
@@ -192,7 +192,7 @@ const Header = function (props) {
               </Link>
               <Link
                 className="nav-link"
-                to="/triviamanagement"
+                to="/management/trivia"
               >
                 <MenuItem onClick={handleCloseManagement}>
                   Trivia
@@ -200,7 +200,7 @@ const Header = function (props) {
               </Link>
               <Link
                 className="nav-link"
-                to="/pricecurrenciesmanagement"
+                to="/management/pricecurrencies"
               >
                 <MenuItem onClick={handleCloseManagement}>
                   Price Currencies
@@ -208,7 +208,7 @@ const Header = function (props) {
               </Link>
               <Link
                 className="nav-link"
-                to="/dashboardusers"
+                to="/management/dashboardusers"
               >
                 <MenuItem onClick={handleCloseManagement}>
                   DashboardUsers
@@ -216,7 +216,7 @@ const Header = function (props) {
               </Link>
               <Link
                 className="nav-link"
-                to="/withdrawaladdresses"
+                to="/management/withdrawaladdresses"
               >
                 <MenuItem onClick={handleCloseManagement}>
                   WithdrawalAddresses
@@ -248,7 +248,7 @@ const Header = function (props) {
             >
               <Link
                 className="nav-link"
-                to="/deposits"
+                to="/functions/deposits"
               >
                 <MenuItem onClick={handleCloseFunctions}>
                   Deposits
@@ -256,7 +256,7 @@ const Header = function (props) {
               </Link>
               <Link
                 className="nav-link"
-                to="/withdrawals"
+                to="/functions/withdrawals"
               >
                 <MenuItem onClick={handleCloseFunctions}>
                   Withdrawals
@@ -264,7 +264,7 @@ const Header = function (props) {
               </Link>
               <Link
                 className="nav-link"
-                to="/errors"
+                to="/functions/errors"
               >
                 <MenuItem onClick={handleCloseFunctions}>
                   Errors
@@ -272,7 +272,7 @@ const Header = function (props) {
               </Link>
               <Link
                 className="nav-link"
-                to="/tips"
+                to="/functions/tips"
               >
                 <MenuItem onClick={handleCloseFunctions}>
                   Tips
@@ -280,7 +280,7 @@ const Header = function (props) {
               </Link>
               <Link
                 className="nav-link"
-                to="/rains"
+                to="/functions/rains"
               >
                 <MenuItem onClick={handleCloseFunctions}>
                   Rains
@@ -288,7 +288,7 @@ const Header = function (props) {
               </Link>
               <Link
                 className="nav-link"
-                to="/soaks"
+                to="/functions/soaks"
               >
                 <MenuItem onClick={handleCloseFunctions}>
                   Soaks
@@ -296,7 +296,7 @@ const Header = function (props) {
               </Link>
               <Link
                 className="nav-link"
-                to="/floods"
+                to="/functions/floods"
               >
                 <MenuItem onClick={handleCloseFunctions}>
                   Floods
@@ -304,7 +304,7 @@ const Header = function (props) {
               </Link>
               <Link
                 className="nav-link"
-                to="/sleets"
+                to="/functions/sleets"
               >
                 <MenuItem onClick={handleCloseFunctions}>
                   Sleets
@@ -312,7 +312,7 @@ const Header = function (props) {
               </Link>
               <Link
                 className="nav-link"
-                to="/voicerains"
+                to="/functions/voicerains"
               >
                 <MenuItem onClick={handleCloseFunctions}>
                   Voicerains
@@ -320,7 +320,7 @@ const Header = function (props) {
               </Link>
               <Link
                 className="nav-link"
-                to="/thunders"
+                to="/functions/thunders"
               >
                 <MenuItem onClick={handleCloseFunctions}>
                   Thunders
@@ -328,7 +328,7 @@ const Header = function (props) {
               </Link>
               <Link
                 className="nav-link"
-                to="/thunderstorms"
+                to="/functions/thunderstorms"
               >
                 <MenuItem onClick={handleCloseFunctions}>
                   Thunderstorms
@@ -336,7 +336,7 @@ const Header = function (props) {
               </Link>
               <Link
                 className="nav-link"
-                to="/hurricanes"
+                to="/functions/hurricanes"
               >
                 <MenuItem onClick={handleCloseFunctions}>
                   Hurricanes
@@ -344,7 +344,7 @@ const Header = function (props) {
               </Link>
               <Link
                 className="nav-link"
-                to="/reactdrops"
+                to="/functions/reactdrops"
               >
                 <MenuItem onClick={handleCloseFunctions}>
                   Reactdrops
@@ -352,7 +352,7 @@ const Header = function (props) {
               </Link>
               <Link
                 className="nav-link"
-                to="/trivia"
+                to="/functions/trivia"
               >
                 <MenuItem onClick={handleCloseFunctions}>
                   Trivias
@@ -361,7 +361,6 @@ const Header = function (props) {
             </Menu>
           </Nav>
           <ul>
-
             <li>
               <IconButton
                 size="large"

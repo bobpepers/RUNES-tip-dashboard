@@ -12,11 +12,7 @@ export function fetchBotSettings() {
     dispatch({
       type: FETCH_BOTSETTINGS_BEGIN,
     });
-    axios.post(`${window.myConfig.apiUrl}/bot/settings`, {
-      // id,
-      // channelId,
-      // channelName
-    })
+    axios.post(`${window.myConfig.apiUrl}/bot/settings`)
       .then((response) => {
         dispatch({
           type: FETCH_BOTSETTINGS_SUCCESS,
@@ -41,17 +37,16 @@ export function updateBotSettings(id, maintenance, enabled) {
       id,
       maintenance,
       enabled,
-    })
-      .then((response) => {
-        dispatch({
-          type: UPDATE_BOTSETTINGS,
-          payload: response.data.result,
-        });
-      }).catch((error) => {
-        notistackErrorAdd(
-          dispatch,
-          error,
-        );
+    }).then((response) => {
+      dispatch({
+        type: UPDATE_BOTSETTINGS,
+        payload: response.data.result,
       });
+    }).catch((error) => {
+      notistackErrorAdd(
+        dispatch,
+        error,
+      );
+    });
   }
 }

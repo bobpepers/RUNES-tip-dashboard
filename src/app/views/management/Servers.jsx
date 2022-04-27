@@ -19,7 +19,7 @@ import {
   fetchServerAction,
   banServerAction,
 } from '../../actions/servers';
-import ServerTable from '../../components/ServerTable';
+import ServerTable from '../../components/management/ServerTable';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {

@@ -76,8 +76,6 @@ export function disabletfa(obj) {
     });
     axios.post(`${window.myConfig.apiUrl}/2fa/disable`, obj)
       .then((response) => {
-        console.log('actions/disable tfa action Success');
-        console.log(response);
         dispatch({
           type: DISABLE_2FA_SUCCESS,
           payload: response.data,

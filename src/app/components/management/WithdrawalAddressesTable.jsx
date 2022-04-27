@@ -274,7 +274,7 @@ const WithdrawalAddressesTable = function (props) {
                     <TableCell component="th" id={labelId} scope="row" padding="none">
                       <p>
                         <Button
-                          onClick={() => navigate(`/withdrawaladdress/${row.id}`)}
+                          onClick={() => navigate(`/management/withdrawaladdress/${row.id}`)}
                         >
                           {row.id}
                         </Button>
@@ -283,7 +283,7 @@ const WithdrawalAddressesTable = function (props) {
                     </TableCell>
                     <TableCell align="right">
                       <Button
-                        onClick={() => navigate(`/withdrawaladdress/${row.id}`)}
+                        onClick={() => navigate(`/management/withdrawaladdress/${row.id}`)}
                       >
                         {row.address}
                       </Button>
@@ -300,7 +300,7 @@ const WithdrawalAddressesTable = function (props) {
                     <TableCell align="right">
                       <Button
                         variant="outlined"
-                        onClick={() => navigate(`/withdrawaladdress/${row.id}`)}
+                        onClick={() => navigate(`/management/withdrawaladdress/${row.id}`)}
                       >
                         View
                       </Button>

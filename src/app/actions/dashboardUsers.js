@@ -17,7 +17,7 @@ export function fetchDashboardUsersAction(
     dispatch({
       type: FETCH_DASHBOARDUSERS_BEGIN,
     });
-    axios.post(`${window.myConfig.apiUrl}/dashboardusers`, {
+    axios.post(`${window.myConfig.apiUrl}/management/dashboardusers`, {
       id,
       email,
       username,

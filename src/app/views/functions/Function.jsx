@@ -15,32 +15,120 @@ import {
 } from '@mui/material';
 import { withRouter } from '../../hooks/withRouter';
 import {
-  fetchRainAction,
-} from '../../actions/rain';
+  fetchBotFunctionAction,
+} from '../../actions/botFunction';
 
-const RainView = function (props) {
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+const FunctionView = function (props) {
   const {
     auth,
-    rain,
+    botFunction,
+    functionName,
   } = props;
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { rainId } = useParams();
+  const [functionTips, setFunctionTips] = useState([]);
+  const { functionId } = useParams();
 
   useEffect(() => {
+    setFunctionTips([])
     if (
       auth.authenticated
-      && rainId
+      && functionId
     ) {
-      dispatch(fetchRainAction(rainId));
+      dispatch(fetchBotFunctionAction(functionName, functionId));
     }
   }, [
     auth,
-    rainId,
+    functionId,
   ]);
 
-  useEffect(() => { }, [
-    rain,
+  useEffect(() => {
+    if (functionName === 'rain') {
+      setFunctionTips(
+        botFunction
+        && botFunction.data
+        && botFunction.data.raintips
+        && botFunction.data.raintips,
+      );
+    }
+    if (functionName === 'flood') {
+      setFunctionTips(
+        botFunction
+        && botFunction.data
+        && botFunction.data.floodtips
+        && botFunction.data.floodtips,
+      );
+    }
+    if (functionName === 'hurricane') {
+      setFunctionTips(
+        botFunction
+        && botFunction.data
+        && botFunction.data.hurricanetips
+        && botFunction.data.hurricanetips,
+      );
+    }
+    if (functionName === 'reactdrop') {
+      setFunctionTips(
+        botFunction
+        && botFunction.data
+        && botFunction.data.reactdroptips
+        && botFunction.data.reactdroptips,
+      );
+    }
+    if (functionName === 'sleet') {
+      setFunctionTips(
+        botFunction
+        && botFunction.data
+        && botFunction.data.sleettips
+        && botFunction.data.sleettips,
+      );
+    }
+    if (functionName === 'soak') {
+      setFunctionTips(
+        botFunction
+        && botFunction.data
+        && botFunction.data.soaktips
+        && botFunction.data.soaktips,
+      );
+    }
+    if (functionName === 'thunder') {
+      setFunctionTips(
+        botFunction
+        && botFunction.data
+        && botFunction.data.thundertips
+        && botFunction.data.thundertips,
+      );
+    }
+    if (functionName === 'thunderstorm') {
+      setFunctionTips(
+        botFunction
+        && botFunction.data
+        && botFunction.data.thunderstormtips
+        && botFunction.data.thunderstormtips,
+      );
+    }
+    if (functionName === 'tip') {
+      setFunctionTips(
+        botFunction
+        && botFunction.data
+        && botFunction.data.tiptips
+        && botFunction.data.tiptips,
+      );
+    }
+    if (functionName === 'voicerain') {
+      setFunctionTips(
+        botFunction
+        && botFunction.data
+        && botFunction.data.voiceraintips
+        && botFunction.data.voiceraintips,
+      );
+    }
+  }, [
+    botFunction,
   ]);
 
   return (
@@ -67,7 +155,9 @@ const RainView = function (props) {
             component="div"
             align="center"
           >
-            Rain Id:
+            {capitalizeFirstLetter(functionName)}
+            {' '}
+            Id:
           </Typography>
           <Typography
             variant="h6"
@@ -76,10 +166,10 @@ const RainView = function (props) {
             align="center"
           >
             {
-              rain
-              && rain.data
-              && rain.data.id
-              && rain.data.id
+              botFunction
+              && botFunction.data
+              && botFunction.data.id
+              && botFunction.data.id
             }
           </Typography>
         </Grid>
@@ -108,10 +198,10 @@ const RainView = function (props) {
             align="center"
           >
             {
-              rain
-              && rain.data
-              && rain.data.user
-              && rain.data.user.username
+              botFunction
+              && botFunction.data
+              && botFunction.data.user
+              && botFunction.data.user.username
             }
           </Typography>
         </Grid>
@@ -141,10 +231,10 @@ const RainView = function (props) {
             align="center"
           >
             {
-              rain
-              && rain.data
-              && rain.data.user
-              && rain.data.user.firstname
+              botFunction
+              && botFunction.data
+              && botFunction.data.user
+              && botFunction.data.user.firstname
             }
           </Typography>
         </Grid>
@@ -174,10 +264,10 @@ const RainView = function (props) {
             align="center"
           >
             {
-              rain
-              && rain.data
-              && rain.data.user
-              && rain.data.user.lastname
+              botFunction
+              && botFunction.data
+              && botFunction.data.user
+              && botFunction.data.user.lastname
             }
           </Typography>
         </Grid>
@@ -207,10 +297,10 @@ const RainView = function (props) {
             align="center"
           >
             {
-              rain
-              && rain.data
-              && rain.data.user
-              && rain.data.user.user_id
+              botFunction
+              && botFunction.data
+              && botFunction.data.user
+              && botFunction.data.user.user_id
             }
           </Typography>
         </Grid>
@@ -247,9 +337,9 @@ const RainView = function (props) {
             align="center"
           >
             {
-              rain
-              && rain.data
-              && rain.data.amount / 1e8
+              botFunction
+              && botFunction.data
+              && botFunction.data.amount / 1e8
             }
           </Typography>
         </Grid>
@@ -279,9 +369,9 @@ const RainView = function (props) {
             align="center"
           >
             {
-              rain
-              && rain.data
-              && rain.data.feeAmount / 1e8
+              botFunction
+              && botFunction.data
+              && botFunction.data.feeAmount / 1e8
             }
           </Typography>
         </Grid>
@@ -311,9 +401,9 @@ const RainView = function (props) {
             align="center"
           >
             {
-              rain
-              && rain.data
-              && rain.data.userCount
+              botFunction
+              && botFunction.data
+              && botFunction.data.userCount
             }
           </Typography>
         </Grid>
@@ -348,10 +438,10 @@ const RainView = function (props) {
         >
           <p>Group</p>
           <p>
-            {rain.data && rain.data.group && rain.data.group.groupName}
+            {botFunction.data && botFunction.data.group && botFunction.data.group.groupName}
             {' '}
             (
-            {rain.data && rain.data.group && rain.data.group.groupId}
+            {botFunction.data && botFunction.data.group && botFunction.data.group.groupId}
             )
           </p>
         </Grid>
@@ -367,10 +457,10 @@ const RainView = function (props) {
         >
           <p>Channel</p>
           <p>
-            {rain.data && rain.data.channel && rain.data.channel.channelId}
+            {botFunction.data && botFunction.data.channel && botFunction.data.channel.channelId}
             {' '}
             (
-            {rain.data && rain.data.channel ? rain.data.channel.channelId : 'n/a'}
+            {botFunction.data && botFunction.data.channel ? botFunction.data.channel.channelId : 'n/a'}
             )
           </p>
         </Grid>
@@ -394,10 +484,9 @@ const RainView = function (props) {
         </Grid>
       </Grid>
       {
-        rain
-        && rain.data
-        && rain.data.raintips
-        && rain.data.raintips.map((row, index) => (
+        functionTips
+        && functionTips.length > 0
+        && functionTips.map((row, index) => (
           <Grid
             container
             justifyContent="center"
@@ -428,7 +517,7 @@ const RainView = function (props) {
             >
               <p>user</p>
               <Button
-                onClick={() => navigate(`/user/${row.user && row.user.id}`)}
+                onClick={() => navigate(`/management/user/${row.user && row.user.id}`)}
               >
                 {row.user && row.user.username}
                 {row.user && !row.user.username && row.user.firstname && `${row.user.firstname} `}
@@ -462,13 +551,13 @@ const RainView = function (props) {
   );
 }
 
-RainView.propTypes = {
+FunctionView.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
-  rain: state.rain,
+  botFunction: state.botFunction,
 })
 
-export default withRouter(connect(mapStateToProps, null)(RainView));
+export default withRouter(connect(mapStateToProps, null)(FunctionView));

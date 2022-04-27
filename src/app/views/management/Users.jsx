@@ -19,7 +19,7 @@ import {
   fetchUsersAction,
   banUserAction,
 } from '../../actions/users';
-import UsersTable from '../../components/UsersTable';
+import UsersTable from '../../components/management/UsersTable';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
