@@ -17,21 +17,20 @@ export function fetchErrorsAction(
     axios.post(`${window.myConfig.apiUrl}/functions/errors`, {
       offset,
       limit,
-    })
-      .then((response) => {
-        dispatch({
-          type: FETCH_ERRORS_SUCCESS,
-          payload: response.data,
-        });
-      }).catch((error) => {
-        notistackErrorAdd(
-          dispatch,
-          error,
-        );
-        dispatch({
-          type: FETCH_ERRORS_FAIL,
-          payload: error,
-        });
+    }).then((response) => {
+      dispatch({
+        type: FETCH_ERRORS_SUCCESS,
+        payload: response.data,
       });
+    }).catch((error) => {
+      notistackErrorAdd(
+        dispatch,
+        error,
+      );
+      dispatch({
+        type: FETCH_ERRORS_FAIL,
+        payload: error,
+      });
+    });
   }
 }

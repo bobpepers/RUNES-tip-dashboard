@@ -321,6 +321,23 @@ const RoutesX = function (props) {
           )}
         />
 
+        <Route
+          path="/functions/trivias"
+          element={(
+            <FunctionsView
+              functionName="trivia"
+            />
+          )}
+        />
+        <Route
+          path="/functions/trivia/:functionId"
+          element={(
+            <FunctionView
+              functionName="trivia"
+            />
+          )}
+        />
+
         {/* <Route
           path="/activity"
           element={<Activity />}

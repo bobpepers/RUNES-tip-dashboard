@@ -352,7 +352,7 @@ const Header = function (props) {
               </Link>
               <Link
                 className="nav-link"
-                to="/functions/trivia"
+                to="/functions/trivias"
               >
                 <MenuItem onClick={handleCloseFunctions}>
                   Trivias

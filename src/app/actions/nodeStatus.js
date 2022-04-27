@@ -15,7 +15,7 @@ export function fetchNodeStatusAction() {
       .then((response) => {
         dispatch({
           type: FETCH_NODESTATUS_SUCCESS,
-          payload: response.data,
+          payload: response.data.result,
         });
       }).catch((error) => {
         notistackErrorAdd(

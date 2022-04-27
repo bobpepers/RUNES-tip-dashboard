@@ -58,7 +58,6 @@ export function updatePricesAndConversionsAction() {
   return function (dispatch) {
     axios.post(`${window.myConfig.apiUrl}/management/pricecurrencies/updateprice`)
       .then((response) => {
-        console.log(response);
         dispatch({
           type: ENQUEUE_SNACKBAR,
           notification: {
@@ -86,7 +85,6 @@ export function addPriceCurrenciesAction(obj) {
   return function (dispatch) {
     axios.post(`${window.myConfig.apiUrl}/management/pricecurrencies/add`, obj)
       .then((response) => {
-        console.log(response);
         dispatch({
           type: ADD_PRICECURRENCIES,
           payload: response.data.result,

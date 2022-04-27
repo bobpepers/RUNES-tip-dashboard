@@ -13,7 +13,6 @@ export function fetchFaucetBalanceAction() {
     });
     axios.get(`${window.myConfig.apiUrl}/faucet/balance`)
       .then((response) => {
-        console.log(response.data);
         dispatch({
           type: FETCH_FAUCET_BALANCE_SUCCESS,
           payload: response.data,

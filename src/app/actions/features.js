@@ -38,19 +38,19 @@ export function fetchFeatures() {
 
 export function removeFeature(id) {
   return function (dispatch) {
-    axios.post(`${window.myConfig.apiUrl}/management/feature/remove`, { id })
-      .then((response) => {
-        console.log(response);
-        dispatch({
-          type: REMOVE_FEATURE,
-          payload: response.data.result,
-        });
-      }).catch((error) => {
-        notistackErrorAdd(
-          dispatch,
-          error,
-        );
+    axios.post(`${window.myConfig.apiUrl}/management/feature/remove`, {
+      id,
+    }).then((response) => {
+      dispatch({
+        type: REMOVE_FEATURE,
+        payload: response.data.result,
       });
+    }).catch((error) => {
+      notistackErrorAdd(
+        dispatch,
+        error,
+      );
+    });
   }
 }
 
@@ -58,7 +58,6 @@ export function addFeature(obj) {
   return function (dispatch) {
     axios.post(`${window.myConfig.apiUrl}/management/feature/add`, obj)
       .then((response) => {
-        console.log(response);
         dispatch({
           type: ADD_FEATURE,
           payload: response.data.result,

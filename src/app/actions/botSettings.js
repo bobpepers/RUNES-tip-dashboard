@@ -12,7 +12,7 @@ export function fetchBotSettings() {
     dispatch({
       type: FETCH_BOTSETTINGS_BEGIN,
     });
-    axios.post(`${window.myConfig.apiUrl}/bot/settings`)
+    axios.post(`${window.myConfig.apiUrl}/management/bot/settings`)
       .then((response) => {
         dispatch({
           type: FETCH_BOTSETTINGS_SUCCESS,
@@ -33,7 +33,7 @@ export function fetchBotSettings() {
 
 export function updateBotSettings(id, maintenance, enabled) {
   return function (dispatch) {
-    axios.post(`${window.myConfig.apiUrl}/bot/settings/update`, {
+    axios.post(`${window.myConfig.apiUrl}/management/bot/settings/update`, {
       id,
       maintenance,
       enabled,

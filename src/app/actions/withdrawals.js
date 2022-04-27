@@ -23,11 +23,11 @@ export function acceptWithdrawalAction(id) {
     }).then((response) => {
       dispatch({
         type: ACCEPT_WITHDRAWAL_SUCCESS,
-        payload: response.data.withdrawal,
+        payload: response.data.result,
       });
       dispatch({
         type: UPDATE_WITHDRAWAL,
-        payload: response.data.withdrawal,
+        payload: response.data.result,
       });
     }).catch((error) => {
       notistackErrorAdd(
@@ -52,11 +52,11 @@ export function declineWithdrawalAction(id) {
     }).then((response) => {
       dispatch({
         type: DECLINE_WITHDRAWAL_SUCCESS,
-        payload: response.data.withdrawal,
+        payload: response.data.result,
       });
       dispatch({
         type: UPDATE_WITHDRAWAL,
-        payload: response.data.withdrawal,
+        payload: response.data.result,
       });
     }).catch((error) => {
       notistackErrorAdd(
