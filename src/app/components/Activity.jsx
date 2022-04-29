@@ -64,7 +64,7 @@ const renderBy = (
     by:
     <br />
     <Button
-      onClick={() => navigate(`/user/${activity.spender && activity.spender.id && activity.spender.id}`)}
+      onClick={() => navigate(`/management/user/${activity.spender && activity.spender.id && activity.spender.id}`)}
     >
       {activity.spender && activity.spender.username && activity.spender.username}
       {activity.spender && !activity.spender.username && activity.spender.firstname && `${activity.spender.firstname} `}
@@ -85,7 +85,7 @@ const renderTo = (
     to:
     <br />
     <Button
-      onClick={() => navigate(`/user/${activity.earner && activity.earner.id && activity.earner.id}`)}
+      onClick={() => navigate(`/management/user/${activity.earner && activity.earner.id && activity.earner.id}`)}
     >
       {activity.earner && activity.earner.username && activity.earner.username}
       {activity.earner && !activity.earner.username && activity.earner.firstname && `${activity.earner.firstname} `}
@@ -316,15 +316,23 @@ const renderItems = (
 
             {activity.type === 'tip_s' && (
               <>
-                <Typography variant="subtitle1" gutterBottom component="div">
-                  by:
-                  {' '}
-                  {activity.spender && activity.spender.username && activity.spender.username}
-                  {' '}
-                  (
-                  {activity.spender && activity.spender.user_id && activity.spender.user_id}
-                  )
-                </Typography>
+                <Button
+                  onClick={() => navigate(`/management/user/${activity.spender && activity.spender.id && activity.spender.id}`)}
+                >
+                  <Typography
+                    variant="subtitle1"
+                    gutterBottom
+                    component="div"
+                  >
+                    by:
+                    {' '}
+                    {activity.spender && activity.spender.username && activity.spender.username}
+                    {' '}
+                    (
+                    {activity.spender && activity.spender.user_id && activity.spender.user_id}
+                    )
+                  </Typography>
+                </Button>
                 <Typography variant="subtitle1" gutterBottom component="div">
                   to:
                   {' '}

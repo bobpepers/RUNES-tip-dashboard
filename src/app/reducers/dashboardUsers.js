@@ -9,18 +9,24 @@ const initialState = {
   error: null,
 };
 
-export default (state = initialState, action) => {
+export default (
+  state = initialState,
+  action,
+) => {
   switch (action.type) {
   case FETCH_DASHBOARDUSERS_BEGIN:
     return {
       ...state,
       isFetching: true,
+      data: null,
+      count: 0,
       error: null,
     };
   case FETCH_DASHBOARDUSERS_SUCCESS:
     return {
       ...state,
-      data: action.payload,
+      data: action.payload.result,
+      count: action.payload.count,
       isFetching: false,
     };
   case FETCH_DASHBOARDUSERS_FAIL:

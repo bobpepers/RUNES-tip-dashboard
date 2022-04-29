@@ -24,10 +24,9 @@ export function fetchDashboardUsersAction(
       role,
       banned,
     }).then((response) => {
-      console.log(response.data);
       dispatch({
         type: FETCH_DASHBOARDUSERS_SUCCESS,
-        payload: response.data.dashboardusers,
+        payload: response.data,
       });
     }).catch((error) => {
       notistackErrorAdd(

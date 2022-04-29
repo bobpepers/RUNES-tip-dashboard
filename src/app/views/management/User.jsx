@@ -86,6 +86,7 @@ const UserView = function (props) {
   ]);
 
   useEffect(() => {
+    console.log(userInfo.data);
     if (
       auth.authenticated
       && userInfo
@@ -387,6 +388,107 @@ const UserView = function (props) {
               && userInfo.data.wallet
               && ((userInfo.data.wallet.available + userInfo.data.wallet.locked) / 1e8)
             }
+          </Typography>
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          sm={12}
+          md={12}
+          lg={12}
+          xl={12}
+          className="zindexOne text-center"
+          justifyContent="center"
+        >
+          <h2>reactdrops stats</h2>
+        </Grid>
+        <Grid
+          item
+          xs={4}
+          sm={4}
+          md={4}
+          lg={4}
+          xl={4}
+          className="zindexOne text-center"
+          justifyContent="center"
+        >
+          <Typography
+            variant="h6"
+            gutterBottom
+            component="div"
+            align="center"
+          >
+            failed
+          </Typography>
+          <Typography
+            variant="h6"
+            gutterBottom
+            component="div"
+            align="center"
+          >
+            {userInfo && userInfo.data && userInfo.data.reactdrop_failed_count && userInfo.data.reactdrop_failed_count}
+          </Typography>
+        </Grid>
+        <Grid
+          item
+          xs={4}
+          sm={4}
+          md={4}
+          lg={4}
+          xl={4}
+          className="zindexOne text-center"
+          justifyContent="center "
+        >
+          <Typography
+            variant="h6"
+            gutterBottom
+            component="div"
+            align="center"
+          >
+            success
+          </Typography>
+          <Typography
+            variant="h6"
+            gutterBottom
+            component="div"
+            align="center"
+          >
+            {userInfo && userInfo.data && userInfo.data.reactdrop_success_count && userInfo.data.reactdrop_success_count}
+          </Typography>
+        </Grid>
+        <Grid
+          item
+          xs={4}
+          sm={4}
+          md={4}
+          lg={4}
+          xl={4}
+          className="zindexOne text-center"
+          justifyContent="center"
+        >
+          <Typography
+            variant="h6"
+            gutterBottom
+            component="div"
+            align="center"
+          >
+            success rate
+          </Typography>
+          <Typography
+            variant="h6"
+            gutterBottom
+            component="div"
+            align="center"
+          >
+            {
+              userInfo
+            && userInfo.data
+            && userInfo.data.reactdrop_failed_count
+            && userInfo.data.reactdrop_failed_count
+            && userInfo.data.reactdrop_success_count
+            && ((Number(userInfo.data.reactdrop_success_count) / (Number(userInfo.data.reactdrop_success_count) + Number(userInfo.data.reactdrop_failed_count))) * 100)
+            }
+            &#37;
           </Typography>
         </Grid>
 
