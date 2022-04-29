@@ -486,7 +486,7 @@ const UserView = function (props) {
             && userInfo.data.reactdrop_failed_count
             && userInfo.data.reactdrop_failed_count
             && userInfo.data.reactdrop_success_count
-            && ((Number(userInfo.data.reactdrop_success_count) / (Number(userInfo.data.reactdrop_success_count) + Number(userInfo.data.reactdrop_failed_count))) * 100)
+            && ((Number(userInfo.data.reactdrop_success_count) / (Number(userInfo.data.reactdrop_success_count) + Number(userInfo.data.reactdrop_failed_count))) * 100).toFixed(2)
             }
             &#37;
           </Typography>
