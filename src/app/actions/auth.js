@@ -54,13 +54,14 @@ export function signinUser(props) {
 
   /* Set a header including the token */
   return function (dispatch) {
-    axios.post(
-      `${window.myConfig.apiUrl}/signin`,
-      { email, password, captchaResponse },
-    ).then((response) => {
+    axios.post(`${window.myConfig.apiUrl}/signin`, {
+      email,
+      password,
+      captchaResponse,
+    }).then((response) => {
       dispatch({
         type: AUTH_USER,
-        payload: response,
+        payload: response.data,
       });
       window.location.href = '/';
     })
@@ -141,10 +142,9 @@ export function authenticated() {
   return function (dispatch) {
     axios.get(`${window.myConfig.apiUrl}/authenticated`)
       .then((response) => {
-        console.log('AUTHENTICATION PASSED');
         dispatch({
           type: AUTH_USER_TFA,
-          payload: response,
+          payload: response.data.result,
         });
       })
       .catch((error) => {

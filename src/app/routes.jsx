@@ -66,7 +66,12 @@ const RequireAuth = function (props) {
     dispatch(authenticated());
   }, []);
 
-  useEffect(() => { }, [
+  useEffect(() => {
+    console.log('require auth');
+    console.log(tfaLocked);
+    console.log(doneLoading);
+    console.log(Isauthenticated);
+  }, [
     Isauthenticated,
     doneLoading,
     tfaLocked,

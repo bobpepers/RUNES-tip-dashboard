@@ -59,7 +59,7 @@ function LoginTFA(props) {
   }
 
   return (
-    <div className="form-container index600 shadow-w signinContainer content">
+    <div className="form-container content">
       <Grid
         container
         alignItems="center"
@@ -80,7 +80,11 @@ function LoginTFA(props) {
                 <h2 className="text-center">Enter 2FA Code</h2>
               </Grid>
               <Grid item xs={12}>
-                <Field name="tfa" component={renderNumberField} label="2FA Code" />
+                <Field
+                  name="tfa"
+                  component={renderNumberField}
+                  label="2FA Code"
+                />
               </Grid>
               <Grid item xs={12}>
                 {

@@ -69,7 +69,7 @@ export default function (state = {
   case AUTH_USER:
     return {
       ...state,
-      tfaLocked: action.payload.data.tfaLocked,
+      tfaLocked: action.payload.tfaLocked,
       authenticated: true,
       doneLoading: true,
       error: {},
@@ -77,10 +77,10 @@ export default function (state = {
   case AUTH_USER_TFA:
     return {
       ...state,
-      authenticated: action.payload.data.success,
+      authenticated: action.payload.success,
       doneLoading: true,
       error: {},
-      tfaLocked: action.payload.data.tfaLocked,
+      tfaLocked: action.payload.tfaLocked,
     };
   case UNAUTH_USER:
     return {

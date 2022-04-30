@@ -50,11 +50,11 @@ export function enabletfa(obj) {
       .then((response) => {
         dispatch({
           type: ENABLE_2FA_SUCCESS,
-          payload: response.data,
+          payload: response.data.result,
         });
         dispatch({
           type: CHANGE_USER_TFA_STATE,
-          payload: response.data,
+          payload: response.data.result,
         });
       }).catch((error) => {
         notistackErrorAdd(
@@ -78,11 +78,11 @@ export function disabletfa(obj) {
       .then((response) => {
         dispatch({
           type: DISABLE_2FA_SUCCESS,
-          payload: response.data,
+          payload: response.data.result,
         });
         dispatch({
           type: CHANGE_USER_TFA_STATE,
-          payload: response.data,
+          payload: response.data.result,
         });
       }).catch((error) => {
         notistackErrorAdd(
@@ -114,7 +114,7 @@ export function unlocktfa(
       .then((response) => {
         dispatch({
           type: AUTH_USER_TFA,
-          payload: response,
+          payload: response.data.result,
         });
         navigate('/');
         // window.location.href = '/';

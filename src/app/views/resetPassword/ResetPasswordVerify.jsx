@@ -2,13 +2,17 @@ import React, {
   useState,
   useEffect,
 } from 'react';
-import { connect, useDispatch } from 'react-redux';
+import {
+  connect,
+  useDispatch,
+} from 'react-redux';
 import * as qs from 'query-string';
 import {
   Button,
   Grid,
 } from '@mui/material';
 import {
+  initialize,
   reduxForm,
   Field,
   change,
@@ -23,6 +27,7 @@ function ResetPasswordVerify(props) {
     handleSubmit,
     pristine,
     submitting,
+    initialize,
     // resetPassword,
     errorMessage,
   } = props;
@@ -34,20 +39,20 @@ function ResetPasswordVerify(props) {
   useEffect(() => {
     const parsed = qs.parse(location.search);
     setEmail(parsed.email);
+    initialize({ email: parsed.email });
     if (!props.resetPasswordProgress || email === '') {
-      // history.push('/signup');
+      // navigate('/signup');
     }
   }, []);
 
   const handleFormSubmit = async (formProps) => {
-    // await resetPassword(formProps, navigate);
-    formProps.email = email;
+    console.log(formProps);
     setResend(true);
     dispatch(resetPassword(formProps, navigate));
   }
 
   return (
-    <div className="form-container index600 shadow-w signinContainer content">
+    <div className="form-container height100 content">
       <Grid
         container
         alignItems="center"
@@ -126,6 +131,10 @@ function mapStateToProps(state) {
   };
 }
 
+const mapDispatchToProps = {
+  initialize,
+};
+
 const validate = (formProps) => {
   const errors = {};
 
@@ -136,5 +145,5 @@ const validate = (formProps) => {
   return errors;
 }
 
-export default connect(mapStateToProps, null)(reduxForm({ form: 'resetpasswordVerify', validate })(ResetPasswordVerify));
+export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({ form: 'resetpasswordVerify', validate })(ResetPasswordVerify));
 // export default connect(mapStateToProps, null)(ResetPasswordVerify);

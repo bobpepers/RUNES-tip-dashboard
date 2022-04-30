@@ -37,7 +37,7 @@ const renderNumberField = (
   </FormControl>
 );
 
-const LoginTFA = (props) => {
+function LoginTFA(props) {
   const {
     errorMessage,
     createOrder,
@@ -54,7 +54,7 @@ const LoginTFA = (props) => {
   }
 
   return (
-    <div className="form-container index600 shadow-w signinContainer content minHeight300">
+    <div className="form-container content">
       <Grid
         container
         direction="column"
@@ -82,15 +82,19 @@ const LoginTFA = (props) => {
                 <h2 className="text-center">Enter 2FA Code</h2>
               </Grid>
               <Grid item xs={12}>
-                <Field name="tfa" component={renderNumberField} label="2FA Code" />
+                <Field
+                  name="tfa"
+                  component={renderNumberField}
+                  label="2FA Code"
+                />
               </Grid>
               <Grid item xs={12}>
                 { errorMessage && errorMessage.tfa
               && (
-              <div className="error-container signin-error">
-                Oops!
-                { errorMessage.tfa }
-              </div>
+                <div className="error-container signin-error">
+                  Oops!
+                  { errorMessage.tfa }
+                </div>
               ) }
                 <Button
                   fullWidth

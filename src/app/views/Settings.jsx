@@ -22,7 +22,10 @@ function Settings(props) {
   const dispatch = useDispatch();
 
   useEffect(() => dispatch(fetchUserData()), []);
-  useEffect(() => { }, [props.user]);
+  useEffect(() => {
+    console.log('props.user');
+    console.log(props.user);
+  }, [props.user]);
 
   useEffect(() => {
     document.title = 'RunesTip - Settings';

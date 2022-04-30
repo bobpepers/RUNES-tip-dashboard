@@ -4,6 +4,7 @@ import {
   FETCH_USER_FAIL,
   FETCH_USER_SUCCESS,
 } from './types/index';
+import { notistackErrorAdd } from './helpers/notistackError';
 
 /**
  * Fetch User Data
@@ -23,6 +24,10 @@ export function fetchUserData(
         payload: response.data.result,
       });
     }).catch((error) => {
+      notistackErrorAdd(
+        dispatch,
+        error,
+      );
       dispatch({
         type: FETCH_USER_FAIL,
         payload: error,

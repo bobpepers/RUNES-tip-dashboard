@@ -16,12 +16,14 @@ export function resetPassword(
   props,
   navigate,
 ) {
-  // const { captchaResponse } = props;
   return function (dispatch) {
+    console.log(props);
     axios.post(`${window.myConfig.apiUrl}/reset-password`, props)
-      .then(() => {
+      .then((response) => {
+        console.log(response);
         dispatch({
           type: RESET_PASSWORD_SUCCESS,
+          payload: response.data.result,
         });
         dispatch({
           type: ENQUEUE_SNACKBAR,
@@ -53,8 +55,11 @@ export function resetPassword(
 export function verifyResetPassword(props) {
   return function (dispatch) {
     axios.post(`${window.myConfig.apiUrl}/reset-password/verify`, props)
-      .then(() => {
-        dispatch({ type: VERIFY_RESET_PASSWORD_SUCCESS });
+      .then((response) => {
+        dispatch({
+          type: VERIFY_RESET_PASSWORD_SUCCESS,
+          payload: response.data.result,
+        });
         dispatch({
           type: ENQUEUE_SNACKBAR,
           notification: {
@@ -90,7 +95,6 @@ export function resetPasswordNew(
     axios.post(`${window.myConfig.apiUrl}/reset-password/new`, props)
       .then((response) => {
         console.log(response.data);
-
         // dispatch({ type: AUTH_USER });
         dispatch({
           type: ENQUEUE_SNACKBAR,

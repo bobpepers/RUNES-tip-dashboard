@@ -99,6 +99,22 @@ const renderTo = (
   </Typography>
 )
 
+const renderDashboardUser = (
+  activity,
+  navigate,
+) => (
+  <Typography variant="subtitle1" gutterBottom component="div">
+    dashboard user:
+    <br />
+    <Button
+      onClick={() => navigate(`/management/dashboarduser/${activity.dashboardUser && activity.dashboardUser.id && activity.dashboardUser.id}`)}
+    >
+      {activity.dashboardUser && activity.dashboardUser.username && activity.dashboardUser.username}
+    </Button>
+
+  </Typography>
+)
+
 const renderItems = (
   data,
   navigate,
@@ -225,6 +241,10 @@ const renderItems = (
             {activity.type === 'voicerain_i' && 'VoiceRain: insufficient Balance'}
             {activity.type === 'voiceraintip_s' && 'VoiceRainTip: success'}
             {activity.type === 'withdraw_i' && 'Withdraw: insufficient Balance'}
+
+            {activity.type === 'login_s' && 'Dashboard Login: success'}
+            {activity.type === 'login_f' && 'Dashboard Login: fail'}
+            {activity.type === 'logout_s' && 'Dashboard Logout: success'}
           </Grid>
           <Grid
             item
@@ -232,6 +252,11 @@ const renderItems = (
             lg={4}
             align="center"
           >
+            {(
+              activity.type === 'login_s'
+            || activity.type === 'logout_s'
+            ) && renderDashboardUser(activity, navigate)}
+
             {(
               activity.type === 'floodtip_s'
             || activity.type === 'soaktip_s'

@@ -10,7 +10,7 @@ export default function (state = {}, action) {
   case RESET_PASSWORD_SUCCESS:
     return {
       ...state,
-      resetPassword: true,
+      resetPassword: action.payload.success,
       error: {},
     };
   case RESET_PASSWORD_FAILURE:
@@ -24,7 +24,7 @@ export default function (state = {}, action) {
   case VERIFY_RESET_PASSWORD_SUCCESS:
     return {
       ...state,
-      verifyResetPassword: true,
+      verifyResetPassword: action.payload.success,
       error: {},
       resetPassword: false,
     };

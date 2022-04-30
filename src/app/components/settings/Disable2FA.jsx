@@ -19,7 +19,7 @@ import {
 } from 'redux-form';
 import { makeStyles } from '@mui/styles';
 import { connect } from 'react-redux';
-import CloseIcon from '@mui/icons-material/Close';
+// import CloseIcon from '@mui/icons-material/Close';
 
 import {
   disabletfa,
@@ -103,58 +103,54 @@ function DisableTfa(props) {
     disabletfa(e);
   }
 
-  console.log(errorMessage);
-
   return (
-
-    <div className="form-container index600 shadow-w signinContainer content">
+    <Grid
+      container
+      alignItems="center"
+      justify="center"
+    >
       <Grid
-        container
-        alignItems="center"
-        justify="center"
+        item
+        xs={12}
       >
-        <Grid
-          item
-          xs={12}
+        <h2
+          className="text-center"
         >
-          <h2
-            className="text-center"
-          >
-            Disable 2FA
-          </h2>
-        </Grid>
-        <Grid
-          item
-          xs={12}
-          sm={12}
+          Disable 2FA
+        </h2>
+      </Grid>
+      <Grid
+        item
+        xs={12}
+        sm={12}
+      >
+        <form
+          style={{ width: '100%' }}
+          onSubmit={handleSubmit(myHandleSubmit)}
         >
-          <form
-            style={{ width: '100%' }}
-            onSubmit={handleSubmit(myHandleSubmit)}
+          <Box
+            component={Grid}
+            container
+            item
+            justify="center"
+            direction="column"
+            py={3}
+            xs={12}
           >
+
             <Box
               component={Grid}
-              container
+              p={1}
               item
-              justify="center"
-              direction="column"
-              py={3}
-              xs={12}
             >
-
-              <Box
-                component={Grid}
-                p={1}
-                item
-              >
-                <Field name="tfa" component={renderNumberField} label="2FA" />
-              </Box>
-              <Box
-                component={Grid}
-                p={1}
-                item
-              >
-                { errorMessage && errorMessage.tfa
+              <Field name="tfa" component={renderNumberField} label="2FA" />
+            </Box>
+            <Box
+              component={Grid}
+              p={1}
+              item
+            >
+              { errorMessage && errorMessage.tfa
                     && (
                       <div className="error-container signin-error">
                         Oops!
@@ -162,26 +158,25 @@ function DisableTfa(props) {
                       </div>
                     )}
 
-                {tfa.isFetching
-                  ? <CircularProgress disableShrink />
-                  : (
-                    <Button
-                      fullWidth
-                      variant="contained"
-                      color="primary"
-                      disabled={pristine || submitting}
-                      type="submit"
-                    >
-                      Disable
-                    </Button>
-                  )}
-              </Box>
+              {tfa.isFetching
+                ? <CircularProgress disableShrink />
+                : (
+                  <Button
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    disabled={pristine || submitting}
+                    type="submit"
+                  >
+                    Disable
+                  </Button>
+                )}
             </Box>
-          </form>
+          </Box>
+        </form>
 
-        </Grid>
       </Grid>
-    </div>
+    </Grid>
   );
 }
 
@@ -194,7 +189,7 @@ const validate = (formProps) => {
   if (!formProps.tfa) {
     errors.tfa = 'Please enter 2fa code'
   }
-  console.log(errors);
+  // console.log(errors);
   return errors;
 }
 

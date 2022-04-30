@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
   Button,
-  Modal,
-  Backdrop,
-  Fade,
   Grid,
-  Paper,
   FormControl,
   InputLabel,
   OutlinedInput,
@@ -16,10 +12,11 @@ import {
   Field,
   formValueSelector,
   reset,
+  initialize,
 } from 'redux-form';
 import { makeStyles } from '@mui/styles';
 import { connect } from 'react-redux';
-import CloseIcon from '@mui/icons-material/Close';
+// import CloseIcon from '@mui/icons-material/Close';
 
 import speakeasy from 'speakeasy';
 import QRCode from 'qrcode';
@@ -30,7 +27,6 @@ import {
 
 const options = {
   issuer: window.myConfig.name,
-  // name: `Pony Foo (${ user.email })`,
   name: window.myConfig.wsEndPoint,
   length: 64,
 }
@@ -101,6 +97,7 @@ function Set2FA(props) {
     tfa,
     idleEnabletfa,
     user,
+    initialize,
   } = props;
   const classes = useStyles();
   const [open, setOpen] = useState(false);
@@ -118,25 +115,26 @@ function Set2FA(props) {
     }
   }, [tfa.phase]);
 
-  const handleOpen = () => {
-    setOpen(true);
-    idleEnabletfa();
-  };
+  // const handleOpen = () => {
+  //   setOpen(true);
+  //   idleEnabletfa();
+  // };
 
-  const handleClose = () => {
-    idleEnabletfa();
-    setOpen(false);
-  };
+  // const handleClose = () => {
+  //   idleEnabletfa();
+  //   setOpen(false);
+  // };
+
+  useEffect(() => {
+    initialize({ secret: base32 });
+  }, []);
 
   const myHandleSubmit = (e) => {
-    e.secret = base32;
+    // e.secret = base32;
+    // change('secret', base32);
+    // console.log(e);
     enabletfa(e);
   }
-
-  console.log(errorMessage);
-  console.log('ImagePath');
-  console.log(imagePath);
-  console.log('phase');
 
   return (
     <Grid container>
@@ -208,16 +206,13 @@ function validate(formProps) {
   if (!formProps.price) {
     errors.price = 'Please enter price';
   }
-  console.log(errors);
+  // console.log(errors);
   return errors;
 }
 
-const selector = formValueSelector('enable2fa');
+// const selector = formValueSelector('enable2fa');
 
 function mapStateToProps(state) {
-  console.log('Set2FA mapStateToProps');
-  console.log(state);
-  // console.log(state.createOrder);
   return {
     tfa: state.tfa,
     errorMessage: state.auth.error,
@@ -227,6 +222,7 @@ function mapStateToProps(state) {
 const mapDispatchToProps = {
   enabletfa, // will be wrapped into a dispatch call
   idleEnabletfa, // will be wrapped into a dispatch call
+  initialize,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({ form: 'enable2fa', validate, onSubmitSuccess })(Set2FA));

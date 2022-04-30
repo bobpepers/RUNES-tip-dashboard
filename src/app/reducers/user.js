@@ -51,7 +51,7 @@ export default function userReducer(
       ...state,
       data: {
         ...state.data,
-        tfa: action.payload.data,
+        tfa: action.payload.tfa,
       },
       loading: false,
       error: null,

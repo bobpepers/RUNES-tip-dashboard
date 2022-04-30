@@ -68,7 +68,7 @@ function ResetPasswordNew(props) {
   }
 
   return (
-    <div className="form-container index600 shadow-w signinContainer content">
+    <div className="form-container height100 content">
       <h2 className="text-center">New Password</h2>
       {
         /* Landing error message */
@@ -89,7 +89,14 @@ function ResetPasswordNew(props) {
               justify="center"
               justifyContent="center"
             >
-              <Grid item xs={4}>
+              <Grid
+                item
+                xs={10}
+                sm={10}
+                md={8}
+                lg={4}
+                xl={4}
+              >
                 <form onSubmit={handleSubmit(handleFormSubmit)}>
                   <Grid container direction="column" spacing={3}>
                     <Grid item>

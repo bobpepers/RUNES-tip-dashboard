@@ -36,12 +36,11 @@ export default (state = initialState, action) => {
   case ENABLE_2FA_SUCCESS:
     return {
       ...state,
-      data: action.payload,
+      data: action.payload.tfa,
       phase: 1,
       isFetching: false,
     };
   case ENABLE_2FA_FAIL:
-    console.log('Error: ', action.error);
     return {
       ...state,
       error: action.error,
@@ -66,12 +65,11 @@ export default (state = initialState, action) => {
   case DISABLE_2FA_SUCCESS:
     return {
       ...state,
-      data: action.payload,
+      data: action.payload.tfa,
       phase: 1,
       isFetching: false,
     };
   case DISABLE_2FA_FAIL:
-    console.log('Error: ', action.error);
     return {
       ...state,
       error: action.error,

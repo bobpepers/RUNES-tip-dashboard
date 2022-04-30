@@ -67,7 +67,7 @@ function ResetPassword(props) {
   }
 
   return (
-    <div className="form-container index600 shadow-w signinContainer content">
+    <div className="form-container content">
       <h2 className="text-center">Reset Password</h2>
       <Grid
         container
