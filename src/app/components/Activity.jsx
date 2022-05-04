@@ -245,6 +245,9 @@ const renderItems = (
             {activity.type === 'login_s' && 'Dashboard Login: success'}
             {activity.type === 'login_f' && 'Dashboard Login: fail'}
             {activity.type === 'logout_s' && 'Dashboard Logout: success'}
+            {activity.type === 'tip_faucet_s' && 'Tip Faucet: success'}
+            {activity.type === 'tiptip_faucet_s' && 'Tip Faucet: success'}
+
           </Grid>
           <Grid
             item
@@ -292,6 +295,8 @@ const renderItems = (
             || activity.type === 'price_s'
             || activity.type === 'depositAccepted'
             || activity.type === 'depositComplete'
+            || activity.type === 'tiptip_faucet_s'
+
             ) && renderTo(activity, navigate)}
 
             {(
@@ -305,6 +310,7 @@ const renderItems = (
             || activity.type === 'hurricane_s'
             || activity.type === 'trivia_s'
             || activity.type === 'voicerain_s'
+            || activity.type === 'tip_faucet_s'
 
             || activity.type === 'reactdrop_i'
             || activity.type === 'thunderstorm_i'
@@ -397,6 +403,8 @@ const renderItems = (
             || activity.type === 'tiptip_s'
             || activity.type === 'faucettip_s'
             || activity.type === 'voiceraintip_s'
+            || activity.type === 'tiptip_faucet_s'
+            || activity.type === 'tip_faucet_s'
 
             || activity.type === 'trivia_s'
 
@@ -464,6 +472,7 @@ const renderItems = (
             // || activity.type === 'tip_s'
             || activity.type === 'trivia_s'
             || activity.type === 'voicerain_s'
+            || activity.type === 'tip_faucet_s'
 
             || activity.type === 'reactdrop_f'
             || activity.type === 'thunderstorm_f'
@@ -505,6 +514,8 @@ const renderItems = (
             || activity.type === 'triviatip_s'
             || activity.type === 'faucettip_s'
             || activity.type === 'voiceraintip_s'
+            || activity.type === 'tiptip_faucet_s'
+
             ) && renderEarnedSpendBalance(activity)}
 
             {(
