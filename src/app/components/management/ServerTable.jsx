@@ -17,6 +17,7 @@ import {
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 import BanDialog from './BanDialog';
+import LeaveServer from '../dialogs/LeaveServer';
 
 const headCells = [
   {
@@ -31,6 +32,12 @@ const headCells = [
   {
     id: 'lastActive', numeric: true, disablePadding: false, label: 'last active',
   },
+  {
+    id: 'isInServer', numeric: true, disablePadding: false, label: 'Is in Server',
+  },
+  {
+    id: 'ban', numeric: true, disablePadding: false, label: 'ban',
+  },
 ];
 
 function createData(
@@ -38,6 +45,7 @@ function createData(
   groupId,
   groupName,
   lastActive,
+  isInServer,
   banned,
 ) {
   return {
@@ -45,6 +53,7 @@ function createData(
     groupId,
     groupName,
     lastActive,
+    isInServer,
     banned,
   };
 }
@@ -170,6 +179,7 @@ function ServerTable(props) {
         item.groupId,
         item.groupName,
         item.lastActive,
+        item.isInServer,
         item.banned,
       ),
     );
@@ -275,6 +285,19 @@ function ServerTable(props) {
 
                     <TableCell align="right">
                       {row.lastActive}
+                    </TableCell>
+                    <TableCell align="right">
+                      {
+                        row.isInServer
+                          ? (
+                            <LeaveServer
+                              id={row.id}
+                              groupId={row.groupId}
+                              groupName={row.groupName}
+                            />
+                          )
+                          : 'no'
+                      }
                     </TableCell>
                     <TableCell align="right">
                       {!row.banned ? (

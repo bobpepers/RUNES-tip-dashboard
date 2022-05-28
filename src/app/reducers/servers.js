@@ -3,6 +3,7 @@ import {
   FETCH_SERVERS_SUCCESS,
   FETCH_SERVERS_FAIL,
   UPDATE_SERVER,
+  POST_LEAVESERVER,
 } from '../actions/types/index';
 
 const initialState = {
@@ -18,6 +19,20 @@ export default (state = initialState, action) => {
       data: state.data.map(
         (server) => (server.id === action.payload.id
           ? { ...action.payload }
+          : server),
+      ),
+      isFetching: false,
+      error: null,
+    };
+  case POST_LEAVESERVER:
+    return {
+      ...state,
+      data: state.data.map(
+        (server) => (server.id === action.payload.id
+          ? {
+            ...server,
+            isInServer: false,
+          }
           : server),
       ),
       isFetching: false,

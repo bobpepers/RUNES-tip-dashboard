@@ -34,6 +34,7 @@ import priceCurrencies from './priceCurrencies';
 import userInfo from './userInfo';
 import withdrawalAddresses from './withdrawalAddresses';
 import withdrawalAddress from './withdrawalAddress';
+import leaveServer from './leaveServer';
 
 import botFunctions from './botFunctions';
 import botFunction from './botFunction';
@@ -73,6 +74,7 @@ const store = configureStore({
     priceCurrencies,
     errors,
     userInfo,
+    leaveServer,
 
     withdrawalAddresses,
     withdrawalAddress,
