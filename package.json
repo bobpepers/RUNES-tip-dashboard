@@ -1,6 +1,6 @@
 {
   "name": "runestip-dashboard",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Admin dashboard for RUNES-tip",
   "scripts": {
     "extract": "lingui extract",
@@ -18,8 +18,8 @@
     "pre-release:patch": "git add . && standard-version --commit-all --release-as patch",
     "pre-release:major": "git add . && standard-version --commit-all --release-as major",
     "release": "npm-run-all build standard-version",
-    "release:minor": "npm-run-all build pre-release:minor",
     "release:patch": "npm-run-all build pre-release:patch",
+    "release:minor": "npm-run-all build pre-release:minor",
     "release:major": "npm-run-all build pre-release:major"
   },
   "keywords": [
