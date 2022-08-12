@@ -1,6 +1,6 @@
 {
   "name": "runestip-dashboard",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Admin dashboard for RUNES-tip",
   "scripts": {
     "extract": "lingui extract",
@@ -125,12 +125,12 @@
     "react-moment": "^1.1.2",
     "react-redux": "^8.0.2",
     "react-router-dom": "^6.3.0",
-    "react-tsparticles": "^2.2.0",
+    "react-tsparticles": "^2.2.1",
     "redux": "^4.2.0",
     "redux-form": "^8.3.8",
     "socket.io-client": "^4.5.1",
     "speakeasy": "^2.0.0",
     "styled-components": "^5.3.5",
-    "tsparticles": "^2.2.0"
+    "tsparticles": "^2.2.1"
   }
 }
