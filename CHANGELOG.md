@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.4...v0.0.5) (2022-08-22)
+
+
+### Bug Fixes
+
+* 🚑️ production issue with webpack fast-refresh ([a767e54](https://github.com/bobpepers/runes-tip-dashboard/commit/a767e54b376bb0b1943f621e59ea63b18723a349))
+
 ### [0.0.4](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.3...v0.0.4) (2022-08-22)
 
 
