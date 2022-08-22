@@ -89,7 +89,9 @@ module.exports = (options) => {
             {
               loader: require.resolve('babel-loader'),
               options: {
-                plugins: [!options.isProduction && require.resolve('react-refresh/babel')].filter(Boolean),
+                plugins: [
+                  !options.isProduction && require.resolve('react-refresh/babel'),
+                ].filter(Boolean),
               },
             },
           ],
@@ -175,7 +177,7 @@ module.exports = (options) => {
           removeComments: false,
         },
       }),
-    ],
+    ].filter(Boolean),
   };
 
   if (options.isProduction) {

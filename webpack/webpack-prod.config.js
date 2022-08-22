@@ -1,4 +1,4 @@
-module.exports = require('./webpack.config.js')({
+module.exports = require('./webpack.config')({
   isProduction: true,
   devtool: false,
   jsFileName: 'app.[fullhash].js',

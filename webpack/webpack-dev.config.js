@@ -1,4 +1,4 @@
-module.exports = require('./webpack.config.js')({
+module.exports = require('./webpack.config')({
   isProduction: false,
   disableHostCheck: true,
   devtool: 'inline-source-map',
