@@ -89,6 +89,7 @@ module.exports = (options) => {
             {
               loader: require.resolve('babel-loader'),
               options: {
+                envName: !options.isProduction ? 'development' : 'production',
                 plugins: [
                   !options.isProduction && require.resolve('react-refresh/babel'),
                 ].filter(Boolean),
@@ -153,6 +154,7 @@ module.exports = (options) => {
           use: {
             loader: 'babel-loader',
             options: {
+              envName: !options.isProduction ? 'development' : 'production',
               presets: ['@babel/preset-react', '@babel/preset-env'],
               plugins: [
                 '@babel/plugin-transform-runtime',
@@ -230,7 +232,7 @@ module.exports = (options) => {
     webpackConfig.devServer = {
       // contentBase: Path.join(__dirname, '../'),
       // disableHostCheck: true,
-      hot: true,
+      hot: !!options.isProduction,
       port: options.port,
       // inline: true,
       // progress: true,

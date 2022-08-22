@@ -7,4 +7,4 @@ npm-debug.log
 .env.development
 .env.production
 static/config.js
-
+dist/static/config.js
