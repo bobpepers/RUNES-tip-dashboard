@@ -3,7 +3,6 @@ import React, {
   useState,
 } from 'react';
 import PropTypes from 'prop-types';
-import withStyles from '@mui/styles/withStyles';
 import { useNavigate } from 'react-router-dom';
 import { connect, useDispatch } from 'react-redux';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -13,7 +12,6 @@ import {
   Typography,
 } from '@mui/material';
 import Button from '@mui/material/Button';
-
 import ActivityContainer from '../containers/Activity';
 import ActivityFilter from '../containers/filters/ActivityFilter';
 
@@ -44,24 +42,6 @@ import {
 import {
   fetchFaucetBalanceAction,
 } from '../actions/faucetBalance';
-
-const styles = {
-  card: {
-    minWidth: 275,
-    margin: '50px',
-  },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
-  },
-  title: {
-    fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
-  },
-};
 
 const Home = function (props) {
   const {
@@ -488,4 +468,4 @@ const mapStateToProps = (state) => ({
   startSync: state.startSync,
 })
 
-export default withStyles(styles)(withRouter(connect(mapStateToProps, null)(Home)));
+export default withRouter(connect(mapStateToProps, null)(Home));

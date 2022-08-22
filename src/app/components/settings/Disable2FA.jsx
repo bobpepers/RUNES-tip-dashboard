@@ -17,7 +17,7 @@ import {
   formValueSelector,
   reset,
 } from 'redux-form';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import { connect } from 'react-redux';
 // import CloseIcon from '@mui/icons-material/Close';
 
@@ -26,7 +26,7 @@ import {
   idleDisabletfa,
 } from '../../actions/tfa';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   modal: {
     position: 'fixed !important',
     height: 'calc(100vh - 80px) !important',
@@ -78,7 +78,7 @@ function DisableTfa(props) {
     tfa,
     idleDisabletfa,
   } = props;
-  const classes = useStyles();
+  const { classes } = useStyles();
   const [open, setOpen] = useState(false);
 
   useEffect(() => {

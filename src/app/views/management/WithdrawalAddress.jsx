@@ -3,9 +3,7 @@ import React, {
   useState,
 } from 'react';
 import PropTypes from 'prop-types';
-import withStyles from '@mui/styles/withStyles';
 import {
-  useNavigate,
   useParams,
 } from 'react-router-dom';
 import { connect, useDispatch } from 'react-redux';
@@ -13,7 +11,6 @@ import CircularProgress from '@mui/material/CircularProgress';
 import {
   Grid,
   Typography,
-  Button,
 } from '@mui/material';
 import UsersTable from '../../components/management/UsersTable';
 import WithdrawalsTable from '../../components/functions/WithdrawalsTable';
@@ -29,24 +26,6 @@ import {
 import {
   banUserAction,
 } from '../../actions/users';
-
-const styles = {
-  card: {
-    minWidth: 275,
-    margin: '50px',
-  },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
-  },
-  title: {
-    fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
-  },
-};
 
 const WithdrawalAddressView = function (props) {
   const {
@@ -249,4 +228,4 @@ const mapStateToProps = (state) => ({
   declineWithdrawal: state.declineWithdrawal,
 })
 
-export default withStyles(styles)(withRouter(connect(mapStateToProps, null)(WithdrawalAddressView)));
+export default withRouter(connect(mapStateToProps, null)(WithdrawalAddressView));

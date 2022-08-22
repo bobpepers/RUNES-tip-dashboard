@@ -4,7 +4,7 @@ import React, {
   useEffect,
 } from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import {
   Table,
   TableBody,
@@ -151,7 +151,7 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   root: {
     width: '100%',
   },
@@ -211,7 +211,7 @@ const DepositsTable = function (props) {
     );
   });
 
-  const classes = useStyles();
+  const { classes } = useStyles();
   const [order, setOrder] = useState('desc');
   const [orderBy, setOrderBy] = useState('id');
   const [selected, setSelected] = useState([]);

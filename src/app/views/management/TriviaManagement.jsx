@@ -3,8 +3,10 @@ import React, {
   useState,
 } from 'react';
 import PropTypes from 'prop-types';
-import withStyles from '@mui/styles/withStyles';
-import { connect, useDispatch } from 'react-redux';
+import {
+  connect,
+  useDispatch,
+} from 'react-redux';
 import CircularProgress from '@mui/material/CircularProgress';
 import {
   Grid,
@@ -18,24 +20,6 @@ import {
   removeTriviaAction,
   switchTriviaAction,
 } from '../../actions/trivia';
-
-const styles = {
-  card: {
-    minWidth: 275,
-    margin: '50px',
-  },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
-  },
-  title: {
-    fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
-  },
-};
 
 const TriviaManagement = function (props) {
   const {
@@ -272,4 +256,4 @@ const mapStateToProps = (state) => ({
   insertTrivia: state.insertTrivia,
 })
 
-export default withStyles(styles)(withRouter(connect(mapStateToProps, null)(TriviaManagement)));
+export default withRouter(connect(mapStateToProps, null)(TriviaManagement));

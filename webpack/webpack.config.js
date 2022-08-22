@@ -5,6 +5,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const WebpackObfuscator = require('webpack-obfuscator');
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 module.exports = (options) => {
   const webpackConfig = {
@@ -82,6 +83,18 @@ module.exports = (options) => {
     module: {
       rules: [
         {
+          test: /\.[jt]sx?$/,
+          exclude: /node_modules/,
+          use: [
+            {
+              loader: require.resolve('babel-loader'),
+              options: {
+                plugins: [!options.isProduction && require.resolve('react-refresh/babel')].filter(Boolean),
+              },
+            },
+          ],
+        },
+        {
           test: /\.(gif|png|jpe?g)$/i,
           type: 'asset',
         },
@@ -148,6 +161,7 @@ module.exports = (options) => {
     },
 
     plugins: [
+      !options.isProduction && new ReactRefreshWebpackPlugin(),
       new Webpack.ProvidePlugin({
         process: 'process/browser',
       }),
@@ -221,6 +235,10 @@ module.exports = (options) => {
       historyApiFallback: true,
       // stats: 'errors-warnings',
       host: 'localhost',
+      client: {
+        overlay: false,
+        logging: 'warn', // Want to set this to 'warn' or 'error'
+      },
       // public: 'localhost',
     };
   }

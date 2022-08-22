@@ -3,7 +3,6 @@ import React, {
   useState,
 } from 'react';
 import PropTypes from 'prop-types';
-import withStyles from '@mui/styles/withStyles';
 import {
   useNavigate,
   useParams,
@@ -33,24 +32,6 @@ import {
   fetchDepositsAction,
 } from '../../actions/deposits';
 import WithdrawalsTable from '../../components/functions/WithdrawalsTable';
-
-const styles = {
-  card: {
-    minWidth: 275,
-    margin: '50px',
-  },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
-  },
-  title: {
-    fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
-  },
-};
 
 const UserView = function (props) {
   const {
@@ -594,4 +575,4 @@ const mapStateToProps = (state) => ({
   declineWithdrawal: state.declineWithdrawal,
 })
 
-export default withStyles(styles)(withRouter(connect(mapStateToProps, null)(UserView)));
+export default withRouter(connect(mapStateToProps, null)(UserView));

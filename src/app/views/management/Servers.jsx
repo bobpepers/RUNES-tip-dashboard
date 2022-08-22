@@ -12,7 +12,7 @@ import {
   TextField,
   MenuItem,
 } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import { withRouter } from '../../hooks/withRouter';
 
 import {
@@ -21,7 +21,7 @@ import {
 } from '../../actions/servers';
 import ServerTable from '../../components/management/ServerTable';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   formControl: {
     margin: theme.spacing(1),
     minWidth: 120,
@@ -38,7 +38,7 @@ function ServersView(props) {
     servers,
   } = props;
   const dispatch = useDispatch();
-  const classes = useStyles();
+  const { classes } = useStyles();
   const [id, setId] = useState('');
   const [groupId, setGroupId] = useState('');
   const [serverName, setServerName] = useState('');

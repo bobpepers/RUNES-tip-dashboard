@@ -3,8 +3,10 @@ import React, {
   useState,
 } from 'react';
 import PropTypes from 'prop-types';
-import withStyles from '@mui/styles/withStyles';
-import { connect, useDispatch } from 'react-redux';
+import {
+  connect,
+  useDispatch,
+} from 'react-redux';
 import CircularProgress from '@mui/material/CircularProgress';
 import {
   Grid,
@@ -17,24 +19,6 @@ import { withRouter } from '../../hooks/withRouter';
 import {
   fetchErrorsAction,
 } from '../../actions/errors';
-
-const styles = {
-  card: {
-    minWidth: 275,
-    margin: '50px',
-  },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
-  },
-  title: {
-    fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
-  },
-};
 
 const renderItems = (data) => {
   const parent = [];
@@ -196,4 +180,4 @@ const mapStateToProps = (state) => ({
   errors: state.errors,
 })
 
-export default withStyles(styles)(withRouter(connect(mapStateToProps, null)(Errors)));
+export default withRouter(connect(mapStateToProps, null)(Errors));

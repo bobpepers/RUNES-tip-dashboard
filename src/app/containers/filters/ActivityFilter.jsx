@@ -7,9 +7,9 @@ import {
   FormControl,
   TextField,
 } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   formControl: {
     margin: theme.spacing(1),
     minWidth: 120,
@@ -34,7 +34,7 @@ const ActivityFilter = function (props) {
     setAmount,
   } = props;
 
-  const classes = useStyles();
+  const { classes } = useStyles();
 
   const handleChangeId = (event) => {
     console.log(event);

@@ -14,7 +14,7 @@ import {
   reset,
   initialize,
 } from 'redux-form';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import { connect } from 'react-redux';
 // import CloseIcon from '@mui/icons-material/Close';
 
@@ -45,7 +45,7 @@ QRCode.toDataURL(otpauth_url, (err, imageUrl) => {
   imagePath = imageUrl;
 });
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   modal: {
     position: 'fixed !important',
     height: 'calc(100vh - 80px) !important',
@@ -99,7 +99,7 @@ function Set2FA(props) {
     user,
     initialize,
   } = props;
-  const classes = useStyles();
+  const { classes } = useStyles();
   const [open, setOpen] = useState(false);
 
   console.log(imagePath);

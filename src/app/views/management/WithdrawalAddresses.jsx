@@ -9,14 +9,14 @@ import {
   CircularProgress,
   TextField,
 } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import { withRouter } from '../../hooks/withRouter';
 import {
   fetchWithdrawalAddressesAction,
 } from '../../actions/withdrawalAddresses';
 import WithdrawalAddressesTable from '../../components/management/WithdrawalAddressesTable';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   formControl: {
     margin: theme.spacing(1),
     minWidth: 120,
@@ -33,7 +33,7 @@ const WithdrawalAddressesView = function (props) {
     withdrawalAddresses,
   } = props;
   const dispatch = useDispatch();
-  const classes = useStyles();
+  const { classes } = useStyles();
   const [id, setId] = useState('');
   const [address, setAddress] = useState('');
   const [page, setPage] = useState(0);

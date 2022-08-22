@@ -2,26 +2,26 @@ import React from 'react';
 import {
   connect,
 } from 'react-redux';
-import withStyles from '@mui/styles/withStyles';
+import { withStyles } from 'tss-react/mui';
 import {
   Switch,
 } from '@mui/material';
 import { Brightness3, WbSunny } from '@mui/icons-material';
 import { changeTheme } from '../actions';
 
-const ThemeSwitch = withStyles({
+const ThemeSwitch = withStyles(Switch, (_theme, _params, classes) => ({
   switchBase: {
     color: '#FE6B8B',
-    '&$checked': {
+    [`&.${classes.checked}`]: {
       color: '#FE6B8B',
     },
-    '&$checked + $track': {
+    [`&.${classes.checked} + .${classes.track}`]: {
       backgroundColor: '#FE6B8B',
     },
   },
   checked: {},
   track: {},
-})(Switch);
+}));
 
 // tslint:disable:jsx-no-lambda
 function ThemeToggle(props) {
