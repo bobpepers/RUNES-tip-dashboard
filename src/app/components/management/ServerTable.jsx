@@ -15,7 +15,6 @@ import {
   FormControlLabel,
   Switch,
 } from '@mui/material';
-import { Link } from 'react-router-dom';
 import BanDialog from './BanDialog';
 import LeaveServer from '../dialogs/LeaveServer';
 

@@ -6,7 +6,10 @@ import { withStyles } from 'tss-react/mui';
 import {
   Switch,
 } from '@mui/material';
-import { Brightness3, WbSunny } from '@mui/icons-material';
+import {
+  Brightness3,
+  WbSunny,
+} from '@mui/icons-material';
 import { changeTheme } from '../actions';
 
 const ThemeSwitch = withStyles(Switch, (_theme, _params, classes) => ({
