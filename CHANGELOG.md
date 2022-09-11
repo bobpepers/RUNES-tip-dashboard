@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.6](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.5...v0.0.6) (2022-09-11)
+
+
+### Features
+
+* ➕ add react-final-form dependency ([57f14eb](https://github.com/bobpepers/runes-tip-dashboard/commit/57f14eb59e7b09d95cb8b202c806442c646a3bab))
+
+
+### Refactor
+
+* ♻️ Use react-final-form instead of react-redux-form ([254493b](https://github.com/bobpepers/runes-tip-dashboard/commit/254493b42f9c49403b17473e35e11659277d29b7))
+
 ### [0.0.5](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.4...v0.0.5) (2022-08-22)
 
 

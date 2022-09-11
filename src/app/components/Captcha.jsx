@@ -12,7 +12,6 @@ const Captcha = function (props) {
     meta: {
       touched,
       error,
-      // submitting,
       submitFailed,
       dispatch,
     },
