@@ -3,12 +3,12 @@ import React, {
 } from 'react';
 import {
   connect,
-  useDispatch,
+  // useDispatch,
 } from 'react-redux';
 import {
   Grid,
 } from '@mui/material';
-import { fetchUserData } from '../actions/user';
+// import { fetchUserData } from '../actions/user';
 import EnableTFA from '../components/settings/Enable2FA';
 import DisableTFA from '../components/settings/Disable2FA';
 
@@ -19,9 +19,9 @@ function Settings(props) {
     },
   } = props;
   document.title = 'RunesTip - Settings';
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  useEffect(() => dispatch(fetchUserData()), []);
+  // useEffect(() => dispatch(fetchUserData()), []);
   useEffect(() => {
     console.log('props.user');
     console.log(data);

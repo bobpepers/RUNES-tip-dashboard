@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.8](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.7...v0.0.8) (2022-09-11)
+
+
+### Bug Fixes
+
+* ⚡️ Move fetchUser up in the app iniation layer ([a9fec3e](https://github.com/bobpepers/runes-tip-dashboard/commit/a9fec3ec739718910de678dae5ae9a764e4577d2))
+
 ### [0.0.7](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.6...v0.0.7) (2022-09-11)
 
 

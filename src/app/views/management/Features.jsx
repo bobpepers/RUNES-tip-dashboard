@@ -123,17 +123,18 @@ const FeaturesView = function (props) {
         99999,
       ),
     );
-
-    dispatch(
-      fetchChannelsAction(
-        '',
-        '',
-        '',
-        serverId,
-        0,
-        99999,
-      ),
-    );
+    if (serverId !== 'All') {
+      dispatch(
+        fetchChannelsAction(
+          '',
+          '',
+          '',
+          serverId,
+          0,
+          99999,
+        ),
+      );
+    }
   }, [
     serverId,
     auth,
