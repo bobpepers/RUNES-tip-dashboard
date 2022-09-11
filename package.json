@@ -129,7 +129,6 @@
     "react-router-dom": "^6.3.0",
     "react-tsparticles": "^2.2.4",
     "redux": "^4.2.0",
-    "redux-form": "^8.3.8",
     "socket.io-client": "^4.5.2",
     "speakeasy": "^2.0.0",
     "styled-components": "^5.3.5",
