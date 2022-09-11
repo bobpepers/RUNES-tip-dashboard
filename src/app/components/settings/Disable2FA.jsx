@@ -2,39 +2,49 @@ import React, {
   useState,
   useEffect,
 } from 'react';
+import { styled } from '@mui/material/styles';
 import {
   Button,
   Grid,
-  FormControl,
-  InputLabel,
-  OutlinedInput,
   CircularProgress,
   Box,
 } from '@mui/material';
 import {
-  reduxForm,
+  Form,
   Field,
-  formValueSelector,
-  reset,
-} from 'redux-form';
-import { makeStyles } from 'tss-react/mui';
-import { connect } from 'react-redux';
-// import CloseIcon from '@mui/icons-material/Close';
+} from 'react-final-form';
+import {
+  connect,
+  useDispatch,
+} from 'react-redux';
+import NumberField from '../form/NumberField';
 
 import {
   disabletfa,
   idleDisabletfa,
 } from '../../actions/tfa';
 
-const useStyles = makeStyles()((theme) => ({
-  modal: {
+const PREFIX = 'Disable2FA';
+
+const classes = {
+  modal: `${PREFIX}-modal`,
+  paper: `${PREFIX}-paper`,
+};
+
+const StyledGrid = styled(Grid)((
+  {
+    theme,
+  },
+) => ({
+  [`& .${classes.modal}`]: {
     position: 'fixed !important',
     height: 'calc(100vh - 80px) !important',
     top: '60px !important',
     bottom: '30px !important',
     overflowY: 'auto',
   },
-  paper: {
+
+  [`& .${classes.paper}`]: {
     backgroundColor: theme.palette.background.paper,
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
@@ -42,43 +52,13 @@ const useStyles = makeStyles()((theme) => ({
   },
 }));
 
-const renderNumberField = (
-  {
-    input,
-    label,
-    meta: { touched, error },
-    ...custom
-  },
-) => (
-  <FormControl variant="outlined" fullWidth>
-    <InputLabel htmlFor="outlined-adornment-tfa">{label}</InputLabel>
-    <OutlinedInput
-      label={label}
-      fullWidth
-      id="outlined-adornment-tfa"
-      inputProps={{ className: 'outlined-adornment-tfa' }}
-      type="number"
-      labelWidth={70}
-      hintText={label}
-      floatingLabelText={label}
-      errorText={touched && error}
-      {...input}
-      {...custom}
-    />
-  </FormControl>
-);
-
 function DisableTfa(props) {
   const {
     errorMessage,
-    disabletfa,
-    handleSubmit,
-    pristine,
-    submitting,
     tfa,
-    idleDisabletfa,
   } = props;
-  const { classes } = useStyles();
+  const dispatch = useDispatch();
+
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -96,15 +76,11 @@ function DisableTfa(props) {
 
   const handleOpen = () => {
     setOpen(true);
-    idleDisabletfa();
+    dispatch(idleDisabletfa());
   };
 
-  const myHandleSubmit = (e) => {
-    disabletfa(e);
-  }
-
   return (
-    <Grid
+    <StyledGrid
       container
       alignItems="center"
       justify="center"
@@ -124,33 +100,57 @@ function DisableTfa(props) {
         xs={12}
         sm={12}
       >
-        <form
-          style={{ width: '100%' }}
-          onSubmit={handleSubmit(myHandleSubmit)}
+        <Form
+          onSubmit={async (values, form) => {
+            await dispatch(disabletfa(values));
+            form.reset();
+          }}
+          validate={(values) => {
+            const errors = {};
+            if (!values.tfa) {
+              errors.tfa = 'Please enter 2fa code'
+            }
+            // console.log(errors);
+            return errors;
+          }}
         >
-          <Box
-            component={Grid}
-            container
-            item
-            justify="center"
-            direction="column"
-            py={3}
-            xs={12}
-          >
+          {({
+            form,
+            handleSubmit,
+            submitting,
+            pristine,
+          }) => (
+            <form
+              style={{ width: '100%' }}
+              onSubmit={handleSubmit}
+            >
+              <Box
+                component={Grid}
+                container
+                item
+                justify="center"
+                direction="column"
+                py={3}
+                xs={12}
+              >
 
-            <Box
-              component={Grid}
-              p={1}
-              item
-            >
-              <Field name="tfa" component={renderNumberField} label="2FA" />
-            </Box>
-            <Box
-              component={Grid}
-              p={1}
-              item
-            >
-              { errorMessage && errorMessage.tfa
+                <Box
+                  component={Grid}
+                  p={1}
+                  item
+                >
+                  <Field
+                    name="tfa"
+                    component={NumberField}
+                    label="2FA"
+                  />
+                </Box>
+                <Box
+                  component={Grid}
+                  p={1}
+                  item
+                >
+                  { errorMessage && errorMessage.tfa
                     && (
                       <div className="error-container signin-error">
                         Oops!
@@ -158,55 +158,32 @@ function DisableTfa(props) {
                       </div>
                     )}
 
-              {tfa.isFetching
-                ? <CircularProgress disableShrink />
-                : (
-                  <Button
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    disabled={pristine || submitting}
-                    type="submit"
-                  >
-                    Disable
-                  </Button>
-                )}
-            </Box>
-          </Box>
-        </form>
-
+                  {tfa.isLoading
+                    ? <CircularProgress disableShrink />
+                    : (
+                      <Button
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        disabled={pristine || submitting}
+                        type="submit"
+                      >
+                        Disable
+                      </Button>
+                    )}
+                </Box>
+              </Box>
+            </form>
+          )}
+        </Form>
       </Grid>
-    </Grid>
+    </StyledGrid>
   );
 }
 
-const onSubmitSuccess = (result, dispatch) => {
-  dispatch(reset('order'));
-}
+const mapStateToProps = (state) => ({
+  tfa: state.tfa,
+  errorMessage: state.auth.error,
+})
 
-const validate = (formProps) => {
-  const errors = {};
-  if (!formProps.tfa) {
-    errors.tfa = 'Please enter 2fa code'
-  }
-  // console.log(errors);
-  return errors;
-}
-
-const selector = formValueSelector('enable2fa');
-
-const mapStateToProps = (state) => {
-  console.log('Set2FA mapStateToProps');
-  console.log(state);
-  // console.log(state.createOrder);
-  return {
-    tfa: state.tfa,
-    errorMessage: state.auth.error,
-  }
-}
-const mapDispatchToProps = {
-  disabletfa, // will be wrapped into a dispatch call
-  idleDisabletfa, // will be wrapped into a dispatch call
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({ form: 'enable2fa', validate, onSubmitSuccess })(DisableTfa));
+export default connect(mapStateToProps, null)(DisableTfa);

@@ -1,52 +1,32 @@
 import React, {
   useEffect,
+  useState,
 } from 'react';
-import { reduxForm, Field } from 'redux-form';
-import { Link, useNavigate } from 'react-router-dom';
-import { connect, useDispatch } from 'react-redux';
+import {
+  Form,
+  Field,
+} from 'react-final-form';
+import {
+  Link,
+  useNavigate,
+} from 'react-router-dom';
+import {
+  connect,
+  useDispatch,
+} from 'react-redux';
 import * as qs from 'query-string';
 import {
   Button,
   Grid,
-  FormControl,
-  TextField,
 } from '@mui/material';
 import {
   verifyResetPassword,
   resetPasswordNew,
 } from '../../actions/resetPassword';
-
-const renderField = ({
-  input,
-  type,
-  placeholder,
-  meta: {
-    touched,
-    error,
-  },
-}) => (
-  <div className={`input-group ${touched && error ? 'has-error' : ''}`}>
-    <FormControl
-      variant="outlined"
-      fullWidth
-    >
-      <TextField
-        id="outlined-username-field"
-        label={placeholder}
-        type={type}
-        variant="outlined"
-        {...input}
-      />
-      { touched && error && <div className="form-error">{error}</div> }
-    </FormControl>
-  </div>
-);
+import PasswordField from '../../components/form/PasswordField';
 
 function ResetPasswordNew(props) {
   const {
-    handleSubmit,
-    pristine,
-    submitting,
     errorMessage,
   } = props;
 
@@ -60,12 +40,37 @@ function ResetPasswordNew(props) {
     dispatch(verifyResetPassword({ email, token }));
   }, []);
 
-  const handleFormSubmit = (myProps) => {
-    const parsed = qs.parse(location.search);
-    myProps.email = parsed.email;
-    myProps.token = parsed.token;
-    dispatch(resetPasswordNew(myProps, navigate));
-  }
+  const [stateValues, setStateValues] = useState({
+    password: '',
+    rePassword: '',
+    showPassword: false,
+    showRePassword: false,
+  });
+
+  const handleChange = (prop) => (event) => {
+    setStateValues({
+      ...stateValues,
+      [prop]: event.target.value,
+    });
+  };
+
+  const handleClickShowPassword = () => {
+    setStateValues({
+      ...stateValues,
+      showPassword: !stateValues.showPassword,
+    });
+  };
+
+  const handleClickShowRePassword = () => {
+    setStateValues({
+      ...stateValues,
+      showRePassword: !stateValues.showRePassword,
+    });
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
 
   return (
     <div className="form-container height100 content">
@@ -75,10 +80,10 @@ function ResetPasswordNew(props) {
         errorMessage && errorMessage.verifyResetPassword
           ? (
             <div className="content">
-              <h3>{ errorMessage.verifyResetPassword.message }</h3>
+              <h3>{errorMessage.verifyResetPassword.message}</h3>
               {
                 errorMessage.verifyResetPassword.resend
-                  && <Link className="resend" to="/reset-password">Reset Password Again</Link>
+                && <Link className="resend" to="/reset-password">Reset Password Again</Link>
               }
             </div>
           )
@@ -97,47 +102,91 @@ function ResetPasswordNew(props) {
                 lg={4}
                 xl={4}
               >
-                <form onSubmit={handleSubmit(handleFormSubmit)}>
-                  <Grid container direction="column" spacing={3}>
-                    <Grid item>
-                      <Field
-                        name="newpassword"
-                        component={renderField}
-                        type="password"
-                        placeholder="New password"
-                      />
-                    </Grid>
-                    <Grid item>
-                      <Field
-                        name="renewpassword"
-                        component={renderField}
-                        type="password"
-                        placeholder="Repeat New password"
-                      />
-                      {
-                        errorMessage
-                          && errorMessage.verifyResetPassword
-                            && (
-                              <div className="error-container">
-                                { errorMessage.verifyResetPassword.message }
-                              </div>
-                            )
+                <Form
+                  onSubmit={async (values) => {
+                    const parsed = qs.parse(location.search);
+                    values.email = parsed.email;
+                    values.token = parsed.token;
+                    await dispatch(resetPasswordNew(values, navigate));
+                  }}
+                  validate={(values) => {
+                    const errors = {};
+                    const fields = ['newpassword', 'renewpassword'];
+
+                    fields.forEach((f) => {
+                      if (!(f in values)) {
+                        errors[f] = `${f} is required`;
                       }
-                    </Grid>
-                    <Grid item>
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        disabled={pristine || submitting}
-                        type="submit"
-                        fullWidth
-                        size="large"
-                      >
-                        Change password
-                      </Button>
-                    </Grid>
-                  </Grid>
-                </form>
+                    });
+
+                    if (values.newpassword && values.newpassword.length < 6) {
+                      errors.newpassword = 'minimum 6 characters';
+                    }
+
+                    if (values.newpassword !== values.renewpassword) {
+                      errors.renewpassword = "passwords doesn't match";
+                    }
+
+                    return errors;
+                  }}
+                >
+                  {({
+                    form,
+                    handleSubmit,
+                    submitting,
+                    pristine,
+                  }) => (
+                    <form onSubmit={handleSubmit}>
+                      <Grid container direction="column" spacing={3}>
+                        <Grid item>
+                          <Field
+                            name="newpassword"
+                            handleClickShowPassword={handleClickShowPassword}
+                            mvalues={stateValues}
+                            handleChange={handleChange}
+                            handleMouseDownPassword={handleMouseDownPassword}
+                            component={PasswordField}
+                            placeholder="New password"
+                            label="New password"
+                          />
+                        </Grid>
+                        <Grid item>
+                          <Field
+                            name="renewpassword"
+                            handleClickShowPassword={handleClickShowRePassword}
+                            mvalues={stateValues}
+                            handleChange={handleChange}
+                            handleMouseDownPassword={handleMouseDownPassword}
+                            component={PasswordField}
+                            placeholder="Repeat New password"
+                            label="Repeat New password"
+                          />
+                          {
+                            errorMessage
+                        && errorMessage.verifyResetPassword
+                        && (
+                          <div className="error-container">
+                            {errorMessage.verifyResetPassword.message}
+                          </div>
+                        )
+                          }
+                        </Grid>
+                        <Grid item>
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            disabled={pristine || submitting}
+                            type="submit"
+                            fullWidth
+                            size="large"
+                          >
+                            Change password
+                          </Button>
+                        </Grid>
+                      </Grid>
+                    </form>
+                  )}
+                </Form>
               </Grid>
             </Grid>
           )
@@ -146,31 +195,10 @@ function ResetPasswordNew(props) {
   )
 }
 
-function validate(props) {
-  const errors = {};
-  const fields = ['newpassword', 'renewpassword'];
-
-  fields.forEach((f) => {
-    if (!(f in props)) {
-      errors[f] = `${f} is required`;
-    }
-  });
-
-  if (props.newpassword && props.newpassword.length < 6) {
-    errors.newpassword = 'minimum 6 characters';
-  }
-
-  if (props.newpassword !== props.renewpassword) {
-    errors.renewpassword = "passwords doesn't match";
-  }
-
-  return errors;
-}
-
 function mapStateToProps(state) {
   return {
     errorMessage: state.resetPass.error,
   };
 }
 
-export default connect(mapStateToProps, null)(reduxForm({ form: 'resetnewpassword', validate })(ResetPasswordNew));
+export default connect(mapStateToProps, null)(ResetPasswordNew);

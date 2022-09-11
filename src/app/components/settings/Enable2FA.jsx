@@ -1,29 +1,56 @@
-import React, { useState, useEffect } from 'react';
+import React, {
+  useState,
+  useEffect,
+} from 'react';
+import { styled } from '@mui/material/styles';
 import {
   Button,
   Grid,
-  FormControl,
-  InputLabel,
-  OutlinedInput,
   CircularProgress,
 } from '@mui/material';
 import {
-  reduxForm,
+  Form,
   Field,
-  formValueSelector,
-  reset,
-  initialize,
-} from 'redux-form';
-import { makeStyles } from 'tss-react/mui';
-import { connect } from 'react-redux';
-// import CloseIcon from '@mui/icons-material/Close';
-
+} from 'react-final-form';
+import {
+  connect,
+  useDispatch,
+} from 'react-redux';
 import speakeasy from 'speakeasy';
 import QRCode from 'qrcode';
 import {
   enabletfa,
   idleEnabletfa,
 } from '../../actions/tfa';
+import NumberField from '../form/NumberField';
+
+const PREFIX = 'Enable2FA';
+
+const classes = {
+  modal: `${PREFIX}-modal`,
+  paper: `${PREFIX}-paper`,
+};
+
+const StyledGrid = styled(Grid)((
+  {
+    theme,
+  },
+) => ({
+  [`& .${classes.modal}`]: {
+    position: 'fixed !important',
+    height: 'calc(100vh - 80px) !important',
+    top: '60px !important',
+    bottom: '30px !important',
+    overflowY: 'auto',
+  },
+
+  [`& .${classes.paper}`]: {
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
+}));
 
 const options = {
   issuer: window.myConfig.name,
@@ -45,61 +72,14 @@ QRCode.toDataURL(otpauth_url, (err, imageUrl) => {
   imagePath = imageUrl;
 });
 
-const useStyles = makeStyles()((theme) => ({
-  modal: {
-    position: 'fixed !important',
-    height: 'calc(100vh - 80px) !important',
-    top: '60px !important',
-    bottom: '30px !important',
-    overflowY: 'auto',
-  },
-  paper: {
-    backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-  },
-}));
-
-const renderNumberField = (
-  {
-    input,
-    label,
-    meta: { touched, error },
-    ...custom
-  },
-) => (
-  <FormControl variant="outlined" fullWidth>
-    <InputLabel htmlFor="outlined-adornment-tfa">{label}</InputLabel>
-    <OutlinedInput
-      label={label}
-      fullWidth
-      id="outlined-adornment-tfa"
-      inputProps={{ className: 'outlined-adornment-tfa' }}
-      type="number"
-      labelWidth={70}
-      hintText={label}
-      floatingLabelText={label}
-      errorText={touched && error}
-      {...input}
-      {...custom}
-    />
-  </FormControl>
-);
-
 function Set2FA(props) {
   const {
     errorMessage,
-    enabletfa,
-    handleSubmit,
-    pristine,
-    submitting,
     tfa,
-    idleEnabletfa,
     user,
-    initialize,
   } = props;
-  const { classes } = useStyles();
+  const dispatch = useDispatch();
+
   const [open, setOpen] = useState(false);
 
   console.log(imagePath);
@@ -125,47 +105,61 @@ function Set2FA(props) {
   //   setOpen(false);
   // };
 
-  useEffect(() => {
-    initialize({ secret: base32 });
-  }, []);
-
-  const myHandleSubmit = (e) => {
-    // e.secret = base32;
-    // change('secret', base32);
-    // console.log(e);
-    enabletfa(e);
-  }
-
   return (
-    <Grid container>
+    <StyledGrid container>
       <Grid container item xs={12}>
         <h2 className="text-center w-100">Enable 2FA</h2>
       </Grid>
-      <form
-        style={{ width: '100%' }}
-        onSubmit={handleSubmit(myHandleSubmit)}
+      <Form
+        initialValues={{
+          secret: base32,
+        }}
+        onSubmit={async (values, form) => {
+          await dispatch(enabletfa(values));
+          form.reset();
+        }}
+        validate={(values) => {
+          const errors = {};
+          if (!values.tfa) {
+            errors.tfa = 'Please enter 2fa code'
+          }
+          return errors;
+        }}
       >
-        <Grid container spacing={3} className="signinContainer">
-          <Grid
-            container
-            item
-            justify="center"
-            justifyContent="center"
+        {({
+          form,
+          handleSubmit,
+          submitting,
+          pristine,
+        }) => (
+          <form
+            style={{ width: '100%' }}
+            onSubmit={handleSubmit}
           >
-            <img src={imagePath} alt="2FA QR Code" />
-          </Grid>
-          <Grid item xs={12}>
-            <p className="text-center">Secret:</p>
-            <p className="wordbreak text-center">
-              {base32}
-            </p>
-          </Grid>
-          <Grid item xs={12}>
-            <Field name="tfa" component={renderNumberField} label="2FA" />
-          </Grid>
-
-          <Grid item xs={12}>
-            { errorMessage && errorMessage.tfa
+            <Grid container spacing={3} className="signinContainer">
+              <Grid
+                container
+                item
+                justify="center"
+                justifyContent="center"
+              >
+                <img src={imagePath} alt="2FA QR Code" />
+              </Grid>
+              <Grid item xs={12}>
+                <p className="text-center">Secret:</p>
+                <p className="wordbreak text-center">
+                  {base32}
+                </p>
+              </Grid>
+              <Grid item xs={12}>
+                <Field
+                  name="tfa"
+                  component={NumberField}
+                  label="2FA"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                { errorMessage && errorMessage.tfa
                     && (
                       <div className="error-container signin-error">
                         Oops!
@@ -173,44 +167,28 @@ function Set2FA(props) {
                       </div>
                     )}
 
-            {tfa.isFetching
-              ? <CircularProgress disableShrink />
-              : (
-                <Button
-                  variant="contained"
-                  color="primary"
-                  disabled={pristine || submitting}
-                  type="submit"
-                  fullWidth
-                >
-                  Enable
-                </Button>
-              )}
-          </Grid>
-        </Grid>
-      </form>
+                {tfa.isLoading
+                  ? <CircularProgress disableShrink />
+                  : (
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      disabled={pristine || submitting}
+                      type="submit"
+                      fullWidth
+                    >
+                      Enable
+                    </Button>
+                  )}
+              </Grid>
+            </Grid>
+          </form>
+        )}
+      </Form>
 
-    </Grid>
+    </StyledGrid>
   );
 }
-
-function onSubmitSuccess(result, dispatch) {
-  dispatch(reset('order'));
-}
-
-function validate(formProps) {
-  const errors = {};
-  if (!formProps.tfa) {
-    errors.tfa = 'Please enter 2fa code'
-  }
-  if (!formProps.price) {
-    errors.price = 'Please enter price';
-  }
-  // console.log(errors);
-  return errors;
-}
-
-// const selector = formValueSelector('enable2fa');
 
 function mapStateToProps(state) {
   return {
@@ -219,10 +197,5 @@ function mapStateToProps(state) {
     user: state.user.data,
   }
 }
-const mapDispatchToProps = {
-  enabletfa, // will be wrapped into a dispatch call
-  idleEnabletfa, // will be wrapped into a dispatch call
-  initialize,
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({ form: 'enable2fa', validate, onSubmitSuccess })(Set2FA));
+export default connect(mapStateToProps, null)(Set2FA);

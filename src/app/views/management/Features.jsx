@@ -15,18 +15,15 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  TextField,
-  FormControl,
-  InputLabel,
   Select,
   MenuItem,
-  FormHelperText,
+  Box,
 } from '@mui/material';
 
 import {
-  reduxForm,
+  Form,
   Field,
-} from 'redux-form';
+} from 'react-final-form';
 
 import {
   fetchFeatures,
@@ -37,47 +34,9 @@ import {
 import { fetchServerAction } from '../../actions/servers';
 import { fetchChannelsAction } from '../../actions/channels';
 
-const renderField = ({
-  input, type, placeholder, meta: { touched, error },
-}) => (
-  <div className={`input-group ${touched && error ? 'has-error' : ''}`}>
-    <FormControl
-      variant="outlined"
-      fullWidth
-    >
-      <TextField
-        // className="outlined-email-field"
-        label={placeholder}
-        type={type}
-        variant="outlined"
-        inputProps={{ className: 'outlined-email-field' }}
-        {...input}
-      />
-      {touched && error && <div className="form-error">{error}</div>}
-    </FormControl>
-  </div>
-);
-
-const renderSelectField = ({
-  input,
-  label,
-  meta: { touched, error },
-  children,
-  ...custom
-}) => (
-  <FormControl className="admin-form-field" style={{ width: '100%' }}>
-    <InputLabel error={touched && error}>{label}</InputLabel>
-    <Select
-      style={{ width: '100%' }}
-      floatingLabelText={label}
-      error={touched && error}
-      {...input}
-      children={children}
-      {...custom}
-    />
-    <FormHelperText error={touched && error}>{error}</FormHelperText>
-  </FormControl>
-)
+import SelectField from '../../components/form/SelectFields';
+import TextField from '../../components/form/TextField';
+import NumberField from '../../components/form/NumberField';
 
 const FeaturesView = function (props) {
   const {
@@ -85,7 +44,6 @@ const FeaturesView = function (props) {
     features,
     servers,
     channels,
-    handleSubmit,
   } = props;
   const dispatch = useDispatch();
   const [inEditMode, setInEditMode] = useState({
@@ -148,8 +106,8 @@ const FeaturesView = function (props) {
     setUnitSampleSize(null);
     setUnitEnabled(null);
   }
-  const changeServer = (val, preVal) => {
-    setServerId(preVal);
+  const changeServer = (val) => {
+    setServerId(val);
   }
 
   useEffect(() => {
@@ -181,142 +139,208 @@ const FeaturesView = function (props) {
     auth,
   ]);
 
-  useEffect(() => { }, [
+  useEffect(() => {
+    console.log(channels);
+  }, [
     features,
     servers,
     channels,
     serverId,
   ]);
 
-  const handleFormSubmit = async (obj) => {
-    await dispatch(addFeature(obj));
-  }
-
   return (
     <div className="content index600 height100 w-100 transactions transaction">
-      <form onSubmit={handleSubmit(handleFormSubmit)} style={{ width: '100%' }}>
-        <Grid container>
-          <Grid item xs={4}>
-            <Field
-              name="feature"
-              component={renderSelectField}
-              label="Feature"
-            >
-              <MenuItem key="1" value="tip">
-                tip
-              </MenuItem>
-              <MenuItem key="2" value="rain">
-                rain
-              </MenuItem>
-              <MenuItem key="3" value="reactdrop">
-                reactdrop
-              </MenuItem>
-              <MenuItem key="4" value="faucet">
-                faucet
-              </MenuItem>
-              <MenuItem key="5" value="hurricane">
-                hurricane
-              </MenuItem>
-              <MenuItem key="6" value="thunderstorm">
-                thunderstorm
-              </MenuItem>
-              <MenuItem key="7" value="thunder">
-                thunder
-              </MenuItem>
-              <MenuItem key="8" value="voicerain">
-                voicerain
-              </MenuItem>
-              <MenuItem key="9" value="sleet">
-                sleet
-              </MenuItem>
-              <MenuItem key="10" value="soak">
-                soak
-              </MenuItem>
-              <MenuItem key="11" value="flood">
-                flood
-              </MenuItem>
-              <MenuItem key="12" value="withdraw">
-                withdraw
-              </MenuItem>
-            </Field>
-          </Grid>
-          <Grid item xs={4}>
-            <Field
-              name="server"
-              component={renderSelectField}
-              onChange={(val, prevVal) => changeServer(val, prevVal)}
-              label="Server"
-            >
-              {servers && servers.data && servers.data.map((server) => (
-                <MenuItem key={server.id} value={server.id}>
-                  {server.groupName}
-                </MenuItem>
-              ))}
-            </Field>
-          </Grid>
-          <Grid item xs={4}>
-            <Field
-              name="channel"
-              component={renderSelectField}
-              // onChange={changeServer}
-              label="Channel (optional)"
-            >
-              <MenuItem key="all" value="all">
-                All
-              </MenuItem>
-              {channels && channels.data && channels.data.map((channel) => (
-                <MenuItem key={channel.id} value={channel.id}>
-                  {channel.channelName}
-                </MenuItem>
-              ))}
-            </Field>
-          </Grid>
-          <Grid item xs={4}>
-            <Field
-              name="min"
-              component={renderField}
-              type="number"
-              placeholder="min"
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <Field
-              name="fee"
-              component={renderField}
-              type="number"
-              placeholder="fee %"
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <Field
-              name="enabled"
-              component={renderSelectField}
-              // onChange={changeServer}
-              label="Enabled"
-            >
-              <MenuItem key="1" value="enable">
-                Enable
-              </MenuItem>
-              <MenuItem key="2" value="disable">
-                Disable
-              </MenuItem>
-            </Field>
-          </Grid>
-          <Grid item xs={4}>
-            <Button
-              variant="contained"
-              color="primary"
-              type="submit"
-              className="btn"
-              fullWidth
-              size="large"
-            >
-              Add
-            </Button>
-          </Grid>
-        </Grid>
+      <Form
+        onSubmit={async (values) => {
+          await dispatch(addFeature(values));
+        }}
+        validate={(values) => {
+          const errors = {};
+          if (!values.feature) {
+            errors.feature = 'Feature is required'
+          }
+          if (!values.server) {
+            errors.server = 'Server is required'
+          }
+          if (!values.min) {
+            errors.min = 'Min is required'
+          }
+          if (!values.fee) {
+            errors.fee = 'Fee is required'
+          }
+          if (!values.enabled) {
+            errors.enabled = 'Enabled is required'
+          }
 
-      </form>
+          return errors;
+        }}
+      >
+        {({
+          form,
+          handleSubmit,
+          submitting,
+          pristine,
+        }) => (
+          <form onSubmit={handleSubmit}>
+            <Box
+              component={Grid}
+              container
+              item
+            >
+              <Box
+                component={Grid}
+                item
+                xs={4}
+              >
+                <Field
+                  name="feature"
+                  component={SelectField}
+                  label="Feature"
+                >
+                  <MenuItem key="1" value="tip">
+                    tip
+                  </MenuItem>
+                  <MenuItem key="2" value="rain">
+                    rain
+                  </MenuItem>
+                  <MenuItem key="3" value="reactdrop">
+                    reactdrop
+                  </MenuItem>
+                  <MenuItem key="4" value="faucet">
+                    faucet
+                  </MenuItem>
+                  <MenuItem key="5" value="hurricane">
+                    hurricane
+                  </MenuItem>
+                  <MenuItem key="6" value="thunderstorm">
+                    thunderstorm
+                  </MenuItem>
+                  <MenuItem key="7" value="thunder">
+                    thunder
+                  </MenuItem>
+                  <MenuItem key="8" value="voicerain">
+                    voicerain
+                  </MenuItem>
+                  <MenuItem key="9" value="sleet">
+                    sleet
+                  </MenuItem>
+                  <MenuItem key="10" value="soak">
+                    soak
+                  </MenuItem>
+                  <MenuItem key="11" value="flood">
+                    flood
+                  </MenuItem>
+                  <MenuItem key="12" value="withdraw">
+                    withdraw
+                  </MenuItem>
+                </Field>
+              </Box>
+              <Box
+                component={Grid}
+                item
+                xs={4}
+              >
+                <Field
+                  name="server"
+                  component={SelectField}
+                  parse={(value) => {
+                    console.log('trigger parse');
+                    changeServer(value)
+                    return value;
+                  }}
+                  label="Server"
+                >
+                  {servers && servers.data && servers.data.map((server) => (
+                    <MenuItem key={server.id} value={server.id}>
+                      {server.groupName}
+                    </MenuItem>
+                  ))}
+                </Field>
+              </Box>
+              <Box
+                component={Grid}
+                item
+                xs={4}
+              >
+                <Field
+                  name="channel"
+                  component={SelectField}
+                  label="Channel (optional)"
+                >
+                  <MenuItem key="all" value="all">
+                    All
+                  </MenuItem>
+                  {channels && channels.data && channels.data.map((channel) => (
+                    <MenuItem key={channel.id} value={channel.id}>
+                      {channel.channelName}
+                    </MenuItem>
+                  ))}
+                </Field>
+              </Box>
+              <Box
+                component={Grid}
+                item
+                xs={4}
+              >
+                <Field
+                  name="min"
+                  component={NumberField}
+                  placeholder="min"
+                  label="Min"
+                />
+              </Box>
+              <Box
+                component={Grid}
+                item
+                xs={4}
+              >
+                <Field
+                  name="fee"
+                  component={NumberField}
+                  placeholder="fee %"
+                  label="fee %"
+                />
+              </Box>
+              <Box
+                component={Grid}
+                item
+                xs={4}
+              >
+                <Field
+                  name="enabled"
+                  component={SelectField}
+                  label="Enabled"
+                >
+                  <MenuItem key="1" value="enable">
+                    Enable
+                  </MenuItem>
+                  <MenuItem key="2" value="disable">
+                    Disable
+                  </MenuItem>
+                </Field>
+              </Box>
+              <Box
+                component={Grid}
+                item
+                xs={12}
+              >
+                <Button
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                  className="btn"
+                  fullWidth
+                  size="large"
+                  style={{ marginLeft: '5px' }}
+                  disabled={pristine || submitting}
+                >
+                  Add
+                </Button>
+              </Box>
+            </Box>
+          </form>
+        )}
+      </Form>
       <TableContainer>
         <Table
           size="small"
@@ -509,26 +533,9 @@ function mapStateToProps(state) {
 }
 
 const validate = (formProps) => {
-  const errors = {};
-  if (!formProps.feature) {
-    errors.feature = 'Feature is required'
-  }
-  if (!formProps.server) {
-    errors.server = 'Server is required'
-  }
-  if (!formProps.min) {
-    errors.min = 'Min is required'
-  }
-  if (!formProps.fee) {
-    errors.fee = 'Fee is required'
-  }
-  if (!formProps.enabled) {
-    errors.enabled = 'Enabled is required'
-  }
 
-  return errors;
 }
 
 // const selector = formValueSelector('profile');
 
-export default connect(mapStateToProps, null)(reduxForm({ form: 'adminCountries', validate })(FeaturesView));
+export default connect(mapStateToProps, null)(FeaturesView);

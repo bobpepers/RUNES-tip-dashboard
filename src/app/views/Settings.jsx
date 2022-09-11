@@ -8,7 +8,7 @@ import {
 import {
   Grid,
 } from '@mui/material';
-import { fetchUserData } from '../actions/user'
+import { fetchUserData } from '../actions/user';
 import EnableTFA from '../components/settings/Enable2FA';
 import DisableTFA from '../components/settings/Disable2FA';
 
@@ -24,8 +24,8 @@ function Settings(props) {
   useEffect(() => dispatch(fetchUserData()), []);
   useEffect(() => {
     console.log('props.user');
-    console.log(props.user);
-  }, [props.user]);
+    console.log(data);
+  }, [data]);
 
   useEffect(() => {
     document.title = 'RunesTip - Settings';
@@ -54,7 +54,7 @@ function Settings(props) {
             </h3>
           </Grid>
           <Grid container justify="center">
-            { data && data.tfa === false
+            {data && data.tfa === false
               ? <EnableTFA />
               : <DisableTFA />}
           </Grid>

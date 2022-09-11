@@ -4,18 +4,19 @@ import React, {
 } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import styled from 'styled-components';
-import { change } from 'redux-form';
 
 const Captcha = function (props) {
   const {
     language,
+    submitting,
     meta: {
       touched,
       error,
-      submitting,
+      // submitting,
       submitFailed,
       dispatch,
     },
+    change,
   } = props;
 
   const captcha = createRef();
@@ -36,28 +37,6 @@ const Captcha = function (props) {
   const onChange = (value) => {
     dispatch(
       change(
-        'signin',
-        'captchaResponse',
-        value,
-      ),
-    );
-    dispatch(
-      change(
-        'signup',
-        'captchaResponse',
-        value,
-      ),
-    );
-    dispatch(
-      change(
-        'resetpassword',
-        'captchaResponse',
-        value,
-      ),
-    );
-    dispatch(
-      change(
-        'resetpasswordVerify',
         'captchaResponse',
         value,
       ),

@@ -1,4 +1,3 @@
-import { reducer as form } from 'redux-form';
 import { configureStore } from '@reduxjs/toolkit'
 import auth from './auth';
 import tfa from './tfa';
@@ -41,7 +40,6 @@ import botFunction from './botFunction';
 
 const store = configureStore({
   reducer: {
-    form,
     auth,
     resetPass: resetPassword,
     tfa,

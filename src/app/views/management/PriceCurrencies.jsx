@@ -15,20 +15,15 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  TextField,
-  FormControl,
-  InputLabel,
   Select,
   MenuItem,
-  FormHelperText,
+  Box,
 } from '@mui/material';
 
 import {
-  reduxForm,
+  Form,
   Field,
-  // formValueSelector,
-  // change,
-} from 'redux-form';
+} from 'react-final-form';
 
 import {
   fetchPriceCurrenciesAction,
@@ -38,53 +33,13 @@ import {
   updatePricesAndConversionsAction,
 } from '../../actions/priceCurrencies';
 
-const renderField = ({
-  input, type, placeholder, meta: { touched, error },
-}) => (
-  <div className={`input-group ${touched && error ? 'has-error' : ''}`}>
-    <FormControl
-      variant="outlined"
-      fullWidth
-    >
-      <TextField
-        // className="outlined-email-field"
-        label={placeholder}
-        type={type}
-        variant="outlined"
-        inputProps={{ className: 'outlined-email-field' }}
-        {...input}
-      />
-      {touched && error && <div className="form-error">{error}</div>}
-    </FormControl>
-  </div>
-);
-
-const renderSelectField = ({
-  input,
-  label,
-  meta: { touched, error },
-  children,
-  ...custom
-}) => (
-  <FormControl className="admin-form-field" style={{ width: '100%' }}>
-    <InputLabel error={touched && error}>{label}</InputLabel>
-    <Select
-      style={{ width: '100%' }}
-      floatingLabelText={label}
-      error={touched && error}
-      {...input}
-      children={children}
-      {...custom}
-    />
-    <FormHelperText error={touched && error}>{error}</FormHelperText>
-  </FormControl>
-)
+import SelectField from '../../components/form/SelectFields';
+import TextField from '../../components/form/TextField';
 
 const PriceCurrenciesManagement = function (props) {
   const {
     auth,
     priceCurrencies,
-    handleSubmit,
   } = props;
   const dispatch = useDispatch();
   const [inEditMode, setInEditMode] = useState({
@@ -152,74 +107,125 @@ const PriceCurrenciesManagement = function (props) {
     }, 2500);
   }
 
-  const handleFormSubmit = async (obj) => {
-    await dispatch(addPriceCurrenciesAction(obj));
-  }
-
   return (
     <div className="content index600 height100 w-100 transactions transaction">
-      <form onSubmit={handleSubmit(handleFormSubmit)} style={{ width: '100%' }}>
-        <Grid container>
-          <Grid item xs={4}>
-            <Field
-              name="name"
-              component={renderField}
-              type="text"
-              placeholder="name"
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <Field
-              name="iso"
-              component={renderField}
-              type="text"
-              placeholder="iso"
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <Field
-              name="type"
-              component={renderSelectField}
-              // onChange={changeServer}
-              label="Type"
+      <Form
+        onSubmit={async (values) => {
+          console.log(values);
+          await dispatch(addPriceCurrenciesAction(values));
+        }}
+        validate={(values) => {
+          const errors = {};
+          console.log(values);
+          if (!values.name) {
+            errors.name = 'Name is required'
+          }
+          if (!values.iso) {
+            errors.iso = 'Iso is required'
+          }
+          if (!values.type) {
+            errors.type = 'Type is required'
+          }
+          return errors;
+        }}
+      >
+        {({
+          form,
+          handleSubmit,
+          submitting,
+          pristine,
+        }) => (
+          <form onSubmit={handleSubmit}>
+            <Box
+              component={Grid}
+              container
+              item
             >
-              <MenuItem key="1" value="fiat">
-                FIAT
-              </MenuItem>
-              <MenuItem key="2" value="cryptocurrency">
-                CRYPTOCURRENCY
-              </MenuItem>
-            </Field>
-          </Grid>
-          <Grid item xs={6}>
-            <Button
-              variant="contained"
-              color="primary"
-              type="submit"
-              className="btn"
-              fullWidth
-              size="large"
-              style={{ marginRight: '5px' }}
-            >
-              Add
-            </Button>
-          </Grid>
-          <Grid item xs={6}>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={() => updatePricesAndConversions()}
-              className="btn"
-              fullWidth
-              size="large"
-              style={{ marginLeft: '5px' }}
-            >
-              Update Prices &amp; Conversions
-            </Button>
-          </Grid>
-        </Grid>
-
-      </form>
+              <Box
+                component={Grid}
+                item
+                xs={4}
+              >
+                <Field
+                  fullWidth
+                  name="name"
+                  component={TextField}
+                  type="text"
+                  placeholder="name"
+                  label="Name"
+                />
+              </Box>
+              <Box
+                component={Grid}
+                item
+                xs={4}
+              >
+                <Field
+                  fullWidth
+                  name="iso"
+                  component={TextField}
+                  type="text"
+                  placeholder="iso"
+                  label="Iso"
+                />
+              </Box>
+              <Box
+                component={Grid}
+                item
+                xs={4}
+              >
+                <Field
+                  name="type"
+                  component={SelectField}
+                  label="Type"
+                >
+                  <MenuItem key="1" value="fiat">
+                    FIAT
+                  </MenuItem>
+                  <MenuItem key="2" value="cryptocurrency">
+                    CRYPTOCURRENCY
+                  </MenuItem>
+                </Field>
+              </Box>
+              <Box
+                component={Grid}
+                item
+                xs={6}
+              >
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => updatePricesAndConversions()}
+                  className="btn"
+                  fullWidth
+                  size="large"
+                  style={{ marginRight: '5px' }}
+                >
+                  Update Prices &amp; Conversions
+                </Button>
+              </Box>
+              <Box
+                component={Grid}
+                item
+                xs={6}
+              >
+                <Button
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                  className="btn"
+                  fullWidth
+                  size="large"
+                  style={{ marginLeft: '5px' }}
+                  disabled={pristine || submitting}
+                >
+                  Add
+                </Button>
+              </Box>
+            </Box>
+          </form>
+        )}
+      </Form>
       <TableContainer>
         <Table
           size="small"
@@ -383,20 +389,4 @@ function mapStateToProps(state) {
   };
 }
 
-const validate = (formProps) => {
-  const errors = {};
-  if (!formProps.name) {
-    errors.name = 'Name is required'
-  }
-  if (!formProps.iso) {
-    errors.iso = 'Iso is required'
-  }
-  if (!formProps.type) {
-    errors.type = 'Type is required'
-  }
-  return errors;
-}
-
-// const selector = formValueSelector('profile');
-
-export default connect(mapStateToProps, null)(reduxForm({ form: 'priceCurrencies', validate })(PriceCurrenciesManagement));
+export default connect(mapStateToProps, null)(PriceCurrenciesManagement);
