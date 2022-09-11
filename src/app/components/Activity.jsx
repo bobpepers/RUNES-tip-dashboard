@@ -280,6 +280,7 @@ const renderItems = (
             || activity.type === 'ignoreme_s'
             || activity.type === 'listtransactions_s'
             || activity.type === 'publicstats_s'
+            || activity.type === 'voiceraintip_s'
 
             || activity.type === 'thundertip_f'
             || activity.type === 'thunderstormtip_f'
@@ -288,6 +289,7 @@ const renderItems = (
             || activity.type === 'floodtip_f'
             || activity.type === 'sleettip_f'
             || activity.type === 'hurricanetip_f'
+            || activity.type === 'voiceraintip_f'
 
             || activity.type === 'deposit_s'
             || activity.type === 'stats_s'
