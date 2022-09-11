@@ -85,13 +85,13 @@ module.exports = (options) => {
         '.jsx',
       ],
       alias: {
-        // url: require.resolve('url/'),
+        url: require.resolve('url/'),
         stream: require.resolve('stream-browserify'),
         crypto: require.resolve('crypto-browserify'),
-        buffer: require.resolve('buffer/'),
-        fs: false,
-        module: false,
-        typescript: false,
+        // buffer: require.resolve('buffer/'),
+        // fs: false,
+        // module: false,
+        // typescript: false,
       },
     },
     plugins: [
