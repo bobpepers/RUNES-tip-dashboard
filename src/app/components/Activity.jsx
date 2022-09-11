@@ -248,6 +248,9 @@ const renderItems = (
             {activity.type === 'tip_faucet_s' && 'Tip Faucet: success'}
             {activity.type === 'tiptip_faucet_s' && 'Tip Faucet: success'}
 
+            {activity.type === 'support_s' && 'Support request: success'}
+            {activity.type === 'support_f' && 'Support Request: fail'}
+
           </Grid>
           <Grid
             item
@@ -297,6 +300,8 @@ const renderItems = (
             || activity.type === 'depositComplete'
             || activity.type === 'tiptip_faucet_s'
 
+            || activity.type === 'support_s'
+            || activity.type === 'support_f'
             ) && renderTo(activity, navigate)}
 
             {(
@@ -343,6 +348,7 @@ const renderItems = (
             || activity.type === 'withdrawAccepted'
             || activity.type === 'withdrawRejected'
             || activity.type === 'withdrawComplete'
+
             ) && renderBy(activity, navigate)}
 
             {activity.type === 'tip_s' && (
