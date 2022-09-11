@@ -11,12 +11,12 @@ import ReactCountryFlag from 'react-country-flag';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import PropTypes from 'prop-types';
 import ThemeToggle from '../components/ThemeToggle';
 
 function Footer(props) {
   const {
     i18n,
-    loading,
   } = props;
   const LANGUAGE_KEY = 'language';
   const [language, setLanguage] = useState('');
@@ -64,16 +64,10 @@ function Footer(props) {
     setAnchorElLang(null);
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
   return (
-    <div className="infoBar footer">
+    <div className="footer">
       <Grid
         container
-        // className="height100 d-flex justify-content-around justify-content-md-center Grid itemst-unstyled categories ng-scope"
-        // ng-controller="myController"
         direction="row"
         justifyContent="center"
         alignItems="baseline"
@@ -84,8 +78,6 @@ function Footer(props) {
           sm={4}
           md={2}
           align="center"
-          // alignItems="center"
-          // direction="row"
         >
           <ThemeToggle />
         </Grid>
@@ -98,22 +90,23 @@ function Footer(props) {
           style={{
             marginBottom: 'auto',
           }}
-          // alignItems="center"
-          // direction="row"
         >
           <Button
-            // aria-controls="simple-menu"
-            // aria-haspopup="true"
             onClick={handleClickLangMenu}
             className="langPadding toggleLangWrapper"
             id="user-nav-dropdown"
-            style={{ color: '#bdbdbd' }}
+            style={{
+              color: '#bdbdbd',
+            }}
           >
             <Badge
               color="secondary"
             >
               <span>
-                <ReactCountryFlag countryCode={countryCode(language)} svg />
+                <ReactCountryFlag
+                  countryCode={countryCode(language)}
+                  svg
+                />
                 {' '}
                 {`${language}`}
               </span>
@@ -139,7 +132,7 @@ function Footer(props) {
               <div>
                 <ReactCountryFlag countryCode="us" svg />
                 {' '}
-                en
+                EN
               </div>
             </MenuItem>
             <MenuItem
@@ -149,9 +142,12 @@ function Footer(props) {
               }}
             >
               <div>
-                <ReactCountryFlag countryCode="fr" svg />
+                <ReactCountryFlag
+                  countryCode="fr"
+                  svg
+                />
                 {' '}
-                fr
+                FR
               </div>
             </MenuItem>
             <MenuItem
@@ -161,9 +157,12 @@ function Footer(props) {
               }}
             >
               <div>
-                <ReactCountryFlag countryCode="nl" svg />
+                <ReactCountryFlag
+                  countryCode="nl"
+                  svg
+                />
                 {' '}
-                nl
+                NL
               </div>
             </MenuItem>
           </Menu>
@@ -172,5 +171,11 @@ function Footer(props) {
     </div>
   );
 }
+
+Footer.propTypes = {
+  i18n: PropTypes.shape({
+    activate: PropTypes.func.isRequired,
+  }).isRequired,
+};
 
 export default Footer;

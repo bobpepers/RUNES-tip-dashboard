@@ -1,0 +1,16 @@
+.footer {
+  position: fixed;
+  background-color: var(--footer);
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 800;
+  color: white;
+  //position: fixed;
+  flex-shrink: 0;
+}
+
+.footer p {
+  margin: 0;
+  padding: 0;
+}
