@@ -3,7 +3,6 @@ import React, {
   useState,
 } from 'react';
 import PropTypes from 'prop-types';
-import { useNavigate } from 'react-router-dom';
 import { connect, useDispatch } from 'react-redux';
 import CircularProgress from '@mui/material/CircularProgress';
 import {
@@ -14,34 +13,14 @@ import {
 import Button from '@mui/material/Button';
 import ActivityContainer from '../containers/Activity';
 import ActivityFilter from '../containers/filters/ActivityFilter';
-
 import { withRouter } from '../hooks/withRouter';
-import {
-  fetchNodeStatusAction,
-} from '../actions/nodeStatus';
-
-import {
-  fetchBlockNumberAction,
-} from '../actions/blockNumber';
-
-import {
-  startSyncAction,
-} from '../actions/startSync';
-
-import {
-  fetchLiabilityAction,
-} from '../actions/liability';
-import {
-  patchDepositsAction,
-} from '../actions/patchDeposits';
-
-import {
-  fetchBalanceAction,
-} from '../actions/balance';
-
-import {
-  fetchFaucetBalanceAction,
-} from '../actions/faucetBalance';
+import { fetchNodeStatusAction } from '../actions/nodeStatus';
+import { fetchBlockNumberAction } from '../actions/blockNumber';
+import { startSyncAction } from '../actions/startSync';
+import { fetchLiabilityAction } from '../actions/liability';
+import { patchDepositsAction } from '../actions/patchDeposits';
+import { fetchBalanceAction } from '../actions/balance';
+import { fetchFaucetBalanceAction } from '../actions/faucetBalance';
 
 const Home = function (props) {
   const {
@@ -54,7 +33,6 @@ const Home = function (props) {
     blockNumber,
     startSync,
   } = props;
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const refreshStats = () => {
@@ -99,11 +77,6 @@ const Home = function (props) {
   }
   const startSyncFunction = () => {
     dispatch(startSyncAction())
-  }
-
-  const routeChangeExample = () => {
-    const path = 'bridge';
-    navigate(path);
   }
 
   const [id, setId] = useState('');
