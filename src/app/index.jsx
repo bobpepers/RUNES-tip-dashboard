@@ -2,6 +2,7 @@ import React, {
   Suspense,
   lazy,
   createRef,
+  useEffect,
 } from 'react';
 import {
   ThemeProvider,
@@ -9,7 +10,11 @@ import {
   createTheme,
 } from '@mui/material/styles';
 import { createRoot } from 'react-dom/client';
-import { Provider } from 'react-redux';
+import {
+  Provider,
+  useDispatch,
+  connect,
+} from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { SnackbarProvider } from 'notistack';
 import Button from '@mui/material/Button';
@@ -23,6 +28,7 @@ import '@fortawesome/fontawesome-free/css/all.css';
 import './assets/fonts/texgyreheros-regular.woff';
 import './theme/style.scss';
 import LoadingContainer from './containers/Loading';
+import { fetchUserData } from './actions/user';
 
 const ParticlesRunebase = lazy(() => import('./components/ParticlesRunebase'));
 const Header = lazy(() => import('./containers/Header'));
@@ -66,7 +72,7 @@ function DismissAction({ id }) {
   )
 }
 
-function App() {
+function AppWrapper() {
   return (
     <StyledEngineProvider injectFirst>
       <I18nProvider i18n={i18n}>
@@ -85,13 +91,7 @@ function App() {
             >
               <BrowserRouter>
                 <Suspense fallback={<LoadingContainer />}>
-                  <Notifier />
-                  <ParticlesRunebase />
-                  <Header />
-                  <Routes />
-                  <Footer
-                    i18n={i18n}
-                  />
+                  <App />
                 </Suspense>
               </BrowserRouter>
             </SnackbarProvider>
@@ -102,8 +102,42 @@ function App() {
   );
 }
 
+function AppContainer(props) {
+  const {
+    authenticated,
+  } = props;
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (authenticated.authenticated && !authenticated.tfaLocked) {
+      dispatch(fetchUserData());
+    }
+  }, [
+    authenticated,
+  ]);
+
+  return (
+    <>
+      <Notifier />
+      <ParticlesRunebase />
+      <Header />
+      <Routes />
+      <Footer
+        i18n={i18n}
+      />
+    </>
+  );
+}
+
+function mapStateToProps(state) {
+  return {
+    authenticated: state.auth,
+  };
+}
+
+const App = connect(mapStateToProps)(AppContainer);
+
 createRoot(
   document.getElementById('root'),
 ).render(
-  <App />,
+  <AppWrapper />,
 );

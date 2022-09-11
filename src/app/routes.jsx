@@ -66,10 +66,24 @@ const RequireAuth = function (props) {
   ]);
 
   if (!Isauthenticated && doneLoading) {
-    return <Navigate to="/login" state={{ from: location }} />;
+    return (
+      <Navigate
+        to="/login"
+        state={{
+          from: location,
+        }}
+      />
+    );
   }
   if (tfaLocked && doneLoading) {
-    return <Navigate to="/login/2fa" state={{ from: location }} />;
+    return (
+      <Navigate
+        to="/login/2fa"
+        state={{
+          from: location,
+        }}
+      />
+    );
   }
   return <Outlet />;
 }
@@ -358,7 +372,6 @@ const RoutesX = function (props) {
           path="/settings"
           element={<Settings />}
         />
-
       </Route>
 
       <Route
