@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.9](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.8...v0.0.9) (2022-09-11)
+
+
+### Features
+
+* 🚸 Add support request to activity feed ([c3c6f7f](https://github.com/bobpepers/runes-tip-dashboard/commit/c3c6f7fb5071a0fc843edb9a360a8dd6251fd706))
+
+
+### Bug Fixes
+
+* 💄 z-index issue ([4edd81f](https://github.com/bobpepers/runes-tip-dashboard/commit/4edd81fc0ce367988b96e7294a01699d9b542d3a))
+* Add a missing voiceraintip userfield to activity ([3b24312](https://github.com/bobpepers/runes-tip-dashboard/commit/3b243128e9c4b5ea320eab72078bab825ea6d4ac))
+
 ### [0.0.8](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.7...v0.0.8) (2022-09-11)
 
 
