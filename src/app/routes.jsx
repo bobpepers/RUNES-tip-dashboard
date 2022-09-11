@@ -4,7 +4,6 @@ import React, {
 import {
   Route,
   Routes,
-  // useNavigate,
   useLocation,
   Navigate,
   Outlet,
@@ -12,24 +11,17 @@ import {
 import PropTypes from 'prop-types';
 import { connect, useDispatch } from 'react-redux';
 import toggleTheme from './helpers/toggleTheme';
-
 import Home from './views/Home';
-
-// import Activity from './views/Activity';
 import Settings from './views/Settings';
-
 import Register from './views/register/Register';
 import RegisterVerify from './views/register/RegisterVerify';
 import VerifyEmail from './views/register/VerifyEmail';
 import RegisterVerified from './views/register/RegisterVerified';
-
 import ResetPassword from './views/resetPassword/ResetPassword';
 import ResetPasswordVerify from './views/resetPassword/ResetPasswordVerify';
 import ResetPasswordNew from './views/resetPassword/ResetPasswordNew';
-
 import Servers from './views/management/Servers';
 import UserView from './views/management/User';
-
 import Channels from './views/management/Channels';
 import TriviaManagement from './views/management/TriviaManagement';
 import Users from './views/management/Users';
@@ -39,19 +31,15 @@ import DashboardUsers from './views/management/DashboardUsers';
 import PriceCurrenciesManagement from './views/management/PriceCurrencies';
 import WithdrawalAddressesView from './views/management/WithdrawalAddresses';
 import WithdrawalAddressView from './views/management/WithdrawalAddress';
-
 import FunctionsView from './views/functions/Functions';
 import FunctionView from './views/functions/Function';
-
 import Deposits from './views/functions/Deposits';
 import Withdrawals from './views/functions/Withdrawals';
 import Errors from './views/functions/Errors';
-
 import Login from './views/login/Login';
 import LoginTFA from './views/login/Login2FA';
 import LogoutView from './views/Logout';
-
-import { authenticated } from './actions/auth';
+import { authenticatedAction } from './actions/auth';
 
 const RequireAuth = function (props) {
   const {
@@ -63,7 +51,7 @@ const RequireAuth = function (props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(authenticated());
+    dispatch(authenticatedAction());
   }, []);
 
   useEffect(() => {
@@ -342,11 +330,6 @@ const RoutesX = function (props) {
             />
           )}
         />
-
-        {/* <Route
-          path="/activity"
-          element={<Activity />}
-        /> */}
         <Route
           path="/functions/deposits"
           element={<Deposits />}

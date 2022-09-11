@@ -22,22 +22,24 @@ export function signupUser(
   const { captchaResponse } = props;
 
   return function (dispatch) {
-    axios.post(`${window.myConfig.apiUrl}/signup`, { props, captchaResponse })
-      .then(() => {
-        dispatch({
-          type: SIGNUP_SUCCESS,
-        });
-        dispatch(navigate(`/register/verify-register?email=${props.email}`));
-      }).catch((error) => {
-        notistackErrorAdd(
-          dispatch,
-          error,
-        );
-        dispatch({
-          type: SIGNUP_FAILURE,
-          payload: error.reponse.data.console.error,
-        });
+    axios.post(`${window.myConfig.apiUrl}/signup`, {
+      props,
+      captchaResponse,
+    }).then(() => {
+      dispatch({
+        type: SIGNUP_SUCCESS,
       });
+      dispatch(navigate(`/register/verify-register?email=${props.email}`));
+    }).catch((error) => {
+      notistackErrorAdd(
+        dispatch,
+        error,
+      );
+      dispatch({
+        type: SIGNUP_FAILURE,
+        payload: error.message || error.reponse.data.console.error,
+      });
+    });
   }
 }
 
@@ -45,7 +47,10 @@ export function signupUser(
  * Sign in
  */
 
-export function signinUser(props) {
+export function signinUser(
+  props,
+  navigate,
+) {
   const {
     email,
     password,
@@ -63,7 +68,7 @@ export function signinUser(props) {
         type: AUTH_USER,
         payload: response.data,
       });
-      window.location.href = '/';
+      navigate('/');
     })
       .catch((error) => {
         notistackErrorAdd(
@@ -120,14 +125,14 @@ export function verifyEmail(props, navigate) {
 /**
  * Sign out
  */
-export function signoutUser() {
+export function signoutUser(navigate) {
   return function (dispatch) {
     axios.get(`${window.myConfig.apiUrl}/logout`)
       .then(() => {
         dispatch({
           type: UNAUTH_USER,
         });
-        window.location.href = '/';
+        navigate('/');
       })
       .catch((error) => {
         console.log(error);
@@ -138,7 +143,7 @@ export function signoutUser() {
 /**
  * Check if user is authenticated
  */
-export function authenticated() {
+export function authenticatedAction() {
   return function (dispatch) {
     axios.get(`${window.myConfig.apiUrl}/authenticated`)
       .then((response) => {

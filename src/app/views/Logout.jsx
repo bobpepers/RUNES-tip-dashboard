@@ -1,22 +1,16 @@
 import React, {
   useEffect,
-  useMemo,
 } from 'react';
 import {
   connect,
   useDispatch,
 } from 'react-redux';
 import {
-  useLocation,
+  useNavigate,
 } from 'react-router-dom';
 import {
   signoutUser,
 } from '../actions/auth';
-
-const useQuery = () => {
-  const { search } = useLocation();
-  return useMemo(() => new URLSearchParams(search), [search]);
-}
 
 function LogoutView(props) {
   const {
@@ -24,8 +18,10 @@ function LogoutView(props) {
     auth,
   } = props;
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   useEffect(() => {
-    dispatch(signoutUser());
+    dispatch(signoutUser(navigate));
   }, []);
 
   useEffect(() => {
