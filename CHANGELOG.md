@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.7](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.6...v0.0.7) (2022-09-11)
+
+
+### Bug Fixes
+
+* ⚡️ default theme dark, save theme state to localstorage ([aac8b4f](https://github.com/bobpepers/runes-tip-dashboard/commit/aac8b4f91d4d3ec03447147133270e140588bea7))
+
+
+### Style
+
+* ♻️ Header use mu5 Appbar instead of bootstrap menu ([db348ea](https://github.com/bobpepers/runes-tip-dashboard/commit/db348eaf0248c4adde6596f18ee5bd58c9e8dea2))
+
+
+### Performance
+
+* ⚡️ No hard reload on login/logout ([4af211d](https://github.com/bobpepers/runes-tip-dashboard/commit/4af211d9dd731849c6416b6c3845a4921665f6ce))
+
 ### [0.0.6](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.5...v0.0.6) (2022-09-11)
 
 
