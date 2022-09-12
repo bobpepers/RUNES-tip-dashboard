@@ -88,10 +88,6 @@ module.exports = (options) => {
         url: require.resolve('url/'),
         stream: require.resolve('stream-browserify'),
         crypto: require.resolve('crypto-browserify'),
-        // buffer: require.resolve('buffer/'),
-        // fs: false,
-        // module: false,
-        // typescript: false,
       },
     },
     plugins: [
