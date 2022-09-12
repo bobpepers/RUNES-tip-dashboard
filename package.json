@@ -1,6 +1,6 @@
 {
   "name": "runestip-dashboard",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Admin dashboard for RUNES-tip",
   "scripts": {
     "extract": "lingui extract",
@@ -65,7 +65,7 @@
     "crypto-browserify": "^3.12.0",
     "css-loader": "^6.7.1",
     "dotenv": "^16.0.2",
-    "eslint": "^8.23.0",
+    "eslint": "^8.23.1",
     "eslint-auto-fix": "^1.0.4",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.26.0",
@@ -101,7 +101,7 @@
     "@lingui/macro": "^3.14.0",
     "@lingui/react": "^3.14.0",
     "@mui/icons-material": "^5.10.3",
-    "@mui/material": "^5.10.4",
+    "@mui/material": "^5.10.5",
     "@reduxjs/toolkit": "^1.8.5",
     "axios": "^0.27.2",
     "babel-runtime": "^6.26.0",
