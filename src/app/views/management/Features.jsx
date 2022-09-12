@@ -15,8 +15,9 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Select,
   MenuItem,
+  TextField as MuiTextField,
+  Select as MuiSelect,
   Box,
 } from '@mui/material';
 
@@ -33,9 +34,7 @@ import {
 } from '../../actions/features';
 import { fetchServerAction } from '../../actions/servers';
 import { fetchChannelsAction } from '../../actions/channels';
-
 import SelectField from '../../components/form/SelectFields';
-import TextField from '../../components/form/TextField';
 import NumberField from '../../components/form/NumberField';
 
 const FeaturesView = function (props) {
@@ -177,7 +176,6 @@ const FeaturesView = function (props) {
         }}
       >
         {({
-          form,
           handleSubmit,
           submitting,
           pristine,
@@ -391,7 +389,7 @@ const FeaturesView = function (props) {
                     <TableCell align="right">
                       {
                         inEditMode.status && inEditMode.rowKey === feature.id ? (
-                          <TextField
+                          <MuiTextField
                             value={unitMin}
                             onChange={(event) => setUnitMin(event.target.value)}
                           />
@@ -404,7 +402,7 @@ const FeaturesView = function (props) {
                     <TableCell align="right">
                       {
                         inEditMode.status && inEditMode.rowKey === feature.id ? (
-                          <TextField
+                          <MuiTextField
                             value={unitFee}
                             onChange={(event) => setUnitFee(event.target.value)}
                           />
@@ -417,7 +415,7 @@ const FeaturesView = function (props) {
                     <TableCell align="right">
                       {
                         inEditMode.status && inEditMode.rowKey === feature.id ? (
-                          <TextField
+                          <MuiTextField
                             value={unitSampleSize}
                             onChange={(event) => setUnitSampleSize(event.target.value)}
                           />
@@ -430,7 +428,7 @@ const FeaturesView = function (props) {
                     <TableCell align="right">
                       {
                         inEditMode.status && inEditMode.rowKey === feature.id ? (
-                          <Select
+                          <MuiSelect
                             label="Enabled"
                             // defaultValue={unitEnabled ? 'true' : 'false'}
                             value={unitEnabled}
@@ -442,7 +440,7 @@ const FeaturesView = function (props) {
                             <MenuItem key="enableFalse" value="false">
                               False
                             </MenuItem>
-                          </Select>
+                          </MuiSelect>
                         ) : (
                           <span>{feature.enabled ? 'true' : 'false'}</span>
                         )
@@ -532,11 +530,5 @@ function mapStateToProps(state) {
     channels: state.channels,
   };
 }
-
-const validate = (formProps) => {
-
-}
-
-// const selector = formValueSelector('profile');
 
 export default connect(mapStateToProps, null)(FeaturesView);
