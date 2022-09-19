@@ -11,6 +11,7 @@ import {
   Typography,
 } from '@mui/material';
 import Button from '@mui/material/Button';
+import BigNumber from 'bignumber.js';
 import ActivityContainer from '../containers/Activity';
 import ActivityFilter from '../containers/filters/ActivityFilter';
 import { withRouter } from '../hooks/withRouter';
@@ -151,7 +152,7 @@ const Home = function (props) {
             {liability.data
               && liability.data
               && liability.data.amount
-              ? `${liability.data.amount / 1e8} ${window.myConfig.ticker}`
+              ? `${new BigNumber(liability.data.amount).dividedBy(1e8).toString()} ${window.myConfig.ticker}`
               : `0 ${window.myConfig.ticker}`}
           </Typography>
         </Grid>
@@ -182,7 +183,7 @@ const Home = function (props) {
             {balance.data
               && balance.data
               && balance.data.amount
-              ? `${balance.data.amount} ${window.myConfig.ticker}`
+              ? `${new BigNumber(balance.data.amount).toString()} ${window.myConfig.ticker}`
               : `0 ${window.myConfig.ticker}`}
           </Typography>
         </Grid>
@@ -214,7 +215,7 @@ const Home = function (props) {
               && balance.data.amount
               && liability.data
               && liability.data.amount
-              ? `${((Number(balance.data.amount) - (Number(liability.data.amount) / 1e8))).toFixed(8)} ${window.myConfig.ticker}`
+              ? `${new BigNumber(balance.data.amount).minus(new BigNumber(liability.data.amount).dividedBy(1e8)).toString()} ${window.myConfig.ticker}`
               : `0 ${window.myConfig.ticker}`}
           </Typography>
         </Grid>
@@ -245,7 +246,7 @@ const Home = function (props) {
             {faucetBalance.data
               && faucetBalance.data
               && faucetBalance.data.amount
-              ? `${faucetBalance.data.amount / 1e8} ${window.myConfig.ticker}`
+              ? `${new BigNumber(faucetBalance.data.amount).dividedBy(1e8).toString()} ${window.myConfig.ticker}`
               : `0 ${window.myConfig.ticker}`}
           </Typography>
         </Grid>

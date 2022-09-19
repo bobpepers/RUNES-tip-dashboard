@@ -44,21 +44,23 @@ const DepositsView = function (props) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(50);
 
-  useEffect(() => dispatch(fetchDepositsAction(
+  useEffect(() => {
+    dispatch(fetchDepositsAction(
+      id,
+      txId,
+      userId,
+      username,
+      from,
+      page * rowsPerPage,
+      rowsPerPage,
+    ))
+  }, [
     id,
     txId,
     userId,
     username,
     from,
-    page * rowsPerPage,
-    rowsPerPage,
-  )), [
-    id,
-    txId,
-    userId,
-    username,
-    from,
-    auth,
+    // auth,
     page,
     rowsPerPage,
   ]);

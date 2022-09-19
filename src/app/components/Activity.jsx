@@ -160,6 +160,7 @@ const renderItems = (
           >
             {activity.type === 'faucettip_s' && 'Claim Faucet'}
             {activity.type === 'faucettip_t' && 'Claim Faucet too fast'}
+            {activity.type === 'faucettip_i' && 'Faucet is dry'}
             {activity.type === 'waterFaucet' && 'Water Faucet'}
             {activity.type === 'thundertip_f' && 'ThunderTip: fail'}
             {activity.type === 'thundertip_s' && 'ThunderTip: success'}
