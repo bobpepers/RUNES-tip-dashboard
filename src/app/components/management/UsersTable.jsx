@@ -17,6 +17,7 @@ import {
   Switch,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import BigNumber from 'bignumber.js';
 import BanDialog from './BanDialog';
 
 const headCells = [
@@ -178,6 +179,7 @@ const UsersTable = function (props) {
     rowsPerPage,
     setRowsPerPage,
     totalCount,
+    dpValue,
   } = props;
   const rows = [];
 
@@ -315,9 +317,9 @@ const UsersTable = function (props) {
                             {row.username}
                           </Button>
                         </TableCell>
-                        <TableCell align="right">{row.available / 1e8}</TableCell>
-                        <TableCell align="right">{row.locked / 1e8}</TableCell>
-                        <TableCell align="right">{row.total / 1e8}</TableCell>
+                        <TableCell align="right">{new BigNumber(row.available).dividedBy(`1e${dpValue}`).toString()}</TableCell>
+                        <TableCell align="right">{new BigNumber(row.locked).dividedBy(`1e${dpValue}`).toString()}</TableCell>
+                        <TableCell align="right">{new BigNumber(row.total).dividedBy(`1e${dpValue}`).toString()}</TableCell>
 
                         <TableCell align="right">
                           {row.lastActive}
@@ -385,9 +387,9 @@ const UsersTable = function (props) {
                             {row.username}
                           </Button>
                         </TableCell>
-                        <TableCell align="right">{row.available / 1e8}</TableCell>
-                        <TableCell align="right">{row.locked / 1e8}</TableCell>
-                        <TableCell align="right">{row.total / 1e8}</TableCell>
+                        <TableCell align="right">{new BigNumber(row.available).dividedBy(`1e${dpValue}`).toString()}</TableCell>
+                        <TableCell align="right">{new BigNumber(row.locked).dividedBy(`1e${dpValue}`).toString()}</TableCell>
+                        <TableCell align="right">{new BigNumber(row.total).dividedBy(`1e${dpValue}`).toString()}</TableCell>
 
                         <TableCell align="right">
                           {row.lastActive}

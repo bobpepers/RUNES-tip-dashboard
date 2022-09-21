@@ -22,6 +22,7 @@ import { fetchLiabilityAction } from '../actions/liability';
 import { patchDepositsAction } from '../actions/patchDeposits';
 import { fetchBalanceAction } from '../actions/balance';
 import { fetchFaucetBalanceAction } from '../actions/faucetBalance';
+import { fetchDpAction } from '../actions/dp';
 
 const Home = function (props) {
   const {
@@ -33,8 +34,17 @@ const Home = function (props) {
     faucetBalance,
     blockNumber,
     startSync,
+    dp,
   } = props;
   const dispatch = useDispatch();
+
+  const [id, setId] = useState('');
+  const [spender, setSpender] = useState('');
+  const [earner, setEarner] = useState('');
+  const [type, setType] = useState('');
+  const [amount, setAmount] = useState('');
+  const [rowsPerPage, setRowsPerPage] = useState(50);
+  const [dpValue, setDpValue] = useState(0);
 
   const refreshStats = () => {
     if (auth.authenticated) {
@@ -43,6 +53,7 @@ const Home = function (props) {
       dispatch(fetchBalanceAction());
       dispatch(fetchFaucetBalanceAction());
       dispatch(fetchBlockNumberAction());
+      dispatch(fetchDpAction());
     }
   }
 
@@ -53,6 +64,7 @@ const Home = function (props) {
       dispatch(fetchBalanceAction());
       dispatch(fetchFaucetBalanceAction());
       dispatch(fetchBlockNumberAction());
+      dispatch(fetchDpAction());
     }
   }, [
     auth,
@@ -62,6 +74,11 @@ const Home = function (props) {
   useEffect(
     () => {
       console.log(auth);
+      console.log(dp);
+      if (dp && dp.data && dp.data.dp) {
+        setDpValue(dp.data.dp)
+      }
+      console.log(dpValue);
     },
     [
       auth,
@@ -70,6 +87,8 @@ const Home = function (props) {
       balance,
       faucetBalance,
       blockNumber,
+      dp,
+      dpValue,
     ],
   );
 
@@ -79,13 +98,6 @@ const Home = function (props) {
   const startSyncFunction = () => {
     dispatch(startSyncAction())
   }
-
-  const [id, setId] = useState('');
-  const [spender, setSpender] = useState('');
-  const [earner, setEarner] = useState('');
-  const [type, setType] = useState('');
-  const [amount, setAmount] = useState('');
-  const [rowsPerPage, setRowsPerPage] = useState(50);
 
   return (
     <div className="height100 content">
@@ -152,7 +164,7 @@ const Home = function (props) {
             {liability.data
               && liability.data
               && liability.data.amount
-              ? `${new BigNumber(liability.data.amount).dividedBy(1e8).toString()} ${window.myConfig.ticker}`
+              ? `${new BigNumber(liability.data.amount).dividedBy(`1e${dpValue}`).toString()} ${window.myConfig.ticker}`
               : `0 ${window.myConfig.ticker}`}
           </Typography>
         </Grid>
@@ -215,7 +227,7 @@ const Home = function (props) {
               && balance.data.amount
               && liability.data
               && liability.data.amount
-              ? `${new BigNumber(balance.data.amount).minus(new BigNumber(liability.data.amount).dividedBy(1e8)).toString()} ${window.myConfig.ticker}`
+              ? `${new BigNumber(balance.data.amount).minus(new BigNumber(liability.data.amount).dividedBy(`1e${dpValue}`)).toString()} ${window.myConfig.ticker}`
               : `0 ${window.myConfig.ticker}`}
           </Typography>
         </Grid>
@@ -246,7 +258,7 @@ const Home = function (props) {
             {faucetBalance.data
               && faucetBalance.data
               && faucetBalance.data.amount
-              ? `${new BigNumber(faucetBalance.data.amount).dividedBy(1e8).toString()} ${window.myConfig.ticker}`
+              ? `${new BigNumber(faucetBalance.data.amount).dividedBy(`1e${dpValue}`).toString()} ${window.myConfig.ticker}`
               : `0 ${window.myConfig.ticker}`}
           </Typography>
         </Grid>
@@ -420,6 +432,7 @@ const Home = function (props) {
             type={type}
             amount={amount}
             rowsPerPage={rowsPerPage}
+            dpValue={dpValue}
           />
         </Grid>
       </Grid>
@@ -440,6 +453,7 @@ const mapStateToProps = (state) => ({
   faucetBalance: state.faucetBalance,
   blockNumber: state.blockNumber,
   startSync: state.startSync,
+  dp: state.dp,
 })
 
 export default withRouter(connect(mapStateToProps, null)(Home));

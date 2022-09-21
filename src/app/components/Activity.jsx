@@ -10,39 +10,52 @@ import Moment from 'react-moment';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { useNavigate } from 'react-router-dom';
+import BigNumber from 'bignumber.js';
 
-const renderEarnedSpendBalance = (activity) => (
+const renderEarnedSpendBalance = (
+  activity,
+  dpValue,
+) => (
   <>
     <Typography variant="subtitle1" gutterBottom component="div">
       spender balance:
       {' '}
-      {activity.spender_balance / 1e8}
+      {new BigNumber(activity.spender_balance).dividedBy(`1e${dpValue}`).toString()}
     </Typography>
     <Typography variant="subtitle1" gutterBottom component="div">
       earner balance:
       {' '}
-      {activity.earner_balance / 1e8}
+      {new BigNumber(activity.earner_balance).dividedBy(`1e${dpValue}`).toString()}
     </Typography>
   </>
 )
 
-const renderEarnerBalance = (activity) => (
+const renderEarnerBalance = (
+  activity,
+  dpValue,
+) => (
   <Typography variant="subtitle1" gutterBottom component="div">
     earner balance:
     <br />
-    {activity.earner_balance / 1e8}
+    {new BigNumber(activity.earner_balance).dividedBy(`1e${dpValue}`).toString()}
   </Typography>
 )
 
-const renderSpenderBalance = (activity) => (
+const renderSpenderBalance = (
+  activity,
+  dpValue,
+) => (
   <Typography variant="subtitle1" gutterBottom component="div">
     spender balance:
     <br />
-    {activity.spender_balance / 1e8}
+    {new BigNumber(activity.spender_balance).dividedBy(`1e${dpValue}`).toString()}
   </Typography>
 )
 
-const renderAmount = (activity) => (
+const renderAmount = (
+  activity,
+  dpValue,
+) => (
   <Typography
     variant="subtitle1"
     gutterBottom
@@ -51,7 +64,7 @@ const renderAmount = (activity) => (
   >
     amount:
     <br />
-    {activity.amount && activity.amount / 1e8}
+    {activity.amount && new BigNumber(activity.amount).dividedBy(`1e${dpValue}`).toString()}
     {activity.failedAmount && activity.failedAmount}
   </Typography>
 )
@@ -118,8 +131,28 @@ const renderDashboardUser = (
 const renderItems = (
   data,
   navigate,
+  dpValue,
 ) => {
   const parent = [];
+  console.log(dpValue);
+  console.log(dpValue);
+  console.log(dpValue);
+  console.log(dpValue);
+  console.log(dpValue);
+  console.log(dpValue);
+  console.log(dpValue);
+  console.log(dpValue);
+  console.log(dpValue);
+  console.log(dpValue);
+  console.log(dpValue);
+  console.log(dpValue);
+  console.log(dpValue);
+  console.log(dpValue);
+  console.log(dpValue);
+  console.log(dpValue);
+  console.log(dpValue);
+  console.log(dpValue);
+
   data.map((activity) => {
     console.log(activity);
     parent.push(
@@ -252,6 +285,14 @@ const renderItems = (
             {activity.type === 'support_s' && 'Support request: success'}
             {activity.type === 'support_f' && 'Support Request: fail'}
 
+            <Typography variant="subtitle1" gutterBottom component="div">
+              {activity && activity.flood && activity.flood.floodGroup && `Server: ${activity.flood.floodGroup.groupName}`}
+              {activity && activity.flood && activity.flood.floodtipGroup && `Server: ${activity.flood.floodtipGroup.groupName}`}
+              <br />
+              {activity && activity.flood && activity.flood.floodChannel && `Channel: ${activity.flood.floodChannel.channelName}`}
+              {activity && activity.flood && activity.flood.floodtipChannel && `Channel: ${activity.flood.floodtipChannel.channelName}`}
+            </Typography>
+
           </Grid>
           <Grid
             item
@@ -262,7 +303,10 @@ const renderItems = (
             {(
               activity.type === 'login_s'
             || activity.type === 'logout_s'
-            ) && renderDashboardUser(activity, navigate)}
+            ) && renderDashboardUser(
+              activity,
+              navigate,
+            )}
 
             {(
               activity.type === 'floodtip_s'
@@ -305,7 +349,10 @@ const renderItems = (
 
             || activity.type === 'support_s'
             || activity.type === 'support_f'
-            ) && renderTo(activity, navigate)}
+            ) && renderTo(
+              activity,
+              navigate,
+            )}
 
             {(
               activity.type === 'reactdrop_s'
@@ -352,7 +399,10 @@ const renderItems = (
             || activity.type === 'withdrawRejected'
             || activity.type === 'withdrawComplete'
 
-            ) && renderBy(activity, navigate)}
+            ) && renderBy(
+              activity,
+              navigate,
+            )}
 
             {activity.type === 'tip_s' && (
               <>
@@ -461,7 +511,10 @@ const renderItems = (
             || activity.type === 'waterFaucet'
             || activity.type === 'withdraw_i'
             || activity.type === 'voicerain_i'
-            ) && renderAmount(activity)}
+            ) && renderAmount(
+              activity,
+              dpValue,
+            )}
           </Grid>
           <Grid
             item
@@ -508,7 +561,10 @@ const renderItems = (
             || activity.type === 'trivia_i'
             || activity.type === 'withdraw_i'
             || activity.type === 'voicerain_i'
-            ) && renderSpenderBalance(activity)}
+            ) && renderSpenderBalance(
+              activity,
+              dpValue,
+            )}
 
             {(
               activity.type === 'tip_s'
@@ -525,16 +581,22 @@ const renderItems = (
             || activity.type === 'voiceraintip_s'
             || activity.type === 'tiptip_faucet_s'
 
-            ) && renderEarnedSpendBalance(activity)}
+            ) && renderEarnedSpendBalance(
+              activity,
+              dpValue,
+            )}
 
             {(
               activity.type === 'depositComplete'
             || activity.type === 'reactdroptip_s'
             || activity.type === 'waterFaucet'
             || activity.type === 'balance_s'
-            ) && renderEarnerBalance(activity)}
+            ) && renderEarnerBalance(
+              activity,
+              dpValue,
+            )}
 
-            {activity.type === 'tip_f' && `amount: ${activity.amount / 1e8}`}
+            {activity.type === 'tip_f' && `amount: ${new BigNumber(activity.amount).dividedBy(`1e${dpValue}`).toString()}`}
 
             {activity.type === 'depositAccepted' && ''}
             {activity.type === 'withdrawRequested' && ''}
@@ -556,6 +618,7 @@ const ActivityComponent = function (props) {
     activitiesPerPage,
     page,
     setPage,
+    dpValue,
   } = props;
 
   const totalPages = totalCount
@@ -646,6 +709,7 @@ const ActivityComponent = function (props) {
             ? renderItems(
               activity,
               navigate,
+              dpValue,
             )
             : <CircularProgress />
         }

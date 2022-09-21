@@ -37,6 +37,7 @@ import leaveServer from './leaveServer';
 
 import botFunctions from './botFunctions';
 import botFunction from './botFunction';
+import dp from './dp';
 
 const store = configureStore({
   reducer: {
@@ -73,6 +74,7 @@ const store = configureStore({
     errors,
     userInfo,
     leaveServer,
+    dp,
 
     withdrawalAddresses,
     withdrawalAddress,

@@ -16,6 +16,7 @@ import {
   Button,
 } from '@mui/material';
 
+import BigNumber from 'bignumber.js';
 import ActivityContainer from '../../containers/Activity';
 import DepositsTable from '../../components/functions/DepositsTable';
 
@@ -32,6 +33,7 @@ import {
   fetchDepositsAction,
 } from '../../actions/deposits';
 import WithdrawalsTable from '../../components/functions/WithdrawalsTable';
+import { fetchDpAction } from '../../actions/dp';
 
 const UserView = function (props) {
   const {
@@ -41,6 +43,7 @@ const UserView = function (props) {
     withdrawals,
     acceptWithdrawal,
     declineWithdrawal,
+    dp,
   } = props;
   // const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -51,6 +54,7 @@ const UserView = function (props) {
   const [type, setType] = useState('');
   const [amount, setAmount] = useState('');
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [dpValue, setDpValue] = useState(0);
 
   useEffect(() => {
     console.log(auth.authenticated);
@@ -104,6 +108,19 @@ const UserView = function (props) {
   const declineWithdrawalFunction = (idWithdrawal) => {
     dispatch(declineWithdrawalAction(idWithdrawal))
   };
+
+  useEffect(() => {
+    dispatch(fetchDpAction());
+  }, []);
+
+  useEffect(() => {
+    if (dp && dp.data && dp.data.dp) {
+      setDpValue(dp.data.dp)
+    }
+  }, [
+    dp,
+    dpValue,
+  ]);
 
   return (
     <div className="height100 content">
@@ -301,7 +318,7 @@ const UserView = function (props) {
               userInfo
               && userInfo.data
               && userInfo.data.wallet
-              && (userInfo.data.wallet.available / 1e8)
+              && (new BigNumber(userInfo.data.wallet.available).dividedBy(`1e${dpValue}`).toString())
             }
           </Typography>
         </Grid>
@@ -334,7 +351,7 @@ const UserView = function (props) {
               userInfo
               && userInfo.data
               && userInfo.data.wallet
-              && (userInfo.data.wallet.locked / 1e8)
+              && (new BigNumber(userInfo.data.wallet.locked).dividedBy(`1e${dpValue}`).toString())
             }
           </Typography>
         </Grid>
@@ -367,7 +384,7 @@ const UserView = function (props) {
               userInfo
               && userInfo.data
               && userInfo.data.wallet
-              && ((userInfo.data.wallet.available + userInfo.data.wallet.locked) / 1e8)
+              && (new BigNumber(userInfo.data.wallet.available).plus(userInfo.data.wallet.locked).dividedBy(`1e${dpValue}`).toString())
             }
           </Typography>
         </Grid>
@@ -573,6 +590,7 @@ const mapStateToProps = (state) => ({
   withdrawals: state.withdrawals,
   acceptWithdrawal: state.acceptWithdrawal,
   declineWithdrawal: state.declineWithdrawal,
+  dp: state.dp,
 })
 
 export default withRouter(connect(mapStateToProps, null)(UserView));

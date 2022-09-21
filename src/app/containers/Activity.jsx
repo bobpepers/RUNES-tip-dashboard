@@ -31,6 +31,7 @@ const ActivityContainer = function (props) {
     type,
     amount,
     rowsPerPage,
+    dpValue,
   } = props;
   const dispatch = useDispatch();
 
@@ -152,6 +153,7 @@ const ActivityContainer = function (props) {
                 activitiesPerPage={rowsPerPage}
                 page={page}
                 setPage={setPage}
+                dpValue={dpValue}
               />
             )
         }

@@ -14,10 +14,12 @@ import {
   Typography,
   Button,
 } from '@mui/material';
+import BigNumber from 'bignumber.js';
 import { withRouter } from '../../hooks/withRouter';
 import {
   fetchBotFunctionAction,
 } from '../../actions/botFunction';
+import { fetchDpAction } from '../../actions/dp';
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -279,10 +281,12 @@ const FunctionView = function (props) {
     auth,
     botFunction,
     functionName,
+    dp,
   } = props;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [functionTips, setFunctionTips] = useState([]);
+  const [dpValue, setDpValue] = useState(0);
   const { functionId } = useParams();
 
   useEffect(() => {
@@ -392,10 +396,19 @@ const FunctionView = function (props) {
   ]);
 
   useEffect(() => {
+    dispatch(fetchDpAction());
+  }, []);
+
+  useEffect(() => {
     console.log('functionTips');
     console.log(functionTips);
+    if (dp && dp.data && dp.data.dp) {
+      setDpValue(dp.data.dp)
+    }
   }, [
     functionTips,
+    dp,
+    dpValue,
   ]);
 
   return (
@@ -606,7 +619,7 @@ const FunctionView = function (props) {
             {
               botFunction
               && botFunction.data
-              && botFunction.data.amount / 1e8
+              && new BigNumber(botFunction.data.amount).dividedBy(`1e${dpValue}`).toString()
             }
           </Typography>
         </Grid>
@@ -638,7 +651,7 @@ const FunctionView = function (props) {
             {
               botFunction
               && botFunction.data
-              && botFunction.data.feeAmount / 1e8
+              && new BigNumber(botFunction.data.feeAmount).dividedBy(`1e${dpValue}`).toString()
             }
           </Typography>
         </Grid>
@@ -913,7 +926,7 @@ const FunctionView = function (props) {
             >
               <p>amount</p>
               <p>
-                {row.amount / 1e8}
+                {new BigNumber(row.amount).dividedBy(`1e${dpValue}`).toString()}
               </p>
             </Grid>
           </Grid>
@@ -931,6 +944,7 @@ FunctionView.propTypes = {
 const mapStateToProps = (state) => ({
   auth: state.auth,
   botFunction: state.botFunction,
+  dp: state.dp,
 })
 
 export default withRouter(connect(mapStateToProps, null)(FunctionView));

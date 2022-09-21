@@ -17,6 +17,7 @@ import {
   Switch,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import BigNumber from 'bignumber.js';
 
 const headCells = [
   {
@@ -176,6 +177,7 @@ const FunctionsTable = function (props) {
     rowsPerPage,
     setRowsPerPage,
     totalCount,
+    dpValue,
   } = props;
   const rows = [];
   console.log(functions);
@@ -316,10 +318,10 @@ const FunctionsTable = function (props) {
                       )
                     </TableCell>
                     <TableCell align="right">
-                      {row.amount / 1e8}
+                      {new BigNumber(row.amount).dividedBy(`1e${dpValue}`).toString()}
                     </TableCell>
                     <TableCell align="right">
-                      {row.feeAmount / 1e8}
+                      {new BigNumber(row.feeAmount).dividedBy(`1e${dpValue}`).toString()}
                     </TableCell>
                     <TableCell align="right">
                       {row.userCount}

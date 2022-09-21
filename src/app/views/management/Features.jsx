@@ -26,6 +26,7 @@ import {
   Field,
 } from 'react-final-form';
 
+import BigNumber from 'bignumber.js';
 import {
   fetchFeatures,
   addFeature,
@@ -36,6 +37,7 @@ import { fetchServerAction } from '../../actions/servers';
 import { fetchChannelsAction } from '../../actions/channels';
 import SelectField from '../../components/form/SelectFields';
 import NumberField from '../../components/form/NumberField';
+import { fetchDpAction } from '../../actions/dp';
 
 const FeaturesView = function (props) {
   const {
@@ -43,6 +45,7 @@ const FeaturesView = function (props) {
     features,
     servers,
     channels,
+    dp,
   } = props;
   const dispatch = useDispatch();
   const [inEditMode, setInEditMode] = useState({
@@ -54,6 +57,7 @@ const FeaturesView = function (props) {
   const [unitSampleSize, setUnitSampleSize] = useState(null);
   const [unitEnabled, setUnitEnabled] = useState(null);
   const [serverId, setServerId] = useState('All');
+  const [dpValue, setDpValue] = useState(0);
 
   const onEdit = ({
     id,
@@ -140,12 +144,21 @@ const FeaturesView = function (props) {
   ]);
 
   useEffect(() => {
+    dispatch(fetchDpAction());
+  }, []);
+
+  useEffect(() => {
     console.log(channels);
+    if (dp && dp.data && dp.data.dp) {
+      setDpValue(dp.data.dp)
+    }
   }, [
     features,
     servers,
     channels,
     serverId,
+    dp,
+    dpValue,
   ]);
 
   return (
@@ -395,7 +408,7 @@ const FeaturesView = function (props) {
                           />
 
                         ) : (
-                          feature.min / 1e8
+                          new BigNumber(feature.min).dividedBy(`1e${dpValue}`).toString()
                         )
                       }
                     </TableCell>
@@ -488,7 +501,7 @@ const FeaturesView = function (props) {
                               size="large"
                               onClick={() => onEdit({
                                 id: feature.id,
-                                currentUnitMin: feature.min / 1e8,
+                                currentUnitMin: new BigNumber(feature.min).dividedBy(`1e${dpValue}`).toString(),
                                 currentUnitFee: feature.fee / 1e2,
                                 currentUnitSampleSize: feature.maxSampleSize,
                                 currentUnitEnabled: feature.enabled,
@@ -528,6 +541,7 @@ function mapStateToProps(state) {
     features: state.features,
     servers: state.servers,
     channels: state.channels,
+    dp: state.dp,
   };
 }
 

@@ -19,6 +19,7 @@ import {
   Button,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import BigNumber from 'bignumber.js';
 
 const headCells = [
   {
@@ -180,6 +181,7 @@ const DepositsTable = function (props) {
     rowsPerPage,
     setRowsPerPage,
     totalCount,
+    dpValue,
   } = props;
 
   const navigate = useNavigate();
@@ -326,7 +328,7 @@ const DepositsTable = function (props) {
                     <TableCell align="right">
                       {row.txId}
                     </TableCell>
-                    <TableCell align="right">{row.amount / 1e8}</TableCell>
+                    <TableCell align="right">{new BigNumber(row.amount).dividedBy(`1e${dpValue}`).toString()}</TableCell>
                     <TableCell align="right">{row.confirmations}</TableCell>
                     <TableCell align="right">{row.phase}</TableCell>
                   </TableRow>
