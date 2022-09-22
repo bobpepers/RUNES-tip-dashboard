@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.12](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.11...v0.0.12) (2022-09-22)
+
+
+### Features
+
+* ✨ Use dp from backend for value calculations ([2dbbf88](https://github.com/bobpepers/runes-tip-dashboard/commit/2dbbf888fc5cd1a04d1bc920560b2caab4021922))
+
 ### [0.0.11](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.10...v0.0.11) (2022-09-20)
 
 
