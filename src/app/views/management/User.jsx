@@ -516,6 +516,7 @@ const UserView = function (props) {
                   type={type}
                   amount={amount}
                   rowsPerPage={rowsPerPage}
+                  dpValue={dpValue}
                 />
               ) : (<span />)
           }
