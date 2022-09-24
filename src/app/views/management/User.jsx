@@ -538,6 +538,7 @@ const UserView = function (props) {
                   rowsPerPage={rowsPerPage}
                   setRowsPerPage={setRowsPerPage}
                   totalCount={deposits && deposits.count && deposits.count}
+                  dpValue={dpValue}
                   deposits={deposits
                     && deposits.data
                     ? deposits.data
@@ -566,6 +567,7 @@ const UserView = function (props) {
                   declineWithdrawalFunction={declineWithdrawalFunction}
                   acceptWithdrawal={acceptWithdrawal}
                   declineWithdrawal={declineWithdrawal}
+                  dpValue={dpValue}
                   withdrawals={withdrawals
                     && withdrawals.data
                     ? withdrawals.data
