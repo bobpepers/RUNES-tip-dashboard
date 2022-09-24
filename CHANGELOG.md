@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.14](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.13...v0.0.14) (2022-09-24)
+
+
+### Bug Fixes
+
+* 🐛 add a missing dpValue ([0e5b419](https://github.com/bobpepers/runes-tip-dashboard/commit/0e5b419f43196f8a207e15854b5d75a7790aad85))
+
 ### [0.0.13](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.12...v0.0.13) (2022-09-23)
 
 
