@@ -18,20 +18,140 @@ import { withRouter } from '../hooks/withRouter';
 import { fetchNodeStatusAction } from '../actions/nodeStatus';
 import { fetchBlockNumberAction } from '../actions/blockNumber';
 import { startSyncAction } from '../actions/startSync';
-import { fetchLiabilityAction } from '../actions/liability';
 import { patchDepositsAction } from '../actions/patchDeposits';
-import { fetchBalanceAction } from '../actions/balance';
-import { fetchFaucetBalanceAction } from '../actions/faucetBalance';
 import { fetchDpAction } from '../actions/dp';
+import { fetchAdminWalletAction } from '../actions/adminWallet';
+
+const renderWallet = (
+  wallet,
+) => {
+  console.log(wallet);
+  return (
+    <Grid
+      container
+      spacing={1}
+      justifyContent="center"
+      className="zindexOne"
+    >
+      <Grid
+        item
+        xs={6}
+        sm={6}
+        md={4}
+        lg={3}
+        xl={3}
+        className="zindexOne"
+        justifyContent="center"
+      >
+        <Typography
+          variant="h6"
+          gutterBottom
+          component="div"
+          align="center"
+        >
+          Liability
+        </Typography>
+        <Typography
+          variant="subtitle1"
+          gutterBottom
+          component="div"
+          align="center"
+        >
+          {`${new BigNumber(wallet.liability).dividedBy(`1e${wallet.dp}`).toString()} ${wallet.ticker}`}
+        </Typography>
+      </Grid>
+
+      <Grid
+        item
+        xs={6}
+        sm={6}
+        md={4}
+        lg={3}
+        xl={3}
+        className="zindexOne"
+        justifyContent="center"
+      >
+        <Typography
+          variant="h6"
+          gutterBottom
+          component="div"
+          align="center"
+        >
+          Balance
+        </Typography>
+        <Typography
+          variant="subtitle1"
+          gutterBottom
+          component="div"
+          align="center"
+        >
+          {`${new BigNumber(wallet.balance).dividedBy(`1e${wallet.dp}`).toString()} ${wallet.ticker}`}
+        </Typography>
+      </Grid>
+      <Grid
+        item
+        xs={6}
+        sm={6}
+        md={4}
+        lg={3}
+        xl={3}
+        className="zindexOne"
+        justifyContent="center"
+      >
+        <Typography
+          variant="h6"
+          gutterBottom
+          component="div"
+          align="center"
+        >
+          Difference
+        </Typography>
+        <Typography
+          variant="subtitle1"
+          gutterBottom
+          component="div"
+          align="center"
+        >
+          {`${new BigNumber(wallet.balance).minus(wallet.liability).dividedBy(`1e${wallet.dp}`).toString()} ${wallet.ticker}`}
+        </Typography>
+      </Grid>
+      <Grid
+        item
+        xs={6}
+        sm={6}
+        md={4}
+        lg={3}
+        xl={3}
+        className="zindexOne"
+        justifyContent="center"
+      >
+        <Typography
+          variant="h6"
+          gutterBottom
+          component="div"
+          align="center"
+        >
+          Faucet Balance
+        </Typography>
+        <Typography
+          variant="subtitle1"
+          gutterBottom
+          component="div"
+          align="center"
+        >
+          {`${new BigNumber(wallet.faucetBalance).dividedBy(`1e${wallet.dp}`).toString()} ${wallet.ticker}`}
+        </Typography>
+      </Grid>
+    </Grid>
+  )
+}
 
 const Home = function (props) {
   const {
     auth,
     nodeStatus,
-    liability,
-    balance,
+    adminWallet,
     patchDeposits,
-    faucetBalance,
     blockNumber,
     startSync,
     dp,
@@ -49,22 +169,18 @@ const Home = function (props) {
   const refreshStats = () => {
     if (auth.authenticated) {
       dispatch(fetchNodeStatusAction());
-      dispatch(fetchLiabilityAction());
-      dispatch(fetchBalanceAction());
-      dispatch(fetchFaucetBalanceAction());
       dispatch(fetchBlockNumberAction());
       dispatch(fetchDpAction());
+      dispatch(fetchAdminWalletAction());
     }
   }
 
   useEffect(() => {
     if (auth.authenticated) {
       dispatch(fetchNodeStatusAction());
-      dispatch(fetchLiabilityAction());
-      dispatch(fetchBalanceAction());
-      dispatch(fetchFaucetBalanceAction());
       dispatch(fetchBlockNumberAction());
       dispatch(fetchDpAction());
+      dispatch(fetchAdminWalletAction());
     }
   }, [
     auth,
@@ -79,13 +195,12 @@ const Home = function (props) {
         setDpValue(dp.data.dp)
       }
       console.log(dpValue);
+      console.log(adminWallet);
     },
     [
       auth,
       nodeStatus,
-      liability,
-      balance,
-      faucetBalance,
+      adminWallet,
       blockNumber,
       dp,
       dpValue,
@@ -112,8 +227,8 @@ const Home = function (props) {
           xs={6}
           sm={6}
           md={4}
-          lg={3}
-          xl={3}
+          lg={4}
+          xl={4}
           className="zindexOne"
           justifyContent="center"
         >
@@ -142,133 +257,8 @@ const Home = function (props) {
           xs={6}
           sm={6}
           md={4}
-          lg={3}
-          xl={3}
-          className="zindexOne"
-          justifyContent="center"
-        >
-          <Typography
-            variant="h6"
-            gutterBottom
-            component="div"
-            align="center"
-          >
-            Liability
-          </Typography>
-          <Typography
-            variant="subtitle1"
-            gutterBottom
-            component="div"
-            align="center"
-          >
-            {liability.data
-              && liability.data
-              && liability.data.amount
-              ? `${new BigNumber(liability.data.amount).dividedBy(`1e${dpValue}`).toString()} ${window.myConfig.ticker}`
-              : `0 ${window.myConfig.ticker}`}
-          </Typography>
-        </Grid>
-        <Grid
-          item
-          xs={6}
-          sm={6}
-          md={4}
-          lg={3}
-          xl={3}
-          className="zindexOne"
-          justifyContent="center"
-        >
-          <Typography
-            variant="h6"
-            gutterBottom
-            component="div"
-            align="center"
-          >
-            Balance
-          </Typography>
-          <Typography
-            variant="subtitle1"
-            gutterBottom
-            component="div"
-            align="center"
-          >
-            {balance.data
-              && balance.data
-              && balance.data.amount
-              ? `${new BigNumber(balance.data.amount).toString()} ${window.myConfig.ticker}`
-              : `0 ${window.myConfig.ticker}`}
-          </Typography>
-        </Grid>
-        <Grid
-          item
-          xs={6}
-          sm={6}
-          md={4}
-          lg={3}
-          xl={3}
-          className="zindexOne"
-          justifyContent="center"
-        >
-          <Typography
-            variant="h6"
-            gutterBottom
-            component="div"
-            align="center"
-          >
-            Difference
-          </Typography>
-          <Typography
-            variant="subtitle1"
-            gutterBottom
-            component="div"
-            align="center"
-          >
-            {balance.data
-              && balance.data.amount
-              && liability.data
-              && liability.data.amount
-              ? `${new BigNumber(balance.data.amount).minus(new BigNumber(liability.data.amount).dividedBy(`1e${dpValue}`)).toString()} ${window.myConfig.ticker}`
-              : `0 ${window.myConfig.ticker}`}
-          </Typography>
-        </Grid>
-        <Grid
-          item
-          xs={6}
-          sm={6}
-          md={4}
-          lg={3}
-          xl={3}
-          className="zindexOne"
-          justifyContent="center"
-        >
-          <Typography
-            variant="h6"
-            gutterBottom
-            component="div"
-            align="center"
-          >
-            Faucet Balance
-          </Typography>
-          <Typography
-            variant="subtitle1"
-            gutterBottom
-            component="div"
-            align="center"
-          >
-            {faucetBalance.data
-              && faucetBalance.data
-              && faucetBalance.data.amount
-              ? `${new BigNumber(faucetBalance.data.amount).dividedBy(`1e${dpValue}`).toString()} ${window.myConfig.ticker}`
-              : `0 ${window.myConfig.ticker}`}
-          </Typography>
-        </Grid>
-        <Grid
-          item
-          xs={6}
-          sm={6}
-          md={4}
-          lg={3}
-          xl={3}
+          lg={4}
+          xl={4}
           className="zindexOne"
           justifyContent="center"
         >
@@ -323,6 +313,11 @@ const Home = function (props) {
           </Typography>
         </Grid>
       </Grid>
+      {
+        adminWallet
+      && adminWallet.data
+      && adminWallet.data.map((wallet) => renderWallet(wallet))
+      }
 
       <Grid
         container
@@ -447,10 +442,8 @@ Home.propTypes = {
 const mapStateToProps = (state) => ({
   auth: state.auth,
   nodeStatus: state.nodeStatus,
-  liability: state.liability,
-  balance: state.balance,
+  adminWallet: state.adminWallet,
   patchDeposits: state.patchDeposits,
-  faucetBalance: state.faucetBalance,
   blockNumber: state.blockNumber,
   startSync: state.startSync,
   dp: state.dp,

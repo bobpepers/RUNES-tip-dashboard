@@ -1,20 +1,21 @@
 import axios from '../axios';
 import {
-  FETCH_LIABILITY_BEGIN,
-  FETCH_LIABILITY_SUCCESS,
-  FETCH_LIABILITY_FAIL,
+  FETCH_ADMINWALLET_BEGIN,
+  FETCH_ADMINWALLET_SUCCESS,
+  FETCH_ADMINWALLET_FAIL,
 } from './types/index';
 import { notistackErrorAdd } from './helpers/notistackError';
 
-export function fetchLiabilityAction() {
+export function fetchAdminWalletAction() {
   return function (dispatch) {
     dispatch({
-      type: FETCH_LIABILITY_BEGIN,
+      type: FETCH_ADMINWALLET_BEGIN,
     });
-    axios.get(`${window.myConfig.apiUrl}/liability`)
+    axios.get(`${window.myConfig.apiUrl}/admin/wallet`)
       .then((response) => {
+        console.log(response.data.result);
         dispatch({
-          type: FETCH_LIABILITY_SUCCESS,
+          type: FETCH_ADMINWALLET_SUCCESS,
           payload: response.data.result,
         });
       }).catch((error) => {
@@ -23,7 +24,7 @@ export function fetchLiabilityAction() {
           error,
         );
         dispatch({
-          type: FETCH_LIABILITY_FAIL,
+          type: FETCH_ADMINWALLET_FAIL,
           payload: error,
         });
       });

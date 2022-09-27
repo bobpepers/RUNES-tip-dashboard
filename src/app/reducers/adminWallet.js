@@ -1,7 +1,7 @@
 import {
-  FETCH_BALANCE_BEGIN,
-  FETCH_BALANCE_SUCCESS,
-  FETCH_BALANCE_FAIL,
+  FETCH_ADMINWALLET_BEGIN,
+  FETCH_ADMINWALLET_SUCCESS,
+  FETCH_ADMINWALLET_FAIL,
 } from '../actions/types/index';
 
 const initialState = {
@@ -11,19 +11,19 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-  case FETCH_BALANCE_BEGIN:
+  case FETCH_ADMINWALLET_BEGIN:
     return {
       ...state,
       isFetching: true,
       error: null,
     };
-  case FETCH_BALANCE_SUCCESS:
+  case FETCH_ADMINWALLET_SUCCESS:
     return {
       ...state,
       data: action.payload,
       isFetching: false,
     };
-  case FETCH_BALANCE_FAIL:
+  case FETCH_ADMINWALLET_FAIL:
     console.log('Error: ', action.error);
     return {
       ...state,

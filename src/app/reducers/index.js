@@ -11,8 +11,6 @@ import users from './users';
 import deposits from './deposits';
 import withdrawals from './withdrawals';
 import dashboardUsers from './dashboardUsers';
-import liability from './liability';
-import balance from './balance';
 import channels from './channels';
 import features from './features';
 import botSettings from './botSettings';
@@ -20,7 +18,6 @@ import botSettings from './botSettings';
 import acceptWithdrawal from './acceptWithdrawal';
 import declineWithdrawal from './declineWithdrawal';
 import patchDeposits from './patchDeposits';
-import faucetBalance from './faucetBalance';
 import blockNumber from './blockNumber';
 import startSync from './startSync';
 import triviaQuestions from './triviaQuestions';
@@ -34,6 +31,7 @@ import userInfo from './userInfo';
 import withdrawalAddresses from './withdrawalAddresses';
 import withdrawalAddress from './withdrawalAddress';
 import leaveServer from './leaveServer';
+import adminWallet from './adminWallet';
 
 import botFunctions from './botFunctions';
 import botFunction from './botFunction';
@@ -48,6 +46,7 @@ const store = configureStore({
     alert,
 
     nodeStatus,
+    adminWallet,
     user,
     servers,
     channels,
@@ -56,14 +55,11 @@ const store = configureStore({
     deposits,
     withdrawals,
     dashboardUsers,
-    liability,
-    balance,
     features,
     acceptWithdrawal,
     declineWithdrawal,
     botSettings,
     patchDeposits,
-    faucetBalance,
     blockNumber,
     startSync,
     triviaQuestions,

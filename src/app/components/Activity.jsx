@@ -14,47 +14,69 @@ import BigNumber from 'bignumber.js';
 
 const renderEarnedSpendBalance = (
   activity,
-  dpValue,
 ) => (
   <>
     <Typography variant="subtitle1" gutterBottom component="div">
       spender balance:
       {' '}
-      {new BigNumber(activity.spender_balance).dividedBy(`1e${dpValue}`).toString()}
+      {new BigNumber(activity.spender_balance).dividedBy(`1e${activity.coin.dp}`).toString()}
+      {' '}
+      {activity.coin.ticker}
     </Typography>
     <Typography variant="subtitle1" gutterBottom component="div">
       earner balance:
       {' '}
-      {new BigNumber(activity.earner_balance).dividedBy(`1e${dpValue}`).toString()}
+      {new BigNumber(activity.earner_balance).dividedBy(`1e${activity.coin.dp}`).toString()}
+      {' '}
+      {activity.coin.ticker}
     </Typography>
   </>
 )
 
+const renderWalletBalances = (
+  activity,
+) => (
+  <Typography variant="subtitle1" gutterBottom component="div">
+    balances:
+    {
+      activity.earner.wallets.map((wallet) => (
+        <>
+          <br />
+          {new BigNumber(wallet.available).plus(wallet.locked).dividedBy(`1e${wallet.coin.dp}`).toString()}
+          {' '}
+          {wallet.coin.ticker}
+        </>
+      ))
+    }
+  </Typography>
+)
+
 const renderEarnerBalance = (
   activity,
-  dpValue,
 ) => (
   <Typography variant="subtitle1" gutterBottom component="div">
     earner balance:
     <br />
-    {new BigNumber(activity.earner_balance).dividedBy(`1e${dpValue}`).toString()}
+    {new BigNumber(activity.earner_balance).dividedBy(`1e${activity.coin.dp}`).toString()}
+    {' '}
+    {activity.coin.ticker}
   </Typography>
 )
 
 const renderSpenderBalance = (
   activity,
-  dpValue,
 ) => (
   <Typography variant="subtitle1" gutterBottom component="div">
     spender balance:
     <br />
-    {new BigNumber(activity.spender_balance).dividedBy(`1e${dpValue}`).toString()}
+    {new BigNumber(activity.spender_balance).dividedBy(`1e${activity.coin.dp}`).toString()}
+    {' '}
+    {activity.coin.ticker}
   </Typography>
 )
 
 const renderAmount = (
   activity,
-  dpValue,
 ) => (
   <Typography
     variant="subtitle1"
@@ -64,7 +86,9 @@ const renderAmount = (
   >
     amount:
     <br />
-    {activity.amount && new BigNumber(activity.amount).dividedBy(`1e${dpValue}`).toString()}
+    {activity.amount && new BigNumber(activity.amount).dividedBy(`1e${activity.coin.dp}`).toString()}
+    {' '}
+    {activity.coin.ticker}
     {activity.failedAmount && activity.failedAmount}
   </Typography>
 )
@@ -131,28 +155,8 @@ const renderDashboardUser = (
 const renderItems = (
   data,
   navigate,
-  dpValue,
 ) => {
   const parent = [];
-  console.log(dpValue);
-  console.log(dpValue);
-  console.log(dpValue);
-  console.log(dpValue);
-  console.log(dpValue);
-  console.log(dpValue);
-  console.log(dpValue);
-  console.log(dpValue);
-  console.log(dpValue);
-  console.log(dpValue);
-  console.log(dpValue);
-  console.log(dpValue);
-  console.log(dpValue);
-  console.log(dpValue);
-  console.log(dpValue);
-  console.log(dpValue);
-  console.log(dpValue);
-  console.log(dpValue);
-
   data.map((activity) => {
     console.log(activity);
     parent.push(
@@ -513,7 +517,6 @@ const renderItems = (
             || activity.type === 'voicerain_i'
             ) && renderAmount(
               activity,
-              dpValue,
             )}
           </Grid>
           <Grid
@@ -563,7 +566,6 @@ const renderItems = (
             || activity.type === 'voicerain_i'
             ) && renderSpenderBalance(
               activity,
-              dpValue,
             )}
 
             {(
@@ -583,20 +585,23 @@ const renderItems = (
 
             ) && renderEarnedSpendBalance(
               activity,
-              dpValue,
             )}
 
             {(
               activity.type === 'depositComplete'
             || activity.type === 'reactdroptip_s'
             || activity.type === 'waterFaucet'
-            || activity.type === 'balance_s'
             ) && renderEarnerBalance(
               activity,
-              dpValue,
             )}
 
-            {activity.type === 'tip_f' && `amount: ${new BigNumber(activity.amount).dividedBy(`1e${dpValue}`).toString()}`}
+            {(
+              activity.type === 'balance_s'
+            ) && renderWalletBalances(
+              activity,
+            )}
+
+            {activity.type === 'tip_f' && `amount: ${new BigNumber(activity.amount).dividedBy(`1e${activity.coin.dp}`).toString()}`}
 
             {activity.type === 'depositAccepted' && ''}
             {activity.type === 'withdrawRequested' && ''}
