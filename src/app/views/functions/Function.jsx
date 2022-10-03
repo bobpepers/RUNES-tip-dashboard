@@ -8,7 +8,10 @@ import {
   useNavigate,
   useParams,
 } from 'react-router-dom';
-import { connect, useDispatch } from 'react-redux';
+import {
+  connect,
+  useDispatch,
+} from 'react-redux';
 import {
   Grid,
   Typography,
@@ -16,10 +19,7 @@ import {
 } from '@mui/material';
 import BigNumber from 'bignumber.js';
 import { withRouter } from '../../hooks/withRouter';
-import {
-  fetchBotFunctionAction,
-} from '../../actions/botFunction';
-import { fetchDpAction } from '../../actions/dp';
+import { fetchBotFunctionAction } from '../../actions/botFunction';
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -281,12 +281,10 @@ const FunctionView = function (props) {
     auth,
     botFunction,
     functionName,
-    dp,
   } = props;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [functionTips, setFunctionTips] = useState([]);
-  const [dpValue, setDpValue] = useState(0);
   const { functionId } = useParams();
 
   useEffect(() => {
@@ -396,19 +394,10 @@ const FunctionView = function (props) {
   ]);
 
   useEffect(() => {
-    dispatch(fetchDpAction());
-  }, []);
-
-  useEffect(() => {
     console.log('functionTips');
     console.log(functionTips);
-    if (dp && dp.data && dp.data.dp) {
-      setDpValue(dp.data.dp)
-    }
   }, [
     functionTips,
-    dp,
-    dpValue,
   ]);
 
   return (
@@ -619,7 +608,13 @@ const FunctionView = function (props) {
             {
               botFunction
               && botFunction.data
-              && new BigNumber(botFunction.data.amount).dividedBy(`1e${dpValue}`).toString()
+              && new BigNumber(botFunction.data.amount).dividedBy(`1e${botFunction.data.coin.dp}`).toString()
+            }
+            {' '}
+            {
+              botFunction
+              && botFunction.data
+              && botFunction.data.coin.ticker
             }
           </Typography>
         </Grid>
@@ -651,7 +646,13 @@ const FunctionView = function (props) {
             {
               botFunction
               && botFunction.data
-              && new BigNumber(botFunction.data.feeAmount).dividedBy(`1e${dpValue}`).toString()
+              && new BigNumber(botFunction.data.feeAmount).dividedBy(`1e${botFunction.data.coin.dp}`).toString()
+            }
+            {' '}
+            {
+              botFunction
+              && botFunction.data
+              && botFunction.data.coin.ticker
             }
           </Typography>
         </Grid>
@@ -926,7 +927,13 @@ const FunctionView = function (props) {
             >
               <p>amount</p>
               <p>
-                {new BigNumber(row.amount).dividedBy(`1e${dpValue}`).toString()}
+                {new BigNumber(row.amount).dividedBy(`1e${botFunction.data.coin.dp}`).toString()}
+                {' '}
+                {
+                  botFunction
+                  && botFunction.data
+                  && botFunction.data.coin.ticker
+                }
               </p>
             </Grid>
           </Grid>

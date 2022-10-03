@@ -64,6 +64,8 @@ function createData(
   createdAt,
   confirmations,
   userRowId,
+  ticker,
+  dp,
 ) {
   return {
     id,
@@ -76,6 +78,8 @@ function createData(
     createdAt,
     confirmations,
     userRowId,
+    ticker,
+    dp,
   };
 }
 
@@ -219,6 +223,8 @@ const WithdrawalsTable = function (props) {
         item.createdAt ? item.createdAt : '',
         item.confirmations ? item.confirmations : '',
         item.user ? item.user.id : '',
+        item.coin && item.coin.ticker,
+        item.coin && item.coin.dp,
       ),
     );
   });
@@ -340,7 +346,11 @@ const WithdrawalsTable = function (props) {
                         <TableCell align="right">
                           {row.txId}
                         </TableCell>
-                        <TableCell align="right">{row.amount && new BigNumber(row.amount).dividedBy(`1e${dpValue}`).toString()}</TableCell>
+                        <TableCell align="right">
+                          {row.amount && new BigNumber(row.amount).dividedBy(`1e${row.dp}`).toString()}
+                          {' '}
+                          {row.ticker}
+                        </TableCell>
                         <TableCell align="right">{row.createdAt && row.createdAt}</TableCell>
                         <TableCell align="right">{row.confirmations && row.confirmations}</TableCell>
                         <TableCell align="right">{row.phase && row.phase}</TableCell>

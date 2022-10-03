@@ -17,7 +17,6 @@ import {
   fetchDepositsAction,
 } from '../../actions/deposits';
 import DepositsTable from '../../components/functions/DepositsTable';
-import { fetchDpAction } from '../../actions/dp';
 
 const useStyles = makeStyles()((theme) => ({
   formControl: {
@@ -45,7 +44,6 @@ const DepositsView = function (props) {
   const [from, setFrom] = useState('');
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(50);
-  const [dpValue, setDpValue] = useState(0);
 
   useEffect(() => {
     dispatch(fetchDepositsAction(
@@ -88,18 +86,9 @@ const DepositsView = function (props) {
   };
 
   useEffect(() => {
-    dispatch(fetchDpAction());
-  }, []);
-
-  useEffect(() => {
     console.log(deposits);
-    if (dp && dp.data && dp.data.dp) {
-      setDpValue(dp.data.dp)
-    }
   }, [
     deposits,
-    dp,
-    dpValue,
   ]);
 
   return (
@@ -179,7 +168,6 @@ const DepositsView = function (props) {
                   rowsPerPage={rowsPerPage}
                   setRowsPerPage={setRowsPerPage}
                   totalCount={deposits && deposits.count && deposits.count}
-                  dpValue={dpValue}
                   deposits={deposits
                     && deposits.data
                     ? deposits.data

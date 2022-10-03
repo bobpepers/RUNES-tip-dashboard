@@ -17,7 +17,6 @@ import {
   declineWithdrawalAction,
 } from '../../actions/withdrawals';
 import WithdrawalsTable from '../../components/functions/WithdrawalsTable';
-import { fetchDpAction } from '../../actions/dp';
 
 const useStyles = makeStyles()((theme) => ({
   formControl: {
@@ -35,7 +34,6 @@ const WithdrawalsView = function (props) {
     withdrawals,
     acceptWithdrawal,
     declineWithdrawal,
-    dp,
   } = props;
   const dispatch = useDispatch();
   const { classes } = useStyles();
@@ -46,7 +44,6 @@ const WithdrawalsView = function (props) {
   const [to, setTo] = useState('');
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(50);
-  const [dpValue, setDpValue] = useState(0);
 
   useEffect(() => dispatch(fetchWithdrawalsAction(
     id,
@@ -93,22 +90,13 @@ const WithdrawalsView = function (props) {
   };
 
   useEffect(() => {
-    dispatch(fetchDpAction());
-  }, []);
-
-  useEffect(() => {
     console.log(withdrawals);
-    if (dp && dp.data && dp.data.dp) {
-      setDpValue(dp.data.dp)
-    }
   }, [
     withdrawals,
     acceptWithdrawal,
     declineWithdrawal,
     page,
     rowsPerPage,
-    dp,
-    dpValue,
   ]);
 
   return (
@@ -192,7 +180,6 @@ const WithdrawalsView = function (props) {
                   declineWithdrawalFunction={declineWithdrawalFunction}
                   acceptWithdrawal={acceptWithdrawal}
                   declineWithdrawal={declineWithdrawal}
-                  dpValue={dpValue}
                   withdrawals={withdrawals
                     && withdrawals.data
                     ? withdrawals.data

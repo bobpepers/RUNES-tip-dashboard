@@ -59,6 +59,8 @@ function createData(
   amount,
   confirmations,
   userRowId,
+  ticker,
+  dp,
 ) {
   return {
     id,
@@ -70,6 +72,8 @@ function createData(
     amount,
     confirmations,
     userRowId,
+    ticker,
+    dp,
   };
 }
 
@@ -181,7 +185,6 @@ const DepositsTable = function (props) {
     rowsPerPage,
     setRowsPerPage,
     totalCount,
-    dpValue,
   } = props;
 
   const navigate = useNavigate();
@@ -209,6 +212,8 @@ const DepositsTable = function (props) {
         item.amount,
         item.confirmations,
         item.user ? item.user.id : '',
+        item.coin && item.coin.ticker,
+        item.coin && item.coin.dp,
       ),
     );
   });
@@ -328,7 +333,11 @@ const DepositsTable = function (props) {
                     <TableCell align="right">
                       {row.txId}
                     </TableCell>
-                    <TableCell align="right">{new BigNumber(row.amount).dividedBy(`1e${dpValue}`).toString()}</TableCell>
+                    <TableCell align="right">
+                      {new BigNumber(row.amount).dividedBy(`1e${row.dp}`).toString()}
+                      {' '}
+                      {row.ticker}
+                    </TableCell>
                     <TableCell align="right">{row.confirmations}</TableCell>
                     <TableCell align="right">{row.phase}</TableCell>
                   </TableRow>

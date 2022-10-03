@@ -183,7 +183,7 @@ const RoutesX = function (props) {
           )}
         />
         <Route
-          path="/functions/sleet/:sleetId"
+          path="/functions/sleet/:functionId"
           element={(
             <FunctionView
               functionName="sleet"

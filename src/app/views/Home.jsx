@@ -19,7 +19,6 @@ import { fetchNodeStatusAction } from '../actions/nodeStatus';
 import { fetchBlockNumberAction } from '../actions/blockNumber';
 import { startSyncAction } from '../actions/startSync';
 import { patchDepositsAction } from '../actions/patchDeposits';
-import { fetchDpAction } from '../actions/dp';
 import { fetchAdminWalletAction } from '../actions/adminWallet';
 
 const renderWallet = (
@@ -154,7 +153,6 @@ const Home = function (props) {
     patchDeposits,
     blockNumber,
     startSync,
-    dp,
   } = props;
   const dispatch = useDispatch();
 
@@ -164,13 +162,11 @@ const Home = function (props) {
   const [type, setType] = useState('');
   const [amount, setAmount] = useState('');
   const [rowsPerPage, setRowsPerPage] = useState(50);
-  const [dpValue, setDpValue] = useState(0);
 
   const refreshStats = () => {
     if (auth.authenticated) {
       dispatch(fetchNodeStatusAction());
       dispatch(fetchBlockNumberAction());
-      dispatch(fetchDpAction());
       dispatch(fetchAdminWalletAction());
     }
   }
@@ -179,7 +175,6 @@ const Home = function (props) {
     if (auth.authenticated) {
       dispatch(fetchNodeStatusAction());
       dispatch(fetchBlockNumberAction());
-      dispatch(fetchDpAction());
       dispatch(fetchAdminWalletAction());
     }
   }, [
@@ -190,11 +185,6 @@ const Home = function (props) {
   useEffect(
     () => {
       console.log(auth);
-      console.log(dp);
-      if (dp && dp.data && dp.data.dp) {
-        setDpValue(dp.data.dp)
-      }
-      console.log(dpValue);
       console.log(adminWallet);
     },
     [
@@ -202,8 +192,6 @@ const Home = function (props) {
       nodeStatus,
       adminWallet,
       blockNumber,
-      dp,
-      dpValue,
     ],
   );
 
@@ -248,7 +236,7 @@ const Home = function (props) {
           >
             {nodeStatus.data
               && nodeStatus.data.peers
-              ? `${nodeStatus.data.peers.length} peers`
+              ? `${nodeStatus.data.peers}`
               : 'offline'}
           </Typography>
         </Grid>
@@ -427,7 +415,6 @@ const Home = function (props) {
             type={type}
             amount={amount}
             rowsPerPage={rowsPerPage}
-            dpValue={dpValue}
           />
         </Grid>
       </Grid>

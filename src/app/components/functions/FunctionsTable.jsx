@@ -53,6 +53,8 @@ function createData(
   feeAmount,
   userCount,
   userDbId,
+  ticker,
+  dp,
 ) {
   return {
     id,
@@ -64,6 +66,8 @@ function createData(
     feeAmount,
     userCount,
     userDbId,
+    ticker,
+    dp,
   };
 }
 
@@ -177,7 +181,6 @@ const FunctionsTable = function (props) {
     rowsPerPage,
     setRowsPerPage,
     totalCount,
-    dpValue,
   } = props;
   const rows = [];
   console.log(functions);
@@ -194,6 +197,8 @@ const FunctionsTable = function (props) {
         item.feeAmount && item.feeAmount,
         item.userCount,
         item.user && item.user.id,
+        item.coin && item.coin.ticker,
+        item.coin && item.coin.dp,
       ),
     );
   });
@@ -318,10 +323,14 @@ const FunctionsTable = function (props) {
                       )
                     </TableCell>
                     <TableCell align="right">
-                      {new BigNumber(row.amount).dividedBy(`1e${dpValue}`).toString()}
+                      {new BigNumber(row.amount).dividedBy(`1e${row.dp}`).toString()}
+                      {' '}
+                      {row.ticker}
                     </TableCell>
                     <TableCell align="right">
-                      {new BigNumber(row.feeAmount).dividedBy(`1e${dpValue}`).toString()}
+                      {new BigNumber(row.feeAmount).dividedBy(`1e${row.dp}`).toString()}
+                      {' '}
+                      {row.ticker}
                     </TableCell>
                     <TableCell align="right">
                       {row.userCount}

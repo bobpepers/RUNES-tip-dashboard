@@ -16,7 +16,6 @@ import FunctionsTable from '../../components/functions/FunctionsTable';
 import {
   fetchBotFunctionsAction,
 } from '../../actions/botFunction';
-import { fetchDpAction } from '../../actions/dp';
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -26,12 +25,10 @@ const FunctionsView = function (props) {
   const {
     botFunctions,
     functionName,
-    dp,
   } = props;
   const dispatch = useDispatch();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(50);
-  const [dpValue, setDpValue] = useState(0);
 
   useEffect(() => dispatch(fetchBotFunctionsAction(
     `${functionName}s`,
@@ -44,19 +41,10 @@ const FunctionsView = function (props) {
   ]);
 
   useEffect(() => {
-    dispatch(fetchDpAction());
-  }, []);
-
-  useEffect(() => {
-    if (dp && dp.data && dp.data.dp) {
-      setDpValue(dp.data.dp)
-    }
   }, [
     botFunctions,
     page,
     rowsPerPage,
-    dp,
-    dpValue,
   ]);
 
   return (
@@ -83,7 +71,6 @@ const FunctionsView = function (props) {
                   setRowsPerPage={setRowsPerPage}
                   totalCount={botFunctions && botFunctions.count && botFunctions.count}
                   linkParam={functionName}
-                  dpValue={dpValue}
                   functions={botFunctions
                     && botFunctions.data
                     ? botFunctions.data
