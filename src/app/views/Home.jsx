@@ -3,7 +3,10 @@ import React, {
   useState,
 } from 'react';
 import PropTypes from 'prop-types';
-import { connect, useDispatch } from 'react-redux';
+import {
+  connect,
+  useDispatch,
+} from 'react-redux';
 import CircularProgress from '@mui/material/CircularProgress';
 import {
   Grid,

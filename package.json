@@ -127,6 +127,6 @@
     "speakeasy": "^2.0.0",
     "styled-components": "^5.3.6",
     "tsparticles": "^2.3.4",
-    "tss-react": "^4.3.3"
+    "tss-react": "^4.3.4"
   }
 }
