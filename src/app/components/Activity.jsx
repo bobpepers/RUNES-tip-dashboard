@@ -19,16 +19,16 @@ const renderEarnedSpendBalance = (
     <Typography variant="subtitle1" gutterBottom component="div">
       spender balance:
       {' '}
-      {new BigNumber(activity.spender_balance).dividedBy(`1e${activity.coin.dp}`).toString()}
+      {new BigNumber(activity.spender_balance).dividedBy(`1e${activity.coin && activity.coin.dp}`).toString()}
       {' '}
       {activity.coin.ticker}
     </Typography>
     <Typography variant="subtitle1" gutterBottom component="div">
       earner balance:
       {' '}
-      {new BigNumber(activity.earner_balance).dividedBy(`1e${activity.coin.dp}`).toString()}
+      {new BigNumber(activity.earner_balance).dividedBy(`1e${activity.coin && activity.coin.dp}`).toString()}
       {' '}
-      {activity.coin.ticker}
+      {activity.coin && activity.coin.ticker}
     </Typography>
   </>
 )
@@ -57,9 +57,9 @@ const renderEarnerBalance = (
   <Typography variant="subtitle1" gutterBottom component="div">
     earner balance:
     <br />
-    {new BigNumber(activity.earner_balance).dividedBy(`1e${activity.coin.dp}`).toString()}
+    {new BigNumber(activity.earner_balance).dividedBy(`1e${activity.coin && activity.coin.dp}`).toString()}
     {' '}
-    {activity.coin.ticker}
+    {activity.coin && activity.coin.ticker}
   </Typography>
 )
 
@@ -69,9 +69,9 @@ const renderSpenderBalance = (
   <Typography variant="subtitle1" gutterBottom component="div">
     spender balance:
     <br />
-    {new BigNumber(activity.spender_balance).dividedBy(`1e${activity.coin.dp}`).toString()}
+    {new BigNumber(activity.spender_balance).dividedBy(`1e${activity.coin && activity.coin.dp}`).toString()}
     {' '}
-    {activity.coin.ticker}
+    {activity.coin && activity.coin.ticker}
   </Typography>
 )
 
@@ -86,9 +86,9 @@ const renderAmount = (
   >
     amount:
     <br />
-    {activity.amount && new BigNumber(activity.amount).dividedBy(`1e${activity.coin.dp}`).toString()}
+    {activity.amount && new BigNumber(activity.amount).dividedBy(`1e${activity.coin && activity.coin.dp}`).toString()}
     {' '}
-    {activity.coin.ticker}
+    {activity.coin && activity.coin.ticker}
     {activity.failedAmount && activity.failedAmount}
   </Typography>
 )
