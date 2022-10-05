@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.15](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.14...v0.0.15) (2022-10-05)
+
+
+### Features
+
+* Activity feed token compatability, fetch full admin wallet in 1 api call, render adminwallet ([31d30e7](https://github.com/bobpepers/runes-tip-dashboard/commit/31d30e7c8bc15c290048c3acdd687133e1d357a1))
+
+
+### Bug Fixes
+
+* ⚡️ dashboard multi-token compat fixes ([8521bc1](https://github.com/bobpepers/runes-tip-dashboard/commit/8521bc135272e96f45b6d9155e0e66c392b38dbb))
+
 ### [0.0.14](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.13...v0.0.14) (2022-09-24)
 
 
