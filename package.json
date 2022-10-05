@@ -103,7 +103,7 @@
     "@mui/icons-material": "^5.10.6",
     "@mui/material": "^5.10.8",
     "@reduxjs/toolkit": "^1.8.5",
-    "axios": "^0.27.2",
+    "axios": "^1.0.0",
     "babel-runtime": "^6.26.0",
     "bignumber.js": "^9.1.0",
     "final-form": "^4.20.7",
