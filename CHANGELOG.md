@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.16](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.15...v0.0.16) (2022-10-06)
+
+
+### Bug Fixes
+
+* 🐛 fix inexistent activity coin records ([cff535e](https://github.com/bobpepers/runes-tip-dashboard/commit/cff535eab2aa1728846fc3534fa3cd329beab58e))
+
 ### [0.0.15](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.14...v0.0.15) (2022-10-05)
 
 
