@@ -48,9 +48,6 @@ const headCells = [
   {
     id: 'phase', numeric: true, disablePadding: false, label: 'phase',
   },
-  {
-    id: 'action', numeric: true, disablePadding: false, label: 'action',
-  },
 ];
 
 function createData(
@@ -211,6 +208,9 @@ const WithdrawalsTable = function (props) {
   const rows = [];
 
   withdrawals.forEach((item) => {
+    console.log(item);
+    console.log(item.coin);
+    console.log(item.confirmations);
     rows.push(
       createData(
         item.id ? item.id : '',
@@ -221,7 +221,7 @@ const WithdrawalsTable = function (props) {
         item.to_from ? item.to_from : '',
         item.amount ? item.amount : 0,
         item.createdAt ? item.createdAt : '',
-        item.confirmations ? item.confirmations : '',
+        item.confirmations || 0,
         item.user ? item.user.id : '',
         item.coin && item.coin.ticker,
         item.coin && item.coin.dp,
@@ -354,33 +354,6 @@ const WithdrawalsTable = function (props) {
                         <TableCell align="right">{row.createdAt && row.createdAt}</TableCell>
                         <TableCell align="right">{row.confirmations && row.confirmations}</TableCell>
                         <TableCell align="right">{row.phase && row.phase}</TableCell>
-                        <TableCell align="right">
-                          {
-                            (
-                              row.phase === 'review'
-                            // || row.phase === 'failed'
-                            )
-                            && !acceptWithdrawal.isFetching
-                            && !declineWithdrawal.isFetching
-                              ? (
-                                <>
-                                  <Button
-                                    onClick={() => acceptWithdrawalFunction(row.id)}
-                                    variant="contained"
-                                  >
-                                    Accept
-                                  </Button>
-                                  <Button
-                                    onClick={() => declineWithdrawalFunction(row.id)}
-                                    variant="contained"
-                                  >
-                                    Decline
-                                  </Button>
-                                </>
-                              )
-                              : ('loading')
-                          }
-                        </TableCell>
                       </TableRow>
                     );
                   })}
@@ -426,37 +399,10 @@ const WithdrawalsTable = function (props) {
                         <TableCell align="right">
                           {row.txId}
                         </TableCell>
-                        <TableCell align="right">{row.amount && new BigNumber(row.amount).dividedBy(`1e${dpValue}`).toString()}</TableCell>
+                        <TableCell align="right">{row.amount && new BigNumber(row.amount).dividedBy(`1e${row.dp}`).toString()}</TableCell>
                         <TableCell align="right">{row.createdAt && row.createdAt}</TableCell>
                         <TableCell align="right">{row.confirmations && row.confirmations}</TableCell>
                         <TableCell align="right">{row.phase && row.phase}</TableCell>
-                        <TableCell align="right">
-                          {
-                            (
-                              row.phase === 'review'
-                            // || row.phase === 'failed'
-                            )
-                            && !acceptWithdrawal.isFetching
-                            && !declineWithdrawal.isFetching
-                              ? (
-                                <>
-                                  <Button
-                                    onClick={() => acceptWithdrawalFunction(row.id)}
-                                    variant="contained"
-                                  >
-                                    Accept
-                                  </Button>
-                                  <Button
-                                    onClick={() => declineWithdrawalFunction(row.id)}
-                                    variant="contained"
-                                  >
-                                    Decline
-                                  </Button>
-                                </>
-                              )
-                              : ('loading')
-                          }
-                        </TableCell>
                       </TableRow>
                     );
                   })}
