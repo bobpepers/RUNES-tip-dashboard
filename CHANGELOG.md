@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.17](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.16...v0.0.17) (2022-10-07)
+
+
+### Features
+
+* 🎨 Add activity message for failed faucet request ([687cf95](https://github.com/bobpepers/runes-tip-dashboard/commit/687cf954474fa1d03edcfcaf492dc2b1ba642be5))
+
 ### [0.0.16](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.15...v0.0.16) (2022-10-06)
 
 
