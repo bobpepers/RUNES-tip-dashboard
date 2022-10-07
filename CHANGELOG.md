@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.18](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.17...v0.0.18) (2022-10-07)
+
+
+### Bug Fixes
+
+* 🐛 fix dp value withdrawTable ([7095fec](https://github.com/bobpepers/runes-tip-dashboard/commit/7095fec060cf81eea9d20591637a823e6e754931))
+
 ### [0.0.17](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.16...v0.0.17) (2022-10-07)
 
 
