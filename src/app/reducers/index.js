@@ -33,6 +33,10 @@ import withdrawalAddress from './withdrawalAddress';
 import leaveServer from './leaveServer';
 import adminWallet from './adminWallet';
 
+import coins from './coins';
+import editCoinInfo from './editCoinInfo';
+import deleteCoinInfoExchange from './deleteCoinInfoExchange';
+
 import botFunctions from './botFunctions';
 import botFunction from './botFunction';
 import dp from './dp';
@@ -44,6 +48,10 @@ const store = configureStore({
     tfa,
     theme,
     alert,
+
+    coins,
+    editCoinInfo,
+    deleteCoinInfoExchange,
 
     nodeStatus,
     adminWallet,

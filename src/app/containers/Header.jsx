@@ -135,6 +135,14 @@ function Header(
         </Link>
         <Link
           className="nav-link"
+          to="/management/coins"
+        >
+          <MenuItem onClick={handleCloseManagement}>
+            Coins
+          </MenuItem>
+        </Link>
+        <Link
+          className="nav-link"
           to="/management/servers"
         >
           <MenuItem onClick={handleCloseManagement}>

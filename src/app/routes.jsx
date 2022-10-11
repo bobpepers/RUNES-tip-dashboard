@@ -39,6 +39,7 @@ import Errors from './views/functions/Errors';
 import Login from './views/login/Login';
 import LoginTFA from './views/login/Login2FA';
 import LogoutView from './views/Logout';
+import CoinsView from './views/management/Coins';
 import { authenticatedAction } from './actions/auth';
 
 const RequireAuth = function (props) {
@@ -359,6 +360,10 @@ const RoutesX = function (props) {
         <Route
           path="/management/dashboardusers"
           element={<DashboardUsers />}
+        />
+        <Route
+          path="/management/coins"
+          element={<CoinsView />}
         />
         <Route
           path="/management/trivia"
