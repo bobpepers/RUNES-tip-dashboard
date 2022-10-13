@@ -19,6 +19,8 @@ import {
   insertTriviaAction,
   removeTriviaAction,
   switchTriviaAction,
+  updateTriviaQuestionAction,
+  updateTriviaAnswerAction,
 } from '../../actions/trivia';
 
 const TriviaManagement = function (props) {
@@ -55,6 +57,16 @@ const TriviaManagement = function (props) {
 
   const [inputAnswerList, setInputAnswerList] = useState([{ answer: '', correct: 'false' }]);
   const [inputQuestion, setInputQuestion] = useState('');
+  const [inEditModeAnswer, setinEditModeAnswer] = useState({
+    status: false,
+    rowKey: null,
+  });
+  const [inEditModeQuestion, setinEditModeQuestion] = useState({
+    status: false,
+    rowKey: null,
+  });
+  const [unitAnswer, setUnitAnswer] = useState(null);
+  const [unitQuestion, setUnitQuestion] = useState(null);
 
   const handleInputAnswerChange = (e, index) => {
     console.log(e);
@@ -103,6 +115,72 @@ const TriviaManagement = function (props) {
     dispatch(switchTriviaAction(id))
   };
 
+  const onEditAnswer = ({
+    id,
+    currentUnitAnswer,
+  }) => {
+    console.log(currentUnitAnswer);
+    setinEditModeAnswer({
+      status: true,
+      rowKey: id,
+    })
+    setUnitAnswer(currentUnitAnswer);
+    console.log(unitAnswer);
+  }
+
+  const onEditQuestion = ({
+    id,
+    currentUnitQuestion,
+  }) => {
+    console.log(currentUnitQuestion);
+    setinEditModeQuestion({
+      status: true,
+      rowKey: id,
+    })
+    setUnitQuestion(currentUnitQuestion);
+  }
+
+  const onSaveEditAnswer = async ({ id }) => {
+    await dispatch(updateTriviaAnswerAction(
+      id,
+      unitAnswer,
+    ));
+
+    setinEditModeAnswer({
+      status: false,
+      rowKey: null,
+    })
+    setUnitAnswer(null);
+  }
+
+  const onSaveEditQuestion = async ({ id }) => {
+    await dispatch(updateTriviaQuestionAction(
+      id,
+      unitQuestion,
+    ));
+
+    setinEditModeQuestion({
+      status: false,
+      rowKey: null,
+    })
+    setUnitQuestion(null);
+  }
+
+  const onCancelEditAnswer = () => {
+    setinEditModeAnswer({
+      status: false,
+      rowKey: null,
+    })
+    setUnitAnswer(null);
+  }
+  const onCancelEditQuestion = () => {
+    setinEditModeAnswer({
+      status: false,
+      rowKey: null,
+    })
+    setUnitQuestion(null);
+  }
+
   return (
     <div className="height100 content">
       <Grid container>
@@ -121,47 +199,45 @@ const TriviaManagement = function (props) {
         </Grid>
         <Grid item xs={12}>Answers:</Grid>
         <Grid item xs={12}>
-          {inputAnswerList.map((x, i) => {
-            console.log(x);
-            return (
-              <Grid container>
-                <Grid item xs={8}>
-                  <TextField
-                    onChange={(e) => handleInputAnswerChange(e, i)}
-                    fullWidth
-                    variant="outlined"
-                    name="answer"
-                    placeholder="Answer"
-                    value={x.answer}
-                  />
-                </Grid>
-                <Grid item xs={2}>
-                  <select
-                    onChange={(e) => handleInputAnswerChange(e, i)}
-                    name="correct"
-                    style={{ fontSize: '30px' }}
+          {inputAnswerList.map((x, i) => (
+            <Grid container>
+              <Grid item xs={8}>
+                <TextField
+                  onChange={(e) => handleInputAnswerChange(e, i)}
+                  fullWidth
+                  variant="outlined"
+                  name="answer"
+                  placeholder="Answer"
+                  value={x.answer}
+                />
+              </Grid>
+              <Grid item xs={2}>
+                <select
+                  onChange={(e) => handleInputAnswerChange(e, i)}
+                  name="correct"
+                  style={{ fontSize: '30px' }}
+                >
+                  <option value="false">
+                    incorrect
+                  </option>
+                  <option value="true">
+                    correct
+                  </option>
+                </select>
+              </Grid>
+              <Grid item xs={2}>
+                {inputAnswerList.length !== 1 && (
+                  <Button
+                    variant="contained"
+                    onClick={() => handleRemoveClick(i)}
                   >
-                    <option value="false">
-                      incorrect
-                    </option>
-                    <option value="true">
-                      correct
-                    </option>
-                  </select>
-                </Grid>
-                <Grid item xs={2}>
-                  {inputAnswerList.length !== 1 && (
-                    <Button
-                      variant="contained"
-                      onClick={() => handleRemoveClick(i)}
-                    >
-                      Remove Answer
-                    </Button>
-                  )}
-                </Grid>
-                <Grid item xs={12} style={{ marginTop: '10px' }}>
-                  {
-                    inputAnswerList.length < 5
+                    Remove Answer
+                  </Button>
+                )}
+              </Grid>
+              <Grid item xs={12} style={{ marginTop: '10px' }}>
+                {
+                  inputAnswerList.length < 5
                     && inputAnswerList.length - 1 === i
                   && (
                     <Button
@@ -173,12 +249,11 @@ const TriviaManagement = function (props) {
                       Add answer
                     </Button>
                   )
-                  }
-                </Grid>
-
+                }
               </Grid>
-            )
-          })}
+
+            </Grid>
+          ))}
           <Grid item xs={12} style={{ marginTop: '10px' }}>
             <Button
               fullWidth
@@ -199,11 +274,64 @@ const TriviaManagement = function (props) {
             <>
               <Grid container style={{ border: 'solid 1px black' }}>
                 <Grid item xs={1}>{d.id}</Grid>
-                <Grid item xs={8}>{d.question}</Grid>
+                <Grid item xs={6}>
+                  {
+                    inEditModeQuestion.status && inEditModeQuestion.rowKey === d.id ? (
+                      <TextField
+                        value={unitQuestion}
+                        onChange={(event) => setUnitQuestion(event.target.value)}
+                      />
+
+                    ) : (
+                      d.question
+                    )
+                  }
+                </Grid>
                 <Grid item xs={1}>
                   used:
                   {' '}
                   {d.trivia.length}
+                </Grid>
+                <Grid item xs={2}>
+                  {
+                    inEditModeQuestion.status && inEditModeQuestion.rowKey === d.id ? (
+                      <>
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          size="large"
+                          onClick={() => onSaveEditQuestion({
+                            id: d.id,
+                            question: unitQuestion,
+                          })}
+                        >
+                          Save
+                        </Button>
+
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          size="large"
+                          style={{ marginLeft: 8 }}
+                          onClick={() => onCancelEditQuestion()}
+                        >
+                          Cancel
+                        </Button>
+                      </>
+                    ) : (
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        size="large"
+                        onClick={() => onEditQuestion({
+                          id: d.id,
+                          currentUnitQuestion: d.question,
+                        })}
+                      >
+                        Edit
+                      </Button>
+                    )
+                  }
                 </Grid>
                 <Grid item xs={1}>
                   <Button
@@ -224,16 +352,66 @@ const TriviaManagement = function (props) {
               </Grid>
 
               {
-                d.triviaanswers.map((a) => {
-                  console.log(a);
-                  return (
-                    <Grid container>
-                      <Grid item xs={1} />
-                      <Grid item xs={9}>{a.answer}</Grid>
-                      <Grid item xs={2}>{a.correct ? 'correct' : 'incorrect'}</Grid>
+                d.triviaanswers.map((a) => (
+                  <Grid container>
+                    <Grid item xs={1} />
+                    <Grid item xs={7}>
+                      {
+                        inEditModeAnswer.status && inEditModeAnswer.rowKey === a.id ? (
+                          <TextField
+                            value={unitAnswer}
+                            onChange={(event) => setUnitAnswer(event.target.value)}
+                          />
+
+                        ) : (
+                          a.answer
+                        )
+                      }
                     </Grid>
-                  )
-                })
+                    <Grid item xs={2}>{a.correct ? 'correct' : 'incorrect'}</Grid>
+                    <Grid item xs={2}>
+                      {
+                        inEditModeAnswer.status && inEditModeAnswer.rowKey === a.id ? (
+                          <>
+                            <Button
+                              variant="contained"
+                              color="primary"
+                              size="large"
+                              onClick={() => onSaveEditAnswer({
+                                id: a.id,
+                                answer: unitAnswer,
+                              })}
+                            >
+                              Save
+                            </Button>
+
+                            <Button
+                              variant="contained"
+                              color="primary"
+                              size="large"
+                              style={{ marginLeft: 8 }}
+                              onClick={() => onCancelEditAnswer()}
+                            >
+                              Cancel
+                            </Button>
+                          </>
+                        ) : (
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            size="large"
+                            onClick={() => onEditAnswer({
+                              id: a.id,
+                              currentUnitAnswer: a.answer,
+                            })}
+                          >
+                            Edit
+                          </Button>
+                        )
+                      }
+                    </Grid>
+                  </Grid>
+                ))
               }
             </>
 

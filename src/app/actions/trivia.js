@@ -19,6 +19,10 @@ import {
 
   DELETE_TRIVIAQUESTION,
   ADD_TRIVIAQUESTION,
+
+  UPDATE_TRIVIA_QUESTION,
+  UPDATE_TRIVIA_ANSWER,
+
 } from './types/index';
 import { notistackErrorAdd } from './helpers/notistackError';
 
@@ -50,6 +54,55 @@ export function switchTriviaAction(id) {
   }
 }
 
+export function updateTriviaQuestionAction(
+  id,
+  question,
+) {
+  return function (dispatch) {
+    dispatch({
+      type: REMOVE_TRIVIA_BEGIN,
+    });
+    axios.post(`${window.myConfig.apiUrl}/management/trivia/question/edit`, {
+      id,
+      question,
+    }).then((response) => {
+      dispatch({
+        type: UPDATE_TRIVIA_QUESTION,
+        payload: response.data.result,
+      });
+    }).catch((error) => {
+      notistackErrorAdd(
+        dispatch,
+        error,
+      );
+    });
+  }
+}
+
+export function updateTriviaAnswerAction(
+  id,
+  answer,
+) {
+  return function (dispatch) {
+    dispatch({
+      type: REMOVE_TRIVIA_BEGIN,
+    });
+    axios.post(`${window.myConfig.apiUrl}/management/trivia/answer/edit`, {
+      id,
+      answer,
+    }).then((response) => {
+      dispatch({
+        type: UPDATE_TRIVIA_ANSWER,
+        payload: response.data.result,
+      });
+    }).catch((error) => {
+      notistackErrorAdd(
+        dispatch,
+        error,
+      );
+    });
+  }
+}
 export function removeTriviaAction(
   id,
 ) {

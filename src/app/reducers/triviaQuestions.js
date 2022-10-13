@@ -4,7 +4,8 @@ import {
   FETCH_TRIVIAQUESTIONS_FAIL,
   DELETE_TRIVIAQUESTION,
   ADD_TRIVIAQUESTION,
-  UPDATE_TRIVIAQUESTION,
+  UPDATE_TRIVIA_QUESTION,
+  UPDATE_TRIVIA_ANSWER,
 } from '../actions/types/index';
 
 const initialState = {
@@ -14,20 +15,28 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-  case UPDATE_TRIVIAQUESTION:
+  case UPDATE_TRIVIA_QUESTION:
     console.log(action.payload);
-    const updatedChangeData = Object.values(
-      []
-        .concat(state.data, action.payload)
-        .reduce(
-          (r, c) => ((r[c.id] = Object.assign(r[c.id] || {}, c)), r),
-          {},
-        ),
-    );
-    const reverseUpdatedArray = updatedChangeData.reverse();
     return {
       ...state,
-      data: reverseUpdatedArray,
+      data: state.data.map((question) => {
+        if (question.id === action.payload.id) {
+          return action.payload;
+        }
+        return question;
+      }),
+      isFetching: false,
+    };
+  case UPDATE_TRIVIA_ANSWER:
+    console.log(action.payload);
+    return {
+      ...state,
+      data: state.data.map((question) => {
+        if (question.id === action.payload.id) {
+          return action.payload;
+        }
+        return question;
+      }),
       isFetching: false,
     };
   case ADD_TRIVIAQUESTION:
