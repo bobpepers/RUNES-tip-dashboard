@@ -37,7 +37,7 @@ import { fetchServerAction } from '../../actions/servers';
 import { fetchChannelsAction } from '../../actions/channels';
 import SelectField from '../../components/form/SelectFields';
 import NumberField from '../../components/form/NumberField';
-import { fetchDpAction } from '../../actions/dp';
+import { fetchCoinsAction } from '../../actions/coin';
 
 const FeaturesView = function (props) {
   const {
@@ -45,7 +45,7 @@ const FeaturesView = function (props) {
     features,
     servers,
     channels,
-    dp,
+    coins,
   } = props;
   const dispatch = useDispatch();
   const [inEditMode, setInEditMode] = useState({
@@ -57,7 +57,8 @@ const FeaturesView = function (props) {
   const [unitSampleSize, setUnitSampleSize] = useState(null);
   const [unitEnabled, setUnitEnabled] = useState(null);
   const [serverId, setServerId] = useState('All');
-  const [dpValue, setDpValue] = useState(0);
+  const [coinFilter, setCoinFilter] = useState(null);
+  const [platformFilter, setPlatformFilter] = useState(null);
 
   const onEdit = ({
     id,
@@ -114,8 +115,8 @@ const FeaturesView = function (props) {
   }
 
   useEffect(() => {
+    dispatch(fetchCoinsAction());
     dispatch(fetchFeatures());
-
     dispatch(
       fetchServerAction(
         '',
@@ -144,23 +145,21 @@ const FeaturesView = function (props) {
   ]);
 
   useEffect(() => {
-    dispatch(fetchDpAction());
-  }, []);
-
-  useEffect(() => {
-    console.log(channels);
-    if (dp && dp.data && dp.data.dp) {
-      setDpValue(dp.data.dp)
-    }
+    console.log(coins);
   }, [
     features,
+    coins,
     servers,
     channels,
     serverId,
-    dp,
-    dpValue,
   ]);
 
+  const handleChangeCoinFilter = (value) => {
+    setCoinFilter(value.target.value)
+  }
+  const handleChangePlatformFilter = (value) => {
+    setPlatformFilter(value.target.value);
+  }
   return (
     <div className="content index600 height100 w-100 transactions transaction">
       <Form
@@ -190,6 +189,7 @@ const FeaturesView = function (props) {
       >
         {({
           handleSubmit,
+          values,
           submitting,
           pristine,
         }) => (
@@ -253,6 +253,46 @@ const FeaturesView = function (props) {
                 xs={4}
               >
                 <Field
+                  name="platform"
+                  component={SelectField}
+                  label="Platform"
+                  defaultValue="discord"
+                >
+                  <MenuItem value="discord">
+                    Discord
+                  </MenuItem>
+                  <MenuItem value="telegram">
+                    Telegram
+                  </MenuItem>
+                  <MenuItem value="matrix">
+                    Matrix
+                  </MenuItem>
+                </Field>
+              </Box>
+              <Box
+                component={Grid}
+                item
+                xs={4}
+              >
+                <Field
+                  name="coin"
+                  component={SelectField}
+                  label="Coin"
+                  defaultValue={coins.data && coins.data[0] && coins.data[0].id}
+                >
+                  {coins && coins.data && coins.data.map((coin) => (
+                    <MenuItem key={coin.ticker} value={coin.id}>
+                      {coin.ticker}
+                    </MenuItem>
+                  ))}
+                </Field>
+              </Box>
+              <Box
+                component={Grid}
+                item
+                xs={4}
+              >
+                <Field
                   name="server"
                   component={SelectField}
                   parse={(value) => {
@@ -262,9 +302,11 @@ const FeaturesView = function (props) {
                   }}
                   label="Server"
                 >
-                  {servers && servers.data && servers.data.map((server) => (
-                    <MenuItem key={server.id} value={server.id}>
-                      {server.groupName}
+                  {servers
+                  && servers.data
+                  && servers.data.filter((server) => server.groupId.startsWith(values.platform)).map((filteredServer) => (
+                    <MenuItem key={filteredServer.id} value={filteredServer.id}>
+                      {filteredServer.groupName}
                     </MenuItem>
                   ))}
                 </Field>
@@ -353,6 +395,35 @@ const FeaturesView = function (props) {
           </form>
         )}
       </Form>
+      <Grid container>
+        <Grid item xs={6}>
+          <MuiSelect
+            value={platformFilter}
+            label="Platform"
+            fullWidth
+            onChange={handleChangePlatformFilter}
+            defaultValue="discord"
+          >
+            <MenuItem value="discord">Discord</MenuItem>
+            <MenuItem value="telegram">Telegram</MenuItem>
+            <MenuItem value="matrix">Matrix</MenuItem>
+          </MuiSelect>
+        </Grid>
+        <Grid item xs={6}>
+          <MuiSelect
+            value={coinFilter}
+            fullWidth
+            label="Coin"
+            onChange={handleChangeCoinFilter}
+          >
+            {coins && coins.data && coins.data.map((coin) => (
+              <MenuItem key={coin.ticker} value={coin.id}>
+                {coin.ticker}
+              </MenuItem>
+            ))}
+          </MuiSelect>
+        </Grid>
+      </Grid>
       <TableContainer>
         <Table
           size="small"
@@ -363,6 +434,8 @@ const FeaturesView = function (props) {
               <TableCell>id</TableCell>
               <TableCell align="right">type</TableCell>
               <TableCell align="right">name</TableCell>
+              <TableCell align="right">platform</TableCell>
+              <TableCell align="right">coin</TableCell>
               <TableCell align="right">server</TableCell>
               <TableCell align="right">channel</TableCell>
               <TableCell align="right">min</TableCell>
@@ -374,10 +447,25 @@ const FeaturesView = function (props) {
             </TableRow>
           </TableHead>
           <TableBody>
+
             {features
               && features.data
-              && features.data.map((feature, i) => {
-                console.log(feature);
+              && features.data.filter(
+                (filterFeature) => {
+                  if (!platformFilter) {
+                    return true;
+                  }
+                  return platformFilter && filterFeature.platform.startsWith(platformFilter)
+                },
+              ).filter(
+                (filterFeature) => {
+                  if (!coinFilter) {
+                    return true
+                  }
+                  return coinFilter && filterFeature.coin.id === coinFilter
+                },
+              ).map((feature, i) => {
+                let x;
                 return (
                   <TableRow key={i}>
                     <TableCell component="th" scope="row">
@@ -389,6 +477,16 @@ const FeaturesView = function (props) {
                     <TableCell align="right">
                       {
                         feature.name
+                      }
+                    </TableCell>
+                    <TableCell align="right">
+                      {
+                        feature.platform
+                      }
+                    </TableCell>
+                    <TableCell align="right">
+                      {
+                        feature.coin.ticker
                       }
                     </TableCell>
                     <TableCell align="right">
@@ -408,7 +506,7 @@ const FeaturesView = function (props) {
                           />
 
                         ) : (
-                          new BigNumber(feature.min).dividedBy(`1e${dpValue}`).toString()
+                          new BigNumber(feature.min).dividedBy(`1e${feature.coin.dp}`).toString()
                         )
                       }
                     </TableCell>
@@ -501,7 +599,7 @@ const FeaturesView = function (props) {
                               size="large"
                               onClick={() => onEdit({
                                 id: feature.id,
-                                currentUnitMin: new BigNumber(feature.min).dividedBy(`1e${dpValue}`).toString(),
+                                currentUnitMin: new BigNumber(feature.min).dividedBy(`1e${feature.coin.dp}`).toString(),
                                 currentUnitFee: feature.fee / 1e2,
                                 currentUnitSampleSize: feature.maxSampleSize,
                                 currentUnitEnabled: feature.enabled,
@@ -541,7 +639,7 @@ function mapStateToProps(state) {
     features: state.features,
     servers: state.servers,
     channels: state.channels,
-    dp: state.dp,
+    coins: state.coins,
   };
 }
 
