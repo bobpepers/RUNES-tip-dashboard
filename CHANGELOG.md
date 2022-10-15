@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.19](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.18...v0.0.19) (2022-10-15)
+
+
+### Features
+
+* ✨ CoinInfo editing ([e99faec](https://github.com/bobpepers/runes-tip-dashboard/commit/e99faecc06f1659dba58b85b2fc47a7cc0e52bb1))
+* ✨ Editable trivia question & answers ([bf5d3bf](https://github.com/bobpepers/runes-tip-dashboard/commit/bf5d3bf9341db728158fe77402a652702591b2a4))
+* ✨ feature settings: include platform & coin fields - add filters ([8da3cee](https://github.com/bobpepers/runes-tip-dashboard/commit/8da3ceee7ac2098bb924a399b3dacad84de48c17))
+
 ### [0.0.18](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.17...v0.0.18) (2022-10-07)
 
 

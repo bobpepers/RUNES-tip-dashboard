@@ -11,7 +11,6 @@ import {
   SWITCH_TRIVIA_BEGIN,
   SWITCH_TRIVIA_SUCCESS,
   SWITCH_TRIVIA_FAIL,
-  UPDATE_TRIVIAQUESTION,
 
   REMOVE_TRIVIA_BEGIN,
   REMOVE_TRIVIA_SUCCESS,
@@ -35,10 +34,6 @@ export function switchTriviaAction(id) {
       .then((response) => {
         dispatch({
           type: SWITCH_TRIVIA_SUCCESS,
-          payload: response.data.result,
-        });
-        dispatch({
-          type: UPDATE_TRIVIAQUESTION,
           payload: response.data.result,
         });
       }).catch((error) => {
