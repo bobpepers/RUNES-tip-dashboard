@@ -290,6 +290,9 @@ const renderItems = (
             {activity.type === 'support_s' && 'Support request: success'}
             {activity.type === 'support_f' && 'Support Request: fail'}
 
+            {activity.type === 'history_s' && 'History request: success'}
+            {activity.type === 'history_f' && 'History Request: fail'}
+
             <Typography variant="subtitle1" gutterBottom component="div">
               {activity && activity.flood && activity.flood.floodGroup && `Server: ${activity.flood.floodGroup.groupName}`}
               {activity && activity.flood && activity.flood.floodtipGroup && `Server: ${activity.flood.floodtipGroup.groupName}`}
@@ -403,6 +406,8 @@ const renderItems = (
             || activity.type === 'withdrawAccepted'
             || activity.type === 'withdrawRejected'
             || activity.type === 'withdrawComplete'
+            || activity.type === 'history_s'
+            || activity.type === 'history_f'
 
             ) && renderBy(
               activity,
