@@ -357,6 +357,8 @@ const renderItems = (
 
             || activity.type === 'support_s'
             || activity.type === 'support_f'
+            || activity.type === 'history_s'
+            || activity.type === 'history_f'
             ) && renderTo(
               activity,
               navigate,
@@ -406,8 +408,6 @@ const renderItems = (
             || activity.type === 'withdrawAccepted'
             || activity.type === 'withdrawRejected'
             || activity.type === 'withdrawComplete'
-            || activity.type === 'history_s'
-            || activity.type === 'history_f'
 
             ) && renderBy(
               activity,
