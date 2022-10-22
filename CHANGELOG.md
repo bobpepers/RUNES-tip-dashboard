@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.22](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.21...v0.0.22) (2022-10-22)
+
+
+### Bug Fixes
+
+* ⚡️ additional activity field ([b6d84ef](https://github.com/bobpepers/runes-tip-dashboard/commit/b6d84efae6eae234987b67f6b34bcb5e098f1fb8))
+
 ### [0.0.21](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.20...v0.0.21) (2022-10-16)
 
 
