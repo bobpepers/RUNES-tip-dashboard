@@ -93,6 +93,33 @@ const renderAmount = (
   </Typography>
 )
 
+const renderGroupChannel = (
+  activity,
+) => (
+  <Typography
+    variant="subtitle1"
+    gutterBottom
+    component="div"
+    style={{ wordBreak: 'break-word' }}
+  >
+    {activity && activity.group ? (
+      <>
+        {activity.group.groupName}
+        <br />
+        {activity.group.groupId}
+        <br />
+      </>
+    ) : ''}
+    {activity && activity.channel ? (
+      <>
+        {activity.channel.channelName}
+        <br />
+        {activity.channel.channelId}
+      </>
+    ) : ''}
+  </Typography>
+)
+
 const renderBy = (
   activity,
   navigate,
@@ -192,7 +219,7 @@ const renderItems = (
           <Grid
             item
             xs={12}
-            lg={2}
+            lg={1}
             align="center"
           >
             {activity.type === 'faucettip_s' && 'Claim Faucet'}
@@ -293,6 +320,9 @@ const renderItems = (
             {activity.type === 'history_s' && 'History request: success'}
             {activity.type === 'history_f' && 'History Request: fail'}
 
+            {activity.type === 'settings_s' && 'Settings request: success'}
+            {activity.type === 'settings_f' && 'Settings Request: fail'}
+
             <Typography variant="subtitle1" gutterBottom component="div">
               {activity && activity.flood && activity.flood.floodGroup && `Server: ${activity.flood.floodGroup.groupName}`}
               {activity && activity.flood && activity.flood.floodtipGroup && `Server: ${activity.flood.floodtipGroup.groupName}`}
@@ -305,7 +335,7 @@ const renderItems = (
           <Grid
             item
             xs={12}
-            lg={4}
+            lg={3}
             align="center"
           >
             {(
@@ -359,6 +389,8 @@ const renderItems = (
             || activity.type === 'support_f'
             || activity.type === 'history_s'
             || activity.type === 'history_f'
+            || activity.type === 'settings_s'
+            || activity.type === 'settings_f'
             ) && renderTo(
               activity,
               navigate,
@@ -445,6 +477,14 @@ const renderItems = (
               </>
             )}
 
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            lg={2}
+            align="center"
+          >
+            {renderGroupChannel(activity)}
           </Grid>
           <Grid
             item
