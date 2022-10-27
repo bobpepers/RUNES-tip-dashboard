@@ -36,6 +36,7 @@ import adminWallet from './adminWallet';
 import coins from './coins';
 import editCoinInfo from './editCoinInfo';
 import deleteCoinInfoExchange from './deleteCoinInfoExchange';
+import deleteCoinInfoHint from './deleteCoinInfoHint';
 
 import botFunctions from './botFunctions';
 import botFunction from './botFunction';
@@ -52,6 +53,7 @@ const store = configureStore({
     coins,
     editCoinInfo,
     deleteCoinInfoExchange,
+    deleteCoinInfoHint,
 
     nodeStatus,
     adminWallet,

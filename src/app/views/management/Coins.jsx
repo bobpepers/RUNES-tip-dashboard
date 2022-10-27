@@ -18,6 +18,7 @@ import {
   fetchCoinsAction,
   editCoinInfoAction,
   deleteCoinInfoExchangeAction,
+  deleteCoinInfoHintAction,
 } from '../../actions/coin';
 
 const CoinManagement = function (props) {
@@ -26,6 +27,7 @@ const CoinManagement = function (props) {
     coins,
     editCoinInfo,
     deleteCoinInfoExchange,
+    deleteCoinInfoHint,
   } = props;
   const dispatch = useDispatch();
 
@@ -42,7 +44,9 @@ const CoinManagement = function (props) {
   const [unitDiscord, setUnitDiscord] = useState(null);
   const [unitDescription, setUnitDescription] = useState(null);
   const [unitExchanges, setUnitExchanges] = useState([]);
+  const [unitHints, setUnitHints] = useState([]);
   const [newExchangeCounter, setNewExchangeCounter] = useState(0);
+  const [newHintsCounter, setNewHintsCounter] = useState(0);
 
   useEffect(() => {
     if (auth.authenticated) {
@@ -71,6 +75,7 @@ const CoinManagement = function (props) {
     currentUnitDiscord,
     currentUnitDescription,
     currentUnitExchanges,
+    currentUnitHints,
   }) => {
     setInEditMode({
       status: true,
@@ -85,6 +90,7 @@ const CoinManagement = function (props) {
     setUnitDiscord(currentUnitDiscord);
     setUnitDescription(currentUnitDescription);
     setUnitExchanges(currentUnitExchanges);
+    setUnitHints(currentUnitHints);
   }
 
   const onSave = async ({ id }) => {
@@ -99,6 +105,7 @@ const CoinManagement = function (props) {
       unitDiscord,
       unitDescription,
       unitExchanges,
+      unitHints,
     ));
 
     setInEditMode({
@@ -114,6 +121,7 @@ const CoinManagement = function (props) {
     setUnitDiscord(null);
     setUnitDescription(null);
     setUnitExchanges(null);
+    setUnitHints(null);
   }
 
   const onCancel = () => {
@@ -130,6 +138,39 @@ const CoinManagement = function (props) {
     setUnitDiscord(null);
     setUnitDescription(null);
     setUnitExchanges(null);
+    setUnitHints(null);
+  }
+
+  const addHint = (
+    coinId,
+  ) => {
+    setUnitHints([
+      {
+        id: `new-${newHintsCounter}`,
+        coinId,
+        url: '',
+      },
+      ...unitHints,
+    ]);
+    setNewHintsCounter(newHintsCounter + 1)
+  }
+
+  const editHint = (
+    id,
+    coinId,
+    value,
+  ) => {
+    const newState = unitHints.map((obj) => {
+      if (obj.id === id) {
+        return {
+          id,
+          coinId,
+          hint: value,
+        };
+      }
+      return obj;
+    });
+    setUnitHints(newState);
   }
 
   const addExchange = (
@@ -169,6 +210,16 @@ const CoinManagement = function (props) {
     coinId,
   ) => {
     dispatch(deleteCoinInfoExchangeAction(
+      id,
+      coinId,
+    ))
+  }
+
+  const deleteCoinInfoHintFunction = (
+    id,
+    coinId,
+  ) => {
+    dispatch(deleteCoinInfoHintAction(
       id,
       coinId,
     ))
@@ -246,6 +297,7 @@ const CoinManagement = function (props) {
                         currentUnitDiscord: coin.coinInfo.discord,
                         currentUnitDescription: coin.coinInfo.description,
                         currentUnitExchanges: coin.coinInfo.coinInfoExchanges || [],
+                        currentUnitHints: coin.coinInfo.coinInfoHints || [],
                       })}
                     >
                       Edit
@@ -514,6 +566,97 @@ const CoinManagement = function (props) {
                   ))
                 }
               </Grid>
+              <div>
+                Hints
+              </div>
+              <div>
+                {
+                  inEditMode.status && inEditMode.rowKey === coin.id && (
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      size="large"
+                      style={{ marginLeft: 8 }}
+                      onClick={() => addHint(coin.id)}
+                    >
+                      + Add Hint
+                    </Button>
+
+                  )
+                }
+              </div>
+              <Grid container item xs={12}>
+                {
+                  inEditMode.status && inEditMode.rowKey === coin.id ? (
+                    unitHints && unitHints.map((a) => (
+                      <Grid
+                        item
+                        key={a.id}
+                        xs={12}
+                      >
+                        <div>{a.id}</div>
+                        {
+                          inEditMode.status && inEditMode.rowKey === coin.id && (
+                            <MuiTextField
+                              fullWidth
+                              value={a.hint}
+                              onChange={(event) => editHint(a.id, coin.id, event.target.value)}
+                            />
+
+                          )
+                        }
+                      </Grid>
+                    ))
+                  ) : (
+                    coin.coinInfo && coin.coinInfo.coinInfoHints && coin.coinInfo.coinInfoHints.map((a) => (
+                      <Grid container>
+                        <Grid item xs={8}>
+                          {
+                            inEditMode.status && inEditMode.rowKey === coin.id && (
+                              <MuiTextField
+                                fullWidth
+                                disabled
+                                value={a.hint}
+                              />
+
+                            )
+                          }
+                        </Grid>
+                      </Grid>
+                    ))
+                  )
+                }
+                {
+                  coin.coinInfo && coin.coinInfo.coinInfoHints && coin.coinInfo.coinInfoHints.map((a) => (
+                    <Grid container>
+                      {
+                        !inEditMode.status && (
+                          <>
+                            <Grid item xs={9}>
+                              <MuiTextField
+                                fullWidth
+                                disabled
+                                value={a.hint}
+                              />
+                            </Grid>
+                            <Grid item xs={3}>
+                              <Button
+                                variant="contained"
+                                color="primary"
+                                size="large"
+                                style={{ marginLeft: 8 }}
+                                onClick={() => deleteCoinInfoHintFunction(a.id, coin.id)}
+                              >
+                                - Delete Hint
+                              </Button>
+                            </Grid>
+                          </>
+                        )
+                      }
+                    </Grid>
+                  ))
+                }
+              </Grid>
             </Grid>
           ))
         }
@@ -532,6 +675,7 @@ const mapStateToProps = (state) => ({
   coins: state.coins,
   editCoinInfo: state.editCoinInfo,
   deleteCoinInfoExchange: state.deleteCoinInfoExchange,
+  deleteCoinInfoHint: state.deleteCoinInfoHint,
 })
 
 export default withRouter(connect(mapStateToProps, null)(CoinManagement));

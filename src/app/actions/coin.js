@@ -10,6 +10,9 @@ import {
   DELETE_COININFOEXCHANGE_SUCCESS,
   DELETE_COININFOEXCHANGE_FAIL,
   UPDATE_COIN,
+  DELETE_COININFOHINT_BEGIN,
+  DELETE_COININFOHINT_SUCCESS,
+  DELETE_COININFOHINT_FAIL,
 } from './types/index';
 import { notistackErrorAdd } from './helpers/notistackError';
 
@@ -49,6 +52,7 @@ export function editCoinInfoAction(
   discord,
   description,
   exchanges,
+  hints,
 ) {
   return function (dispatch) {
     dispatch({
@@ -65,6 +69,7 @@ export function editCoinInfoAction(
       discord,
       description,
       exchanges,
+      hints,
     }).then((response) => {
       dispatch({
         type: EDIT_COININFO_SUCCESS,
@@ -114,6 +119,39 @@ export function deleteCoinInfoExchangeAction(
       );
       dispatch({
         type: DELETE_COININFOEXCHANGE_FAIL,
+        payload: error,
+      });
+    });
+  }
+}
+
+export function deleteCoinInfoHintAction(
+  id,
+  coinId,
+) {
+  return function (dispatch) {
+    dispatch({
+      type: DELETE_COININFOHINT_BEGIN,
+    });
+    axios.post(`${window.myConfig.apiUrl}/management/coinInfo/hint/delete`, {
+      id,
+      coinId,
+    }).then((response) => {
+      dispatch({
+        type: DELETE_COININFOHINT_SUCCESS,
+        payload: response.data.result,
+      });
+      dispatch({
+        type: UPDATE_COIN,
+        payload: response.data.result,
+      });
+    }).catch((error) => {
+      notistackErrorAdd(
+        dispatch,
+        error,
+      );
+      dispatch({
+        type: DELETE_COININFOHINT_FAIL,
         payload: error,
       });
     });
