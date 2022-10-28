@@ -304,7 +304,6 @@ const CoinManagement = function (props) {
                     </Button>
                   )
                 }
-
               </Grid>
               <Grid item xs={4}>
                 <div>

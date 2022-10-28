@@ -669,7 +669,6 @@ const ActivityComponent = function (props) {
     activitiesPerPage,
     page,
     setPage,
-    dpValue,
   } = props;
 
   const totalPages = totalCount
@@ -760,7 +759,6 @@ const ActivityComponent = function (props) {
             ? renderItems(
               activity,
               navigate,
-              dpValue,
             )
             : <CircularProgress />
         }

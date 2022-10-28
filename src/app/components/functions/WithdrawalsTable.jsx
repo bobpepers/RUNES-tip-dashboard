@@ -399,7 +399,11 @@ const WithdrawalsTable = function (props) {
                         <TableCell align="right">
                           {row.txId}
                         </TableCell>
-                        <TableCell align="right">{row.amount && new BigNumber(row.amount).dividedBy(`1e${row.dp}`).toString()}</TableCell>
+                        <TableCell align="right">
+                          {row.amount && new BigNumber(row.amount).dividedBy(`1e${row.dp}`).toString()}
+                          {' '}
+                          {row.ticker}
+                        </TableCell>
                         <TableCell align="right">{row.createdAt && row.createdAt}</TableCell>
                         <TableCell align="right">{row.confirmations && row.confirmations}</TableCell>
                         <TableCell align="right">{row.phase && row.phase}</TableCell>

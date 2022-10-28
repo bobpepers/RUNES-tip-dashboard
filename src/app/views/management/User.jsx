@@ -4,7 +4,7 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import {
-  useNavigate,
+  // useNavigate,
   useParams,
 } from 'react-router-dom';
 import { connect, useDispatch } from 'react-redux';
@@ -13,7 +13,7 @@ import {
   Grid,
   Divider,
   Typography,
-  Button,
+  // Button,
 } from '@mui/material';
 
 import BigNumber from 'bignumber.js';
@@ -33,7 +33,6 @@ import {
   fetchDepositsAction,
 } from '../../actions/deposits';
 import WithdrawalsTable from '../../components/functions/WithdrawalsTable';
-import { fetchDpAction } from '../../actions/dp';
 
 const UserView = function (props) {
   const {
@@ -43,7 +42,6 @@ const UserView = function (props) {
     withdrawals,
     acceptWithdrawal,
     declineWithdrawal,
-    dp,
   } = props;
   // const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -54,7 +52,6 @@ const UserView = function (props) {
   const [type, setType] = useState('');
   const [amount, setAmount] = useState('');
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [dpValue, setDpValue] = useState(0);
 
   useEffect(() => {
     console.log(auth.authenticated);
@@ -108,19 +105,6 @@ const UserView = function (props) {
   const declineWithdrawalFunction = (idWithdrawal) => {
     dispatch(declineWithdrawalAction(idWithdrawal))
   };
-
-  useEffect(() => {
-    dispatch(fetchDpAction());
-  }, []);
-
-  useEffect(() => {
-    if (dp && dp.data && dp.data.dp) {
-      setDpValue(dp.data.dp)
-    }
-  }, [
-    dp,
-    dpValue,
-  ]);
 
   return (
     <div className="height100 content">
@@ -290,104 +274,118 @@ const UserView = function (props) {
             }
           </Typography>
         </Grid>
-        <Grid
-          item
-          xs={6}
-          sm={6}
-          md={4}
-          lg={4}
-          xl={4}
-          className="zindexOne"
-          justifyContent="center"
-        >
-          <Typography
-            variant="h6"
-            gutterBottom
-            component="div"
-            align="center"
-          >
-            available balance:
-          </Typography>
-          <Typography
-            variant="h6"
-            gutterBottom
-            component="div"
-            align="center"
-          >
-            {
-              userInfo
-              && userInfo.data
-              && userInfo.data.wallet
-              && (new BigNumber(userInfo.data.wallet.available).dividedBy(`1e${dpValue}`).toString())
-            }
-          </Typography>
-        </Grid>
 
-        <Grid
-          item
-          xs={6}
-          sm={6}
-          md={4}
-          lg={4}
-          xl={4}
-          className="zindexOne"
-          justifyContent="center"
-        >
-          <Typography
-            variant="h6"
-            gutterBottom
-            component="div"
-            align="center"
-          >
-            locked balance:
-          </Typography>
-          <Typography
-            variant="h6"
-            gutterBottom
-            component="div"
-            align="center"
-          >
-            {
-              userInfo
-              && userInfo.data
-              && userInfo.data.wallet
-              && (new BigNumber(userInfo.data.wallet.locked).dividedBy(`1e${dpValue}`).toString())
-            }
-          </Typography>
-        </Grid>
+        {
+          userInfo
+          && userInfo.data
+          && userInfo.data.wallets
+        && userInfo.data.wallets.map((wallet) => (
+          <>
+            <Grid
+              item
+              xs={6}
+              sm={6}
+              md={4}
+              lg={4}
+              xl={4}
+              className="zindexOne"
+              justifyContent="center"
+            >
+              <Typography
+                variant="h6"
+                gutterBottom
+                component="div"
+                align="center"
+              >
+                available
+                {' '}
+                {wallet.coin.ticker}
+                {' '}
+                balance:
+              </Typography>
+              <Typography
+                variant="h6"
+                gutterBottom
+                component="div"
+                align="center"
+              >
+                {
+                  new BigNumber(wallet.available).dividedBy(`1e${wallet.coin.dp}`).toString()
+                }
+              </Typography>
+            </Grid>
 
-        <Grid
-          item
-          xs={6}
-          sm={6}
-          md={4}
-          lg={4}
-          xl={4}
-          className="zindexOne"
-          justifyContent="center"
-        >
-          <Typography
-            variant="h6"
-            gutterBottom
-            component="div"
-            align="center"
-          >
-            total balance:
-          </Typography>
-          <Typography
-            variant="h6"
-            gutterBottom
-            component="div"
-            align="center"
-          >
-            {
-              userInfo
-              && userInfo.data
-              && userInfo.data.wallet
-              && (new BigNumber(userInfo.data.wallet.available).plus(userInfo.data.wallet.locked).dividedBy(`1e${dpValue}`).toString())
-            }
-          </Typography>
-        </Grid>
+            <Grid
+              item
+              xs={6}
+              sm={6}
+              md={4}
+              lg={4}
+              xl={4}
+              className="zindexOne"
+              justifyContent="center"
+            >
+              <Typography
+                variant="h6"
+                gutterBottom
+                component="div"
+                align="center"
+              >
+                locked
+                {' '}
+                {wallet.coin.ticker}
+                {' '}
+                balance:
+              </Typography>
+              <Typography
+                variant="h6"
+                gutterBottom
+                component="div"
+                align="center"
+              >
+                {
+                  new BigNumber(wallet.locked).dividedBy(`1e${wallet.coin.dp}`).toString()
+                }
+              </Typography>
+            </Grid>
+
+            <Grid
+              item
+              xs={6}
+              sm={6}
+              md={4}
+              lg={4}
+              xl={4}
+              className="zindexOne"
+              justifyContent="center"
+            >
+              <Typography
+                variant="h6"
+                gutterBottom
+                component="div"
+                align="center"
+              >
+                total
+                {' '}
+                {wallet.coin.ticker}
+                {' '}
+                balance:
+              </Typography>
+              <Typography
+                variant="h6"
+                gutterBottom
+                component="div"
+                align="center"
+              >
+                {
+
+                  new BigNumber(wallet.available).plus(wallet.locked).dividedBy(`1e${wallet.coin.dp}`).toString()
+                }
+              </Typography>
+            </Grid>
+          </>
+        ))
+        }
         <Grid
           item
           xs={12}
@@ -516,7 +514,6 @@ const UserView = function (props) {
                   type={type}
                   amount={amount}
                   rowsPerPage={rowsPerPage}
-                  dpValue={dpValue}
                 />
               ) : (<span />)
           }
@@ -538,7 +535,6 @@ const UserView = function (props) {
                   rowsPerPage={rowsPerPage}
                   setRowsPerPage={setRowsPerPage}
                   totalCount={deposits && deposits.count && deposits.count}
-                  dpValue={dpValue}
                   deposits={deposits
                     && deposits.data
                     ? deposits.data
@@ -567,7 +563,6 @@ const UserView = function (props) {
                   declineWithdrawalFunction={declineWithdrawalFunction}
                   acceptWithdrawal={acceptWithdrawal}
                   declineWithdrawal={declineWithdrawal}
-                  dpValue={dpValue}
                   withdrawals={withdrawals
                     && withdrawals.data
                     ? withdrawals.data
@@ -593,7 +588,6 @@ const mapStateToProps = (state) => ({
   withdrawals: state.withdrawals,
   acceptWithdrawal: state.acceptWithdrawal,
   declineWithdrawal: state.declineWithdrawal,
-  dp: state.dp,
 })
 
 export default withRouter(connect(mapStateToProps, null)(UserView));
