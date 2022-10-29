@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.24](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.23...v0.0.24) (2022-10-29)
+
+
+### Bug Fixes
+
+* 🐛 Fix userInfo view (multi-wallet) ([3313984](https://github.com/bobpepers/runes-tip-dashboard/commit/33139848069c4a34c3816a35b8728d7a8fb1700b))
+
 ### [0.0.23](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.22...v0.0.23) (2022-10-27)
 
 
