@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.25](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.24...v0.0.25) (2022-11-12)
+
+
+### Bug Fixes
+
+* 🐛 users table: fix broken wallet display ([d4c5d66](https://github.com/bobpepers/runes-tip-dashboard/commit/d4c5d66e9f56e013c23095e674a10981e40044d4))
+
+
+### Refactor
+
+* ⚰️ Remove deprecated dp action/reducer ([7f8ea19](https://github.com/bobpepers/runes-tip-dashboard/commit/7f8ea19a4dc9981554d617a3d9875ce1934c740a))
+
 ### [0.0.24](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.23...v0.0.24) (2022-10-29)
 
 
