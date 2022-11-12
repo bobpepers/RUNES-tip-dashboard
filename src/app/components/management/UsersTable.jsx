@@ -51,12 +51,22 @@ function createData(
   id,
   userId,
   username,
-  available,
-  locked,
-  total,
+  wallets,
   lastActive,
   banned,
 ) {
+  let available = '';
+  let locked = '';
+  let total = '';
+  if (wallets) {
+    // eslint-disable-next-line no-restricted-syntax
+    for (const wallet of wallets) {
+      available += `${new BigNumber(wallet.available).dividedBy(`1e${wallet.coin.dp}`).toString()} ${wallet.coin.ticker}\n`;
+      locked += `${new BigNumber(wallet.locked).dividedBy(`1e${wallet.coin.dp}`).toString()} ${wallet.coin.ticker}\n`;
+      total += `${new BigNumber(wallet.available).plus(wallet.locked).dividedBy(`1e${wallet.coin.dp}`).toString()} ${wallet.coin.ticker}\n`;
+    }
+  }
+
   return {
     id,
     userId,
@@ -179,7 +189,6 @@ const UsersTable = function (props) {
     rowsPerPage,
     setRowsPerPage,
     totalCount,
-    dpValue,
   } = props;
   const rows = [];
 
@@ -189,9 +198,7 @@ const UsersTable = function (props) {
         item.id,
         item.user_id,
         item.username,
-        item.wallet ? item.wallet.available : 0,
-        item.wallet ? item.wallet.locked : 0,
-        item.wallet ? item.wallet.available + item.wallet.locked : 0,
+        item.wallets ? item.wallets : 0,
         item.lastSeen,
         item.banned,
       ),
@@ -317,10 +324,30 @@ const UsersTable = function (props) {
                             {row.username}
                           </Button>
                         </TableCell>
-                        <TableCell align="right">{new BigNumber(row.available).dividedBy(`1e${dpValue}`).toString()}</TableCell>
-                        <TableCell align="right">{new BigNumber(row.locked).dividedBy(`1e${dpValue}`).toString()}</TableCell>
-                        <TableCell align="right">{new BigNumber(row.total).dividedBy(`1e${dpValue}`).toString()}</TableCell>
-
+                        <TableCell
+                          align="right"
+                          syle={{
+                            whiteSpace: 'pre-line',
+                          }}
+                        >
+                          {row.available}
+                        </TableCell>
+                        <TableCell
+                          style={{
+                            whiteSpace: 'pre-line',
+                          }}
+                          align="right"
+                        >
+                          {row.locked}
+                        </TableCell>
+                        <TableCell
+                          style={{
+                            whiteSpace: 'pre-line',
+                          }}
+                          align="right"
+                        >
+                          {row.total}
+                        </TableCell>
                         <TableCell align="right">
                           {row.lastActive}
                         </TableCell>
@@ -387,9 +414,30 @@ const UsersTable = function (props) {
                             {row.username}
                           </Button>
                         </TableCell>
-                        <TableCell align="right">{new BigNumber(row.available).dividedBy(`1e${dpValue}`).toString()}</TableCell>
-                        <TableCell align="right">{new BigNumber(row.locked).dividedBy(`1e${dpValue}`).toString()}</TableCell>
-                        <TableCell align="right">{new BigNumber(row.total).dividedBy(`1e${dpValue}`).toString()}</TableCell>
+                        <TableCell
+                          style={{
+                            whiteSpace: 'pre-line',
+                          }}
+                          align="right"
+                        >
+                          {row.available}
+                        </TableCell>
+                        <TableCell
+                          style={{
+                            whiteSpace: 'pre-line',
+                          }}
+                          align="right"
+                        >
+                          {row.locked}
+                        </TableCell>
+                        <TableCell
+                          style={{
+                            whiteSpace: 'pre-line',
+                          }}
+                          align="right"
+                        >
+                          {row.total}
+                        </TableCell>
 
                         <TableCell align="right">
                           {row.lastActive}

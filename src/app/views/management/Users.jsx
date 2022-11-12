@@ -20,7 +20,6 @@ import {
   banUserAction,
 } from '../../actions/users';
 import UsersTable from '../../components/management/UsersTable';
-import { fetchDpAction } from '../../actions/dp';
 
 const useStyles = makeStyles()((theme) => ({
   formControl: {
@@ -37,7 +36,6 @@ const UsersView = function (props) {
   const {
     auth,
     users,
-    dp,
   } = props;
   const dispatch = useDispatch();
   const { classes } = useStyles();
@@ -48,7 +46,6 @@ const UsersView = function (props) {
   const [userId, setUserId] = useState('');
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(25);
-  const [dpValue, setDpValue] = useState(0);
 
   useEffect(() => dispatch(
     fetchUsersAction(
@@ -88,18 +85,6 @@ const UsersView = function (props) {
   const handleChangeUserId = (event) => {
     setUserId(event.target.value);
   };
-
-  useEffect(() => {
-    if (dp && dp.data && dp.data.dp) {
-      setDpValue(dp.data.dp)
-    }
-  }, [
-    users,
-    dp,
-  ]);
-  useEffect(() => {
-    dispatch(fetchDpAction());
-  }, []);
 
   const banUser = (
     banId,
@@ -207,7 +192,6 @@ const UsersView = function (props) {
                   setRowsPerPage={setRowsPerPage}
                   totalCount={users && users.count && users.count}
                   banUser={banUser}
-                  dpValue={dpValue}
                   users={users
                     && users.data
                     ? users.data
@@ -225,7 +209,6 @@ const UsersView = function (props) {
 const mapStateToProps = (state) => ({
   auth: state.auth,
   users: state.users,
-  dp: state.dp,
 })
 
 export default withRouter(connect(mapStateToProps, null)(UsersView));
