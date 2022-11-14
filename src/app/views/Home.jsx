@@ -20,139 +20,134 @@ import ActivityFilter from '../containers/filters/ActivityFilter';
 import { withRouter } from '../hooks/withRouter';
 import { fetchNodeStatusAction } from '../actions/nodeStatus';
 import { fetchBlockNumberAction } from '../actions/blockNumber';
-import { patchDepositsAction } from '../actions/patchDeposits';
 import { fetchAdminWalletAction } from '../actions/adminWallet';
 
 const renderWallet = (
   wallet,
-) => {
-  console.log(wallet);
-  return (
+) => (
+  <Grid
+    container
+    spacing={1}
+    justifyContent="center"
+    className="zindexOne"
+  >
     <Grid
-      container
-      spacing={1}
-      justifyContent="center"
+      item
+      xs={6}
+      sm={6}
+      md={4}
+      lg={3}
+      xl={3}
       className="zindexOne"
+      justifyContent="center"
     >
-      <Grid
-        item
-        xs={6}
-        sm={6}
-        md={4}
-        lg={3}
-        xl={3}
-        className="zindexOne"
-        justifyContent="center"
+      <Typography
+        variant="h6"
+        gutterBottom
+        component="div"
+        align="center"
       >
-        <Typography
-          variant="h6"
-          gutterBottom
-          component="div"
-          align="center"
-        >
-          Liability
-        </Typography>
-        <Typography
-          variant="subtitle1"
-          gutterBottom
-          component="div"
-          align="center"
-        >
-          {`${new BigNumber(wallet.liability).dividedBy(`1e${wallet.dp}`).toString()} ${wallet.ticker}`}
-        </Typography>
-      </Grid>
-
-      <Grid
-        item
-        xs={6}
-        sm={6}
-        md={4}
-        lg={3}
-        xl={3}
-        className="zindexOne"
-        justifyContent="center"
+        Liability
+      </Typography>
+      <Typography
+        variant="subtitle1"
+        gutterBottom
+        component="div"
+        align="center"
       >
-        <Typography
-          variant="h6"
-          gutterBottom
-          component="div"
-          align="center"
-        >
-          Balance
-        </Typography>
-        <Typography
-          variant="subtitle1"
-          gutterBottom
-          component="div"
-          align="center"
-        >
-          {`${new BigNumber(wallet.balance).dividedBy(`1e${wallet.dp}`).toString()} ${wallet.ticker}`}
-        </Typography>
-      </Grid>
-      <Grid
-        item
-        xs={6}
-        sm={6}
-        md={4}
-        lg={3}
-        xl={3}
-        className="zindexOne"
-        justifyContent="center"
-      >
-        <Typography
-          variant="h6"
-          gutterBottom
-          component="div"
-          align="center"
-        >
-          Difference
-        </Typography>
-        <Typography
-          variant="subtitle1"
-          gutterBottom
-          component="div"
-          align="center"
-        >
-          {`${new BigNumber(wallet.balance).minus(wallet.liability).dividedBy(`1e${wallet.dp}`).toString()} ${wallet.ticker}`}
-        </Typography>
-      </Grid>
-      <Grid
-        item
-        xs={6}
-        sm={6}
-        md={4}
-        lg={3}
-        xl={3}
-        className="zindexOne"
-        justifyContent="center"
-      >
-        <Typography
-          variant="h6"
-          gutterBottom
-          component="div"
-          align="center"
-        >
-          Faucet Balance
-        </Typography>
-        <Typography
-          variant="subtitle1"
-          gutterBottom
-          component="div"
-          align="center"
-        >
-          {`${new BigNumber(wallet.faucetBalance).dividedBy(`1e${wallet.dp}`).toString()} ${wallet.ticker}`}
-        </Typography>
-      </Grid>
+        {`${new BigNumber(wallet.liability).dividedBy(`1e${wallet.dp}`).toString()} ${wallet.ticker}`}
+      </Typography>
     </Grid>
-  )
-}
+
+    <Grid
+      item
+      xs={6}
+      sm={6}
+      md={4}
+      lg={3}
+      xl={3}
+      className="zindexOne"
+      justifyContent="center"
+    >
+      <Typography
+        variant="h6"
+        gutterBottom
+        component="div"
+        align="center"
+      >
+        Balance
+      </Typography>
+      <Typography
+        variant="subtitle1"
+        gutterBottom
+        component="div"
+        align="center"
+      >
+        {`${new BigNumber(wallet.balance).dividedBy(`1e${wallet.dp}`).toString()} ${wallet.ticker}`}
+      </Typography>
+    </Grid>
+    <Grid
+      item
+      xs={6}
+      sm={6}
+      md={4}
+      lg={3}
+      xl={3}
+      className="zindexOne"
+      justifyContent="center"
+    >
+      <Typography
+        variant="h6"
+        gutterBottom
+        component="div"
+        align="center"
+      >
+        Difference
+      </Typography>
+      <Typography
+        variant="subtitle1"
+        gutterBottom
+        component="div"
+        align="center"
+      >
+        {`${new BigNumber(wallet.balance).minus(wallet.liability).dividedBy(`1e${wallet.dp}`).toString()} ${wallet.ticker}`}
+      </Typography>
+    </Grid>
+    <Grid
+      item
+      xs={6}
+      sm={6}
+      md={4}
+      lg={3}
+      xl={3}
+      className="zindexOne"
+      justifyContent="center"
+    >
+      <Typography
+        variant="h6"
+        gutterBottom
+        component="div"
+        align="center"
+      >
+        Faucet Balance
+      </Typography>
+      <Typography
+        variant="subtitle1"
+        gutterBottom
+        component="div"
+        align="center"
+      >
+        {`${new BigNumber(wallet.faucetBalance).dividedBy(`1e${wallet.dp}`).toString()} ${wallet.ticker}`}
+      </Typography>
+    </Grid>
+  </Grid>
+)
 
 const Home = function (props) {
   const {
     auth,
     nodeStatus,
     adminWallet,
-    patchDeposits,
     blockNumber,
   } = props;
   const dispatch = useDispatch();
@@ -194,10 +189,6 @@ const Home = function (props) {
       blockNumber,
     ],
   );
-
-  const patchDepositsFunction = () => {
-    dispatch(patchDepositsAction())
-  }
 
   return (
     <div className="height100 content">
@@ -315,31 +306,11 @@ const Home = function (props) {
         <Divider
           style={{ width: '100%' }}
         />
-
         <Grid
           align="center"
           justifyContent="center"
           item
-          xs={4}
-        >
-          {
-            patchDeposits.isFetching ? (
-              <CircularProgress />
-            ) : (
-              <Button
-                variant="contained"
-                onClick={() => patchDepositsFunction()}
-              >
-                Patch Deposits
-              </Button>
-            )
-          }
-        </Grid>
-        <Grid
-          align="center"
-          justifyContent="center"
-          item
-          xs={4}
+          xs={12}
         >
           {
             blockNumber.isFetching ? (
@@ -406,9 +377,7 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
   nodeStatus: state.nodeStatus,
   adminWallet: state.adminWallet,
-  patchDeposits: state.patchDeposits,
   blockNumber: state.blockNumber,
-  startSync: state.startSync,
   dp: state.dp,
 })
 
