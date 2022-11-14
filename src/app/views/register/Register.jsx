@@ -14,7 +14,7 @@ import {
   Box,
 } from '@mui/material';
 import Captcha from '../../components/Captcha';
-import { signupUser } from '../../actions';
+import { signupUser } from '../../actions/auth';
 import PasswordField from '../../components/form/PasswordField';
 import TextField from '../../components/form/TextField';
 

@@ -20,7 +20,7 @@ import speakeasy from 'speakeasy';
 import QRCode from 'qrcode';
 import {
   enabletfa,
-  idleEnabletfa,
+  // idleEnabletfa,
 } from '../../actions/tfa';
 import NumberField from '../form/NumberField';
 

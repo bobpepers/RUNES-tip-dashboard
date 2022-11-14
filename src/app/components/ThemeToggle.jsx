@@ -10,7 +10,7 @@ import {
   Brightness3,
   WbSunny,
 } from '@mui/icons-material';
-import { changeTheme } from '../actions';
+import { changeTheme } from '../actions/changeTheme';
 
 const ThemeSwitch = withStyles(Switch, (_theme, _params, classes) => ({
   switchBase: {
