@@ -20,7 +20,6 @@ import ActivityFilter from '../containers/filters/ActivityFilter';
 import { withRouter } from '../hooks/withRouter';
 import { fetchNodeStatusAction } from '../actions/nodeStatus';
 import { fetchBlockNumberAction } from '../actions/blockNumber';
-import { startSyncAction } from '../actions/startSync';
 import { patchDepositsAction } from '../actions/patchDeposits';
 import { fetchAdminWalletAction } from '../actions/adminWallet';
 
@@ -155,7 +154,6 @@ const Home = function (props) {
     adminWallet,
     patchDeposits,
     blockNumber,
-    startSync,
   } = props;
   const dispatch = useDispatch();
 
@@ -182,7 +180,6 @@ const Home = function (props) {
     }
   }, [
     auth,
-    startSync,
   ]);
 
   useEffect(
@@ -200,9 +197,6 @@ const Home = function (props) {
 
   const patchDepositsFunction = () => {
     dispatch(patchDepositsAction())
-  }
-  const startSyncFunction = () => {
-    dispatch(startSyncAction())
   }
 
   return (
@@ -361,27 +355,6 @@ const Home = function (props) {
           }
 
         </Grid>
-        <Grid
-          align="center"
-          justifyContent="center"
-          item
-          xs={4}
-        >
-          {
-            startSync.isFetching ? (
-              <CircularProgress />
-            ) : (
-              <Button
-                variant="contained"
-                onClick={() => startSyncFunction()}
-              >
-                Start Sync
-              </Button>
-            )
-          }
-
-        </Grid>
-
       </Grid>
 
       <Grid
