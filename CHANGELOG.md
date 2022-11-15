@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.26](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.25...v0.0.26) (2022-11-15)
+
+
+### Features
+
+* ✨ discordTipMessageChannelId: edit field, action, reducer (server/group) ([e211038](https://github.com/bobpepers/runes-tip-dashboard/commit/e21103847d761eaac56cacf7ffb20e98b1feb147))
+
+
+### Bug Fixes
+
+* 🐛 Fix missed error from recent changes ([d1d575c](https://github.com/bobpepers/runes-tip-dashboard/commit/d1d575c290f8d373b8e665fdcf79756d8071986a))
+
+
+### Refactor
+
+* ♻️ remove actions index.js ([b3d844b](https://github.com/bobpepers/runes-tip-dashboard/commit/b3d844bcd8bbb27d8e17126eaba49d0042237c8f))
+* ⚰️ Remove deprecated start sync ([c45addc](https://github.com/bobpepers/runes-tip-dashboard/commit/c45addce5e9f388dff71cb35889f299d59484e33))
+* ⚰️ Remove manual deposit patcher ([b602d1f](https://github.com/bobpepers/runes-tip-dashboard/commit/b602d1fedfe4bc09d586dac5b04fe945170048d3))
+
 ### [0.0.25](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.24...v0.0.25) (2022-11-12)
 
 
