@@ -39,7 +39,7 @@ const renderWalletBalances = (
   <Typography variant="subtitle1" gutterBottom component="div">
     balances:
     {
-      activity.earner.wallets.map((wallet) => (
+      activity.earner && activity.earner.wallets.map((wallet) => (
         <>
           <br />
           {new BigNumber(wallet.available).plus(wallet.locked).dividedBy(`1e${wallet.coin.dp}`).toString()}
