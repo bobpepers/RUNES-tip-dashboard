@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-// import { useDispatch } from 'react-redux';
+import React, {
+  useState,
+} from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from 'tss-react/mui';
 import {
   Table,
   Button,
@@ -14,9 +14,12 @@ import {
   TableSortLabel,
   FormControlLabel,
   Switch,
+  TextField,
 } from '@mui/material';
+import { useDispatch } from 'react-redux';
 import BanDialog from './BanDialog';
 import LeaveServer from '../dialogs/LeaveServer';
+import { editServerAction } from '../../actions/editServer';
 
 const headCells = [
   {
@@ -30,6 +33,12 @@ const headCells = [
   },
   {
     id: 'lastActive', numeric: true, disablePadding: false, label: 'last active',
+  },
+  {
+    id: 'discordTipMessageChannel', numeric: true, disablePadding: false, label: 'discordTipMessageChannel',
+  },
+  {
+    id: 'edit', numeric: true, disablePadding: false, label: 'edit',
   },
   {
     id: 'isInServer', numeric: true, disablePadding: false, label: 'Is in Server',
@@ -46,6 +55,7 @@ function createData(
   lastActive,
   isInServer,
   banned,
+  discordTipMessageChannelId,
 ) {
   return {
     id,
@@ -54,6 +64,7 @@ function createData(
     lastActive,
     isInServer,
     banned,
+    discordTipMessageChannelId,
   };
 }
 
@@ -85,9 +96,9 @@ function stableSort(array, comparator) {
 
 function EnhancedTableHead(props) {
   const {
-    classes,
     onSelectAllClick,
-    order, orderBy,
+    order,
+    orderBy,
     numSelected,
     rowCount,
     onRequestSort,
@@ -114,7 +125,7 @@ function EnhancedTableHead(props) {
             >
               {headCell.label}
               {orderBy === headCell.id ? (
-                <span className={classes.visuallyHidden}>
+                <span>
                   {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
                 </span>
               ) : null}
@@ -127,7 +138,6 @@ function EnhancedTableHead(props) {
 }
 
 EnhancedTableHead.propTypes = {
-  classes: PropTypes.object.isRequired,
   numSelected: PropTypes.number.isRequired,
   onRequestSort: PropTypes.func.isRequired,
   onSelectAllClick: PropTypes.func.isRequired,
@@ -135,26 +145,6 @@ EnhancedTableHead.propTypes = {
   orderBy: PropTypes.string.isRequired,
   rowCount: PropTypes.number.isRequired,
 };
-
-const useStyles = makeStyles()((theme) => ({
-  root: {
-    width: '100%',
-  },
-  table: {
-    minWidth: 750,
-  },
-  visuallyHidden: {
-    border: 0,
-    clip: 'rect(0 0 0 0)',
-    height: 1,
-    margin: -1,
-    overflow: 'hidden',
-    padding: 0,
-    position: 'absolute',
-    top: 20,
-    width: 1,
-  },
-}));
 
 function ServerTable(props) {
   const {
@@ -168,10 +158,10 @@ function ServerTable(props) {
     totalCount,
   } = props;
   const rows = [];
+  const dispatch = useDispatch();
 
   servers.forEach((item) => {
-    console.log('item');
-    console.log(item);
+    // console.log(item);
     rows.push(
       createData(
         item.id,
@@ -180,11 +170,11 @@ function ServerTable(props) {
         item.lastActive,
         item.isInServer,
         item.banned,
+        item.discordTipMessageChannelId,
       ),
     );
   });
 
-  const { classes } = useStyles();
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('id');
   const [selected, setSelected] = useState([]);
@@ -240,17 +230,54 @@ function ServerTable(props) {
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
+  const [inEditMode, setinEditMode] = useState({
+    status: false,
+    rowKey: null,
+  });
+  const [unitDiscordTipMessageChannel, setUnitDiscordTipMessageChannel] = useState(null);
+
+  const onSaveEdit = async ({ id }) => {
+    await dispatch(editServerAction(
+      id,
+      unitDiscordTipMessageChannel,
+    ));
+
+    setinEditMode({
+      status: false,
+      rowKey: null,
+    })
+    setUnitDiscordTipMessageChannel(null);
+  }
+
+  const onEdit = ({
+    id,
+    currentUnitDiscordTipMessageChannel,
+  }) => {
+    console.log(currentUnitDiscordTipMessageChannel);
+    setinEditMode({
+      status: true,
+      rowKey: id,
+    })
+    setUnitDiscordTipMessageChannel(currentUnitDiscordTipMessageChannel);
+  }
+
+  const onCancelEdit = () => {
+    setinEditMode({
+      status: false,
+      rowKey: null,
+    })
+    setUnitDiscordTipMessageChannel(null);
+  }
+
   return (
-    <div className={classes.root}>
+    <div>
       <TableContainer>
         <Table
-          className={classes.table}
           aria-labelledby="tableTitle"
           size={dense ? 'small' : 'medium'}
           aria-label="enhanced table"
         >
           <EnhancedTableHead
-            classes={classes}
             numSelected={selected.length}
             order={order}
             orderBy={orderBy}
@@ -279,11 +306,68 @@ function ServerTable(props) {
                         {row.id}
                       </p>
                     </TableCell>
-                    <TableCell align="right">{row.groupId}</TableCell>
-                    <TableCell align="right">{row.groupName}</TableCell>
-
+                    <TableCell align="right">
+                      {row.groupId}
+                    </TableCell>
+                    <TableCell align="right">
+                      {row.groupName}
+                    </TableCell>
                     <TableCell align="right">
                       {row.lastActive}
+                    </TableCell>
+                    <TableCell align="right">
+                      {
+                        inEditMode.status && inEditMode.rowKey === row.id ? (
+                          <TextField
+                            value={unitDiscordTipMessageChannel}
+                            onChange={(event) => setUnitDiscordTipMessageChannel(event.target.value)}
+                          />
+
+                        ) : (
+                          row.discordTipMessageChannelId
+                        )
+                      }
+                    </TableCell>
+                    <TableCell align="right">
+                      {
+                        inEditMode.status && inEditMode.rowKey === row.id ? (
+                          <>
+                            <Button
+                              variant="contained"
+                              color="primary"
+                              size="large"
+                              onClick={() => onSaveEdit({
+                                id: row.id,
+                                discordTipMessageChannel: unitDiscordTipMessageChannel,
+                              })}
+                            >
+                              Save
+                            </Button>
+
+                            <Button
+                              variant="contained"
+                              color="primary"
+                              size="large"
+                              style={{ marginLeft: 8 }}
+                              onClick={() => onCancelEdit()}
+                            >
+                              Cancel
+                            </Button>
+                          </>
+                        ) : (
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            size="large"
+                            onClick={() => onEdit({
+                              id: row.id,
+                              currentUnitDiscordTipMessageChannel: row.discordTipMessageChannelId,
+                            })}
+                          >
+                            Edit
+                          </Button>
+                        )
+                      }
                     </TableCell>
                     <TableCell align="right">
                       {

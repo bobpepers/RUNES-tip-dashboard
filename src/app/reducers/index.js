@@ -29,6 +29,7 @@ import userInfo from './userInfo';
 import withdrawalAddresses from './withdrawalAddresses';
 import withdrawalAddress from './withdrawalAddress';
 import leaveServer from './leaveServer';
+import editServer from './editServer';
 import adminWallet from './adminWallet';
 
 import coins from './coins';
@@ -75,6 +76,7 @@ const store = configureStore({
     errors,
     userInfo,
     leaveServer,
+    editServer,
 
     withdrawalAddresses,
     withdrawalAddress,

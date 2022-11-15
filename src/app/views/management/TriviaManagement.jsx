@@ -173,6 +173,7 @@ const TriviaManagement = function (props) {
     })
     setUnitAnswer(null);
   }
+
   const onCancelEditQuestion = () => {
     setinEditModeAnswer({
       status: false,
