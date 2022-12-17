@@ -14,7 +14,7 @@ import {
   connect,
   useDispatch,
 } from 'react-redux';
-import * as qs from 'query-string';
+import queryString from 'query-string';
 import {
   Button,
   Grid,
@@ -34,7 +34,7 @@ function ResetPasswordNew(props) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const parsed = qs.parse(location.search);
+    const parsed = queryString.parse(location.search);
     const { email } = parsed;
     const { token } = parsed;
     dispatch(verifyResetPassword({ email, token }));
@@ -104,7 +104,7 @@ function ResetPasswordNew(props) {
               >
                 <Form
                   onSubmit={async (values) => {
-                    const parsed = qs.parse(location.search);
+                    const parsed = queryString.parse(location.search);
                     values.email = parsed.email;
                     values.token = parsed.token;
                     await dispatch(resetPasswordNew(values, navigate));

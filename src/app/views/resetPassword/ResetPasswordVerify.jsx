@@ -6,7 +6,7 @@ import {
   connect,
   useDispatch,
 } from 'react-redux';
-import * as qs from 'query-string';
+import queryString from 'query-string';
 import {
   Button,
   Grid,
@@ -29,7 +29,7 @@ function ResetPasswordVerify(props) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const parsed = qs.parse(location.search);
+    const parsed = queryString.parse(location.search);
     setEmail(parsed.email);
     if (!props.resetPasswordProgress || email === '') {
       // navigate('/signup');
