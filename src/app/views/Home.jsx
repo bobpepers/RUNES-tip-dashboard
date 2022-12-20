@@ -263,8 +263,8 @@ const Home = function (props) {
           xs={6}
           sm={6}
           md={4}
-          lg={3}
-          xl={3}
+          lg={4}
+          xl={4}
           className="zindexOne"
           justifyContent="center"
         >
