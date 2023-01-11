@@ -24,6 +24,7 @@ import Servers from './views/management/Servers';
 import UserView from './views/management/User';
 import Channels from './views/management/Channels';
 import TriviaManagement from './views/management/TriviaManagement';
+import TriviaCategoryManagement from './views/management/TriviaCategoryManagement';
 import Users from './views/management/Users';
 import BotSettings from './views/management/BotSettings';
 import Features from './views/management/Features';
@@ -368,6 +369,10 @@ const RoutesX = function (props) {
         <Route
           path="/management/trivia"
           element={<TriviaManagement />}
+        />
+        <Route
+          path="/management/trivia/categories"
+          element={<TriviaCategoryManagement />}
         />
         <Route
           path="/management/pricecurrencies"

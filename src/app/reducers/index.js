@@ -18,6 +18,7 @@ import botSettings from './botSettings';
 import acceptWithdrawal from './acceptWithdrawal';
 import declineWithdrawal from './declineWithdrawal';
 import blockNumber from './blockNumber';
+import triviaCategories from './triviaCategories';
 import triviaQuestions from './triviaQuestions';
 import insertTrivia from './insertTrivia';
 import removeTrivia from './removeTrivia';
@@ -68,6 +69,7 @@ const store = configureStore({
     declineWithdrawal,
     botSettings,
     blockNumber,
+    triviaCategories,
     triviaQuestions,
     insertTrivia,
     removeTrivia,

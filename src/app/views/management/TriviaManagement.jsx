@@ -7,11 +7,14 @@ import {
   connect,
   useDispatch,
 } from 'react-redux';
-import CircularProgress from '@mui/material/CircularProgress';
 import {
   Grid,
   Button,
   TextField,
+  MenuItem,
+  InputLabel,
+  FormControl,
+  Select,
 } from '@mui/material';
 import { withRouter } from '../../hooks/withRouter';
 import {
@@ -22,6 +25,9 @@ import {
   updateTriviaQuestionAction,
   updateTriviaAnswerAction,
 } from '../../actions/trivia';
+import {
+  fetchTriviaCategories,
+} from '../../actions/triviaCategories';
 
 const TriviaManagement = function (props) {
   const {
@@ -29,6 +35,7 @@ const TriviaManagement = function (props) {
     triviaQuestions,
     removeTrivia,
     insertTrivia,
+    triviaCategories,
   } = props;
   // const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -36,27 +43,28 @@ const TriviaManagement = function (props) {
   useEffect(() => {
     if (auth.authenticated) {
       dispatch(fetchTriviaQuestions());
+      dispatch(fetchTriviaCategories());
     }
   }, [
     auth,
   ]);
 
   useEffect(
-    () => {
-      console.log(auth);
-      console.log('--------------------------');
-      console.log(triviaQuestions);
-    },
+    () => { },
     [
       auth,
       triviaQuestions,
       removeTrivia,
       insertTrivia,
+      triviaCategories,
     ],
   );
 
   const [inputAnswerList, setInputAnswerList] = useState([{ answer: '', correct: 'false' }]);
   const [inputQuestion, setInputQuestion] = useState('');
+  const [category, setCategory] = useState('None');
+  const [unitCategory, setUnitCategory] = useState('None');
+
   const [inEditModeAnswer, setinEditModeAnswer] = useState({
     status: false,
     rowKey: null,
@@ -69,7 +77,6 @@ const TriviaManagement = function (props) {
   const [unitQuestion, setUnitQuestion] = useState(null);
 
   const handleInputAnswerChange = (e, index) => {
-    console.log(e);
     const { name, value } = e.target;
     const list = [...inputAnswerList];
     list[index][name] = value;
@@ -77,7 +84,6 @@ const TriviaManagement = function (props) {
   };
 
   const handleInputQuestionChange = (e) => {
-    console.log(e);
     const { value } = e.target;
     setInputQuestion(value);
   };
@@ -86,9 +92,11 @@ const TriviaManagement = function (props) {
     dispatch(insertTriviaAction({
       question: inputQuestion,
       answers: inputAnswerList,
+      category,
     }));
     setInputAnswerList([{ answer: '', correct: 'false' }]);
     setInputQuestion('');
+    setCategory('None');
   };
 
   const handleRemoveClick = (index) => {
@@ -119,20 +127,19 @@ const TriviaManagement = function (props) {
     id,
     currentUnitAnswer,
   }) => {
-    console.log(currentUnitAnswer);
     setinEditModeAnswer({
       status: true,
       rowKey: id,
     })
     setUnitAnswer(currentUnitAnswer);
-    console.log(unitAnswer);
   }
 
   const onEditQuestion = ({
     id,
     currentUnitQuestion,
+    currentUnitCategory,
   }) => {
-    console.log(currentUnitQuestion);
+    setUnitCategory(currentUnitCategory);
     setinEditModeQuestion({
       status: true,
       rowKey: id,
@@ -157,6 +164,7 @@ const TriviaManagement = function (props) {
     await dispatch(updateTriviaQuestionAction(
       id,
       unitQuestion,
+      unitCategory,
     ));
 
     setinEditModeQuestion({
@@ -164,6 +172,7 @@ const TriviaManagement = function (props) {
       rowKey: null,
     })
     setUnitQuestion(null);
+    setUnitCategory('None');
   }
 
   const onCancelEditAnswer = () => {
@@ -175,11 +184,16 @@ const TriviaManagement = function (props) {
   }
 
   const onCancelEditQuestion = () => {
-    setinEditModeAnswer({
+    setinEditModeQuestion({
       status: false,
       rowKey: null,
     })
     setUnitQuestion(null);
+    setUnitCategory('None');
+  }
+
+  const handleChangeCategory = (e) => {
+    setCategory(e.target.value);
   }
 
   return (
@@ -198,6 +212,27 @@ const TriviaManagement = function (props) {
             onChange={(e) => handleInputQuestionChange(e)}
           />
         </Grid>
+        <Grid item xs={12}>
+          <FormControl fullWidth>
+            <InputLabel id="category-select-label">Category</InputLabel>
+            <Select
+              labelId="category-select-label"
+              id="category-select"
+              value={category}
+              label="Category"
+              onChange={handleChangeCategory}
+            >
+              <MenuItem key="category-none" value="None">None</MenuItem>
+              [
+              {triviaCategories
+              && triviaCategories.data
+              && triviaCategories.data.map((x) => (
+                <MenuItem key={x.name} value={x.id}>{x.name}</MenuItem>
+              ))}
+              ]
+            </Select>
+          </FormControl>
+        </Grid>
         <Grid item xs={12}>Answers:</Grid>
         <Grid item xs={12}>
           {inputAnswerList.map((x, i) => (
@@ -213,18 +248,20 @@ const TriviaManagement = function (props) {
                 />
               </Grid>
               <Grid item xs={2}>
-                <select
-                  onChange={(e) => handleInputAnswerChange(e, i)}
-                  name="correct"
-                  style={{ fontSize: '30px' }}
-                >
-                  <option value="false">
-                    incorrect
-                  </option>
-                  <option value="true">
-                    correct
-                  </option>
-                </select>
+                <FormControl fullWidth>
+                  <Select
+                    onChange={(e) => handleInputAnswerChange(e, i)}
+                    name="correct"
+                    value={inputAnswerList[i].correct || 'false'}
+                  >
+                    <MenuItem value="false">
+                      incorrect
+                    </MenuItem>
+                    <MenuItem value="true">
+                      correct
+                    </MenuItem>
+                  </Select>
+                </FormControl>
               </Grid>
               <Grid item xs={2}>
                 {inputAnswerList.length !== 1 && (
@@ -275,7 +312,7 @@ const TriviaManagement = function (props) {
             <>
               <Grid container style={{ border: 'solid 1px black' }}>
                 <Grid item xs={1}>{d.id}</Grid>
-                <Grid item xs={6}>
+                <Grid item xs={5}>
                   {
                     inEditModeQuestion.status && inEditModeQuestion.rowKey === d.id ? (
                       <TextField
@@ -285,6 +322,39 @@ const TriviaManagement = function (props) {
 
                     ) : (
                       d.question
+                    )
+                  }
+                </Grid>
+                <Grid item xs={1}>
+                  {
+                    inEditModeQuestion.status && inEditModeQuestion.rowKey === d.id ? (
+                      <FormControl fullWidth>
+                        <InputLabel id="unitCategory-select-label">Category</InputLabel>
+                        <Select
+                          labelId="unitCategory-select-label"
+                          id="unitCategory-select"
+                          value={unitCategory}
+                          label="UnitCategory"
+                          onChange={(event) => {
+                            setUnitCategory(event.target.value)
+                          }}
+                        >
+                          <MenuItem key="unitCategory-none" value="None">None</MenuItem>
+                          {triviaCategories
+                            && triviaCategories.data
+                            && triviaCategories.data.map((x) => (
+                              <MenuItem
+                                key={x.name}
+                                value={x.id}
+                              >
+                                {x.name}
+                              </MenuItem>
+                            ))}
+
+                        </Select>
+                      </FormControl>
+                    ) : (
+                      d.triviaquestionCategory && d.triviaquestionCategory.name
                     )
                   }
                 </Grid>
@@ -304,6 +374,7 @@ const TriviaManagement = function (props) {
                           onClick={() => onSaveEditQuestion({
                             id: d.id,
                             question: unitQuestion,
+                            category: unitCategory,
                           })}
                         >
                           Save
@@ -327,6 +398,7 @@ const TriviaManagement = function (props) {
                         onClick={() => onEditQuestion({
                           id: d.id,
                           currentUnitQuestion: d.question,
+                          currentUnitCategory: d.triviaquestionCategory && d.triviaquestionCategory.id ? d.triviaquestionCategory.id : 'None',
                         })}
                       >
                         Edit
@@ -433,6 +505,7 @@ const mapStateToProps = (state) => ({
   triviaQuestions: state.triviaQuestions,
   removeTrivia: state.removeTrivia,
   insertTrivia: state.insertTrivia,
+  triviaCategories: state.triviaCategories,
 })
 
 export default withRouter(connect(mapStateToProps, null)(TriviaManagement));

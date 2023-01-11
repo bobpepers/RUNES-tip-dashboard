@@ -52,6 +52,7 @@ export function switchTriviaAction(id) {
 export function updateTriviaQuestionAction(
   id,
   question,
+  category,
 ) {
   return function (dispatch) {
     dispatch({
@@ -60,6 +61,7 @@ export function updateTriviaQuestionAction(
     axios.post(`${window.myConfig.apiUrl}/management/trivia/question/edit`, {
       id,
       question,
+      category,
     }).then((response) => {
       dispatch({
         type: UPDATE_TRIVIA_QUESTION,
