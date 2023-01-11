@@ -1,6 +1,6 @@
 {
   "name": "runestip-dashboard",
-  "version": "0.0.30",
+  "version": "0.0.31",
   "description": "Admin dashboard for RUNES-tip",
   "scripts": {
     "extract": "lingui extract",
@@ -70,7 +70,7 @@
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jsx-a11y": "^6.7.0",
-    "eslint-plugin-react": "^7.31.11",
+    "eslint-plugin-react": "^7.32.0",
     "html-webpack-plugin": "^5.5.0",
     "image-minimizer-webpack-plugin": "^3.8.1",
     "imagemin": "^8.0.1",
@@ -106,7 +106,7 @@
     "axios": "^1.2.2",
     "babel-runtime": "^6.26.0",
     "bignumber.js": "^9.1.1",
-    "final-form": "^4.20.7",
+    "final-form": "^4.20.8",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "node-sass": "^8.0.0",
