@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.32](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.31...v0.0.32) (2023-01-15)
+
+
+### Features
+
+* ✨ rpc transaction history view ([57053ac](https://github.com/bobpepers/runes-tip-dashboard/commit/57053acda58ee5883d80101df03e5496b2bd7e39))
+
 ### [0.0.31](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.30...v0.0.31) (2023-01-11)
 
 
