@@ -42,6 +42,7 @@ import LoginTFA from './views/login/Login2FA';
 import LogoutView from './views/Logout';
 import CoinsView from './views/management/Coins';
 import { authenticatedAction } from './actions/auth';
+import TransactionHistoryManagement from './views/management/TransactionHistory'
 
 const RequireAuth = function (props) {
   const {
@@ -369,6 +370,10 @@ const RoutesX = function (props) {
         <Route
           path="/management/trivia"
           element={<TriviaManagement />}
+        />
+        <Route
+          path="/management/transaction/history"
+          element={<TransactionHistoryManagement />}
         />
         <Route
           path="/management/trivia/categories"

@@ -205,6 +205,14 @@ function Header(
             WithdrawalAddresses
           </MenuItem>
         </Link>
+        <Link
+          className="nav-link"
+          to="/management/transaction/history"
+        >
+          <MenuItem onClick={handleCloseManagement}>
+            Transaction History
+          </MenuItem>
+        </Link>
       </Menu>
 
       <Button

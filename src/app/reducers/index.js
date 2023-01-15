@@ -40,6 +40,7 @@ import deleteCoinInfoHint from './deleteCoinInfoHint';
 
 import botFunctions from './botFunctions';
 import botFunction from './botFunction';
+import transactionHistory from './transactionHistory';
 
 const store = configureStore({
   reducer: {
@@ -85,6 +86,8 @@ const store = configureStore({
 
     botFunctions,
     botFunction,
+
+    transactionHistory,
   },
 })
 
