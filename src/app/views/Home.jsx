@@ -21,9 +21,12 @@ import { withRouter } from '../hooks/withRouter';
 import { fetchNodeStatusAction } from '../actions/nodeStatus';
 import { fetchBlockNumberAction } from '../actions/blockNumber';
 import { fetchAdminWalletAction } from '../actions/adminWallet';
+import { collectEarningsAction } from '../actions/collectEarnings';
 
 const renderWallet = (
   wallet,
+  collectEarningsFunction,
+  collectEarnings,
 ) => (
   <Grid
     container
@@ -56,6 +59,11 @@ const renderWallet = (
         align="center"
       >
         {`${new BigNumber(wallet.liability).dividedBy(`1e${wallet.dp}`).toString()} ${wallet.ticker}`}
+        {' '}
+        (≈$
+        {new BigNumber(wallet.liability).dividedBy(`1e${wallet.dp}`).times(wallet.price).dp(4)
+          .toString()}
+        )
       </Typography>
     </Grid>
 
@@ -84,6 +92,11 @@ const renderWallet = (
         align="center"
       >
         {`${new BigNumber(wallet.balance).dividedBy(`1e${wallet.dp}`).toString()} ${wallet.ticker}`}
+        {' '}
+        (≈$
+        {new BigNumber(wallet.balance).dividedBy(`1e${wallet.dp}`).times(wallet.price).dp(4)
+          .toString()}
+        )
       </Typography>
     </Grid>
     <Grid
@@ -111,6 +124,12 @@ const renderWallet = (
         align="center"
       >
         {`${new BigNumber(wallet.balance).minus(wallet.liability).dividedBy(`1e${wallet.dp}`).toString()} ${wallet.ticker}`}
+        {' '}
+        (≈$
+        {new BigNumber(wallet.balance).minus(wallet.liability).dividedBy(`1e${wallet.dp}`).times(wallet.price)
+          .dp(4)
+          .toString()}
+        )
       </Typography>
     </Grid>
     <Grid
@@ -138,8 +157,49 @@ const renderWallet = (
         align="center"
       >
         {`${new BigNumber(wallet.faucetBalance).dividedBy(`1e${wallet.dp}`).toString()} ${wallet.ticker}`}
+        {' '}
+        (≈$
+        {new BigNumber(wallet.faucetBalance).dividedBy(`1e${wallet.dp}`).times(wallet.price)
+          .dp(4)
+          .toString()}
+        )
       </Typography>
     </Grid>
+    <Grid
+      item
+      xs={12}
+      sm={12}
+      md={12}
+      lg={12}
+      xl={12}
+      className="zindexOne"
+      justifyContent="center"
+      align="center"
+    >
+      {
+        collectEarnings && collectEarnings.isLoading ? (
+          <CircularProgress />
+        ) : (
+          <Button
+            variant="contained"
+            disabled={new BigNumber(wallet.balance).minus(wallet.liability).lte(0)}
+            onClick={() => collectEarningsFunction(
+              wallet.id,
+              wallet.ticker,
+            )}
+          >
+            Collect
+            {' '}
+            {wallet.ticker}
+            {' '}
+            Earnings
+          </Button>
+        )
+      }
+    </Grid>
+    <Divider
+      style={{ width: '100%' }}
+    />
   </Grid>
 )
 
@@ -149,6 +209,7 @@ const Home = function (props) {
     nodeStatus,
     adminWallet,
     blockNumber,
+    collectEarnings,
   } = props;
   const dispatch = useDispatch();
 
@@ -175,6 +236,7 @@ const Home = function (props) {
     }
   }, [
     auth,
+    collectEarnings,
   ]);
 
   useEffect(
@@ -189,6 +251,16 @@ const Home = function (props) {
       blockNumber,
     ],
   );
+
+  const collectEarningsFunction = (
+    coinId,
+    ticker,
+  ) => {
+    dispatch(collectEarningsAction(
+      coinId,
+      ticker,
+    ))
+  }
 
   return (
     <div className="height100 content">
@@ -292,7 +364,11 @@ const Home = function (props) {
       {
         adminWallet
       && adminWallet.data
-      && adminWallet.data.map((wallet) => renderWallet(wallet))
+      && adminWallet.data.map((wallet) => renderWallet(
+        wallet,
+        collectEarningsFunction,
+        collectEarnings,
+      ))
       }
 
       <Grid
@@ -378,7 +454,7 @@ const mapStateToProps = (state) => ({
   nodeStatus: state.nodeStatus,
   adminWallet: state.adminWallet,
   blockNumber: state.blockNumber,
-  dp: state.dp,
+  collectEarnings: state.collectEarnings,
 })
 
 export default withRouter(connect(mapStateToProps, null)(Home));

@@ -1,33 +1,33 @@
 import {
-  SWITCH_TRIVIA_BEGIN,
-  SWITCH_TRIVIA_SUCCESS,
-  SWITCH_TRIVIA_FAIL,
+  COLLECT_EARNINGS_BEGIN,
+  COLLECT_EARNINGS_SUCCESS,
+  COLLECT_EARNINGS_FAIL,
 } from '../actions/types/index';
 
 const initialState = {
-  isFetching: false, // Default to fetching..
+  isLoading: false, // Default to fetching..
   error: null,
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-  case SWITCH_TRIVIA_BEGIN:
+  case COLLECT_EARNINGS_BEGIN:
     return {
       ...state,
-      isFetching: true,
+      isLoading: true,
       error: null,
     };
-  case SWITCH_TRIVIA_SUCCESS:
+  case COLLECT_EARNINGS_SUCCESS:
     return {
       ...state,
       data: action.payload,
-      isFetching: false,
+      isLoading: false,
     };
-  case SWITCH_TRIVIA_FAIL:
+  case COLLECT_EARNINGS_FAIL:
     return {
       ...state,
       error: action.error,
-      isFetching: false,
+      isLoading: false,
     };
   default:
     return state;
