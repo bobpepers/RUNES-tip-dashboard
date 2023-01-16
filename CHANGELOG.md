@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.33](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.32...v0.0.33) (2023-01-16)
+
+
+### Features
+
+* ✨ Add estimated value to overview, add collect earnings button ([36b8d82](https://github.com/bobpepers/runes-tip-dashboard/commit/36b8d8261850e8f3bcfd525be7188821bf884b59))
+
 ### [0.0.32](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.31...v0.0.32) (2023-01-15)
 
 
