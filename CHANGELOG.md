@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.34](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.33...v0.0.34) (2023-01-27)
+
+
+### Bug Fixes
+
+* header proptype warning, renderWallet key warning ([76f217f](https://github.com/bobpepers/runes-tip-dashboard/commit/76f217fa1f27e4ba4948bd00127d03b14a17409a))
+
+
+### Performance
+
+* Prop Types (Activity component) ([a3871ec](https://github.com/bobpepers/runes-tip-dashboard/commit/a3871ec739bf35983f87aebf6d82dcdf3e4a928c))
+* Prop Types (Activity container) ([c7381f0](https://github.com/bobpepers/runes-tip-dashboard/commit/c7381f0b66d2dfee85c5764ffbb5bbd2234fdd04))
+* Prop Validation (Home) ([8590425](https://github.com/bobpepers/runes-tip-dashboard/commit/85904259d4c14c7bebe3ecb77868f9313a196e3f))
+
 ### [0.0.33](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.32...v0.0.33) (2023-01-16)
 
 

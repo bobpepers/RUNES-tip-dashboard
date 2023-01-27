@@ -1,6 +1,6 @@
 {
   "name": "runestip-dashboard",
-  "version": "0.0.33",
+  "version": "0.0.34",
   "description": "Admin dashboard for RUNES-tip",
   "scripts": {
     "extract": "lingui extract",
