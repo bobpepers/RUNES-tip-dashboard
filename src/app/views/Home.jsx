@@ -241,14 +241,13 @@ const Home = function (props) {
 
   useEffect(
     () => {
-      console.log(auth);
-      console.log(adminWallet);
     },
     [
       auth,
       nodeStatus,
       adminWallet,
       blockNumber,
+      collectEarnings,
     ],
   );
 
@@ -446,7 +445,46 @@ const Home = function (props) {
 }
 
 Home.propTypes = {
-  classes: PropTypes.object.isRequired,
+  auth: PropTypes.shape({
+    authenticated: PropTypes.bool.isRequired,
+    doneLoading: PropTypes.bool.isRequired,
+    error: PropTypes.shape({}),
+  }).isRequired,
+  blockNumber: PropTypes.shape({
+    isFetching: PropTypes.bool.isRequired,
+    data: PropTypes.shape({
+      db: PropTypes.number.isRequired,
+      node: PropTypes.number.isRequired,
+    }),
+  }),
+  adminWallet: PropTypes.shape({
+    data: PropTypes.arrayOf(
+      PropTypes.shape({}),
+    ),
+  }),
+  nodeStatus: PropTypes.shape({
+    data: PropTypes.shape({
+      peers: PropTypes.number.isRequired,
+    }),
+  }),
+  collectEarnings: PropTypes.shape({
+    isLoading: PropTypes.bool.isRequired,
+  }),
+};
+
+Home.defaultProps = {
+  nodeStatus: {
+    data: undefined,
+  },
+  blockNumber: {
+    data: undefined,
+  },
+  adminWallet: {
+    data: undefined,
+  },
+  collectEarnings: {
+    data: undefined,
+  },
 };
 
 const mapStateToProps = (state) => ({
