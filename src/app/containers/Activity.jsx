@@ -11,12 +11,12 @@ import {
   CircularProgress,
 } from '@mui/material';
 import { io } from 'socket.io-client';
+import PropTypes from 'prop-types';
 import {
   fetchActivityAction,
 } from '../actions/activity';
 import ActivityComponent from '../components/Activity';
 import { withRouter } from '../hooks/withRouter';
-
 import {
   INSERT_ACTIVITY,
 } from '../actions/types/index';
@@ -64,8 +64,6 @@ const ActivityContainer = function (props) {
     });
 
     socket.on('updateActivity', (data) => {
-      console.log('updateActivity');
-      console.log(data);
       if (page === 1) {
         if (
           id === ''
@@ -159,6 +157,31 @@ const ActivityContainer = function (props) {
     </Grid>
   )
 }
+
+ActivityContainer.propTypes = {
+  rowsPerPage: PropTypes.number.isRequired,
+  spender: PropTypes.string.isRequired,
+  earner: PropTypes.string.isRequired,
+  amount: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  auth: PropTypes.shape({
+    authenticated: PropTypes.bool.isRequired,
+  }).isRequired,
+  activity: PropTypes.shape({
+    isFetching: PropTypes.bool.isRequired,
+    count: PropTypes.number,
+    data: PropTypes.arrayOf(PropTypes.shape({
+    })),
+  }),
+};
+
+ActivityContainer.defaultProps = {
+  activity: {
+    count: undefined,
+    data: undefined,
+  },
+};
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
