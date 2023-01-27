@@ -11,6 +11,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { useNavigate } from 'react-router-dom';
 import BigNumber from 'bignumber.js';
+import PropTypes from 'prop-types';
 
 const renderEarnedSpendBalance = (
   activity,
@@ -40,12 +41,12 @@ const renderWalletBalances = (
     balances:
     {
       activity.earner && activity.earner.wallets.map((wallet) => (
-        <>
+        <span key={`${wallet.coin.ticker}`}>
           <br />
           {new BigNumber(wallet.available).plus(wallet.locked).dividedBy(`1e${wallet.coin.dp}`).toString()}
           {' '}
           {wallet.coin.ticker}
-        </>
+        </span>
       ))
     }
   </Typography>
@@ -185,7 +186,6 @@ const renderItems = (
 ) => {
   const parent = [];
   data.map((activity) => {
-    console.log(activity);
     parent.push(
       <Grid
         container
@@ -322,15 +322,6 @@ const renderItems = (
 
             {activity.type === 'settings_s' && 'Settings request: success'}
             {activity.type === 'settings_f' && 'Settings Request: fail'}
-
-            <Typography variant="subtitle1" gutterBottom component="div">
-              {activity && activity.flood && activity.flood.floodGroup && `Server: ${activity.flood.floodGroup.groupName}`}
-              {activity && activity.flood && activity.flood.floodtipGroup && `Server: ${activity.flood.floodtipGroup.groupName}`}
-              <br />
-              {activity && activity.flood && activity.flood.floodChannel && `Channel: ${activity.flood.floodChannel.channelName}`}
-              {activity && activity.flood && activity.flood.floodtipChannel && `Channel: ${activity.flood.floodtipChannel.channelName}`}
-            </Typography>
-
           </Grid>
           <Grid
             item
@@ -670,7 +661,6 @@ const ActivityComponent = function (props) {
     page,
     setPage,
   } = props;
-
   const totalPages = totalCount
     ? Math.ceil(totalCount / activitiesPerPage)
     : 0;
@@ -766,5 +756,21 @@ const ActivityComponent = function (props) {
     </Grid>
   )
 }
+
+ActivityComponent.propTypes = {
+  totalCount: PropTypes.number.isRequired,
+  setPage: PropTypes.func.isRequired,
+  activitiesPerPage: PropTypes.number.isRequired,
+  page: PropTypes.number.isRequired,
+  activity: PropTypes.arrayOf(PropTypes.shape({
+  })),
+};
+
+ActivityComponent.defaultProps = {
+  activity: {
+    count: undefined,
+    data: undefined,
+  },
+};
 
 export default ActivityComponent;
