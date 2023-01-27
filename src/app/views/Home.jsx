@@ -33,6 +33,7 @@ const renderWallet = (
     spacing={1}
     justifyContent="center"
     className="zindexOne"
+    key={`${wallet.ticker}`}
   >
     <Grid
       item

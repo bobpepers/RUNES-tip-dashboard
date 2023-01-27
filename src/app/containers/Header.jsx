@@ -27,7 +27,7 @@ function Header(
   props,
 ) {
   const {
-    authenticated,
+    auth,
     user,
   } = props;
   const heightRef = useRef(null);
@@ -45,7 +45,7 @@ function Header(
   useEffect(() => {}, []);
   useEffect(() => {}, [
     user,
-    authenticated,
+    auth,
   ]);
 
   useEffect(() => {
@@ -391,7 +391,7 @@ function Header(
           onClose={handleMenuClose}
         >
           {
-            authenticated.authenticated
+            auth.authenticated
               ? (
                 <div>
                   <MenuItem onClick={handleMenuClose}>
@@ -537,12 +537,14 @@ Header.propTypes = {
   user: PropTypes.shape({
     role: PropTypes.number,
   }).isRequired,
-  authenticated: PropTypes.bool.isRequired,
+  auth: PropTypes.shape({
+    authenticated: PropTypes.bool.isRequired,
+  }).isRequired,
 };
 
 function mapStateToProps(state) {
   return {
-    authenticated: state.auth,
+    auth: state.auth,
     user: state.user.data,
   };
 }
