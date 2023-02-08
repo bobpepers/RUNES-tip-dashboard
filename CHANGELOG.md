@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.35](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.34...v0.0.35) (2023-02-08)
+
+
+### Features
+
+* ✨ Add Uncollected ErcBalances (homedash) ([e0061d5](https://github.com/bobpepers/runes-tip-dashboard/commit/e0061d598bdf6b0dd06a3a81dc78e70d4518cb75))
+
 ### [0.0.34](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.33...v0.0.34) (2023-01-27)
 
 
