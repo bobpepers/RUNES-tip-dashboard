@@ -116,6 +116,38 @@ const renderWallet = (
         component="div"
         align="center"
       >
+        Uncollected ErcBalance
+      </Typography>
+      <Typography
+        variant="subtitle1"
+        gutterBottom
+        component="div"
+        align="center"
+      >
+        {`${new BigNumber(wallet.uncollectedErcBalance).dividedBy(`1e${wallet.dp}`).toString()} ${wallet.ticker}`}
+        {' '}
+        (≈$
+        {new BigNumber(wallet.uncollectedErcBalance).dividedBy(`1e${wallet.dp}`).times(wallet.price).dp(4)
+          .toString()}
+        )
+      </Typography>
+    </Grid>
+    <Grid
+      item
+      xs={6}
+      sm={6}
+      md={4}
+      lg={3}
+      xl={3}
+      className="zindexOne"
+      justifyContent="center"
+    >
+      <Typography
+        variant="h6"
+        gutterBottom
+        component="div"
+        align="center"
+      >
         Difference
       </Typography>
       <Typography
