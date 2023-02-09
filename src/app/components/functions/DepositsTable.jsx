@@ -46,7 +46,9 @@ const headCells = [
   {
     id: 'phase', numeric: true, disablePadding: false, label: 'phase',
   },
-
+  {
+    id: 'collect', numeric: true, disablePadding: false, label: 'collect',
+  },
 ];
 
 function createData(
@@ -61,6 +63,7 @@ function createData(
   userRowId,
   ticker,
   dp,
+  collected,
 ) {
   return {
     id,
@@ -74,6 +77,7 @@ function createData(
     userRowId,
     ticker,
     dp,
+    collected,
   };
 }
 
@@ -214,6 +218,7 @@ const DepositsTable = function (props) {
         item.user ? item.user.id : '',
         item.coin && item.coin.ticker,
         item.coin && item.coin.dp,
+        item.collected,
       ),
     );
   });
@@ -316,14 +321,14 @@ const DepositsTable = function (props) {
                     </TableCell>
                     <TableCell align="right">
                       <Button
-                        onClick={() => navigate(`/user/${row.userRowId}`)}
+                        onClick={() => navigate(`/management/user/${row.userRowId}`)}
                       >
                         {row.userId}
                       </Button>
                     </TableCell>
                     <TableCell align="right">
                       <Button
-                        onClick={() => navigate(`/user/${row.userRowId}`)}
+                        onClick={() => navigate(`/management/user/${row.userRowId}`)}
                       >
                         {row.username}
                       </Button>
@@ -338,8 +343,17 @@ const DepositsTable = function (props) {
                       {' '}
                       {row.ticker}
                     </TableCell>
-                    <TableCell align="right">{row.confirmations}</TableCell>
-                    <TableCell align="right">{row.phase}</TableCell>
+                    <TableCell align="right">
+                      {row.confirmations}
+                    </TableCell>
+                    <TableCell align="right">
+                      {row.phase}
+                    </TableCell>
+                    <TableCell align="right">
+                      {row.collected === 'success' && 'collected'}
+                      {row.collected === 'waiting' && 'waiting to collect'}
+                      {row.collected === 'failed' && 'failed to collect'}
+                    </TableCell>
                   </TableRow>
                 );
               })}
