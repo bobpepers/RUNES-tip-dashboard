@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.36](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.35...v0.0.36) (2023-02-09)
+
+
+### Bug Fixes
+
+* fix user link deposits, add collected column deposits (erc20) ([a509c12](https://github.com/bobpepers/runes-tip-dashboard/commit/a509c12bd354a902ab81bd33f4c0dcff4500a75b))
+
 ### [0.0.35](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.34...v0.0.35) (2023-02-08)
 
 
