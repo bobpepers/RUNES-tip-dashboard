@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.37](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.36...v0.0.37) (2023-02-10)
+
+
+### Features
+
+* ✨ Logs extra ([91023f5](https://github.com/bobpepers/runes-tip-dashboard/commit/91023f5b538b6ff2f79c1bb749f33e9b08a99628))
+
 ### [0.0.36](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.35...v0.0.36) (2023-02-09)
 
 
