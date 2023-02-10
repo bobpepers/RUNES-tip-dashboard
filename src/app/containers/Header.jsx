@@ -254,6 +254,14 @@ function Header(
         </Link>
         <Link
           className="nav-link"
+          to="/functions/logs"
+        >
+          <MenuItem onClick={handleCloseFunctions}>
+            Logs
+          </MenuItem>
+        </Link>
+        <Link
+          className="nav-link"
           to="/functions/errors"
         >
           <MenuItem onClick={handleCloseFunctions}>

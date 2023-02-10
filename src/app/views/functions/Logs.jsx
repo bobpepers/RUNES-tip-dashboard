@@ -17,8 +17,8 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Moment from 'react-moment';
 import { withRouter } from '../../hooks/withRouter';
 import {
-  fetchErrorsAction,
-} from '../../actions/errors';
+  fetchLogsAction,
+} from '../../actions/logs';
 
 const renderItems = (data) => {
   const parent = [];
@@ -35,7 +35,7 @@ const renderItems = (data) => {
           {error.type}
         </Grid>
         <Grid item xs={7} align="center">
-          {error.error}
+          {error.message}
         </Grid>
       </Grid>,
     );
@@ -44,22 +44,22 @@ const renderItems = (data) => {
   return parent;
 }
 
-const Errors = function (props) {
+const Logs = function (props) {
   const {
     auth,
-    errors,
+    logs,
   } = props;
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(50);
 
-  const totalPages = errors && errors.count
-    ? Math.ceil(errors.count / rowsPerPage)
+  const totalPages = logs && logs.count
+    ? Math.ceil(logs.count / rowsPerPage)
     : 0;
 
   useEffect(() => {
     if (auth.authenticated) {
-      dispatch(fetchErrorsAction(
+      dispatch(fetchLogsAction(
         (page - 1) * rowsPerPage,
         rowsPerPage,
       ));
@@ -76,7 +76,7 @@ const Errors = function (props) {
     },
     [
       auth,
-      errors,
+      logs,
       page,
     ],
   );
@@ -158,9 +158,9 @@ const Errors = function (props) {
             </Grid>
             <Grid container item xs={12} className="shadow-w pl-20 glassHeader">
               {
-                errors
-                && errors.data
-                  ? renderItems(errors.data)
+                logs
+                && logs.data
+                  ? renderItems(logs.data)
                   : <CircularProgress />
               }
             </Grid>
@@ -171,13 +171,13 @@ const Errors = function (props) {
   );
 }
 
-Errors.propTypes = {
+Logs.propTypes = {
   auth: PropTypes.shape({
     authenticated: PropTypes.bool.isRequired,
     doneLoading: PropTypes.bool.isRequired,
     error: PropTypes.shape({}),
   }).isRequired,
-  errors: PropTypes.shape({
+  logs: PropTypes.shape({
     data: PropTypes.arrayOf(
       PropTypes.shape({}),
     ),
@@ -187,7 +187,7 @@ Errors.propTypes = {
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
-  errors: state.errors,
+  logs: state.logs,
 })
 
-export default withRouter(connect(mapStateToProps, null)(Errors));
+export default withRouter(connect(mapStateToProps, null)(Logs));

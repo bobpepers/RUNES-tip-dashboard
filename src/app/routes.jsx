@@ -37,6 +37,7 @@ import FunctionView from './views/functions/Function';
 import Deposits from './views/functions/Deposits';
 import Withdrawals from './views/functions/Withdrawals';
 import Errors from './views/functions/Errors';
+import Logs from './views/functions/Logs';
 import Login from './views/login/Login';
 import LoginTFA from './views/login/Login2FA';
 import LogoutView from './views/Logout';
@@ -358,6 +359,10 @@ const RoutesX = function (props) {
         <Route
           path="/functions/errors"
           element={<Errors />}
+        />
+        <Route
+          path="/functions/logs"
+          element={<Logs />}
         />
         <Route
           path="/management/dashboardusers"

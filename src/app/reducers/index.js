@@ -24,6 +24,7 @@ import insertTrivia from './insertTrivia';
 import removeTrivia from './removeTrivia';
 import switchTrivia from './switchTrivia';
 import errors from './errors';
+import logs from './logs';
 import user from './user';
 import priceCurrencies from './priceCurrencies';
 import userInfo from './userInfo';
@@ -78,6 +79,7 @@ const store = configureStore({
     switchTrivia,
     priceCurrencies,
     errors,
+    logs,
     userInfo,
     leaveServer,
     editServer,
