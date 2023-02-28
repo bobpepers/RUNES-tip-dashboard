@@ -22,7 +22,7 @@ const renderEarnedSpendBalance = (
       {' '}
       {new BigNumber(activity.spender_balance).dividedBy(`1e${activity.coin && activity.coin.dp}`).toString()}
       {' '}
-      {activity.coin.ticker}
+      {activity.coin && activity.coin.ticker}
     </Typography>
     <Typography variant="subtitle1" gutterBottom component="div">
       earner balance:
@@ -41,11 +41,11 @@ const renderWalletBalances = (
     balances:
     {
       activity.earner && activity.earner.wallets.map((wallet) => (
-        <span key={`${wallet.coin.ticker}`}>
+        <span key={`${wallet.coin && wallet.coin.ticker}`}>
           <br />
-          {new BigNumber(wallet.available).plus(wallet.locked).dividedBy(`1e${wallet.coin.dp}`).toString()}
+          {new BigNumber(wallet.available).plus(wallet.locked).dividedBy(`1e${wallet.coin && wallet.coin.dp}`).toString()}
           {' '}
-          {wallet.coin.ticker}
+          {wallet.coin && wallet.coin.ticker}
         </span>
       ))
     }
@@ -638,7 +638,7 @@ const renderItems = (
               activity,
             )}
 
-            {activity.type === 'tip_f' && `amount: ${new BigNumber(activity.amount).dividedBy(`1e${activity.coin.dp}`).toString()}`}
+            {activity.type === 'tip_f' && `amount: ${new BigNumber(activity.amount).dividedBy(`1e${activity.coin && activity.coin.dp}`).toString()}`}
 
             {activity.type === 'depositAccepted' && ''}
             {activity.type === 'withdrawRequested' && ''}
