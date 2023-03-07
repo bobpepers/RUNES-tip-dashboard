@@ -221,12 +221,6 @@ const FeaturesView = function (props) {
                   <MenuItem key="4" value="faucet">
                     faucet
                   </MenuItem>
-                  <MenuItem key="5" value="hurricane">
-                    hurricane
-                  </MenuItem>
-                  <MenuItem key="6" value="thunderstorm">
-                    thunderstorm
-                  </MenuItem>
                   <MenuItem key="7" value="thunder">
                     thunder
                   </MenuItem>

@@ -229,8 +229,6 @@ const renderItems = (
             {activity.type === 'waterFaucet' && 'Water Faucet'}
             {activity.type === 'thundertip_f' && 'ThunderTip: fail'}
             {activity.type === 'thundertip_s' && 'ThunderTip: success'}
-            {activity.type === 'thunderstormtip_f' && 'ThunderStormTip: fail'}
-            {activity.type === 'thunderstormtip_s' && 'ThunderStormTip: success'}
             {activity.type === 'raintip_f' && 'RainTip: fail'}
             {activity.type === 'raintip_s' && 'RainTip: success'}
             {activity.type === 'soaktip_f' && 'SoakTip: fail'}
@@ -243,9 +241,6 @@ const renderItems = (
             {activity.type === 'reactdrop_s' && 'ReactDrop: success'}
             {activity.type === 'reactdrop_i' && 'ReactDrop: insufficient Balance'}
             {activity.type === 'reactdroptip_s' && 'ReactDropTip: success'}
-            {activity.type === 'thunderstorm_f' && 'ThunderStorm: fail'}
-            {activity.type === 'thunderstorm_s' && 'ThunderStorm: success'}
-            {activity.type === 'thunderstorm_i' && 'ThunderStorm: insufficient Balance'}
             {activity.type === 'thunder_f' && 'Thunder: fail'}
             {activity.type === 'thunder_s' && 'Thunder: success'}
             {activity.type === 'thunder_i' && 'Thunder: insufficient Balance'}
@@ -291,11 +286,6 @@ const renderItems = (
             {activity.type === 'withdrawAccepted' && 'Withdrawal Accepted'}
             {activity.type === 'withdrawRejected' && 'Withdrawal Rejected'}
             {activity.type === 'withdrawComplete' && 'Withdrawal Complete'}
-            {activity.type === 'hurricanetip_f' && 'HurricaneTip: fail'}
-            {activity.type === 'hurricanetip_s' && 'HurricaneTip: success'}
-            {activity.type === 'hurricane_f' && 'Hurricane: fail'}
-            {activity.type === 'hurricane_s' && 'Hurricane: success'}
-            {activity.type === 'hurricane_i' && 'Hurricane: insufficient Balance'}
             {activity.type === 'triviatip_s' && 'TriviaTip: success'}
             {activity.type === 'trivia_f' && 'Trivia: fail'}
             {activity.type === 'trivia_s' && 'Trivia: success'}
@@ -342,10 +332,8 @@ const renderItems = (
             || activity.type === 'soaktip_s'
             || activity.type === 'sleettip_s'
             || activity.type === 'raintip_s'
-            || activity.type === 'thunderstormtip_s'
             || activity.type === 'thundertip_s'
             || activity.type === 'reactdroptip_s'
-            || activity.type === 'hurricanetip_s'
             || activity.type === 'faucettip_s'
             || activity.type === 'faucettip_t'
             || activity.type === 'tiptip_s'
@@ -357,12 +345,10 @@ const renderItems = (
             || activity.type === 'voiceraintip_s'
 
             || activity.type === 'thundertip_f'
-            || activity.type === 'thunderstormtip_f'
             || activity.type === 'raintip_f'
             || activity.type === 'soaktip_f'
             || activity.type === 'floodtip_f'
             || activity.type === 'sleettip_f'
-            || activity.type === 'hurricanetip_f'
             || activity.type === 'voiceraintip_f'
 
             || activity.type === 'deposit_s'
@@ -390,31 +376,26 @@ const renderItems = (
             {(
               activity.type === 'reactdrop_s'
             || activity.type === 'thunder_s'
-            || activity.type === 'thunderstorm_s'
             || activity.type === 'soak_s'
             || activity.type === 'sleet_s'
             || activity.type === 'flood_s'
             || activity.type === 'rain_s'
-            || activity.type === 'hurricane_s'
             || activity.type === 'trivia_s'
             || activity.type === 'voicerain_s'
             || activity.type === 'tip_faucet_s'
 
             || activity.type === 'reactdrop_i'
-            || activity.type === 'thunderstorm_i'
             || activity.type === 'thunder_i'
             || activity.type === 'soak_i'
             || activity.type === 'sleet_i'
             || activity.type === 'flood_i'
             || activity.type === 'rain_i'
             || activity.type === 'tip_i'
-            || activity.type === 'hurricane_i'
             || activity.type === 'trivia_i'
             || activity.type === 'withdraw_i'
             || activity.type === 'voicerain_i'
 
             || activity.type === 'reactdrop_f'
-            || activity.type === 'thunderstorm_f'
             || activity.type === 'thunder_f'
             || activity.type === 'soak_f'
             || activity.type === 'soak_f'
@@ -422,7 +403,6 @@ const renderItems = (
             || activity.type === 'flood_f'
             || activity.type === 'rain_f'
             || activity.type === 'tip_f'
-            || activity.type === 'hurricane_f'
             || activity.type === 'trivia_f'
             || activity.type === 'withdraw_f'
             || activity.type === 'voicerain_f'
@@ -487,7 +467,6 @@ const renderItems = (
               activity.type === 'reactdrop_s'
             || activity.type === 'thunder_s'
             || activity.type === 'soak_s'
-            || activity.type === 'thunderstorm_s'
             || activity.type === 'sleet_s'
             || activity.type === 'rain_s'
             || activity.type === 'flood_s'
@@ -496,10 +475,7 @@ const renderItems = (
             || activity.type === 'soaktip_s'
             || activity.type === 'floodtip_s'
             || activity.type === 'sleettip_s'
-            || activity.type === 'thunderstormtip_s'
             || activity.type === 'tip_s'
-            || activity.type === 'hurricane_s'
-            || activity.type === 'hurricanetip_s'
             || activity.type === 'tiptip_s'
             || activity.type === 'faucettip_s'
             || activity.type === 'voiceraintip_s'
@@ -516,17 +492,14 @@ const renderItems = (
             || activity.type === 'withdrawComplete'
 
             || activity.type === 'thundertip_f'
-            || activity.type === 'thunderstormtip_f'
             || activity.type === 'raintip_f'
             || activity.type === 'soaktip_f'
             || activity.type === 'floodtip_f'
             || activity.type === 'sleettip_f'
             || activity.type === 'reactdrop_f'
-            || activity.type === 'hurricane_f'
             || activity.type === 'trivia_f'
             || activity.type === 'voicerain_f'
 
-            || activity.type === 'thunderstorm_f'
             || activity.type === 'thunder_f'
             || activity.type === 'soak_f'
             || activity.type === 'sleet_f'
@@ -539,7 +512,6 @@ const renderItems = (
 
             || activity.type === 'trivia_i'
             || activity.type === 'reactdrop_i'
-            || activity.type === 'thunderstorm_i'
             || activity.type === 'thunder_i'
             || activity.type === 'soak_i'
             || activity.type === 'sleet_i'
@@ -547,7 +519,6 @@ const renderItems = (
             || activity.type === 'rain_i'
             || activity.type === 'tip_i'
             || activity.type === 'reactdroptip_i'
-            || activity.type === 'hurricane_i'
             || activity.type === 'reactdroptip_s'
             || activity.type === 'waterFaucet'
             || activity.type === 'withdraw_i'
@@ -566,24 +537,20 @@ const renderItems = (
               activity.type === 'reactdrop_s'
             || activity.type === 'thunder_s'
             || activity.type === 'soak_s'
-            || activity.type === 'thunderstorm_s'
             || activity.type === 'sleet_s'
             || activity.type === 'rain_s'
             || activity.type === 'flood_s'
-            || activity.type === 'hurricane_s'
             // || activity.type === 'tip_s'
             || activity.type === 'trivia_s'
             || activity.type === 'voicerain_s'
             || activity.type === 'tip_faucet_s'
 
             || activity.type === 'reactdrop_f'
-            || activity.type === 'thunderstorm_f'
             || activity.type === 'thunder_f'
             || activity.type === 'soak_f'
             || activity.type === 'sleet_f'
             || activity.type === 'flood_f'
             || activity.type === 'rain_f'
-            || activity.type === 'hurricane_f'
             || activity.type === 'trivia_f'
             || activity.type === 'withdraw_f'
             || activity.type === 'voicerain_f'
@@ -591,13 +558,11 @@ const renderItems = (
 
             || activity.type === 'reactdrop_i'
             || activity.type === 'thunder_i'
-            || activity.type === 'thunderstorm_i'
             || activity.type === 'soak_i'
             || activity.type === 'flood_i'
             || activity.type === 'sleet_i'
             || activity.type === 'rain_i'
             || activity.type === 'tip_i'
-            || activity.type === 'hurricane_i'
             || activity.type === 'trivia_i'
             || activity.type === 'withdraw_i'
             || activity.type === 'voicerain_i'
@@ -609,11 +574,9 @@ const renderItems = (
               activity.type === 'tip_s'
             || activity.type === 'floodtip_s'
             || activity.type === 'thundertip_s'
-            || activity.type === 'thunderstormtip_s'
             || activity.type === 'raintip_s'
             || activity.type === 'soaktip_s'
             || activity.type === 'sleettip_s'
-            || activity.type === 'hurricanetip_s'
             || activity.type === 'tiptip_s'
             || activity.type === 'triviatip_s'
             || activity.type === 'faucettip_s'

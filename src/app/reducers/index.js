@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit';
 import auth from './auth';
 import tfa from './tfa';
 import resetPassword from './resetPassword';

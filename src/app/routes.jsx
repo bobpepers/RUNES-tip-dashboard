@@ -265,40 +265,6 @@ const RoutesX = function (props) {
         />
 
         <Route
-          path="/functions/hurricanes"
-          element={(
-            <FunctionsView
-              functionName="hurricane"
-            />
-          )}
-        />
-        <Route
-          path="/functions/hurricane/:functionId"
-          element={(
-            <FunctionView
-              functionName="hurricane"
-            />
-          )}
-        />
-
-        <Route
-          path="/functions/thunderstorms"
-          element={(
-            <FunctionsView
-              functionName="thunderstorm"
-            />
-          )}
-        />
-        <Route
-          path="/functions/thunderstorm/:functionId"
-          element={(
-            <FunctionView
-              functionName="thunderstorm"
-            />
-          )}
-        />
-
-        <Route
           path="/functions/trivias"
           element={(
             <FunctionsView

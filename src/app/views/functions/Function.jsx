@@ -317,14 +317,6 @@ const FunctionView = function (props) {
         && botFunction.data.floodtips,
       );
     }
-    if (functionName === 'hurricane') {
-      setFunctionTips(
-        botFunction
-        && botFunction.data
-        && botFunction.data.hurricanetips
-        && botFunction.data.hurricanetips,
-      );
-    }
     if (functionName === 'reactdrop') {
       setFunctionTips(
         botFunction
@@ -355,14 +347,6 @@ const FunctionView = function (props) {
         && botFunction.data
         && botFunction.data.thundertips
         && botFunction.data.thundertips,
-      );
-    }
-    if (functionName === 'thunderstorm') {
-      setFunctionTips(
-        botFunction
-        && botFunction.data
-        && botFunction.data.thunderstormtips
-        && botFunction.data.thunderstormtips,
       );
     }
     if (functionName === 'tip') {

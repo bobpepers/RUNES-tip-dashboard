@@ -326,22 +326,6 @@ function Header(
         </Link>
         <Link
           className="nav-link"
-          to="/functions/thunderstorms"
-        >
-          <MenuItem onClick={handleCloseFunctions}>
-            Thunderstorms
-          </MenuItem>
-        </Link>
-        <Link
-          className="nav-link"
-          to="/functions/hurricanes"
-        >
-          <MenuItem onClick={handleCloseFunctions}>
-            Hurricanes
-          </MenuItem>
-        </Link>
-        <Link
-          className="nav-link"
           to="/functions/reactdrops"
         >
           <MenuItem onClick={handleCloseFunctions}>
