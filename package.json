@@ -101,6 +101,7 @@
     "@mui/icons-material": "^5.15.14",
     "@mui/material": "^5.15.14",
     "@reduxjs/toolkit": "^2.2.2",
+    "@tsparticles/react": "^3.0.0",
     "axios": "^1.6.8",
     "babel-runtime": "^6.26.0",
     "bignumber.js": "^9.1.2",
@@ -111,7 +112,7 @@
     "notistack": "^3.0.1",
     "prop-types": "^15.8.1",
     "qrcode": "^1.5.3",
-    "query-string": "^8.1.0",
+    "query-string": "^9.0.0",
     "react": "^18.2.0",
     "react-country-flag": "^3.1.0",
     "react-dom": "^18.2.0",
@@ -125,7 +126,7 @@
     "socket.io-client": "^4.7.5",
     "speakeasy": "^2.0.0",
     "styled-components": "^6.1.8",
-    "tsparticles": "^2.10.1",
+    "tsparticles": "^3.3.0",
     "tss-react": "^4.9.5",
     "vm-browserify": "^1.1.2"
   }
