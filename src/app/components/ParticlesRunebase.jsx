@@ -109,9 +109,6 @@ function ParticlesRunebase() {
               options={{
                 autoPlay: true,
                 background: {
-                  color: {
-                    value: '#fff',
-                  },
                   image: '',
                   position: '',
                   repeat: '',
