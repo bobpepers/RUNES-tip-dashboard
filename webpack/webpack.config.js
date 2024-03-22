@@ -5,7 +5,6 @@ const TerserPlugin = require('terser-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const WebpackObfuscator = require('webpack-obfuscator');
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 module.exports = (options) => {
   const webpackConfig = {
@@ -91,7 +90,6 @@ module.exports = (options) => {
       },
     },
     plugins: [
-      !options.isProduction && new ReactRefreshWebpackPlugin(),
       new Webpack.ProvidePlugin({
         process: 'process/browser',
       }),
@@ -119,9 +117,7 @@ module.exports = (options) => {
               loader: require.resolve('babel-loader'),
               options: {
                 envName: !options.isProduction ? 'development' : 'production',
-                plugins: [
-                  !options.isProduction && require.resolve('react-refresh/babel'),
-                ].filter(Boolean),
+                plugins: [].filter(Boolean),
               },
             },
           ],
@@ -246,12 +242,8 @@ module.exports = (options) => {
       ]),
     );
   } else {
-    webpackConfig.plugins.push(
-      new Webpack.HotModuleReplacementPlugin(),
-    );
-
     webpackConfig.devServer = {
-      hot: !!options.isProduction,
+      hot: true,
       port: options.port,
       historyApiFallback: true,
       host: 'localhost',
