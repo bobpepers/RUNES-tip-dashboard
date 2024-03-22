@@ -79,6 +79,9 @@ module.exports = (options) => {
       },
     },
     resolve: {
+      fallback: {
+        vm: require.resolve('vm-browserify'),
+      },
       extensions: [
         '.js',
         '.jsx',
