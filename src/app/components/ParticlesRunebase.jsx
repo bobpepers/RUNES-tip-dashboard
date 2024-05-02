@@ -36,7 +36,6 @@ function ParticlesRunebase() {
                       area: 500,
                     },
                   },
-
                   links: {
                     enable: true,
                     opacity: 0.02,
@@ -59,7 +58,7 @@ function ParticlesRunebase() {
                 },
                 interactivity: {
                   events: {
-                    onclick: {
+                    onClick: {
                       enable: true,
                       mode: 'push',
                     },
@@ -139,7 +138,7 @@ function ParticlesRunebase() {
                   detectsOn: 'window',
                   events: {
                     onClick: {
-                      enable: true,
+                      enable: false,
                       mode: 'push',
                     },
                     onDiv: {
