@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.46](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.45...v0.0.46) (2024-05-02)
+
+
+### Performance
+
+* :zap: ReactParticles disable onClick ([6592d20](https://github.com/bobpepers/runes-tip-dashboard/commit/6592d209d350fa9be8d21ebfc380b2c14d7af3da))
+
 ### 0.0.45 (2024-04-26)
 
 
