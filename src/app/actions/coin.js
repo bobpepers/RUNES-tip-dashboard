@@ -17,11 +17,12 @@ import {
 import { notistackErrorAdd } from './helpers/notistackError';
 
 export function fetchCoinsAction() {
-  return function (dispatch) {
+  return function (dispatch, getState) {
+    const { currentProject } = getState().selectedProject;
     dispatch({
       type: FETCH_COINS_BEGIN,
     });
-    axios.get(`${window.myConfig.apiUrl}/management/coins`, {
+    axios.get(`${window.myConfig.apiUrl}/management/coins?project=${currentProject}`, {
     })
       .then((response) => {
         dispatch({

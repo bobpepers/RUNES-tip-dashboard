@@ -10,13 +10,15 @@ export function fetchErrorsAction(
   offset,
   limit,
 ) {
-  return function (dispatch) {
+  return function (dispatch, getState) {
+    const { currentProject } = getState().selectedProject;
     dispatch({
       type: FETCH_ERRORS_BEGIN,
     });
     axios.post(`${window.myConfig.apiUrl}/functions/errors`, {
       offset,
       limit,
+      project: currentProject,
     }).then((response) => {
       dispatch({
         type: FETCH_ERRORS_SUCCESS,

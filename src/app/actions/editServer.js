@@ -11,7 +11,8 @@ export function editServerAction(
   id,
   discordTipMessageChannelId,
 ) {
-  return function (dispatch) {
+  return function (dispatch, getState) {
+    const { currentProject } = getState().selectedProject;
     dispatch({
       type: POST_EDITSERVER_BEGIN,
     });
@@ -20,6 +21,7 @@ export function editServerAction(
       {
         id,
         discordTipMessageChannelId,
+        project: currentProject,
       },
     ).then((response) => {
       dispatch({

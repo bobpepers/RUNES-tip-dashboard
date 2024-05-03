@@ -16,7 +16,8 @@ export function fetchUsersAction(
   offset,
   limit,
 ) {
-  return function (dispatch) {
+  return function (dispatch, getState) {
+    const { currentProject } = getState().selectedProject;
     dispatch({
       type: FETCH_USERS_BEGIN,
     });
@@ -28,6 +29,7 @@ export function fetchUsersAction(
       banned,
       offset,
       limit,
+      project: currentProject,
     }).then((response) => {
       dispatch({
         type: FETCH_USERS_SUCCESS,
@@ -50,10 +52,12 @@ export function banUserAction(
   id,
   banMessage = '',
 ) {
-  return function (dispatch) {
+  return function (dispatch, getState) {
+    const { currentProject } = getState().selectedProject;
     axios.post(`${window.myConfig.apiUrl}/management/user/ban`, {
       id,
       banMessage,
+      project: currentProject,
     }).then((response) => {
       dispatch({
         type: UPDATE_USER,

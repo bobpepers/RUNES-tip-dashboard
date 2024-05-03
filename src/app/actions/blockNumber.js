@@ -7,11 +7,12 @@ import {
 import { notistackErrorAdd } from './helpers/notistackError';
 
 export function fetchBlockNumberAction() {
-  return function (dispatch) {
+  return function (dispatch, getState) {
+    const { currentProject } = getState().selectedProject;
     dispatch({
       type: FETCH_BLOCKNUMBER_BEGIN,
     });
-    axios.get(`${window.myConfig.apiUrl}/blocknumber`)
+    axios.get(`${window.myConfig.apiUrl}/blocknumber?project=${currentProject}`)
       .then((response) => {
         dispatch({
           type: FETCH_BLOCKNUMBER_SUCCESS,

@@ -245,11 +245,13 @@ module.exports = (options) => {
       ]),
     );
   } else {
+    const allowedHosts = ['localhost', 'devbot-admin.runebase.io'];
     webpackConfig.devServer = {
       hot: true,
       port: options.port,
       historyApiFallback: true,
       host: 'localhost',
+      allowedHosts,
       client: {
         overlay: false,
         logging: 'warn', // Want to set this to 'warn' or 'error'

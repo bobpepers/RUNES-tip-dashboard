@@ -15,7 +15,8 @@ export function fetchChannelsAction(
   offset,
   limit,
 ) {
-  return function (dispatch) {
+  return function (dispatch, getState) {
+    const { currentProject } = getState().selectedProject;
     dispatch({
       type: FETCH_CHANNELS_BEGIN,
     });
@@ -26,6 +27,7 @@ export function fetchChannelsAction(
       serverId,
       offset,
       limit,
+      project: currentProject,
     }).then((response) => {
       dispatch({
         type: FETCH_CHANNELS_SUCCESS,
@@ -45,10 +47,12 @@ export function fetchChannelsAction(
 }
 
 export function banChannelAction(id, banMessage = '') {
-  return function (dispatch) {
+  return function (dispatch, getState) {
+    const { currentProject } = getState().selectedProject;
     axios.post(`${window.myConfig.apiUrl}/management/channel/ban`, {
       id,
       banMessage,
+      project: currentProject,
     })
       .then((response) => {
         dispatch({

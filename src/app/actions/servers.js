@@ -15,7 +15,8 @@ export function fetchServerAction(
   offset,
   limit,
 ) {
-  return function (dispatch) {
+  return function (dispatch, getState) {
+    const { currentProject } = getState().selectedProject;
     dispatch({
       type: FETCH_SERVERS_BEGIN,
     });
@@ -26,6 +27,7 @@ export function fetchServerAction(
       platform,
       offset,
       limit,
+      project: currentProject,
     }).then((response) => {
       dispatch({
         type: FETCH_SERVERS_SUCCESS,
@@ -45,10 +47,12 @@ export function fetchServerAction(
 }
 
 export function banServerAction(id, banMessage = '') {
-  return function (dispatch) {
+  return function (dispatch, getState) {
+    const { currentProject } = getState().selectedProject;
     axios.post(`${window.myConfig.apiUrl}/management/server/ban`, {
       id,
       banMessage,
+      project: currentProject,
     })
       .then((response) => {
         dispatch({

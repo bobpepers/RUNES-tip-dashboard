@@ -7,13 +7,13 @@ import {
 import { notistackErrorAdd } from './helpers/notistackError';
 
 export function fetchAdminWalletAction() {
-  return function (dispatch) {
+  return function (dispatch, getState) {
+    const { currentProject } = getState().selectedProject;
     dispatch({
       type: FETCH_ADMINWALLET_BEGIN,
     });
-    axios.get(`${window.myConfig.apiUrl}/admin/wallet`)
+    axios.get(`${window.myConfig.apiUrl}/admin/wallet?project=${currentProject}`)
       .then((response) => {
-        console.log(response.data.result);
         dispatch({
           type: FETCH_ADMINWALLET_SUCCESS,
           payload: response.data.result,

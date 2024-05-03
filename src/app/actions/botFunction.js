@@ -14,13 +14,15 @@ export function fetchBotFunctionsAction(
   offset,
   limit,
 ) {
-  return function (dispatch) {
+  return function (dispatch, getState) {
+    const { currentProject } = getState().selectedProject;
     dispatch({
       type: FETCH_BOTFUNCTIONS_BEGIN,
     });
     axios.post(`${window.myConfig.apiUrl}/functions/${name}`, {
       offset,
       limit,
+      project: currentProject,
     }).then((response) => {
       dispatch({
         type: FETCH_BOTFUNCTIONS_SUCCESS,
@@ -43,12 +45,14 @@ export function fetchBotFunctionAction(
   name,
   id,
 ) {
-  return function (dispatch) {
+  return function (dispatch, getState) {
+    const { currentProject } = getState().selectedProject;
     dispatch({
       type: FETCH_BOTFUNCTION_BEGIN,
     });
     axios.post(`${window.myConfig.apiUrl}/functions/${name}`, {
       id,
+      project: currentProject,
     }).then((response) => {
       dispatch({
         type: FETCH_BOTFUNCTION_SUCCESS,

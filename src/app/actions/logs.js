@@ -10,13 +10,15 @@ export function fetchLogsAction(
   offset,
   limit,
 ) {
-  return function (dispatch) {
+  return function (dispatch, getState) {
+    const { currentProject } = getState().selectedProject;
     dispatch({
       type: FETCH_LOGS_BEGIN,
     });
     axios.post(`${window.myConfig.apiUrl}/functions/logs`, {
       offset,
       limit,
+      project: currentProject,
     }).then((response) => {
       dispatch({
         type: FETCH_LOGS_SUCCESS,

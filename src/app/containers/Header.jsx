@@ -9,6 +9,7 @@ import React, {
 } from 'react';
 import {
   connect,
+  useDispatch,
 } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -17,11 +18,14 @@ import {
   MenuItem,
   Menu,
   useMediaQuery,
+  Select,
 } from '@mui/material';
 import { Trans } from '@lingui/macro';
 import { useTheme } from '@mui/material/styles';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MobileNav from '../assets/images/mobilenav.svg';
+import { updateSelectedProject } from '../actions/updateSelectedProject';
+import { listedProjects } from '../constants';
 
 function Header(
   props,
@@ -29,7 +33,9 @@ function Header(
   const {
     auth,
     user,
+    currentProject,
   } = props;
+  const dispatch = useDispatch();
   const heightRef = useRef(null);
   const [menu, setMenu] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -46,6 +52,7 @@ function Header(
   useEffect(() => {}, [
     user,
     auth,
+    currentProject,
   ]);
 
   useEffect(() => {
@@ -75,6 +82,12 @@ function Header(
   };
   const handleMenuClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleChangeProject = (event) => {
+    const newProject = event.target.value;
+    dispatch(updateSelectedProject(newProject));
+    // Perform any additional actions based on the selected project
   };
 
   const mainMenuItems = () => (
@@ -356,6 +369,19 @@ function Header(
           float: 'right',
         }}
       >
+        <Select
+          value={currentProject}
+          onChange={handleChangeProject}
+        >
+          {listedProjects.map((projectName) => (
+            <MenuItem
+              key={projectName}
+              value={projectName}
+            >
+              {projectName}
+            </MenuItem>
+          ))}
+        </Select>
         <IconButton
           size="large"
           edge="end"
@@ -538,6 +564,7 @@ function mapStateToProps(state) {
   return {
     auth: state.auth,
     user: state.user.data,
+    currentProject: state.selectedProject.currentProject,
   };
 }
 

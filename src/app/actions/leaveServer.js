@@ -8,7 +8,8 @@ import {
 import { notistackErrorAdd } from './helpers/notistackError';
 
 export function leaveServerAction(id) {
-  return function (dispatch) {
+  return function (dispatch, getState) {
+    const { currentProject } = getState().selectedProject;
     dispatch({
       type: POST_LEAVESERVER_BEGIN,
     });
@@ -16,6 +17,7 @@ export function leaveServerAction(id) {
       `${window.myConfig.apiUrl}/management/server/leave`,
       {
         id,
+        project: currentProject,
       },
     ).then((response) => {
       dispatch({

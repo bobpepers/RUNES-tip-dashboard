@@ -11,7 +11,8 @@ export function fetchTransactionHistoryAction(
   offset,
   limit,
 ) {
-  return function (dispatch) {
+  return function (dispatch, getState) {
+    const { currentProject } = getState().selectedProject;
     dispatch({
       type: FETCH_TRANSACTION_HISTORY_BEGIN,
     });
@@ -19,6 +20,7 @@ export function fetchTransactionHistoryAction(
       coinId,
       offset,
       limit,
+      project: currentProject,
     }).then((response) => {
       dispatch({
         type: FETCH_TRANSACTION_HISTORY_SUCCESS,

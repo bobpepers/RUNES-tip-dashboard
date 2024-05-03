@@ -11,12 +11,14 @@ export function collectEarningsAction(
   id,
   ticker,
 ) {
-  return function (dispatch) {
+  return function (dispatch, getState) {
+    const { currentProject } = getState().selectedProject;
     dispatch({
       type: COLLECT_EARNINGS_BEGIN,
     });
     axios.post(`${window.myConfig.apiUrl}/management/collect/earnings`, {
       id,
+      project: currentProject,
     }).then((response) => {
       dispatch({
         type: ENQUEUE_SNACKBAR,

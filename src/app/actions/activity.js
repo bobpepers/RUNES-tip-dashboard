@@ -15,7 +15,8 @@ export function fetchActivityAction(
   offset,
   limit,
 ) {
-  return function (dispatch) {
+  return function (dispatch, getState) {
+    const { currentProject } = getState().selectedProject;
     dispatch({
       type: FETCH_ACTIVITY_BEGIN,
     });
@@ -27,6 +28,7 @@ export function fetchActivityAction(
       amount,
       offset,
       limit,
+      project: currentProject,
     }).then((response) => {
       dispatch({
         type: FETCH_ACTIVITY_SUCCESS,

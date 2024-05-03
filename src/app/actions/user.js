@@ -12,12 +12,14 @@ import { notistackErrorAdd } from './helpers/notistackError';
 export function fetchUserData(
   id,
 ) {
-  return function (dispatch) {
+  return function (dispatch, getState) {
+    const { currentProject } = getState().selectedProject;
     dispatch({
       type: FETCH_USER_BEGIN,
     });
     axios.post(`${window.myConfig.apiUrl}/user`, {
       id,
+      project: currentProject,
     }).then((response) => {
       dispatch({
         type: FETCH_USER_SUCCESS,

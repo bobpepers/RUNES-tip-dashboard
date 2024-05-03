@@ -15,7 +15,8 @@ export function fetchDepositsAction(
   offset,
   limit,
 ) {
-  return function (dispatch) {
+  return function (dispatch, getState) {
+    const { currentProject } = getState().selectedProject;
     dispatch({
       type: FETCH_DEPOSITS_BEGIN,
     });
@@ -27,6 +28,7 @@ export function fetchDepositsAction(
       from,
       offset,
       limit,
+      project: currentProject,
     })
       .then((response) => {
         dispatch({

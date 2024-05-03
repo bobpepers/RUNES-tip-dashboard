@@ -8,11 +8,14 @@ import {
 import { notistackErrorAdd } from './helpers/notistackError';
 
 export function fetchBotSettings() {
-  return function (dispatch) {
+  return function (dispatch, getState) {
+    const { currentProject } = getState().selectedProject;
     dispatch({
       type: FETCH_BOTSETTINGS_BEGIN,
     });
-    axios.post(`${window.myConfig.apiUrl}/management/bot/settings`)
+    axios.post(`${window.myConfig.apiUrl}/management/bot/settings`, {
+      project: currentProject,
+    })
       .then((response) => {
         dispatch({
           type: FETCH_BOTSETTINGS_SUCCESS,
@@ -32,11 +35,13 @@ export function fetchBotSettings() {
 }
 
 export function updateBotSettings(id, maintenance, enabled) {
-  return function (dispatch) {
+  return function (dispatch, getState) {
+    const { currentProject } = getState().selectedProject;
     axios.post(`${window.myConfig.apiUrl}/management/bot/settings/update`, {
       id,
       maintenance,
       enabled,
+      project: currentProject,
     }).then((response) => {
       dispatch({
         type: UPDATE_BOTSETTINGS,

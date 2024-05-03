@@ -122,6 +122,7 @@ function AppWrapper() {
 function AppContainer(props) {
   const {
     authenticated,
+    currentProject,
   } = props;
   const dispatch = useDispatch();
   useEffect(() => {
@@ -133,19 +134,20 @@ function AppContainer(props) {
   ]);
 
   return (
-    <>
+    <div key={currentProject}>
       <Notifier />
       <ParticlesRunebase />
       <Header />
       <Routes />
       <Footer />
-    </>
+    </div>
   );
 }
 
 function mapStateToProps(state) {
   return {
     authenticated: state.auth,
+    currentProject: state.selectedProject.currentProject,
   };
 }
 

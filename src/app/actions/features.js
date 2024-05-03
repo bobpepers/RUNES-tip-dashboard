@@ -10,7 +10,8 @@ import {
 import { notistackErrorAdd } from './helpers/notistackError';
 
 export function fetchFeatures() {
-  return function (dispatch) {
+  return function (dispatch, getState) {
+    const { currentProject } = getState().selectedProject;
     dispatch({
       type: FETCH_FEATURES_BEGIN,
     });
@@ -18,6 +19,7 @@ export function fetchFeatures() {
       // id,
       // channelId,
       // channelName
+      project: currentProject,
     }).then((response) => {
       dispatch({
         type: FETCH_FEATURES_SUCCESS,
@@ -37,9 +39,11 @@ export function fetchFeatures() {
 }
 
 export function removeFeature(id) {
-  return function (dispatch) {
+  return function (dispatch, getState) {
+    const { currentProject } = getState().selectedProject;
     axios.post(`${window.myConfig.apiUrl}/management/feature/remove`, {
       id,
+      project: currentProject,
     }).then((response) => {
       dispatch({
         type: REMOVE_FEATURE,
@@ -55,8 +59,13 @@ export function removeFeature(id) {
 }
 
 export function addFeature(obj) {
-  return function (dispatch) {
-    axios.post(`${window.myConfig.apiUrl}/management/feature/add`, obj)
+  return function (dispatch, getState) {
+    const { currentProject } = getState().selectedProject;
+    const addFeatureObject = {
+      ...obj,
+      project: currentProject,
+    }
+    axios.post(`${window.myConfig.apiUrl}/management/feature/add`, addFeatureObject)
       .then((response) => {
         dispatch({
           type: ADD_FEATURE,
@@ -78,13 +87,15 @@ export function updateFeature(
   maxSampleSize,
   enabled,
 ) {
-  return function (dispatch) {
+  return function (dispatch, getState) {
+    const { currentProject } = getState().selectedProject;
     axios.post(`${window.myConfig.apiUrl}/management/feature/update`, {
       id,
       min,
       fee,
       maxSampleSize,
       enabled,
+      project: currentProject,
     })
       .then((response) => {
         dispatch({

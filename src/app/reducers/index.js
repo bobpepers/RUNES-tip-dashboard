@@ -43,6 +43,7 @@ import botFunctions from './botFunctions';
 import botFunction from './botFunction';
 import transactionHistory from './transactionHistory';
 import collectEarnings from './collectEarnings';
+import selectedProject from './selectedProject';
 
 const store = configureStore({
   reducer: {
@@ -92,6 +93,7 @@ const store = configureStore({
 
     transactionHistory,
     collectEarnings,
+    selectedProject,
   },
 })
 

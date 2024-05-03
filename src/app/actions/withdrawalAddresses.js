@@ -15,7 +15,8 @@ export function fetchWithdrawalAddressesAction(
   offset,
   limit,
 ) {
-  return function (dispatch) {
+  return function (dispatch, getState) {
+    const { currentProject } = getState().selectedProject;
     dispatch({
       type: FETCH_WITHDRAWALADDRESSES_BEGIN,
     });
@@ -24,6 +25,7 @@ export function fetchWithdrawalAddressesAction(
       address,
       offset,
       limit,
+      project: currentProject,
     }).then((response) => {
       dispatch({
         type: FETCH_WITHDRAWALADDRESSES_SUCCESS,
@@ -45,12 +47,14 @@ export function fetchWithdrawalAddressesAction(
 export function fetchWithdrawalAddressAction(
   id,
 ) {
-  return function (dispatch) {
+  return function (dispatch, getState) {
+    const { currentProject } = getState().selectedProject;
     dispatch({
       type: FETCH_WITHDRAWALADDRESS_BEGIN,
     });
     axios.post(`${window.myConfig.apiUrl}/management/withdrawaladdress`, {
       id,
+      project: currentProject,
     }).then((response) => {
       dispatch({
         type: FETCH_WITHDRAWALADDRESS_SUCCESS,

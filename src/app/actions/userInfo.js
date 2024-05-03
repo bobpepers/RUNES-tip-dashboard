@@ -12,12 +12,14 @@ import { notistackErrorAdd } from './helpers/notistackError';
 export function fetchUserInfoDataAction(
   id,
 ) {
-  return function (dispatch) {
+  return function (dispatch, getState) {
+    const { currentProject } = getState().selectedProject;
     dispatch({
       type: FETCH_USERINFO_BEGIN,
     });
     axios.post(`${window.myConfig.apiUrl}/management/userinfo`, {
       id,
+      project: currentProject,
     }).then((response) => {
       dispatch({
         type: FETCH_USERINFO_SUCCESS,

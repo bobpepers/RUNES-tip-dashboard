@@ -11,7 +11,8 @@ import {
 import { notistackErrorAdd } from './helpers/notistackError';
 
 export function fetchPriceCurrenciesAction() {
-  return function (dispatch) {
+  return function (dispatch, getState) {
+    const { currentProject } = getState().selectedProject;
     dispatch({
       type: FETCH_PRICECURRENCIES_BEGIN,
     });
@@ -19,6 +20,7 @@ export function fetchPriceCurrenciesAction() {
       // id,
       // channelId,
       // channelName
+      project: currentProject,
     }).then((response) => {
       dispatch({
         type: FETCH_PRICECURRENCIES_SUCCESS,
@@ -38,26 +40,32 @@ export function fetchPriceCurrenciesAction() {
 }
 
 export function removePriceCurrenciesAction(id) {
-  return function (dispatch) {
-    axios.post(`${window.myConfig.apiUrl}/management/pricecurrencies/remove`, { id })
-      .then((response) => {
-        dispatch({
-          type: REMOVE_PRICECURRENCIES,
-          payload: response.data.result,
-        });
-      }).catch((error) => {
-        notistackErrorAdd(
-          dispatch,
-          error,
-        );
+  return function (dispatch, getState) {
+    const { currentProject } = getState().selectedProject;
+    axios.post(`${window.myConfig.apiUrl}/management/pricecurrencies/remove`, {
+      id,
+      project: currentProject,
+    }).then((response) => {
+      dispatch({
+        type: REMOVE_PRICECURRENCIES,
+        payload: response.data.result,
       });
+    }).catch((error) => {
+      notistackErrorAdd(
+        dispatch,
+        error,
+      );
+    });
   }
 }
 
 export function updatePricesAndConversionsAction() {
-  return function (dispatch) {
-    axios.post(`${window.myConfig.apiUrl}/management/pricecurrencies/updateprice`)
-      .then((response) => {
+  return function (dispatch, getState) {
+    const { currentProject } = getState().selectedProject;
+    axios.post(`${window.myConfig.apiUrl}/management/pricecurrencies/updateprice`, {
+      project: currentProject,
+    })
+      .then(() => {
         dispatch({
           type: ENQUEUE_SNACKBAR,
           notification: {
@@ -82,8 +90,13 @@ export function updatePricesAndConversionsAction() {
 }
 
 export function addPriceCurrenciesAction(obj) {
-  return function (dispatch) {
-    axios.post(`${window.myConfig.apiUrl}/management/pricecurrencies/add`, obj)
+  return function (dispatch, getState) {
+    const { currentProject } = getState().selectedProject;
+    const newObj = {
+      ...obj,
+      project: currentProject,
+    }
+    axios.post(`${window.myConfig.apiUrl}/management/pricecurrencies/add`, newObj)
       .then((response) => {
         dispatch({
           type: ADD_PRICECURRENCIES,
@@ -104,12 +117,14 @@ export function updatePriceCurrenciesAction(
   iso,
   type,
 ) {
-  return function (dispatch) {
+  return function (dispatch, getState) {
+    const { currentProject } = getState().selectedProject;
     axios.post(`${window.myConfig.apiUrl}/management/pricecurrencies/update`, {
       id,
       name,
       iso,
       type,
+      project: currentProject,
     })
       .then((response) => {
         dispatch({

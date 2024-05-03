@@ -7,11 +7,12 @@ import {
 import { notistackErrorAdd } from './helpers/notistackError';
 
 export function fetchNodeStatusAction() {
-  return function (dispatch) {
+  return function (dispatch, getState) {
+    const { currentProject } = getState().selectedProject;
     dispatch({
       type: FETCH_NODESTATUS_BEGIN,
     });
-    axios.get(`${window.myConfig.apiUrl}/status`)
+    axios.get(`${window.myConfig.apiUrl}/status?project=${currentProject}`)
       .then((response) => {
         dispatch({
           type: FETCH_NODESTATUS_SUCCESS,

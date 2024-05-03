@@ -15,10 +15,12 @@ export function updateTriviaCategoryAction(
   id,
   name,
 ) {
-  return function (dispatch) {
+  return function (dispatch, getState) {
+    const { currentProject } = getState().selectedProject;
     axios.post(`${window.myConfig.apiUrl}/management/trivia/category/edit`, {
       id,
       name,
+      project: currentProject,
     }).then((response) => {
       dispatch({
         type: UPDATE_TRIVIACATEGORY,
@@ -46,9 +48,11 @@ export function updateTriviaCategoryAction(
 export function removeTriviaCategoryAction(
   id,
 ) {
-  return function (dispatch) {
+  return function (dispatch, getState) {
+    const { currentProject } = getState().selectedProject;
     axios.post(`${window.myConfig.apiUrl}/management/trivia/category/remove`, {
       id,
+      project: currentProject,
     }).then((response) => {
       dispatch({
         type: DELETE_TRIVIACATEGORY,
@@ -76,9 +80,11 @@ export function removeTriviaCategoryAction(
 export function insertTriviaCategoryAction(
   name,
 ) {
-  return function (dispatch) {
+  return function (dispatch, getState) {
+    const { currentProject } = getState().selectedProject;
     axios.post(`${window.myConfig.apiUrl}/management/trivia/category/insert`, {
       name,
+      project: currentProject,
     }).then((response) => {
       dispatch({
         type: ADD_TRIVIACATEGORY,
@@ -104,11 +110,12 @@ export function insertTriviaCategoryAction(
 }
 
 export function fetchTriviaCategories() {
-  return function (dispatch) {
+  return function (dispatch, getState) {
+    const { currentProject } = getState().selectedProject;
     dispatch({
       type: FETCH_TRIVIACATEGORIES_BEGIN,
     });
-    axios.get(`${window.myConfig.apiUrl}/management/trivia/categories`)
+    axios.get(`${window.myConfig.apiUrl}/management/trivia/categories?project=${currentProject}`)
       .then((response) => {
         dispatch({
           type: FETCH_TRIVIACATEGORIES_SUCCESS,

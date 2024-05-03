@@ -17,10 +17,8 @@ export function resetPassword(
   navigate,
 ) {
   return function (dispatch) {
-    console.log(props);
     axios.post(`${window.myConfig.apiUrl}/reset-password`, props)
       .then((response) => {
-        console.log(response);
         dispatch({
           type: RESET_PASSWORD_SUCCESS,
           payload: response.data.result,
@@ -95,7 +93,6 @@ export function resetPasswordNew(
     axios.post(`${window.myConfig.apiUrl}/reset-password/new`, props)
       .then((response) => {
         console.log(response.data);
-        // dispatch({ type: AUTH_USER });
         dispatch({
           type: ENQUEUE_SNACKBAR,
           notification: {
