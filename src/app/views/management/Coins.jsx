@@ -39,6 +39,7 @@ const CoinManagement = function (props) {
   const [unitLogoUrl, setUnitLogoUrl] = useState(null);
   const [unitWebsite, setUnitWebsite] = useState(null);
   const [unitExplorer, setUnitExplorer] = useState(null);
+  const [unitExplorerTransactionPath, setUnitExplorerTransactionPath] = useState(null);
   const [unitGithub, setUnitGithub] = useState(null);
   const [unitTelegram, setUnitTelegram] = useState(null);
   const [unitDiscord, setUnitDiscord] = useState(null);
@@ -70,6 +71,7 @@ const CoinManagement = function (props) {
     currentUnitLogoUrl,
     currentUnitWebsite,
     currentUnitExplorer,
+    currentUnitExplorerTransactionPath,
     currentUnitGithub,
     currentUnitTelegram,
     currentUnitDiscord,
@@ -85,6 +87,7 @@ const CoinManagement = function (props) {
     setUnitLogoUrl(currentUnitLogoUrl);
     setUnitWebsite(currentUnitWebsite);
     setUnitExplorer(currentUnitExplorer);
+    setUnitExplorer(currentUnitExplorerTransactionPath);
     setUnitGithub(currentUnitGithub);
     setUnitTelegram(currentUnitTelegram);
     setUnitDiscord(currentUnitDiscord);
@@ -100,6 +103,7 @@ const CoinManagement = function (props) {
       unitLogoUrl,
       unitWebsite,
       unitExplorer,
+      unitExplorerTransactionPath,
       unitGithub,
       unitTelegram,
       unitDiscord,
@@ -116,6 +120,7 @@ const CoinManagement = function (props) {
     setUnitLogoUrl(null);
     setUnitWebsite(null);
     setUnitExplorer(null);
+    setUnitExplorerTransactionPath(null);
     setUnitGithub(null);
     setUnitTelegram(null);
     setUnitDiscord(null);
@@ -133,6 +138,7 @@ const CoinManagement = function (props) {
     setUnitLogoUrl(null);
     setUnitWebsite(null);
     setUnitExplorer(null);
+    setUnitExplorerTransactionPath(null);
     setUnitGithub(null);
     setUnitTelegram(null);
     setUnitDiscord(null);
@@ -261,6 +267,7 @@ const CoinManagement = function (props) {
                           logoUrl: unitLogoUrl,
                           website: unitWebsite,
                           explorer: unitExplorer,
+                          explorerTransactionPath: unitExplorerTransactionPath,
                           github: unitGithub,
                           telegram: unitTelegram,
                           discord: unitDiscord,
@@ -292,6 +299,7 @@ const CoinManagement = function (props) {
                         currentUnitLogoUrl: coin.coinInfo.logoUrl,
                         currentUnitWebsite: coin.coinInfo.website,
                         currentUnitExplorer: coin.coinInfo.explorer,
+                        currentUnitExplorerTransactionPath: coin.coinInfo.explorerTransactionPath,
                         currentUnitGithub: coin.coinInfo.github,
                         currentUnitTelegram: coin.coinInfo.telegram,
                         currentUnitDiscord: coin.coinInfo.discord,
@@ -391,6 +399,27 @@ const CoinManagement = function (props) {
               </Grid>
               <Grid item xs={4}>
                 <div>
+                  Explorer Transaction Path:
+                </div>
+                {
+                  inEditMode.status && inEditMode.rowKey === coin.id ? (
+                    <MuiTextField
+                      fullWidth
+                      value={unitExplorerTransactionPath}
+                      onChange={(event) => setUnitExplorerTransactionPath(event.target.value)}
+                    />
+
+                  ) : (
+                    <MuiTextField
+                      fullWidth
+                      disabled
+                      value={coin.coinInfo && coin.coinInfo.explorerTransactionPath}
+                    />
+                  )
+                }
+              </Grid>
+              <Grid item xs={4}>
+                <div>
                   Github:
                 </div>
                 {
@@ -452,7 +481,7 @@ const CoinManagement = function (props) {
                   )
                 }
               </Grid>
-              <Grid item xs={8}>
+              <Grid item xs={12}>
                 <div>
                   Description:
                 </div>
@@ -473,25 +502,27 @@ const CoinManagement = function (props) {
                   )
                 }
               </Grid>
-              <div>
-                Exchanges
-              </div>
-              <div>
-                {
-                  inEditMode.status && inEditMode.rowKey === coin.id && (
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      size="large"
-                      style={{ marginLeft: 8 }}
-                      onClick={() => addExchange(coin.id)}
-                    >
-                      + Add Exchange
-                    </Button>
+              <Grid container item xs={12}>
+                <div>
+                  Exchanges
+                </div>
+                <div>
+                  {
+                    inEditMode.status && inEditMode.rowKey === coin.id && (
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        size="large"
+                        style={{ marginLeft: 8 }}
+                        onClick={() => addExchange(coin.id)}
+                      >
+                        + Add Exchange
+                      </Button>
 
-                  )
-                }
-              </div>
+                    )
+                  }
+                </div>
+              </Grid>
               <Grid container item xs={12}>
                 {
                   inEditMode.status && inEditMode.rowKey === coin.id ? (

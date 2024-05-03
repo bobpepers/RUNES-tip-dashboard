@@ -12,18 +12,17 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import PropTypes from 'prop-types';
+import { useLingui } from '@lingui/react';
 import ThemeToggle from '../components/ThemeToggle';
 
-function Footer(props) {
-  const {
-    i18n,
-  } = props;
+function Footer() {
+  const { i18n } = useLingui();
   const LANGUAGE_KEY = 'language';
   const [language, setLanguage] = useState('');
   const [anchorElLang, setAnchorElLang] = useState(null);
 
   const changeLanguage = (lng) => {
-    i18n.activate(lng);
+    i18n.activate({ language: lng })
     localStorage.setItem(LANGUAGE_KEY, lng);
     setLanguage(lng);
   };

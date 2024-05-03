@@ -20,10 +20,10 @@ import { SnackbarProvider } from 'notistack';
 import Button from '@mui/material/Button';
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
-import store from './reducers'
-import { messages as enMessages } from './locales/en/messages'
-import { messages as nlMessages } from './locales/nl/messages'
-import { messages as frMessages } from './locales/fr/messages'
+import store from './reducers';
+import { messages as enMessages } from './locales/en/messages';
+import { messages as nlMessages } from './locales/nl/messages';
+import { messages as frMessages } from './locales/fr/messages';
 import '@fortawesome/fontawesome-free/css/all.css';
 import './assets/fonts/texgyreheros-regular.woff';
 import './theme/style.scss';
@@ -59,11 +59,27 @@ i18n.load({
   fr: frMessages,
 });
 
+i18n.loadLocaleData({
+  en: {
+    plurals: enMessages,
+  },
+  nl: {
+    plurals: nlMessages,
+  },
+  fr: {
+    plurals: frMessages,
+  },
+})
+
 i18n.activate('en');
 
 const persistedLanguage = localStorage.getItem('language');
+
 if (!persistedLanguage) {
-  localStorage.setItem('language', 'en');
+  localStorage.setItem(
+    'language',
+    'en',
+  );
 }
 
 function DismissAction({ id }) {
@@ -98,6 +114,7 @@ function AppWrapper() {
           </Provider>
         </ThemeProvider>
       </I18nProvider>
+
     </StyledEngineProvider>
   );
 }
@@ -121,9 +138,7 @@ function AppContainer(props) {
       <ParticlesRunebase />
       <Header />
       <Routes />
-      <Footer
-        i18n={i18n}
-      />
+      <Footer />
     </>
   );
 }
@@ -141,3 +156,5 @@ createRoot(
 ).render(
   <AppWrapper />,
 );
+
+export default App; // Added export
