@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.47](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.46...v0.0.47) (2024-05-03)
+
+
+### Features
+
+* :zap: explorerTransactionPath (coinInfo), fix lingui deprecations, upgrade dependencies ([c8174c0](https://github.com/bobpepers/runes-tip-dashboard/commit/c8174c07877c1150030a92b8c71cda7d2dc803a8))
+
 ### [0.0.46](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.45...v0.0.46) (2024-05-02)
 
 
