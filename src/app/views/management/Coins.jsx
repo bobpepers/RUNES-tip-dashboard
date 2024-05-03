@@ -87,7 +87,7 @@ const CoinManagement = function (props) {
     setUnitLogoUrl(currentUnitLogoUrl);
     setUnitWebsite(currentUnitWebsite);
     setUnitExplorer(currentUnitExplorer);
-    setUnitExplorer(currentUnitExplorerTransactionPath);
+    setUnitExplorerTransactionPath(currentUnitExplorerTransactionPath);
     setUnitGithub(currentUnitGithub);
     setUnitTelegram(currentUnitTelegram);
     setUnitDiscord(currentUnitDiscord);
