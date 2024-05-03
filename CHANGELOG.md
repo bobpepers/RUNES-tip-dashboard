@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.48](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.47...v0.0.48) (2024-05-03)
+
+
+### Bug Fixes
+
+* :bug: fix in coinInfoManagement (ExplorerTransactionPath) ([0ab1a0a](https://github.com/bobpepers/runes-tip-dashboard/commit/0ab1a0acaa8bb9042a5d5ccf386be031594ef0f6))
+
 ### [0.0.47](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.46...v0.0.47) (2024-05-03)
 
 
