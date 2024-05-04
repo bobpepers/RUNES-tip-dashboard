@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.50](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.49...v0.0.50) (2024-05-04)
+
+
+### Features
+
+* :sparkles: Add deposit addresses & Memo's to UserInfo ([5a3afcd](https://github.com/bobpepers/runes-tip-dashboard/commit/5a3afcd1c0220863f75d0bc7e8e3ea3a77fe5314))
+* :sparkles: Add project query to io connection ([a2e9751](https://github.com/bobpepers/runes-tip-dashboard/commit/a2e9751ccca2242b2334ac57cc900dbc4aa3c4ac))
+
 ### [0.0.49](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.48...v0.0.49) (2024-05-04)
 
 
