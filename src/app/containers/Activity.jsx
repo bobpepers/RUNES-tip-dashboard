@@ -31,6 +31,7 @@ const ActivityContainer = function (props) {
     type,
     amount,
     rowsPerPage,
+    currentProject,
   } = props;
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
@@ -61,6 +62,9 @@ const ActivityContainer = function (props) {
   useEffect(() => {
     const socket = io(window.myConfig.wsEndPoint, {
       path: '/socket.io',
+      query: {
+        project: currentProject,
+      },
     });
 
     socket.on('updateActivity', (data) => {
@@ -186,6 +190,7 @@ ActivityContainer.defaultProps = {
 const mapStateToProps = (state) => ({
   auth: state.auth,
   activity: state.activity,
+  currentProject: state.selectedProject.currentProject,
 })
 
 export default withRouter(connect(mapStateToProps, null)(ActivityContainer));
