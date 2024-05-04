@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.51](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.50...v0.0.51) (2024-05-04)
+
+
+### Bug Fixes
+
+* :zap: Add missing project argument in actions (coin) ([6934a4c](https://github.com/bobpepers/runes-tip-dashboard/commit/6934a4c4c8f4f575199050216a6680fbb2cd8123))
+
 ### [0.0.50](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.49...v0.0.50) (2024-05-04)
 
 
