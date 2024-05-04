@@ -279,112 +279,112 @@ const UserView = function (props) {
           userInfo
           && userInfo.data
           && userInfo.data.wallets
-        && userInfo.data.wallets.map((wallet) => (
-          <>
-            <Grid
-              item
-              xs={6}
-              sm={6}
-              md={4}
-              lg={4}
-              xl={4}
-              className="zindexOne"
-              justifyContent="center"
-            >
-              <Typography
-                variant="h6"
-                gutterBottom
-                component="div"
-                align="center"
+          && userInfo.data.wallets.map((wallet) => (
+            <>
+              <Grid
+                item
+                xs={6}
+                sm={6}
+                md={4}
+                lg={4}
+                xl={4}
+                className="zindexOne"
+                justifyContent="center"
               >
-                available
-                {' '}
-                {wallet.coin.ticker}
-                {' '}
-                balance:
-              </Typography>
-              <Typography
-                variant="h6"
-                gutterBottom
-                component="div"
-                align="center"
-              >
-                {
-                  new BigNumber(wallet.available).dividedBy(`1e${wallet.coin.dp}`).toString()
-                }
-              </Typography>
-            </Grid>
+                <Typography
+                  variant="h6"
+                  gutterBottom
+                  component="div"
+                  align="center"
+                >
+                  available
+                  {' '}
+                  {wallet.coin.ticker}
+                  {' '}
+                  balance:
+                </Typography>
+                <Typography
+                  variant="h6"
+                  gutterBottom
+                  component="div"
+                  align="center"
+                >
+                  {
+                    new BigNumber(wallet.available).dividedBy(`1e${wallet.coin.dp}`).toString()
+                  }
+                </Typography>
+              </Grid>
 
-            <Grid
-              item
-              xs={6}
-              sm={6}
-              md={4}
-              lg={4}
-              xl={4}
-              className="zindexOne"
-              justifyContent="center"
-            >
-              <Typography
-                variant="h6"
-                gutterBottom
-                component="div"
-                align="center"
+              <Grid
+                item
+                xs={6}
+                sm={6}
+                md={4}
+                lg={4}
+                xl={4}
+                className="zindexOne"
+                justifyContent="center"
               >
-                locked
-                {' '}
-                {wallet.coin.ticker}
-                {' '}
-                balance:
-              </Typography>
-              <Typography
-                variant="h6"
-                gutterBottom
-                component="div"
-                align="center"
-              >
-                {
-                  new BigNumber(wallet.locked).dividedBy(`1e${wallet.coin.dp}`).toString()
-                }
-              </Typography>
-            </Grid>
+                <Typography
+                  variant="h6"
+                  gutterBottom
+                  component="div"
+                  align="center"
+                >
+                  locked
+                  {' '}
+                  {wallet.coin.ticker}
+                  {' '}
+                  balance:
+                </Typography>
+                <Typography
+                  variant="h6"
+                  gutterBottom
+                  component="div"
+                  align="center"
+                >
+                  {
+                    new BigNumber(wallet.locked).dividedBy(`1e${wallet.coin.dp}`).toString()
+                  }
+                </Typography>
+              </Grid>
 
-            <Grid
-              item
-              xs={6}
-              sm={6}
-              md={4}
-              lg={4}
-              xl={4}
-              className="zindexOne"
-              justifyContent="center"
-            >
-              <Typography
-                variant="h6"
-                gutterBottom
-                component="div"
-                align="center"
+              <Grid
+                item
+                xs={6}
+                sm={6}
+                md={4}
+                lg={4}
+                xl={4}
+                className="zindexOne"
+                justifyContent="center"
               >
-                total
-                {' '}
-                {wallet.coin.ticker}
-                {' '}
-                balance:
-              </Typography>
-              <Typography
-                variant="h6"
-                gutterBottom
-                component="div"
-                align="center"
-              >
-                {
+                <Typography
+                  variant="h6"
+                  gutterBottom
+                  component="div"
+                  align="center"
+                >
+                  total
+                  {' '}
+                  {wallet.coin.ticker}
+                  {' '}
+                  balance:
+                </Typography>
+                <Typography
+                  variant="h6"
+                  gutterBottom
+                  component="div"
+                  align="center"
+                >
+                  {
 
-                  new BigNumber(wallet.available).plus(wallet.locked).dividedBy(`1e${wallet.coin.dp}`).toString()
-                }
-              </Typography>
-            </Grid>
-          </>
-        ))
+                    new BigNumber(wallet.available).plus(wallet.locked).dividedBy(`1e${wallet.coin.dp}`).toString()
+                  }
+                </Typography>
+              </Grid>
+            </>
+          ))
         }
         <Grid
           item
@@ -487,7 +487,105 @@ const UserView = function (props) {
             &#37;
           </Typography>
         </Grid>
-
+      </Grid>
+      <Grid
+        container
+        spacing={0}
+        style={{ marginTop: '5px' }}
+      >
+        <Divider
+          style={{ width: '100%' }}
+        />
+        <Grid
+          item
+          xs={12}
+          sm={12}
+          md={12}
+          lg={12}
+          xl={12}
+          className="zindexOne"
+          justifyContent="center"
+        >
+          <Typography
+            variant="h6"
+            gutterBottom
+            component="div"
+            align="center"
+          >
+            Deposit Addresses
+          </Typography>
+        </Grid>
+        <Divider
+          style={{ width: '100%' }}
+        />
+        {
+          userInfo
+          && userInfo.data
+          && userInfo.data.wallets
+          && userInfo.data.wallets.map((wallet) => (
+            <>
+              <Grid
+                item
+                xs={12}
+                sm={12}
+                md={2}
+                lg={2}
+                xl={2}
+                className="zindexOne"
+              >
+                <Typography
+                  variant="subtitle1"
+                  gutterBottom
+                  component="div"
+                >
+                  {wallet.coin.ticker}
+                  :
+                </Typography>
+              </Grid>
+              <Grid
+                item
+                xs={12}
+                sm={12}
+                md={8}
+                lg={8}
+                xl={8}
+                className="zindexOne"
+                justifyContent="center"
+              >
+                <Typography
+                  variant="subtitle1"
+                  gutterBottom
+                  component="div"
+                  align="center"
+                >
+                  {wallet.address.address}
+                </Typography>
+              </Grid>
+              <Grid
+                item
+                xs={12}
+                sm={12}
+                md={2}
+                lg={2}
+                xl={2}
+                className="zindexOne"
+                justifyContent="center"
+              >
+                <Typography
+                  variant="subtitle1"
+                  gutterBottom
+                  component="div"
+                  align="right"
+                >
+                  {wallet.address.memo || 'No Memo'}
+                </Typography>
+              </Grid>
+              <Divider
+                style={{ width: '100%' }}
+              />
+            </>
+          ))
+        }
       </Grid>
 
       <Grid
