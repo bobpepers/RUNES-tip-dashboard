@@ -56,7 +56,8 @@ export function editCoinInfoAction(
   exchanges,
   hints,
 ) {
-  return function (dispatch) {
+  return function (dispatch, getState) {
+    const { currentProject } = getState().selectedProject;
     dispatch({
       type: EDIT_COININFO_BEGIN,
     });
@@ -73,6 +74,7 @@ export function editCoinInfoAction(
       description,
       exchanges,
       hints,
+      project: currentProject,
     }).then((response) => {
       dispatch({
         type: EDIT_COININFO_SUCCESS,
@@ -99,13 +101,15 @@ export function deleteCoinInfoExchangeAction(
   id,
   coinId,
 ) {
-  return function (dispatch) {
+  return function (dispatch, getState) {
+    const { currentProject } = getState().selectedProject;
     dispatch({
       type: DELETE_COININFOEXCHANGE_BEGIN,
     });
     axios.post(`${window.myConfig.apiUrl}/management/coinInfo/exchange/delete`, {
       id,
       coinId,
+      project: currentProject,
     }).then((response) => {
       dispatch({
         type: DELETE_COININFOEXCHANGE_SUCCESS,
@@ -132,13 +136,15 @@ export function deleteCoinInfoHintAction(
   id,
   coinId,
 ) {
-  return function (dispatch) {
+  return function (dispatch, getState) {
+    const { currentProject } = getState().selectedProject;
     dispatch({
       type: DELETE_COININFOHINT_BEGIN,
     });
     axios.post(`${window.myConfig.apiUrl}/management/coinInfo/hint/delete`, {
       id,
       coinId,
+      project: currentProject,
     }).then((response) => {
       dispatch({
         type: DELETE_COININFOHINT_SUCCESS,
