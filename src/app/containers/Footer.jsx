@@ -11,7 +11,6 @@ import ReactCountryFlag from 'react-country-flag';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import PropTypes from 'prop-types';
 import { useLingui } from '@lingui/react';
 import ThemeToggle from '../components/ThemeToggle';
 
@@ -170,11 +169,5 @@ function Footer() {
     </div>
   );
 }
-
-Footer.propTypes = {
-  i18n: PropTypes.shape({
-    activate: PropTypes.func.isRequired,
-  }).isRequired,
-};
 
 export default Footer;

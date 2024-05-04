@@ -526,6 +526,6 @@ const mapStateToProps = (state) => ({
   adminWallet: state.adminWallet,
   blockNumber: state.blockNumber,
   collectEarnings: state.collectEarnings,
-})
+});
 
 export default withRouter(connect(mapStateToProps, null)(Home));
