@@ -43,6 +43,7 @@ const CoinManagement = function (props) {
   const [unitGithub, setUnitGithub] = useState(null);
   const [unitTelegram, setUnitTelegram] = useState(null);
   const [unitDiscord, setUnitDiscord] = useState(null);
+  const [unitCoinpaprikaId, setUnitCoinpaprikaId] = useState(null);
   const [unitDescription, setUnitDescription] = useState(null);
   const [unitExchanges, setUnitExchanges] = useState([]);
   const [unitHints, setUnitHints] = useState([]);
@@ -78,6 +79,7 @@ const CoinManagement = function (props) {
     currentUnitDescription,
     currentUnitExchanges,
     currentUnitHints,
+    currentUnitCoinpaprikaId,
   }) => {
     setInEditMode({
       status: true,
@@ -94,22 +96,26 @@ const CoinManagement = function (props) {
     setUnitDescription(currentUnitDescription);
     setUnitExchanges(currentUnitExchanges);
     setUnitHints(currentUnitHints);
+    setUnitCoinpaprikaId(currentUnitCoinpaprikaId);
   }
 
   const onSave = async ({ id }) => {
     await dispatch(editCoinInfoAction(
-      id,
-      unitName,
-      unitLogoUrl,
-      unitWebsite,
-      unitExplorer,
-      unitExplorerTransactionPath,
-      unitGithub,
-      unitTelegram,
-      unitDiscord,
-      unitDescription,
-      unitExchanges,
-      unitHints,
+      {
+        id,
+        name: unitName,
+        logoUrl: unitLogoUrl,
+        website: unitWebsite,
+        explorer: unitExplorer,
+        explorerTransactionPath: unitExplorerTransactionPath,
+        github: unitGithub,
+        telegram: unitTelegram,
+        discord: unitDiscord,
+        description: unitDescription,
+        exchanges: unitExchanges,
+        hints: unitHints,
+        coinpaprikaId: unitCoinpaprikaId,
+      },
     ));
 
     setInEditMode({
@@ -127,6 +133,7 @@ const CoinManagement = function (props) {
     setUnitDescription(null);
     setUnitExchanges(null);
     setUnitHints(null);
+    setUnitCoinpaprikaId(null);
   }
 
   const onCancel = () => {
@@ -145,6 +152,7 @@ const CoinManagement = function (props) {
     setUnitDescription(null);
     setUnitExchanges(null);
     setUnitHints(null);
+    setUnitCoinpaprikaId(null);
   }
 
   const addHint = (
@@ -273,6 +281,7 @@ const CoinManagement = function (props) {
                           discord: unitDiscord,
                           description: unitDescription,
                           exchanges: unitExchanges,
+                          coinPaprikaId: unitCoinpaprikaId,
                         })}
                       >
                         Save
@@ -306,6 +315,7 @@ const CoinManagement = function (props) {
                         currentUnitDescription: coin.coinInfo.description,
                         currentUnitExchanges: coin.coinInfo.coinInfoExchanges || [],
                         currentUnitHints: coin.coinInfo.coinInfoHints || [],
+                        currentUnitCoinpaprikaId: coin.coinInfo.coinpaprikaId,
                       })}
                     >
                       Edit
@@ -477,6 +487,27 @@ const CoinManagement = function (props) {
                       fullWidth
                       disabled
                       value={coin.coinInfo && coin.coinInfo.discord}
+                    />
+                  )
+                }
+              </Grid>
+              <Grid item xs={4}>
+                <div>
+                  Coinpaprika Id:
+                </div>
+                {
+                  inEditMode.status && inEditMode.rowKey === coin.id ? (
+                    <MuiTextField
+                      fullWidth
+                      value={unitCoinpaprikaId}
+                      onChange={(event) => setUnitCoinpaprikaId(event.target.value)}
+                    />
+
+                  ) : (
+                    <MuiTextField
+                      fullWidth
+                      disabled
+                      value={coin.coinInfo && coin.coinInfo.coinpaprikaId}
                     />
                   )
                 }

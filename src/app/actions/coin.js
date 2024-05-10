@@ -42,22 +42,24 @@ export function fetchCoinsAction() {
   }
 }
 
-export function editCoinInfoAction(
-  id,
-  name,
-  logoUrl,
-  website,
-  explorer,
-  explorerTransactionPath,
-  github,
-  telegram,
-  discord,
-  description,
-  exchanges,
-  hints,
-) {
+export function editCoinInfoAction(values) {
   return function (dispatch, getState) {
     const { currentProject } = getState().selectedProject;
+    const {
+      id,
+      name,
+      logoUrl,
+      website,
+      explorer,
+      explorerTransactionPath,
+      github,
+      telegram,
+      discord,
+      description,
+      coinpaprikaId,
+      exchanges,
+      hints,
+    } = values;
     dispatch({
       type: EDIT_COININFO_BEGIN,
     });
@@ -74,6 +76,7 @@ export function editCoinInfoAction(
       description,
       exchanges,
       hints,
+      coinpaprikaId,
       project: currentProject,
     }).then((response) => {
       dispatch({

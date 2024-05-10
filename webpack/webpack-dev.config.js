@@ -4,5 +4,5 @@ module.exports = require('./webpack.config')({
   devtool: 'inline-source-map',
   jsFileName: 'app.js',
   cssFileName: 'app.css',
-  port: 8012,
+  port: 8042,
 });
