@@ -35,6 +35,9 @@ const headCells = [
     id: 'lastActive', numeric: true, disablePadding: false, label: 'last active',
   },
   {
+    id: 'memberCount', numeric: true, disablePadding: false, label: 'member count',
+  },
+  {
     id: 'discordTipMessageChannel', numeric: true, disablePadding: false, label: 'discordTipMessageChannel',
   },
   {
@@ -56,6 +59,7 @@ function createData(
   isInServer,
   banned,
   discordTipMessageChannelId,
+  memberCount,
 ) {
   return {
     id,
@@ -65,6 +69,7 @@ function createData(
     isInServer,
     banned,
     discordTipMessageChannelId,
+    memberCount,
   };
 }
 
@@ -161,7 +166,6 @@ function ServerTable(props) {
   const dispatch = useDispatch();
 
   servers.forEach((item) => {
-    // console.log(item);
     rows.push(
       createData(
         item.id,
@@ -171,6 +175,7 @@ function ServerTable(props) {
         item.isInServer,
         item.banned,
         item.discordTipMessageChannelId,
+        item.memberCount,
       ),
     );
   });
@@ -314,6 +319,9 @@ function ServerTable(props) {
                     </TableCell>
                     <TableCell align="right">
                       {row.lastActive}
+                    </TableCell>
+                    <TableCell align="right">
+                      {row.memberCount || 'n/a'}
                     </TableCell>
                     <TableCell align="right">
                       {
