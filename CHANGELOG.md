@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.52](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.51...v0.0.52) (2024-05-11)
+
+
+### Features
+
+* :zap: coinpaprikaId in coinInfo management, pass values as object to editCoinInfo ([a674e44](https://github.com/bobpepers/runes-tip-dashboard/commit/a674e44da3d8bc912b77b67c3ba94c12f2107ea6))
+* :zap: memberCount row (ServerTable) ([d90a2ab](https://github.com/bobpepers/runes-tip-dashboard/commit/d90a2ab255d00578edccf3f17ee127d3e7893833))
+
 ### [0.0.51](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.50...v0.0.51) (2024-05-04)
 
 
