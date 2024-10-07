@@ -323,10 +323,10 @@ function Header(
         </Link>
         <Link
           className="nav-link"
-          to="/functions/voicerains"
+          to="/functions/channelwaves"
         >
           <MenuItem onClick={handleCloseFunctions}>
-            Voicerains
+            Channelwaves
           </MenuItem>
         </Link>
         <Link

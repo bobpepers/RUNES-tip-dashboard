@@ -41,6 +41,8 @@ const FunctionsView = function (props) {
   ]);
 
   useEffect(() => {
+    console.log(botFunctions);
+    console.log(botFunctions.data);
   }, [
     botFunctions,
     page,

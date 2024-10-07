@@ -301,81 +301,22 @@ const FunctionView = function (props) {
   ]);
 
   useEffect(() => {
-    if (functionName === 'rain') {
-      setFunctionTips(
-        botFunction
-        && botFunction.data
-        && botFunction.data.raintips
-        && botFunction.data.raintips,
-      );
+    const functionTipMap = {
+      rain: 'raintips',
+      flood: 'floodtips',
+      reactdrop: 'reactdroptips',
+      sleet: 'sleettips',
+      soak: 'soaktips',
+      thunder: 'thundertips',
+      tip: 'tiptips',
+      channelwave: 'channelwavetips',
+      trivia: 'triviatips',
+    };
+
+    if (functionName && functionTipMap[functionName]) {
+      setFunctionTips(botFunction?.data?.[functionTipMap[functionName]]);
     }
-    if (functionName === 'flood') {
-      setFunctionTips(
-        botFunction
-        && botFunction.data
-        && botFunction.data.floodtips
-        && botFunction.data.floodtips,
-      );
-    }
-    if (functionName === 'reactdrop') {
-      setFunctionTips(
-        botFunction
-        && botFunction.data
-        && botFunction.data.reactdroptips
-        && botFunction.data.reactdroptips,
-      );
-    }
-    if (functionName === 'sleet') {
-      setFunctionTips(
-        botFunction
-        && botFunction.data
-        && botFunction.data.sleettips
-        && botFunction.data.sleettips,
-      );
-    }
-    if (functionName === 'soak') {
-      setFunctionTips(
-        botFunction
-        && botFunction.data
-        && botFunction.data.soaktips
-        && botFunction.data.soaktips,
-      );
-    }
-    if (functionName === 'thunder') {
-      setFunctionTips(
-        botFunction
-        && botFunction.data
-        && botFunction.data.thundertips
-        && botFunction.data.thundertips,
-      );
-    }
-    if (functionName === 'tip') {
-      setFunctionTips(
-        botFunction
-        && botFunction.data
-        && botFunction.data.tiptips
-        && botFunction.data.tiptips,
-      );
-    }
-    if (functionName === 'voicerain') {
-      setFunctionTips(
-        botFunction
-        && botFunction.data
-        && botFunction.data.voiceraintips
-        && botFunction.data.voiceraintips,
-      );
-    }
-    if (functionName === 'trivia') {
-      setFunctionTips(
-        botFunction
-        && botFunction.data
-        && botFunction.data.triviatips
-        && botFunction.data.triviatips,
-      );
-    }
-  }, [
-    botFunction,
-  ]);
+  }, [botFunction, functionName]);
 
   useEffect(() => {
     console.log('functionTips');

@@ -183,7 +183,6 @@ const FunctionsTable = function (props) {
     totalCount,
   } = props;
   const rows = [];
-  console.log(functions);
 
   functions.forEach((item) => {
     rows.push(

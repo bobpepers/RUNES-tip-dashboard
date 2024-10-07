@@ -92,6 +92,18 @@ const RequireAuth = function (props) {
   return <Outlet />;
 }
 
+const functionNames = [
+  'rain',
+  'flood',
+  'sleet',
+  'soak',
+  'tip',
+  'channelwave',
+  'thunder',
+  'trivia',
+  'reactdrop',
+];
+
 const RoutesX = function (props) {
   const {
     theme,
@@ -144,176 +156,19 @@ const RoutesX = function (props) {
           element={<WithdrawalAddressView />}
         />
 
-        <Route
-          path="/functions/rains"
-          element={(
-            <FunctionsView
-              functionName="rain"
+        {functionNames.map((functionName) => (
+          <React.Fragment key={functionName}>
+            <Route
+              path={`/functions/${functionName}s`}
+              element={<FunctionsView functionName={functionName} />}
             />
-          )}
-        />
-        <Route
-          path="/functions/rain/:functionId"
-          element={(
-            <FunctionView
-              functionName="rain"
+            <Route
+              path={`/functions/${functionName}/:functionId`}
+              element={<FunctionView functionName={functionName} />}
             />
-          )}
-        />
+          </React.Fragment>
+        ))}
 
-        <Route
-          path="/functions/floods"
-          element={(
-            <FunctionsView
-              functionName="flood"
-            />
-          )}
-        />
-        <Route
-          path="/functions/flood/:functionId"
-          element={(
-            <FunctionView
-              functionName="flood"
-            />
-          )}
-        />
-
-        <Route
-          path="/functions/sleets"
-          element={(
-            <FunctionsView
-              functionName="sleet"
-            />
-          )}
-        />
-        <Route
-          path="/functions/sleet/:functionId"
-          element={(
-            <FunctionView
-              functionName="sleet"
-            />
-          )}
-        />
-
-        <Route
-          path="/functions/soaks"
-          element={(
-            <FunctionsView
-              functionName="soak"
-            />
-          )}
-        />
-        <Route
-          path="/functions/soak/:functionId"
-          element={(
-            <FunctionView
-              functionName="soak"
-            />
-          )}
-        />
-
-        <Route
-          path="/functions/tips"
-          element={(
-            <FunctionsView
-              functionName="tip"
-            />
-          )}
-        />
-
-        <Route
-          path="/functions/tip/:functionId"
-          element={(
-            <FunctionView
-              functionName="tip"
-            />
-          )}
-        />
-
-        <Route
-          path="/functions/voicerains"
-          element={(
-            <FunctionsView
-              functionName="voicerain"
-            />
-          )}
-        />
-        <Route
-          path="/functions/voicerain/:functionId"
-          element={(
-            <FunctionView
-              functionName="voicerain"
-            />
-          )}
-        />
-
-        <Route
-          path="/functions/thunders"
-          element={(
-            <FunctionsView
-              functionName="thunder"
-            />
-          )}
-        />
-        <Route
-          path="/functions/thunder/:functionId"
-          element={(
-            <FunctionView
-              functionName="thunder"
-            />
-          )}
-        />
-
-        <Route
-          path="/functions/trivias"
-          element={(
-            <FunctionsView
-              functionName="trivia"
-            />
-          )}
-        />
-        <Route
-          path="/functions/trivia/:functionId"
-          element={(
-            <FunctionView
-              functionName="trivia"
-            />
-          )}
-        />
-
-        <Route
-          path="/functions/reactdrops"
-          element={(
-            <FunctionsView
-              functionName="reactdrop"
-            />
-          )}
-        />
-        <Route
-          path="/functions/reactdrop/:functionId"
-          element={(
-            <FunctionView
-              functionName="reactdrop"
-            />
-          )}
-        />
-
-        <Route
-          path="/functions/trivias"
-          element={(
-            <FunctionsView
-              functionName="trivia"
-            />
-          )}
-        />
-        <Route
-          path="/functions/trivia/:functionId"
-          element={(
-            <FunctionView
-              functionName="trivia"
-            />
-          )}
-        />
         <Route
           path="/functions/deposits"
           element={<Deposits />}
