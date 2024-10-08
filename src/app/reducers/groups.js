@@ -1,9 +1,9 @@
 import {
-  FETCH_SERVERS_BEGIN,
-  FETCH_SERVERS_SUCCESS,
-  FETCH_SERVERS_FAIL,
-  UPDATE_SERVER,
-  POST_LEAVESERVER,
+  FETCH_GROUPS_BEGIN,
+  FETCH_GROUPS_SUCCESS,
+  FETCH_GROUPS_FAIL,
+  UPDATE_GROUP,
+  POST_LEAVE_GROUP,
 } from '../actions/types/index';
 
 const initialState = {
@@ -13,7 +13,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-  case UPDATE_SERVER:
+  case UPDATE_GROUP:
     return {
       ...state,
       data: state.data.map(
@@ -24,34 +24,34 @@ export default (state = initialState, action) => {
       isFetching: false,
       error: null,
     };
-  case POST_LEAVESERVER:
+  case POST_LEAVE_GROUP:
     return {
       ...state,
       data: state.data.map(
-        (server) => (server.id === action.payload.id
+        (group) => (group.id === action.payload.id
           ? {
-            ...server,
-            isInServer: false,
+            ...group,
+            isBotInGroup: false,
           }
-          : server),
+          : group),
       ),
       isFetching: false,
       error: null,
     };
-  case FETCH_SERVERS_BEGIN:
+  case FETCH_GROUPS_BEGIN:
     return {
       ...state,
       isFetching: true,
       error: null,
     };
-  case FETCH_SERVERS_SUCCESS:
+  case FETCH_GROUPS_SUCCESS:
     return {
       ...state,
       data: action.payload.result,
       count: action.payload.count,
       isFetching: false,
     };
-  case FETCH_SERVERS_FAIL:
+  case FETCH_GROUPS_FAIL:
     return {
       ...state,
       error: action.error,

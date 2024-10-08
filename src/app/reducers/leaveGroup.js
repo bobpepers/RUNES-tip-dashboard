@@ -1,7 +1,7 @@
 import {
-  POST_EDITSERVER_BEGIN,
-  POST_EDITSERVER_SUCCESS,
-  POST_EDITSERVER_FAIL,
+  POST_LEAVE_GROUP_BEGIN,
+  POST_LEAVE_GROUP_SUCCESS,
+  POST_LEAVE_GROUP_FAIL,
 } from '../actions/types/index';
 
 const initialState = {
@@ -11,19 +11,19 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-  case POST_EDITSERVER_BEGIN:
+  case POST_LEAVE_GROUP_BEGIN:
     return {
       ...state,
       isFetching: true,
       error: null,
     };
-  case POST_EDITSERVER_SUCCESS:
+  case POST_LEAVE_GROUP_SUCCESS:
     return {
       ...state,
       data: action.payload,
       isFetching: false,
     };
-  case POST_EDITSERVER_FAIL:
+  case POST_LEAVE_GROUP_FAIL:
     return {
       ...state,
       error: action.error,

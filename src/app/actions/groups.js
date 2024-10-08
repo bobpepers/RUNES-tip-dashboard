@@ -1,26 +1,27 @@
 import axios from '../axios';
 import {
-  FETCH_SERVERS_BEGIN,
-  FETCH_SERVERS_SUCCESS,
-  FETCH_SERVERS_FAIL,
-  UPDATE_SERVER,
+  FETCH_GROUPS_BEGIN,
+  FETCH_GROUPS_SUCCESS,
+  FETCH_GROUPS_FAIL,
+  UPDATE_GROUP,
 } from './types/index';
 import { notistackErrorAdd } from './helpers/notistackError';
 
-export function fetchServerAction(
+export function fetchGroupsAction(
   id,
   groupId,
   serverName,
   platform,
   offset,
   limit,
+  isBotInGroup,
 ) {
   return function (dispatch, getState) {
     const { currentProject } = getState().selectedProject;
     dispatch({
-      type: FETCH_SERVERS_BEGIN,
+      type: FETCH_GROUPS_BEGIN,
     });
-    axios.post(`${window.myConfig.apiUrl}/management/servers`, {
+    axios.post(`${window.myConfig.apiUrl}/management/groups`, {
       id,
       groupId,
       serverName,
@@ -28,9 +29,10 @@ export function fetchServerAction(
       offset,
       limit,
       project: currentProject,
+      isBotInGroup,
     }).then((response) => {
       dispatch({
-        type: FETCH_SERVERS_SUCCESS,
+        type: FETCH_GROUPS_SUCCESS,
         payload: response.data,
       });
     }).catch((error) => {
@@ -39,24 +41,24 @@ export function fetchServerAction(
         error,
       );
       dispatch({
-        type: FETCH_SERVERS_FAIL,
+        type: FETCH_GROUPS_FAIL,
         payload: error,
       });
     });
   }
 }
 
-export function banServerAction(id, banMessage = '') {
+export function banGroupAction(id, banMessage = '') {
   return function (dispatch, getState) {
     const { currentProject } = getState().selectedProject;
-    axios.post(`${window.myConfig.apiUrl}/management/server/ban`, {
+    axios.post(`${window.myConfig.apiUrl}/management/group/ban`, {
       id,
       banMessage,
       project: currentProject,
     })
       .then((response) => {
         dispatch({
-          type: UPDATE_SERVER,
+          type: UPDATE_GROUP,
           payload: response.data.result,
         });
       }).catch((error) => {

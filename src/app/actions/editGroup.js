@@ -1,23 +1,23 @@
 import axios from '../axios';
 import {
-  POST_EDITSERVER_BEGIN,
-  POST_EDITSERVER_SUCCESS,
-  POST_EDITSERVER_FAIL,
-  UPDATE_SERVER,
+  POST_EDIT_GROUP_BEGIN,
+  POST_EDIT_GROUP_SUCCESS,
+  POST_EDIT_GROUP_FAIL,
+  UPDATE_GROUP,
 } from './types/index';
 import { notistackErrorAdd } from './helpers/notistackError';
 
-export function editServerAction(
+export function editGroupAction(
   id,
   discordTipMessageChannelId,
 ) {
   return function (dispatch, getState) {
     const { currentProject } = getState().selectedProject;
     dispatch({
-      type: POST_EDITSERVER_BEGIN,
+      type: POST_EDIT_GROUP_BEGIN,
     });
     axios.post(
-      `${window.myConfig.apiUrl}/management/server/edit`,
+      `${window.myConfig.apiUrl}/management/group/edit`,
       {
         id,
         discordTipMessageChannelId,
@@ -25,11 +25,11 @@ export function editServerAction(
       },
     ).then((response) => {
       dispatch({
-        type: POST_EDITSERVER_SUCCESS,
+        type: POST_EDIT_GROUP_SUCCESS,
         payload: response.data.result,
       });
       dispatch({
-        type: UPDATE_SERVER,
+        type: UPDATE_GROUP,
         payload: response.data.result,
       });
     }).catch((error) => {
@@ -38,7 +38,7 @@ export function editServerAction(
         error,
       );
       dispatch({
-        type: POST_EDITSERVER_FAIL,
+        type: POST_EDIT_GROUP_FAIL,
         payload: error,
       });
     });

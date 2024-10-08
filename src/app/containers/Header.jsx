@@ -156,10 +156,10 @@ function Header(
         </Link>
         <Link
           className="nav-link"
-          to="/management/servers"
+          to="/management/groups"
         >
           <MenuItem onClick={handleCloseManagement}>
-            Servers
+            Groups
           </MenuItem>
         </Link>
         <Link

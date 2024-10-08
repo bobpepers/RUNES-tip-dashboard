@@ -5,7 +5,7 @@ import resetPassword from './resetPassword';
 import theme from './changeTheme';
 import alert from './alert';
 import nodeStatus from './nodeStatus';
-import servers from './servers';
+import groups from './groups';
 import activity from './activity';
 import users from './users';
 import deposits from './deposits';
@@ -30,8 +30,8 @@ import priceCurrencies from './priceCurrencies';
 import userInfo from './userInfo';
 import withdrawalAddresses from './withdrawalAddresses';
 import withdrawalAddress from './withdrawalAddress';
-import leaveServer from './leaveServer';
-import editServer from './editServer';
+import leaveGroup from './leaveGroup';
+import editServer from './editGroup';
 import adminWallet from './adminWallet';
 
 import coins from './coins';
@@ -61,7 +61,7 @@ const store = configureStore({
     nodeStatus,
     adminWallet,
     user,
-    servers,
+    groups,
     channels,
     activity,
     users,
@@ -82,7 +82,7 @@ const store = configureStore({
     errors,
     logs,
     userInfo,
-    leaveServer,
+    leaveGroup,
     editServer,
 
     withdrawalAddresses,

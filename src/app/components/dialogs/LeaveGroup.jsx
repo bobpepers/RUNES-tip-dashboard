@@ -9,14 +9,14 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { leaveServerAction } from '../../actions/leaveServer';
+import { leaveGroupAction } from '../../actions/leaveGroup';
 
-const LeaveServer = function (props) {
+const LeaveGroup = function (props) {
   const {
     id,
     groupId,
     groupName,
-    leaveServer,
+    leaveGroup,
   } = props;
   const [open, setOpen] = React.useState(false);
   const dispatch = useDispatch();
@@ -29,8 +29,8 @@ const LeaveServer = function (props) {
     setOpen(false);
   };
 
-  const handleLeaveServer = () => {
-    dispatch(leaveServerAction(
+  const handleLeaveGroup = () => {
+    dispatch(leaveGroupAction(
       id,
     ));
   };
@@ -38,13 +38,13 @@ const LeaveServer = function (props) {
   useEffect(() => {
     setOpen(false);
   }, [
-    leaveServer,
+    leaveGroup,
   ]);
 
   return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
-        Leave Server
+        Leave Group
       </Button>
       <Dialog
         open={open}
@@ -72,7 +72,7 @@ const LeaveServer = function (props) {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} autoFocus>No</Button>
-          <Button onClick={handleLeaveServer}>
+          <Button onClick={handleLeaveGroup}>
             Yes
           </Button>
         </DialogActions>
@@ -84,8 +84,8 @@ const LeaveServer = function (props) {
 function mapStateToProps(state) {
   return {
     authenticated: state.auth.authenticated,
-    leaveServer: state.leaveServer.data,
+    leaveGroup: state.leaveGroup.data,
   };
 }
 
-export default connect(mapStateToProps, null)(LeaveServer);
+export default connect(mapStateToProps, null)(LeaveGroup);

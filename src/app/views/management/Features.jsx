@@ -33,7 +33,7 @@ import {
   updateFeature,
   removeFeature,
 } from '../../actions/features';
-import { fetchServerAction } from '../../actions/servers';
+import { fetchGroupsAction } from '../../actions/groups';
 import { fetchChannelsAction } from '../../actions/channels';
 import SelectField from '../../components/form/SelectFields';
 import NumberField from '../../components/form/NumberField';
@@ -43,7 +43,7 @@ const FeaturesView = function (props) {
   const {
     auth,
     features,
-    servers,
+    groups,
     channels,
     coins,
   } = props;
@@ -56,7 +56,7 @@ const FeaturesView = function (props) {
   const [unitFee, setUnitFee] = useState(null);
   const [unitSampleSize, setUnitSampleSize] = useState(null);
   const [unitEnabled, setUnitEnabled] = useState(null);
-  const [serverId, setServerId] = useState('All');
+  const [groupId, setGroupId] = useState('All');
   const [coinFilter, setCoinFilter] = useState(null);
   const [platformFilter, setPlatformFilter] = useState(null);
 
@@ -110,15 +110,15 @@ const FeaturesView = function (props) {
     setUnitSampleSize(null);
     setUnitEnabled(null);
   }
-  const changeServer = (val) => {
-    setServerId(val);
+  const changeGroup = (val) => {
+    setGroupId(val);
   }
 
   useEffect(() => {
     dispatch(fetchCoinsAction());
     dispatch(fetchFeatures());
     dispatch(
-      fetchServerAction(
+      fetchGroupsAction(
         '',
         '',
         '',
@@ -127,20 +127,20 @@ const FeaturesView = function (props) {
         99999,
       ),
     );
-    if (serverId !== 'All') {
+    if (groupId !== 'All') {
       dispatch(
         fetchChannelsAction(
           '',
           '',
           '',
-          serverId,
+          groupId,
           0,
           99999,
         ),
       );
     }
   }, [
-    serverId,
+    groupId,
     auth,
   ]);
 
@@ -149,9 +149,9 @@ const FeaturesView = function (props) {
   }, [
     features,
     coins,
-    servers,
+    groups,
     channels,
-    serverId,
+    groupId,
   ]);
 
   const handleChangeCoinFilter = (value) => {
@@ -171,8 +171,8 @@ const FeaturesView = function (props) {
           if (!values.feature) {
             errors.feature = 'Feature is required'
           }
-          if (!values.server) {
-            errors.server = 'Server is required'
+          if (!values.group) {
+            errors.group = 'Group is required'
           }
           if (!values.min) {
             errors.min = 'Min is required'
@@ -221,11 +221,8 @@ const FeaturesView = function (props) {
                   <MenuItem key="4" value="faucet">
                     faucet
                   </MenuItem>
-                  <MenuItem key="7" value="thunder">
-                    thunder
-                  </MenuItem>
-                  <MenuItem key="8" value="voicerain">
-                    voicerain
+                  <MenuItem key="8" value="channelwave">
+                    channelwave
                   </MenuItem>
                   <MenuItem key="9" value="sleet">
                     sleet
@@ -287,20 +284,20 @@ const FeaturesView = function (props) {
                 xs={4}
               >
                 <Field
-                  name="server"
+                  name="group"
                   component={SelectField}
                   parse={(value) => {
                     console.log('trigger parse');
-                    changeServer(value)
+                    changeGroup(value)
                     return value;
                   }}
-                  label="Server"
+                  label="Group"
                 >
-                  {servers
-                  && servers.data
-                  && servers.data.filter((server) => server.groupId.startsWith(values.platform)).map((filteredServer) => (
-                    <MenuItem key={filteredServer.id} value={filteredServer.id}>
-                      {filteredServer.groupName}
+                  {groups
+                  && groups.data
+                  && groups.data.filter((group) => group.groupId.startsWith(values.platform)).map((filteredGroup) => (
+                    <MenuItem key={filteredGroup.id} value={filteredGroup.id}>
+                      {filteredGroup.groupName}
                     </MenuItem>
                   ))}
                 </Field>
@@ -430,7 +427,7 @@ const FeaturesView = function (props) {
               <TableCell align="right">name</TableCell>
               <TableCell align="right">platform</TableCell>
               <TableCell align="right">coin</TableCell>
-              <TableCell align="right">server</TableCell>
+              <TableCell align="right">group</TableCell>
               <TableCell align="right">channel</TableCell>
               <TableCell align="right">min</TableCell>
               <TableCell align="right">fee %</TableCell>
@@ -631,7 +628,7 @@ function mapStateToProps(state) {
   return {
     auth: state.auth,
     features: state.features,
-    servers: state.servers,
+    groups: state.groups,
     channels: state.channels,
     coins: state.coins,
   };

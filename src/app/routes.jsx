@@ -20,7 +20,7 @@ import RegisterVerified from './views/register/RegisterVerified';
 import ResetPassword from './views/resetPassword/ResetPassword';
 import ResetPasswordVerify from './views/resetPassword/ResetPasswordVerify';
 import ResetPasswordNew from './views/resetPassword/ResetPasswordNew';
-import Servers from './views/management/Servers';
+import GroupsView from './views/management/Groups';
 import UserView from './views/management/User';
 import Channels from './views/management/Channels';
 import TriviaManagement from './views/management/TriviaManagement';
@@ -140,8 +140,8 @@ const RoutesX = function (props) {
           element={<Features />}
         />
         <Route
-          path="/management/servers"
-          element={<Servers />}
+          path="/management/groups"
+          element={<GroupsView />}
         />
         <Route
           path="/management/channels"

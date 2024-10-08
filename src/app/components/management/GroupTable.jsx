@@ -18,8 +18,8 @@ import {
 } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import BanDialog from './BanDialog';
-import LeaveServer from '../dialogs/LeaveServer';
-import { editServerAction } from '../../actions/editServer';
+import LeaveGroup from '../dialogs/LeaveGroup';
+import { editGroupAction } from '../../actions/editGroup';
 
 const headCells = [
   {
@@ -29,7 +29,7 @@ const headCells = [
     id: 'groupId', numeric: true, disablePadding: false, label: 'group id',
   },
   {
-    id: 'serverName', numeric: true, disablePadding: false, label: 'server name',
+    id: 'groupName', numeric: true, disablePadding: false, label: 'group name',
   },
   {
     id: 'lastActive', numeric: true, disablePadding: false, label: 'last active',
@@ -44,7 +44,7 @@ const headCells = [
     id: 'edit', numeric: true, disablePadding: false, label: 'edit',
   },
   {
-    id: 'isInServer', numeric: true, disablePadding: false, label: 'Is in Server',
+    id: 'isBotInGroup', numeric: true, disablePadding: false, label: 'is bot in group',
   },
   {
     id: 'ban', numeric: true, disablePadding: false, label: 'ban',
@@ -56,7 +56,7 @@ function createData(
   groupId,
   groupName,
   lastActive,
-  isInServer,
+  isBotInGroup,
   banned,
   discordTipMessageChannelId,
   memberCount,
@@ -66,7 +66,7 @@ function createData(
     groupId,
     groupName,
     lastActive,
-    isInServer,
+    isBotInGroup,
     banned,
     discordTipMessageChannelId,
     memberCount,
@@ -151,10 +151,10 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
-function ServerTable(props) {
+function GroupTable(props) {
   const {
-    servers,
-    banServer,
+    groups,
+    banGroup,
     defaultPageSize,
     page,
     setPage,
@@ -165,14 +165,14 @@ function ServerTable(props) {
   const rows = [];
   const dispatch = useDispatch();
 
-  servers.forEach((item) => {
+  groups.forEach((item) => {
     rows.push(
       createData(
         item.id,
         item.groupId,
         item.groupName,
         item.lastActive,
-        item.isInServer,
+        item.isBotInGroup,
         item.banned,
         item.discordTipMessageChannelId,
         item.memberCount,
@@ -242,7 +242,7 @@ function ServerTable(props) {
   const [unitDiscordTipMessageChannel, setUnitDiscordTipMessageChannel] = useState(null);
 
   const onSaveEdit = async ({ id }) => {
-    await dispatch(editServerAction(
+    await dispatch(editGroupAction(
       id,
       unitDiscordTipMessageChannel,
     ));
@@ -379,9 +379,9 @@ function ServerTable(props) {
                     </TableCell>
                     <TableCell align="right">
                       {
-                        row.isInServer
+                        row.isBotInGroup
                           ? (
-                            <LeaveServer
+                            <LeaveGroup
                               id={row.id}
                               groupId={row.groupId}
                               groupName={row.groupName}
@@ -394,14 +394,14 @@ function ServerTable(props) {
                       {!row.banned ? (
                         <BanDialog
                           name={row.groupName}
-                          confirmBan={banServer}
+                          confirmBan={banGroup}
                           otherId={row.groupId}
                           id={row.id}
                         />
                       ) : (
                         <Button
                           variant="outlined"
-                          onClick={() => banServer(row.id, '')}
+                          onClick={() => banGroup(row.id, '')}
                         >
                           UNBAN
                         </Button>
@@ -430,4 +430,4 @@ function ServerTable(props) {
   );
 }
 
-export default ServerTable;
+export default GroupTable;

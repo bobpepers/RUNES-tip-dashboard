@@ -1,7 +1,4 @@
-import React, {
-  useEffect,
-  useState,
-} from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import {
   Grid,
@@ -16,10 +13,10 @@ import { makeStyles } from 'tss-react/mui';
 import { withRouter } from '../../hooks/withRouter';
 
 import {
-  fetchServerAction,
-  banServerAction,
-} from '../../actions/servers';
-import ServerTable from '../../components/management/ServerTable';
+  fetchGroupsAction,
+  banGroupAction,
+} from '../../actions/groups';
+import GroupTable from '../../components/management/GroupTable';
 
 const useStyles = makeStyles()((theme) => ({
   formControl: {
@@ -32,70 +29,93 @@ const useStyles = makeStyles()((theme) => ({
   },
 }));
 
-function ServersView(props) {
+function GroupsView(props) {
   const {
     auth,
-    servers,
+    groups,
   } = props;
   const dispatch = useDispatch();
   const { classes } = useStyles();
   const [id, setId] = useState('');
   const [groupId, setGroupId] = useState('');
-  const [serverName, setServerName] = useState('');
-  const [platform, setPlatform] = useState('All');
+  const [groupName, setGroupName] = useState('');
+  const [isBotInGroup, setIsBotInGroup] = useState(true); // Default value set to true
+  const [platform, setPlatform] = useState('all');
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(25);
 
   useEffect(() => dispatch(
-    fetchServerAction(
+    fetchGroupsAction(
       id,
       groupId,
-      serverName,
+      groupName,
       platform,
       page * rowsPerPage,
       rowsPerPage,
+      isBotInGroup, // Pass the boolean value
     ),
   ), [
     id,
     groupId,
-    serverName,
+    groupName,
     platform,
     auth,
     page,
     rowsPerPage,
+    isBotInGroup, // Add this to the dependency array
   ]);
 
   const handleChangeId = (event) => {
-    console.log(event);
     setId(event.target.value);
   };
 
-  const handleChangegroupId = (event) => {
+  const handleChangeGroupId = (event) => {
     setGroupId(event.target.value);
   };
 
-  const handleChangeServerName = (event) => {
-    setServerName(event.target.value);
+  const handleChangeGroupName = (event) => {
+    setGroupName(event.target.value);
   };
+
   const handleChangePlatform = (event) => {
     setPlatform(event.target.value);
   };
 
-  useEffect(() => { }, [servers]);
+  const handleChangeIsBotInGroup = (event) => {
+    const { value } = event.target;
+    setIsBotInGroup(value === 'all' ? undefined : value === 'true'); // Handle 'all' option
+  };
 
-  const banServer = (id, banMessage) => {
-    console.log(banMessage);
-    console.log('bannMessage');
-    dispatch(banServerAction(id, banMessage))
+  useEffect(() => { }, [groups]);
+
+  const banGroup = (id, banMessage) => {
+    dispatch(banGroupAction(id, banMessage));
   };
 
   return (
     <div className="height100 content">
       <Grid container>
         <Grid item xs={12}>
-          <h3>Servers</h3>
+          <h3>Groups</h3>
         </Grid>
         <Grid container item xs={12}>
+          <Grid container item xs={12} md={12}>
+            <FormControl variant="outlined" className={classes.formControl}>
+              <InputLabel id="platform-select-label">Platform</InputLabel>
+              <Select
+                labelId="platform-select-label"
+                id="platform-select"
+                value={platform}
+                onChange={handleChangePlatform}
+                label="Platform"
+              >
+                <MenuItem value="all"><em>All</em></MenuItem>
+                <MenuItem value="telegram">Telegram</MenuItem>
+                <MenuItem value="discord">Discord</MenuItem>
+                <MenuItem value="matrix">Matrix</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
           <Grid container item xs={12} md={3}>
             <FormControl variant="outlined" className={classes.formControl}>
               <TextField
@@ -114,8 +134,7 @@ function ServersView(props) {
                 value={groupId}
                 label="discord id"
                 variant="filled"
-                floatingLabelText="groupId"
-                onChange={handleChangegroupId}
+                onChange={handleChangeGroupId}
               />
             </FormControl>
           </Grid>
@@ -123,67 +142,59 @@ function ServersView(props) {
           <Grid container item xs={12} md={3}>
             <FormControl variant="outlined" className={classes.formControl}>
               <TextField
-                name="serverName"
-                value={serverName}
-                label="server name"
+                name="groupName"
+                value={groupName}
+                label="group name"
                 variant="filled"
-                onChange={handleChangeServerName}
+                onChange={handleChangeGroupName}
               />
             </FormControl>
           </Grid>
+
           <Grid container item xs={12} md={3}>
             <FormControl variant="outlined" className={classes.formControl}>
-              <InputLabel id="demo-simple-select-outlined-label">Platform</InputLabel>
+              <InputLabel id="is-bot-in-group-select-label">Is Bot in Group</InputLabel>
               <Select
-                labelId="demo-simple-select-outlined-label"
-                id="demo-simple-select-outlined"
-                value={platform}
-                onChange={handleChangePlatform}
-                label="Platform"
+                labelId="is-bot-in-group-select-label"
+                id="is-bot-in-group-select"
+                value={isBotInGroup === undefined ? 'all' : isBotInGroup.toString()} // Convert boolean to string for Select
+                onChange={handleChangeIsBotInGroup}
+                label="Is Bot in Group"
               >
-                <MenuItem value="all">
-                  <em>All</em>
-                </MenuItem>
-                <MenuItem value="telegram">
-                  Telegram
-                </MenuItem>
-                <MenuItem value="discord">
-                  Discord
-                </MenuItem>
+                <MenuItem value="true">Yes</MenuItem>
+                <MenuItem value="false">No</MenuItem>
+                <MenuItem value="all"><em>All</em></MenuItem>
               </Select>
             </FormControl>
           </Grid>
+
         </Grid>
         <Grid item xs={12}>
           {
-            servers && servers.isFetching
+            groups && groups.isFetching
               ? (<CircularProgress />)
               : (
-                <ServerTable
+                <GroupTable
                   defaultPageSize={25}
                   page={page}
                   setPage={setPage}
                   rowsPerPage={rowsPerPage}
                   setRowsPerPage={setRowsPerPage}
-                  totalCount={servers && servers.count && servers.count}
-                  banServer={banServer}
-                  servers={servers
-                    && servers.data
-                    ? servers.data
-                    : []}
+                  totalCount={groups && groups.count && groups.count}
+                  banGroup={banGroup}
+                  groups={groups && groups.data ? groups.data : []}
                 />
               )
           }
-
         </Grid>
       </Grid>
     </div>
-  )
+  );
 }
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
-  servers: state.servers,
-})
+  groups: state.groups,
+});
 
-export default withRouter(connect(mapStateToProps, null)(ServersView));
+export default withRouter(connect(mapStateToProps, null)(GroupsView));
