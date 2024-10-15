@@ -38,6 +38,9 @@ const headCells = [
     id: 'memberCount', numeric: true, disablePadding: false, label: 'member count',
   },
   {
+    id: 'score', numeric: true, disablePadding: false, label: 'Score',
+  },
+  {
     id: 'discordTipMessageChannel', numeric: true, disablePadding: false, label: 'discordTipMessageChannel',
   },
   {
@@ -60,6 +63,7 @@ function createData(
   banned,
   discordTipMessageChannelId,
   memberCount,
+  score,
 ) {
   return {
     id,
@@ -70,6 +74,7 @@ function createData(
     banned,
     discordTipMessageChannelId,
     memberCount,
+    score,
   };
 }
 
@@ -176,6 +181,7 @@ function GroupTable(props) {
         item.banned,
         item.discordTipMessageChannelId,
         item.memberCount,
+        item.score,
       ),
     );
   });
@@ -322,6 +328,9 @@ function GroupTable(props) {
                     </TableCell>
                     <TableCell align="right">
                       {row.memberCount || 'n/a'}
+                    </TableCell>
+                    <TableCell align="right">
+                      {row.score || '0'}
                     </TableCell>
                     <TableCell align="right">
                       {
