@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.54](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.53...v0.0.54) (2024-11-14)
+
+
+### Features
+
+* :sparkles: isBotInGroup filter, servers -> groups ([8b8923b](https://github.com/bobpepers/runes-tip-dashboard/commit/8b8923b2d08d1e80f5ddd9ec67c182800711074d))
+
+
+### Refactor
+
+* :recycle: reduced code duplication (tipFunction views) ([be9801d](https://github.com/bobpepers/runes-tip-dashboard/commit/be9801d9883157a0ae4cd9fa867f93f16fcb1f2c))
+
+
+### Performance
+
+* :zap: Groups: add score ([2aa4076](https://github.com/bobpepers/runes-tip-dashboard/commit/2aa407603884cc3a44e87a3a85ba7905baa98032))
+
 ### [0.0.53](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.52...v0.0.53) (2024-08-18)
 
 ### [0.0.52](https://github.com/bobpepers/runes-tip-dashboard/compare/v0.0.51...v0.0.52) (2024-05-11)
