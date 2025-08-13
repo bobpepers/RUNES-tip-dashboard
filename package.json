@@ -1,6 +1,6 @@
 {
   "name": "runestip-dashboard",
-  "version": "0.0.54",
+  "version": "0.0.55",
   "description": "Admin dashboard for RUNES-tip",
   "scripts": {
     "extract": "lingui extract",
@@ -86,7 +86,7 @@
     "style-loader": "^4.0.0",
     "terser-webpack-plugin": "^5.3.14",
     "url": "^0.11.4",
-    "webpack": "^5.101.0",
+    "webpack": "^5.101.1",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.2.2",
     "webpack-obfuscator": "^3.5.1"
